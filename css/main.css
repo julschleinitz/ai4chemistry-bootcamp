@@ -328,6 +328,14 @@ footer {
 }
 footer .sep { color: var(--border); }
 
+/* ── Hackathon cards ── */
+.session.hackathon {
+  background: rgba(99,179,237,0.12);
+  border-color: rgba(99,179,237,0.35);
+}
+.session.hackathon:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.hackathon .session-type { color: #63B3ED; }
+
 /* ── Break rows ── */
 .break-row {
   grid-column: 1 / -1;
