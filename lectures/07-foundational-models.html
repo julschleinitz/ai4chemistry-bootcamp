@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture 8 — Diffusion Models · AI4Chemical Sciences Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .lecture-hero { background: var(--surface); padding: 52px 40px 44px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .lecture-hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .lecture-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(93,218,180,0.15); border: 1px solid rgba(93,218,180,0.3); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+    .lecture-hero h1 { font-size: 38px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .lecture-hero h1 em { font-style: normal; color: var(--accent); }
+    .lecture-tagline { font-size: 15px; color: var(--accent-dim); max-width: 640px; margin-bottom: 24px; line-height: 1.6; }
+    .lecture-meta-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .lecture-meta-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); }
+    .lecture-meta-item svg { opacity: 0.7; flex-shrink: 0; }
+    .lecture-body { max-width: 820px; margin: 0 auto; padding: 44px 40px 80px; }
+    .content-section { margin-bottom: 44px; }
+    .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+    .video-placeholder { width: 100%; aspect-ratio: 16 / 9; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: var(--text-dim); }
+    .video-placeholder-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(93,218,180,0.1); border: 1px solid rgba(93,218,180,0.2); display: flex; align-items: center; justify-content: center; }
+    .video-placeholder p { font-size: 13.5px; color: var(--text-dim); margin: 0; text-align: center; }
+    .video-placeholder small { font-size: 11.5px; color: var(--text-dim); opacity: 0.6; }
+    .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .objectives-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .objectives-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .takeaways-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .takeaway-item { display: flex; gap: 14px; align-items: flex-start; background: rgba(93,218,180,0.06); border: 1px solid rgba(93,218,180,0.18); border-left: 3px solid var(--accent); border-radius: 8px; padding: 14px 16px; }
+    .takeaway-item .takeaway-icon { color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+    .takeaway-item p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin: 0; }
+    .takeaway-item strong { color: var(--text); }
+    .ref-list { display: flex; flex-direction: column; gap: 10px; }
+    .ref-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-decoration: none; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+    .ref-item:hover { background: rgba(93,218,180,0.08); border-color: rgba(93,218,180,0.3); }
+    .ref-item-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(93,218,180,0.12); border: 1px solid rgba(93,218,180,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+    .ref-item-body { flex: 1; min-width: 0; }
+    .ref-item-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ref-item-meta { font-size: 12px; color: var(--text-dim); }
+    .ref-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+    .ref-tag.paper   { background: rgba(93,218,180,0.15); color: var(--accent); }
+    .resource-link { display: inline-flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 13.5px; font-weight: 500; padding: 10px 18px; border-radius: 8px; transition: background 0.15s, border-color 0.15s; margin-right: 10px; margin-bottom: 10px; }
+    .resource-link:hover { background: rgba(93,218,180,0.1); border-color: rgba(93,218,180,0.4); color: var(--accent); }
+    .resource-link svg { opacity: 0.8; flex-shrink: 0; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 32px; transition: color 0.15s; }
+    .back-link:hover { color: var(--accent); }
+    @media (max-width: 700px) { .lecture-hero { padding: 36px 20px 32px; } .lecture-hero h1 { font-size: 28px; } .lecture-body { padding: 28px 20px 60px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">
+      <div class="nav-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+        </svg>
+      </div>
+      AI<em>4</em>Chemical Sciences
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Schedule</a></li>
+      <li><a href="../lectures/" class="active">Lectures</a></li>
+      <li><a href="../tutorials/">Tutorials</a></li>
+    </ul>
+  </nav>
+
+  <div class="lecture-hero">
+    <div class="lecture-hero-meta">
+      <span class="lecture-badge">Lecture 8</span>
+    </div>
+    <h1>Diffusion <em>Models</em></h1>
+    <p class="lecture-tagline">
+      Score-based and denoising diffusion probabilistic models — and how they are revolutionising 3-D molecular generation.
+    </p>
+    <div class="lecture-meta-row">
+      <div class="lecture-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Chenghao Liu
+      </div>
+      <div class="lecture-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        August 13, 2026 · 13:00 – 14:30
+      </div>
+      <div class="lecture-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        90 min
+      </div>
+    </div>
+  </div>
+
+  <div class="lecture-body">
+
+    <a class="back-link" href="../index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to schedule
+    </a>
+
+    <div style="margin-bottom: 36px;">
+      <a class="resource-link" href="#">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Slides (PDF)
+      </a>
+    </div>
+
+    <div class="content-section">
+      <p class="content-section-label">Recording</p>
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p>Recording will be available after the bootcamp.</p>
+        <small>August 2026</small>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Learning Objectives</p>
+      <ul class="objectives-list">
+        <li>Derive the forward (noising) and reverse (denoising) processes of a DDPM at a high level</li>
+        <li>Explain how score matching connects diffusion models to energy-based models</li>
+        <li>Describe how equivariant diffusion (e.g., EDM, DiffSBDD) handles the SO(3) symmetry of 3-D molecules</li>
+        <li>Identify the strengths and limitations of diffusion models compared to VAEs and normalising flows for molecular generation</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Key Takeaways</p>
+      <ul class="takeaways-list">
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 1.</strong> Diffusion models generate samples by learning to reverse a gradual noising process — the key insight is that reversing small Gaussian perturbations is easier to learn than mapping noise directly to data.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 2.</strong> For 3-D molecular generation, the diffusion process must be equivariant to rotations and translations; operating in the centre-of-mass frame and using SE(3)-equivariant networks (e.g., EGNN) achieves this.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 3.</strong> Diffusion models produce higher-quality and more diverse samples than VAEs but are slower at inference because they require many denoising steps; consistency models and DDIM reduce this cost significantly.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 4.</strong> Validity and novelty metrics (QED, SA score, RMSD to crystal structures) are necessary but not sufficient — always benchmark generated molecules against experimental activity data when possible.</p>
+        </li>
+
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Further Reading &amp; Resources</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="#" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Ho et al. — "Denoising Diffusion Probabilistic Models" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2020 · Foundational DDPM paper</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="#" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Hoogeboom et al. — "Equivariant Diffusion for Molecule Generation in 3D" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICML, 2022 · Introduces EDM for equivariant 3-D molecular generation</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="#" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Song &amp; Ermon — "Score-Based Generative Modeling through Stochastic Differential Equations" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICLR, 2021 · Unifies score matching and diffusion under an SDE framework</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="#" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Schneuing et al. — "Structure-based Drug Design with Equivariant Diffusion Models" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICML, 2023 · Diffusion conditioned on protein binding pockets</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Division of Chemistry and Chemical Engineering · Caltech</span>
+    <span class="sep">·</span>
+    <span>Contact: <a href="mailto:jul@caltech.edu" style="color:inherit">jul@caltech.edu</a></span>
+    <span class="sep">·</span>
+    <a href="https://github.com/truejulosdu13/ai4chemistry-bootcamp" style="color:inherit;display:flex;align-items:center;gap:5px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      GitHub
+    </a>
+  </footer>
+
+</body>
+</html>
