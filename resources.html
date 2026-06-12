@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <style>
-    /* ── Page hero ── */
     .resources-hero {
       background: var(--surface);
       padding: 52px 40px 44px;
@@ -25,192 +24,89 @@
     .resources-hero p {
       font-size: 15px;
       color: var(--accent-dim);
-      max-width: 600px;
+      max-width: 560px;
       line-height: 1.6;
     }
 
-    /* ── View toggle ── */
-    .view-toggle-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 28px 40px 0;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .view-toggle-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-right: 4px;
-    }
-    .toggle-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 13.5px;
-      font-weight: 500;
-      padding: 9px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
-      font-family: inherit;
-    }
-    .toggle-btn:hover {
-      background: rgba(93,218,180,0.08);
-      border-color: rgba(93,218,180,0.3);
-      color: var(--text);
-    }
-    .toggle-btn.active {
-      background: rgba(93,218,180,0.15);
-      border-color: rgba(93,218,180,0.45);
-      color: var(--accent);
-    }
-
-    /* ── Main content layout ── */
+    /* ── Body ── */
     .resources-body {
-      max-width: 1100px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 36px 40px 80px;
+      padding: 44px 40px 80px;
     }
 
-    /* ── Section ── */
-    .resource-section {
-      margin-bottom: 48px;
+    /* ── Group label ── */
+    .topic-group {
+      margin-bottom: 44px;
     }
-    .resource-section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .resource-section-header h2 {
-      font-size: 17px;
+    .topic-group-label {
+      font-size: 10px;
       font-weight: 700;
-      color: var(--text);
-    }
-    .resource-section-header .section-count {
-      font-size: 12px;
-      color: var(--text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
     }
 
-    /* ── Resource grid ── */
-    .resource-grid {
+    /* ── Topic grid ── */
+    .topic-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
     }
 
-    /* ── Resource card ── */
-    .resource-card {
+    /* ── Topic tile ── */
+    .topic-tile {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 16px 18px;
+      padding: 18px 20px;
       text-decoration: none;
       color: var(--text);
       transition: background 0.15s, border-color 0.15s, transform 0.12s;
-      position: relative;
     }
-    .resource-card:hover {
-      background: rgba(93,218,180,0.06);
-      border-color: rgba(93,218,180,0.3);
+    .topic-tile:hover {
+      background: rgba(93,218,180,0.07);
+      border-color: rgba(93,218,180,0.35);
       transform: translateY(-1px);
     }
-    .resource-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .resource-type {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10px;
+    .topic-tile-title {
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 10px;
-    }
-    .resource-type.course   { background: rgba(93,218,180,0.15);  color: var(--accent); }
-    .resource-type.paper    { background: rgba(99,179,237,0.15);  color: #63B3ED; }
-    .resource-type.tool     { background: rgba(167,139,250,0.15); color: #A78BFA; }
-    .resource-type.dataset  { background: rgba(251,146,60,0.15);  color: #FB923C; }
-    .resource-type.blog     { background: rgba(255,180,50,0.15);  color: #FFB432; }
-    .resource-type.book     { background: rgba(244,114,182,0.15); color: #F472B6; }
-    .resource-type.benchmark { background: rgba(52,211,153,0.15); color: #34D399; }
-
-    .resource-external-icon {
-      color: var(--text-dim);
-      opacity: 0.5;
-      flex-shrink: 0;
-      transition: opacity 0.15s;
-    }
-    .resource-card:hover .resource-external-icon { opacity: 1; }
-
-    .resource-card-title {
-      font-size: 14px;
-      font-weight: 600;
       color: var(--text);
-      line-height: 1.4;
+      line-height: 1.3;
     }
-    .resource-card-desc {
-      font-size: 13px;
+    .topic-tile-sub {
+      font-size: 12.5px;
       color: var(--text-dim);
-      line-height: 1.6;
-      flex: 1;
+      line-height: 1.5;
     }
-    .resource-card-meta {
-      font-size: 11.5px;
-      color: var(--text-dim);
-      opacity: 0.7;
+    .topic-tile-arrow {
+      margin-top: 6px;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.15s, transform 0.15s;
+      font-size: 16px;
+      line-height: 1;
     }
-
-    /* ── Tags ── */
-    .resource-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 4px;
+    .topic-tile:hover .topic-tile-arrow {
+      opacity: 1;
+      transform: translateX(3px);
     }
-    .resource-tag {
-      font-size: 10.5px;
-      font-weight: 500;
-      padding: 2px 8px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-    }
-
-    /* ── View switching ── */
-    .resource-view { }
-    .resource-view.hidden { display: none; }
 
     @media (max-width: 700px) {
       .resources-hero { padding: 36px 20px 32px; }
       .resources-hero h1 { font-size: 28px; }
-      .resources-body { padding: 24px 20px 60px; }
-      .view-toggle-bar { padding: 20px 20px 0; flex-wrap: wrap; }
-      .resource-grid { grid-template-columns: 1fr; }
+      .resources-body { padding: 28px 20px 60px; }
+      .topic-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Nav -->
   <nav>
     <a class="nav-brand" href="index.html">
       <div class="nav-logo">
@@ -229,978 +125,120 @@
     </ul>
   </nav>
 
-  <!-- Hero -->
   <div class="resources-hero">
     <h1>Learning <em>Resources</em></h1>
-    <p>Curated courses, papers, tools, datasets, and blogs — organised by ML concept or by chemistry topic.</p>
-  </div>
-
-  <!-- Toggle -->
-  <div class="view-toggle-bar">
-    <span class="view-toggle-label">View by</span>
-    <button class="toggle-btn active" id="btn-ml" onclick="switchView('ml')">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      ML Concept
-    </button>
-    <button class="toggle-btn" id="btn-chem" onclick="switchView('chem')">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
-      Chemistry Topic
-    </button>
+    <p>Curated courses, tutorials, papers, and tools — organised by topic. Click any card to explore.</p>
   </div>
 
   <div class="resources-body">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- VIEW: BY ML CONCEPT                           -->
-    <!-- ══════════════════════════════════════════════ -->
-    <div id="view-ml" class="resource-view">
+    <!-- ML Methods -->
+    <div class="topic-group">
+      <p class="topic-group-label">ML Methods</p>
+      <div class="topic-grid">
 
-      <!-- ML Fundamentals -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>ML Fundamentals &amp; Statistics</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
+        <a class="topic-tile" href="resources/ml-fundamentals.html">
+          <div class="topic-tile-title">ML Fundamentals</div>
+          <div class="topic-tile-sub">Probability, statistics, sklearn, bias-variance trade-off</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://cs229.stanford.edu/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Course</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">CS229: Machine Learning — Stanford</div>
-            <div class="resource-card-desc">Andrew Ng's comprehensive lecture notes and problem sets covering supervised, unsupervised, and reinforcement learning from first principles.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">supervised learning</span>
-              <span class="resource-tag">probability</span>
-              <span class="resource-tag">optimization</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/chemical-representations.html">
+          <div class="topic-tile-title">Chemical Representations</div>
+          <div class="topic-tile-sub">SMILES, fingerprints, molecular descriptors, RDKit</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://hastie.su.domains/ElemStatLearn/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type book">Book</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">The Elements of Statistical Learning — Hastie, Tibshirani &amp; Friedman</div>
-            <div class="resource-card-desc">The canonical reference for statistical ML — linear models, trees, ensembles, neural nets. Free PDF available from the authors.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">free PDF</span>
-              <span class="resource-tag">theory</span>
-              <span class="resource-tag">ensembles</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/deep-learning.html">
+          <div class="topic-tile-title">Deep Learning</div>
+          <div class="topic-tile-sub">MLPs, backpropagation, PyTorch, optimisers</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://course.fast.ai/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Course</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Practical Deep Learning for Coders — fast.ai</div>
-            <div class="resource-card-desc">Top-down, code-first deep learning course. Covers vision, NLP, tabular data, and deployment with PyTorch and fastai.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">PyTorch</span>
-              <span class="resource-tag">practical</span>
-              <span class="resource-tag">free</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/graph-neural-networks.html">
+          <div class="topic-tile-title">Graph Neural Networks</div>
+          <div class="topic-tile-sub">Message passing, GCN, GAT, MPNN, PyTorch Geometric</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://mml-book.github.io/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type book">Book</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Mathematics for Machine Learning — Deisenroth, Faisal &amp; Ong</div>
-            <div class="resource-card-desc">Free textbook building intuition for linear algebra, multivariate calculus, probability, and optimisation as foundations for ML.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">math</span>
-              <span class="resource-tag">linear algebra</span>
-              <span class="resource-tag">free PDF</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/transformers.html">
+          <div class="topic-tile-title">Transformers</div>
+          <div class="topic-tile-sub">Self-attention, BERT, ChemBERTa, chemical language models</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-        </div>
+        <a class="topic-tile" href="resources/generative-models.html">
+          <div class="topic-tile-title">Generative Models</div>
+          <div class="topic-tile-sub">VAEs, diffusion models, molecular generation, SMILES-RNNs</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
+
+        <a class="topic-tile" href="resources/bayesian-optimization.html">
+          <div class="topic-tile-title">Bayesian Optimization</div>
+          <div class="topic-tile-sub">Gaussian processes, EI/UCB, BoTorch, multi-objective BO</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
+
+        <a class="topic-tile" href="resources/active-learning.html">
+          <div class="topic-tile-title">Active Learning</div>
+          <div class="topic-tile-sub">Uncertainty sampling, BALD, core-set, pool-based loops</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
+
+        <a class="topic-tile" href="resources/uncertainty-quantification.html">
+          <div class="topic-tile-title">Uncertainty Quantification</div>
+          <div class="topic-tile-sub">Calibration, conformal prediction, ensembles, Bayesian NNs</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
+
+        <a class="topic-tile" href="resources/llm-agents.html">
+          <div class="topic-tile-title">LLMs &amp; Agentic AI</div>
+          <div class="topic-tile-sub">RAG, tool use, ReAct, chemistry agents, self-driving labs</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
+
       </div>
+    </div>
 
-      <!-- Cheminformatics -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Cheminformatics &amp; Molecular Representations</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
+    <!-- Chemistry Applications -->
+    <div class="topic-group">
+      <p class="topic-group-label">Chemistry Applications</p>
+      <div class="topic-grid">
 
-          <a class="resource-card" href="https://www.rdkit.org/docs/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">RDKit Documentation</div>
-            <div class="resource-card-desc">The standard open-source cheminformatics library. Covers SMILES parsing, fingerprints, descriptors, substructure search, and 2-D/3-D operations.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">Python</span>
-              <span class="resource-tag">fingerprints</span>
-              <span class="resource-tag">SMILES</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/drug-discovery.html">
+          <div class="topic-tile-title">Drug Discovery &amp; QSAR</div>
+          <div class="topic-tile-sub">ADMET, bioactivity, MoleculeNet, ChEMBL, TDC</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://deepchem.io/tutorials/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Course</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">DeepChem Tutorials</div>
-            <div class="resource-card-desc">Step-by-step notebooks covering ML for drug discovery, materials science, and quantum chemistry. Built on top of RDKit and PyTorch.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">drug discovery</span>
-              <span class="resource-tag">notebooks</span>
-              <span class="resource-tag">free</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/materials-science.html">
+          <div class="topic-tile-title">Materials Science</div>
+          <div class="topic-tile-sub">Formation energy, Materials Project, matminer, OCP</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://practicalcheminformatics.blogspot.com/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Practical Cheminformatics — Pat Walters</div>
-            <div class="resource-card-desc">Practitioner blog on cheminformatics, ML for drug discovery, and dataset curation. Includes Jupyter notebooks with working code.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">QSAR</span>
-              <span class="resource-tag">drug discovery</span>
-              <span class="resource-tag">data curation</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/reaction-prediction.html">
+          <div class="topic-tile-title">Reaction Prediction &amp; Synthesis</div>
+          <div class="topic-tile-sub">Retrosynthesis, yield prediction, RXN, ASKCOS</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-          <a class="resource-card" href="https://github.com/deepchem/deepchem/tree/master/examples" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">MoleculeNet Benchmark Suite</div>
-            <div class="resource-card-desc">Curated benchmark suite of 17+ molecular datasets for property prediction, with standardised splits and evaluation protocols.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">benchmarks</span>
-              <span class="resource-tag">datasets</span>
-              <span class="resource-tag">evaluation</span>
-            </div>
-          </a>
+        <a class="topic-tile" href="resources/quantum-chemistry.html">
+          <div class="topic-tile-title">Quantum Chemistry &amp; DFT</div>
+          <div class="topic-tile-sub">QM9, ANI-1, ML potentials, PySCF, HOMO-LUMO</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
 
-        </div>
+        <a class="topic-tile" href="resources/self-driving-labs.html">
+          <div class="topic-tile-title">Self-Driving Laboratories</div>
+          <div class="topic-tile-sub">Autonomous experiments, Olympus, Acceleration Consortium</div>
+          <div class="topic-tile-arrow">→</div>
+        </a>
+
       </div>
+    </div>
 
-      <!-- GNNs -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Graph Neural Networks</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://web.stanford.edu/class/cs224w/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Course</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">CS224W: Machine Learning with Graphs — Stanford</div>
-            <div class="resource-card-desc">Jure Leskovec's graduate course on graph ML. Slides, recorded lectures, and colab notebooks freely available. Covers GCN, GAT, GraphSAGE, and knowledge graphs.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">GCN</span>
-              <span class="resource-tag">GAT</span>
-              <span class="resource-tag">free lectures</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://pytorch-geometric.readthedocs.io/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">PyTorch Geometric (PyG) Documentation</div>
-            <div class="resource-card-desc">The standard library for graph deep learning in PyTorch. Includes built-in molecular datasets (QM9, ZINC, OGB) and implementations of 60+ GNN architectures.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">PyTorch</span>
-              <span class="resource-tag">QM9</span>
-              <span class="resource-tag">MPNN</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://distill.pub/2021/gnn-intro/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">A Gentle Introduction to GNNs — Distill.pub</div>
-            <div class="resource-card-desc">Interactive article with animated visualisations of message passing, graph-level tasks, and the expressiveness of GNNs. Essential reading before touching any GNN code.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">interactive</span>
-              <span class="resource-tag">visual</span>
-              <span class="resource-tag">message passing</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://ogb.stanford.edu/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type benchmark">Benchmark</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Open Graph Benchmark (OGB)</div>
-            <div class="resource-card-desc">Standardised large-scale graph benchmarks including ogbg-molhiv, ogbg-molpcba, and ogbg-molbbbp for molecular property prediction. Leaderboards included.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">leaderboard</span>
-              <span class="resource-tag">molecular graphs</span>
-              <span class="resource-tag">large-scale</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Transformers -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Transformers &amp; Language Models</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">The Illustrated Transformer — Jay Alammar</div>
-            <div class="resource-card-desc">The most widely recommended visual walkthrough of the transformer architecture — attention heads, positional encoding, and the encoder-decoder stack.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">attention</span>
-              <span class="resource-tag">visual</span>
-              <span class="resource-tag">BERT</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://huggingface.co/learn/nlp-course" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Course</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">HuggingFace NLP Course</div>
-            <div class="resource-card-desc">Free course teaching transformer fine-tuning, tokenisation, datasets, and deployment using the HuggingFace ecosystem. Directly applicable to ChemBERTa fine-tuning.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">fine-tuning</span>
-              <span class="resource-tag">Trainer API</span>
-              <span class="resource-tag">free</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Video</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Let's Build GPT from Scratch — Andrej Karpathy</div>
-            <div class="resource-card-desc">2-hour live coding session building a GPT-style transformer from scratch in pure PyTorch. The best way to develop a deep mechanical understanding of attention.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">PyTorch</span>
-              <span class="resource-tag">coding</span>
-              <span class="resource-tag">2h video</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://huggingface.co/seyonec/ChemBERTa-zinc-base-v1" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Model</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ChemBERTa — HuggingFace Hub</div>
-            <div class="resource-card-desc">Pre-trained RoBERTa model on 77M SMILES strings from ZINC. Ready to fine-tune for molecular property prediction via the Transformers library.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">SMILES</span>
-              <span class="resource-tag">pre-trained</span>
-              <span class="resource-tag">HuggingFace</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Generative Models -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Generative Models</h2>
-          <span class="section-count">3 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">What are Diffusion Models? — Lilian Weng</div>
-            <div class="resource-card-desc">Detailed mathematical walkthrough of DDPMs, score matching, and SDEs. Covers DDIM and classifier-free guidance. Best single reference for diffusion model theory.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">DDPM</span>
-              <span class="resource-tag">score matching</span>
-              <span class="resource-tag">theory</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://lilianweng.github.io/posts/2018-08-12-vae/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">From Autoencoder to Beta-VAE — Lilian Weng</div>
-            <div class="resource-card-desc">Clear derivation of the ELBO objective, the reparameterisation trick, and disentangled VAE variants. Essential background for molecular generation with VAEs.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">VAE</span>
-              <span class="resource-tag">ELBO</span>
-              <span class="resource-tag">latent space</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/molecularsets/moses" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type benchmark">Benchmark</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">MOSES: Molecular Generation Benchmark</div>
-            <div class="resource-card-desc">Standardised benchmark for molecular generation models. Computes validity, uniqueness, novelty, FCD, and scaffold diversity metrics with a unified API.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">validity</span>
-              <span class="resource-tag">novelty</span>
-              <span class="resource-tag">evaluation</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Bayesian Optimization -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Bayesian Optimization</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://distill.pub/2020/bayesian-optimization/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Exploring Bayesian Optimization — Distill.pub</div>
-            <div class="resource-card-desc">Interactive article with explorable animations of GP surrogates, acquisition functions (EI, UCB, PI), and the BO loop. The most accessible introduction available.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">interactive</span>
-              <span class="resource-tag">GP</span>
-              <span class="resource-tag">EI / UCB</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://botorch.org/tutorials/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">BoTorch Tutorials</div>
-            <div class="resource-card-desc">PyTorch-based Bayesian optimisation library from Meta. Tutorials cover single- and multi-objective BO, constrained BO, and integration with Ax for experiment management.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">PyTorch</span>
-              <span class="resource-tag">multi-objective</span>
-              <span class="resource-tag">notebooks</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://arxiv.org/abs/1807.02811" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type paper">Paper</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">A Tutorial on Bayesian Optimization — Frazier (2018)</div>
-            <div class="resource-card-desc">Comprehensive yet accessible tutorial on GP surrogates, acquisition functions, and convergence guarantees. The go-to reference for the theoretical foundations of BO.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">theory</span>
-              <span class="resource-tag">convergence</span>
-              <span class="resource-tag">arXiv</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://ax.dev/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Ax: Adaptive Experimentation Platform</div>
-            <div class="resource-card-desc">Meta's experiment management platform built on BoTorch. Handles parameter spaces, trial tracking, and early stopping. Used in production drug discovery pipelines.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">experiment tracking</span>
-              <span class="resource-tag">production</span>
-              <span class="resource-tag">BoTorch</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Active Learning & UQ -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Active Learning &amp; Uncertainty Quantification</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://burrsettles.com/pub/settles.activelearning.pdf" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type book">Book</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Active Learning Literature Survey — Burr Settles</div>
-            <div class="resource-card-desc">Free monograph covering all major query strategies: uncertainty sampling, query-by-committee, BALD, core-set, and stream-based vs. pool-based settings.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">free PDF</span>
-              <span class="resource-tag">BALD</span>
-              <span class="resource-tag">survey</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://mapie.readthedocs.io/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">MAPIE Documentation</div>
-            <div class="resource-card-desc">scikit-learn-compatible library for conformal prediction. Wraps any regressor or classifier to produce valid prediction intervals with coverage guarantees.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">conformal prediction</span>
-              <span class="resource-tag">sklearn</span>
-              <span class="resource-tag">coverage</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://arxiv.org/abs/2107.07511" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type paper">Paper</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">A Gentle Introduction to Conformal Prediction — Angelopoulos &amp; Bates</div>
-            <div class="resource-card-desc">The most accessible introduction to conformal prediction theory. Explains split conformal, cross-conformal, and risk control with minimal prerequisites.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">theory</span>
-              <span class="resource-tag">distribution-free</span>
-              <span class="resource-tag">arXiv</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://modal-python.readthedocs.io/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">modAL Documentation</div>
-            <div class="resource-card-desc">Modular active learning framework built on scikit-learn. Implements uncertainty sampling, query-by-committee, BALD, and core-set selection with a clean API.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">sklearn</span>
-              <span class="resource-tag">pool-based</span>
-              <span class="resource-tag">Python</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- LLMs & Agentic AI -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>LLMs &amp; Agentic AI</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://www.promptingguide.ai/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type course">Guide</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Prompt Engineering Guide</div>
-            <div class="resource-card-desc">Comprehensive, community-maintained guide to zero-shot, few-shot, chain-of-thought, ReAct, and other prompting techniques with practical examples.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">prompting</span>
-              <span class="resource-tag">chain-of-thought</span>
-              <span class="resource-tag">ReAct</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://python.langchain.com/docs/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">LangChain Documentation</div>
-            <div class="resource-card-desc">Framework for building RAG pipelines, tool-using agents, and multi-step LLM workflows. Integrates with vector stores, HuggingFace, and most LLM providers.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">RAG</span>
-              <span class="resource-tag">agents</span>
-              <span class="resource-tag">Python</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/ur-whitelab/chemcrow-public" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ChemCrow — GitHub</div>
-            <div class="resource-card-desc">Open-source chemistry agent that augments LLMs with 18 chemistry tools: PubChem lookup, RDKit, reaction prediction, and safety checks. Reference implementation for Tutorial 14.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">tool use</span>
-              <span class="resource-tag">RDKit</span>
-              <span class="resource-tag">open-source</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://simonwillison.net/tags/llms/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Simon Willison's Blog — LLMs</div>
-            <div class="resource-card-desc">Prolific practitioner blog covering LLM capabilities, limitations, tool use, and agentic workflows. Consistently among the most useful sources for staying current.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">news</span>
-              <span class="resource-tag">practical</span>
-              <span class="resource-tag">tool use</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-    </div><!-- /view-ml -->
-
-
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- VIEW: BY CHEMISTRY TOPIC                      -->
-    <!-- ══════════════════════════════════════════════ -->
-    <div id="view-chem" class="resource-view hidden">
-
-      <!-- Drug Discovery & QSAR -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Drug Discovery &amp; QSAR</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://tdcommons.ai/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type benchmark">Benchmark</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Therapeutic Data Commons (TDC)</div>
-            <div class="resource-card-desc">Unified benchmark platform for ML in drug discovery: 66+ tasks spanning ADMET prediction, drug–target interaction, and molecular generation with standardised splits.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">ADMET</span>
-              <span class="resource-tag">benchmarks</span>
-              <span class="resource-tag">leaderboard</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://practicalcheminformatics.blogspot.com/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Blog</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Practical Cheminformatics — Pat Walters</div>
-            <div class="resource-card-desc">Industry practitioner blog covering ML model validation, dataset curation, ADMET modelling, and best practices in drug discovery ML. Includes working code.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">QSAR</span>
-              <span class="resource-tag">best practices</span>
-              <span class="resource-tag">notebooks</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://www.ebi.ac.uk/chembl/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ChEMBL Database</div>
-            <div class="resource-card-desc">EBI's manually curated database of bioactive molecules with drug-like properties — 2.4M compounds, 1.5M assays. The primary source for bioactivity training data.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">bioactivity</span>
-              <span class="resource-tag">2.4M compounds</span>
-              <span class="resource-tag">REST API</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://www.swissadme.ch/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">SwissADME</div>
-            <div class="resource-card-desc">Free web tool for predicting ADME properties (logP, solubility, BBB penetration, Lipinski rules) from SMILES. Useful for quickly benchmarking generated molecules.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">ADME</span>
-              <span class="resource-tag">Lipinski</span>
-              <span class="resource-tag">web app</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Materials Science -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Materials Science &amp; Crystals</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://materialsproject.org/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">The Materials Project</div>
-            <div class="resource-card-desc">Open database of 150,000+ inorganic materials with DFT-computed properties: formation energy, band gap, elastic moduli. Python API via pymatgen.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">DFT</span>
-              <span class="resource-tag">formation energy</span>
-              <span class="resource-tag">API</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://hackingmaterials.lbl.gov/matminer/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">matminer</div>
-            <div class="resource-card-desc">Python library for feature engineering from crystal structures: Magpie descriptors, composition features, site fingerprints. Integrates with Materials Project and AFLOW.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">descriptors</span>
-              <span class="resource-tag">crystals</span>
-              <span class="resource-tag">pymatgen</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://opencatalystproject.org/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Open Catalyst Project (OC20 / OC22)</div>
-            <div class="resource-card-desc">Meta AI's large-scale dataset of DFT relaxations for catalyst surfaces. 1.3M+ training structures with forces and energies. Benchmark for ML interatomic potentials.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">catalysis</span>
-              <span class="resource-tag">forces</span>
-              <span class="resource-tag">large-scale</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://jarvis.nist.gov/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">JARVIS (NIST)</div>
-            <div class="resource-card-desc">NIST's repository of 80,000+ materials with DFT, ML, and experimental data. Includes benchmarks for property prediction and ML interatomic potentials.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">NIST</span>
-              <span class="resource-tag">DFT</span>
-              <span class="resource-tag">benchmarks</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Molecular Generation & Design -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Molecular Generation &amp; Design</h2>
-          <span class="section-count">4 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://zinc.docking.org/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ZINC Database</div>
-            <div class="resource-card-desc">Free database of 230M+ commercially available compounds in ready-to-dock 3-D format. ZINC-250k is the standard training corpus for molecular generation models.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">230M compounds</span>
-              <span class="resource-tag">docking</span>
-              <span class="resource-tag">drug-like</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/molecularsets/moses" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type benchmark">Benchmark</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">MOSES: Molecular Sets Benchmark</div>
-            <div class="resource-card-desc">Standardised evaluation framework for molecular generation. Computes validity, uniqueness, novelty, FCD, and scaffold similarity against a reference set.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">evaluation</span>
-              <span class="resource-tag">FCD</span>
-              <span class="resource-tag">VAE / RNN</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/MolecularAI/REINVENT4" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">REINVENT 4 — AstraZeneca</div>
-            <div class="resource-card-desc">Production-grade molecular design tool using reinforcement learning over a generative SMILES model. Supports multi-parameter optimisation and scaffold decoration.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">RL</span>
-              <span class="resource-tag">scaffold</span>
-              <span class="resource-tag">open-source</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">PubChem</div>
-            <div class="resource-card-desc">NIH's open chemistry database: 119M compounds, 300M bioactivities. REST and Python APIs for programmatic access — used in Tutorial 14 for compound lookup.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">119M compounds</span>
-              <span class="resource-tag">REST API</span>
-              <span class="resource-tag">bioactivity</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Reaction Prediction -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Reaction Prediction &amp; Synthesis Planning</h2>
-          <span class="section-count">3 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://rxn.app.accelerate.science/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">RXN for Chemistry — IBM</div>
-            <div class="resource-card-desc">Free web platform for forward reaction prediction, retrosynthesis, and procedure extraction using transformer models trained on USPTO and Pistachio reaction databases.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">retrosynthesis</span>
-              <span class="resource-tag">transformer</span>
-              <span class="resource-tag">free</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://askcos.mit.edu/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ASKCOS — MIT</div>
-            <div class="resource-card-desc">Open-source computer-aided synthesis planning platform. Includes one-step retrosynthesis, multi-step tree search, condition recommendation, and reaction feasibility scoring.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">retrosynthesis</span>
-              <span class="resource-tag">tree search</span>
-              <span class="resource-tag">open-source</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/reymond-group/drfp" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">DRFP: Differential Reaction Fingerprints</div>
-            <div class="resource-card-desc">Fast, differentiable reaction fingerprints for reaction classification and yield prediction. Drop-in replacement for Morgan fingerprints in reaction ML tasks.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">reaction fingerprints</span>
-              <span class="resource-tag">yield prediction</span>
-              <span class="resource-tag">Python</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Proteins & Biomolecules -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Proteins &amp; Biomolecules</h2>
-          <span class="section-count">3 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://alphafold.ebi.ac.uk/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">AlphaFold Protein Structure Database</div>
-            <div class="resource-card-desc">DeepMind &amp; EBI's database of 200M+ predicted protein structures. The AlphaFold2 model code is open-source; structures are freely downloadable via API.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">structure prediction</span>
-              <span class="resource-tag">200M proteins</span>
-              <span class="resource-tag">open-source</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/facebookresearch/esm" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ESM: Evolutionary Scale Modeling — Meta</div>
-            <div class="resource-card-desc">Protein language models (ESM-1b, ESM-2, ESM-3) pre-trained on 250M protein sequences. State-of-the-art embeddings for protein property prediction and structure prediction.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">protein LM</span>
-              <span class="resource-tag">embeddings</span>
-              <span class="resource-tag">HuggingFace</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://www.uniprot.org/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">UniProt</div>
-            <div class="resource-card-desc">Comprehensive protein sequence and functional annotation database. UniProtKB/Swiss-Prot (manually reviewed) and TrEMBL (automatically annotated) cover 250M+ entries.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">sequences</span>
-              <span class="resource-tag">annotations</span>
-              <span class="resource-tag">REST API</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Quantum Chemistry & DFT -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Quantum Chemistry &amp; DFT Datasets</h2>
-          <span class="section-count">3 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.datasets.QM9.html" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">QM9 Dataset</div>
-            <div class="resource-card-desc">134k small organic molecules with DFT-computed properties: HOMO/LUMO gaps, dipole moments, atomisation energies. The standard benchmark for molecular property prediction with GNNs.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">134k molecules</span>
-              <span class="resource-tag">HOMO-LUMO</span>
-              <span class="resource-tag">PyG</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/isayev/ANI1_dataset" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type dataset">Dataset</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">ANI-1 / ANI-2x Datasets</div>
-            <div class="resource-card-desc">20M+ DFT energy and force calculations across conformational space of small organic molecules. Primary dataset for training ML interatomic potentials and active learning pipelines.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">20M conformers</span>
-              <span class="resource-tag">forces</span>
-              <span class="resource-tag">ML potentials</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://pyscf.org/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">PySCF</div>
-            <div class="resource-card-desc">Python-based quantum chemistry package for DFT, HF, MP2, and coupled-cluster calculations. Lightweight, scriptable, and integrable with ML workflows for on-the-fly labelling.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">DFT</span>
-              <span class="resource-tag">Python</span>
-              <span class="resource-tag">open-source</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Self-Driving Labs -->
-      <div class="resource-section">
-        <div class="resource-section-header">
-          <h2>Self-Driving Laboratories</h2>
-          <span class="section-count">3 resources</span>
-        </div>
-        <div class="resource-grid">
-
-          <a class="resource-card" href="https://acceleration.utoronto.ca/" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type blog">Organisation</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Acceleration Consortium — University of Toronto</div>
-            <div class="resource-card-desc">Leading research centre for self-driving labs. Publishes open-source robotics software, benchmark datasets, and tutorials for autonomous experimentation.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">autonomous labs</span>
-              <span class="resource-tag">robotics</span>
-              <span class="resource-tag">tutorials</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/AC-BO-Hackathon/honegumi" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type tool">Tool</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Honegumi — BO Template Generator</div>
-            <div class="resource-card-desc">Interactive tool for generating BoTorch/Ax Bayesian optimisation code from a GUI. Outputs ready-to-run Python scripts for common experimental design scenarios.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">BoTorch</span>
-              <span class="resource-tag">code generation</span>
-              <span class="resource-tag">beginner-friendly</span>
-            </div>
-          </a>
-
-          <a class="resource-card" href="https://github.com/aspuru-guzik-group/olympus" target="_blank" rel="noopener">
-            <div class="resource-card-top">
-              <span class="resource-type benchmark">Benchmark</span>
-              <svg class="resource-external-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </div>
-            <div class="resource-card-title">Olympus — Benchmark for Experiment Planners</div>
-            <div class="resource-card-desc">Aspuru-Guzik group's benchmark for optimisation algorithms on real chemical datasets. Provides emulators for 10+ chemical reaction and materials datasets.</div>
-            <div class="resource-tags">
-              <span class="resource-tag">optimisation</span>
-              <span class="resource-tag">emulators</span>
-              <span class="resource-tag">benchmarks</span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-    </div><!-- /view-chem -->
-
-  </div><!-- /resources-body -->
+  </div>
 
   <footer>
     <span>Division of Chemistry and Chemical Engineering · Caltech</span>
@@ -1212,15 +250,6 @@
       GitHub
     </a>
   </footer>
-
-  <script>
-    function switchView(view) {
-      document.getElementById('view-ml').classList.toggle('hidden', view !== 'ml');
-      document.getElementById('view-chem').classList.toggle('hidden', view !== 'chem');
-      document.getElementById('btn-ml').classList.toggle('active', view === 'ml');
-      document.getElementById('btn-chem').classList.toggle('active', view === 'chem');
-    }
-  </script>
 
 </body>
 </html>

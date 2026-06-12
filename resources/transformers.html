@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformers · Resources · AI4Chemical Sciences Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .topic-hero { background: var(--surface); padding: 52px 40px 44px; border-bottom: 1px solid var(--border); }
+    .topic-hero h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .topic-hero h1 em { font-style: normal; color: var(--accent); }
+    .topic-hero p { font-size: 15px; color: var(--accent-dim); max-width: 580px; line-height: 1.6; }
+    .topic-body { max-width: 900px; margin: 0 auto; padding: 44px 40px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 36px; transition: color 0.15s; }
+    .back-link:hover { color: var(--accent); }
+    .res-section { margin-bottom: 48px; }
+    .res-section-header { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 18px; }
+    .res-section-header h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+    .res-section-header .res-count { font-size: 12px; color: var(--text-dim); }
+    .res-list { display: flex; flex-direction: column; gap: 10px; }
+    .res-card { display: flex; align-items: flex-start; gap: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+    .res-card:hover { background: rgba(93,218,180,0.06); border-color: rgba(93,218,180,0.3); }
+    .res-card-icon { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(93,218,180,0.1); border: 1px solid rgba(93,218,180,0.2); color: var(--accent); }
+    .res-card-icon.orange { background: rgba(255,180,50,0.12); border-color: rgba(255,180,50,0.25); color: #FFB432; }
+    .res-card-icon.blue   { background: rgba(99,179,237,0.12); border-color: rgba(99,179,237,0.25); color: #63B3ED; }
+    .res-card-icon.purple { background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.25); color: #A78BFA; }
+    .res-card-body { flex: 1; min-width: 0; }
+    .res-card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .res-card-desc  { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+    .res-card-meta  { font-size: 11.5px; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
+    .res-ext { color: var(--text-dim); opacity: 0.4; flex-shrink: 0; margin-top: 2px; transition: opacity 0.15s; }
+    .res-card:hover .res-ext { opacity: 1; }
+    @media (max-width: 700px) { .topic-hero { padding: 36px 20px 32px; } .topic-hero h1 { font-size: 28px; } .topic-body { padding: 28px 20px 60px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">
+      <div class="nav-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+        </svg>
+      </div>
+      AI<em>4</em>Chemical Sciences
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Schedule</a></li>
+      <li><a href="../lectures/">Lectures</a></li>
+      <li><a href="../tutorials/">Tutorials</a></li>
+      <li><a href="../resources.html" class="active">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="topic-hero">
+    <h1>Transformers <em>for Chemistry</em></h1>
+    <p>Self-attention, tokenisation of SMILES, and chemical language models — from BERT to domain-adapted chemistry LLMs.</p>
+  </div>
+
+  <div class="topic-body">
+
+    <a class="back-link" href="../resources.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      All topics
+    </a>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Courses</h2>
+        <span class="res-count">4 resources</span>
+      </div>
+      <div class="res-list">
+
+        <a class="res-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">The Illustrated Transformer — Jay Alammar</div>
+            <div class="res-card-desc">The most widely recommended visual walkthrough of the transformer architecture: attention heads, positional encoding, and the encoder-decoder stack.</div>
+            <div class="res-card-meta">jalammar.github.io · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://huggingface.co/learn/nlp-course" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">HuggingFace NLP Course</div>
+            <div class="res-card-desc">Free course teaching transformer fine-tuning, tokenisation, the Trainer API, and HuggingFace datasets. Directly applicable to ChemBERTa fine-tuning.</div>
+            <div class="res-card-meta">HuggingFace · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Andrej Karpathy — Let's Build GPT from Scratch</div>
+            <div class="res-card-desc">2-hour live coding session building a GPT-style transformer from scratch in pure PyTorch. Best way to develop mechanical understanding of attention.</div>
+            <div class="res-card-meta">YouTube · Free video (2h)</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://nlp.seas.harvard.edu/annotated-transformer/" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">The Annotated Transformer — Harvard NLP</div>
+            <div class="res-card-desc">Line-by-line PyTorch implementation of the original transformer paper with inline commentary.</div>
+            <div class="res-card-meta">Harvard NLP · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Tutorials</h2>
+        <span class="res-count">2 resources</span>
+      </div>
+      <div class="res-list">
+
+        <a class="res-card" href="https://huggingface.co/docs/transformers/training" target="_blank" rel="noopener">
+          <div class="res-card-icon orange">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Fine-tuning BERT for Text Classification — HuggingFace</div>
+            <div class="res-card-desc">Step-by-step guide for fine-tuning pre-trained BERT-style models for classification and regression using the Trainer API.</div>
+            <div class="res-card-meta">HuggingFace Docs · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://huggingface.co/seyonec/ChemBERTa-zinc-base-v1" target="_blank" rel="noopener">
+          <div class="res-card-icon orange">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">ChemBERTa Fine-tuning Example</div>
+            <div class="res-card-desc">Model card and usage example for ChemBERTa-zinc-base-v1, including how to load the tokeniser and fine-tune on a molecular property dataset.</div>
+            <div class="res-card-meta">HuggingFace Hub · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Papers</h2>
+        <span class="res-count">4 resources</span>
+      </div>
+      <div class="res-list">
+
+        <a class="res-card" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Vaswani et al. — "Attention Is All You Need" (2017)</div>
+            <div class="res-card-desc">The original transformer paper introducing scaled dot-product attention and multi-head attention.</div>
+            <div class="res-card-meta">NeurIPS 2017 · arXiv:1706.03762</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://arxiv.org/abs/2010.09885" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Chithrananda et al. — "ChemBERTa" (2020)</div>
+            <div class="res-card-desc">Pre-trains RoBERTa on 77M SMILES from ZINC and evaluates on MoleculeNet property prediction benchmarks.</div>
+            <div class="res-card-meta">arXiv:2010.09885</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://www.nature.com/articles/s42256-022-00580-7" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Ross et al. — "Large-Scale Chemical Language Representations Capture Molecular Structure and Properties" (2022)</div>
+            <div class="res-card-desc">MolFormer: transformer pre-trained on 1.1 billion SMILES, outperforming GNNs on several benchmarks.</div>
+            <div class="res-card-meta">Nature Machine Intelligence 2022</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://pubs.acs.org/doi/10.1021/acscentsci.9b00576" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Schwaller et al. — "Molecular Transformer: A Model for Uncertainty-Calibrated Chemical Reaction Prediction" (2019)</div>
+            <div class="res-card-desc">Applies the transformer architecture to reaction SMILES for forward prediction and retrosynthesis.</div>
+            <div class="res-card-meta">ACS Central Science 2019</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Tools</h2>
+        <span class="res-count">2 resources</span>
+      </div>
+      <div class="res-list">
+
+        <a class="res-card" href="https://huggingface.co/docs/transformers" target="_blank" rel="noopener">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">HuggingFace Transformers</div>
+            <div class="res-card-desc">Library with 200k+ pre-trained models including ChemBERTa, MolFormer, and ESM. Simple API for fine-tuning and inference.</div>
+            <div class="res-card-meta">Apache 2.0</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a class="res-card" href="https://huggingface.co/seyonec/ChemBERTa-zinc-base-v1" target="_blank" rel="noopener">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">ChemBERTa on HuggingFace Hub</div>
+            <div class="res-card-desc">Ready-to-use pre-trained chemical language model for molecular property prediction.</div>
+            <div class="res-card-meta">HuggingFace Hub · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Division of Chemistry and Chemical Engineering · Caltech</span>
+    <span class="sep">·</span>
+    <span>Contact: <a href="mailto:jul@caltech.edu" style="color:inherit">jul@caltech.edu</a></span>
+    <span class="sep">·</span>
+    <a href="https://github.com/truejulosdu13/ai4chemistry-bootcamp" style="color:inherit;display:flex;align-items:center;gap:5px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      GitHub
+    </a>
+  </footer>
+
+</body>
+</html>
