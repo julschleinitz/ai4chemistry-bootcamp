@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials · AI4Chemical Sciences Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .page-hero {
+      background: var(--surface);
+      padding: 52px 40px 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .page-hero h1 em { font-style: normal; color: var(--accent); }
+    .page-hero p { font-size: 15px; color: var(--accent-dim); max-width: 560px; line-height: 1.6; }
+
+    .page-body {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 44px 40px 80px;
+    }
+
+    .week-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #e8935a;
+      margin-bottom: 16px;
+      margin-top: 40px;
+    }
+    .week-label:first-child { margin-top: 0; }
+
+    .session-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .session-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.15s, border-color 0.15s, transform 0.12s;
+    }
+    .session-card:hover {
+      background: rgba(232,147,90,0.07);
+      border-color: rgba(232,147,90,0.35);
+      transform: translateY(-1px);
+    }
+    .session-card-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #e8935a;
+      opacity: 0.9;
+    }
+    .session-card-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .session-card-sub {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .session-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      color: var(--text-dim);
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+    .session-card-colab {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #e8935a;
+      margin-top: 6px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .session-card:hover .session-card-colab { opacity: 1; }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 36px 20px 32px; }
+      .page-hero h1 { font-size: 28px; }
+      .page-body { padding: 28px 20px 60px; }
+      .session-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">
+      <div class="nav-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+        </svg>
+      </div>
+      AI<em>4</em>Chemical Sciences
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Schedule</a></li>
+      <li><a href="../lectures/">Lectures</a></li>
+      <li><a href="../tutorials/" class="active">Tutorials</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>Hands-on <em>Tutorials</em></h1>
+    <p>13 coding sessions on Google Colab — from molecular fingerprints and GNNs to Bayesian optimization and chemistry agents. Click any card to open the tutorial.</p>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Week 1 -->
+    <p class="week-label">Week 1 · Aug 10 – 14 · Foundations of ML &amp; Representations</p>
+    <div class="session-grid">
+
+      <a class="session-card" href="molecular-representations.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Molecular Property Prediction</div>
+        <div class="session-card-sub">Building a pipeline using RDKit, feature engineering, training and performance evaluation</div>
+        <div class="session-card-meta">Mon Aug 10</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="model-training.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Model Training &amp; Performance Evaluation</div>
+        <div class="session-card-sub">Train/val/test splitting, data leakage, chemically-relevant splits, baselines</div>
+        <div class="session-card-meta">Tue Aug 11</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="mlp-formation-energy.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Feed-Forward Net — Formation Energy</div>
+        <div class="session-card-sub">PyTorch from scratch, training loop, early stopping on materials data</div>
+        <div class="session-card-meta">Tue Aug 11</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="gnn-homo-lumo.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Molecular Property Prediction with GNNs</div>
+        <div class="session-card-sub">PyG on QM9, MPNN for HOMO-LUMO gap, atom embedding UMAP</div>
+        <div class="session-card-meta">Wed Aug 12</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="interpretability.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Explaining ML Predictions</div>
+        <div class="session-card-sub">SHAP values on molecular fingerprints, attention visualization on GNNs</div>
+        <div class="session-card-meta">Wed Aug 12</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="few-shot-learning.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Few-Shot Learning</div>
+        <div class="session-card-sub">Transfer learning, application, failure modes of limited-data regimes</div>
+        <div class="session-card-meta">Thu Aug 13</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="generative-vae.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Molecular Generation with VAEs</div>
+        <div class="session-card-sub">Encode/decode molecules, latent space exploration, validity checks</div>
+        <div class="session-card-meta">Thu Aug 13</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Week 2 -->
+    <p class="week-label">Week 2 · Aug 17 – 21 · Dataset Design &amp; LLMs</p>
+    <div class="session-grid">
+
+      <a class="session-card" href="chemberta.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Fine-tuning ChemBERTa</div>
+        <div class="session-card-sub">HuggingFace, BACE IC50, frozen vs. full fine-tuning comparison</div>
+        <div class="session-card-meta">Mon Aug 17</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="dft-active-learning.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Active Learning for DFT Triage</div>
+        <div class="session-card-sub">QM9/ANI-1 pool, GP uncertainty sampling, learning curves</div>
+        <div class="session-card-meta">Mon Aug 17</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="reaction-bo.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Reaction Yield Optimization with BO</div>
+        <div class="session-card-sub">Suzuki coupling dataset, BoTorch, EI vs. UCB convergence comparison</div>
+        <div class="session-card-meta">Tue Aug 18</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="uncertainty-quantification.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Uncertainty Quantification in Practice</div>
+        <div class="session-card-sub">Calibration curves, conformal prediction on molecular datasets, ensemble variance</div>
+        <div class="session-card-meta">Tue Aug 18</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="rag-assistant.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Chemistry RAG Assistant</div>
+        <div class="session-card-sub">Index papers, Q&amp;A on reactions, RDKit tool calls</div>
+        <div class="session-card-meta">Wed Aug 19</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+      <a class="session-card" href="react-agent.html">
+        <span class="session-card-badge">Tutorial</span>
+        <div class="session-card-title">Building a Chemistry ReAct Agent</div>
+        <div class="session-card-sub">PubChem lookup, RDKit tools, BO surrogate, guardrails</div>
+        <div class="session-card-meta">Wed Aug 19</div>
+        <div class="session-card-colab">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab →
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Division of Chemistry and Chemical Engineering · Caltech</span>
+    <span class="sep">·</span>
+    <span>Contact: <a href="mailto:jul@caltech.edu" style="color:inherit">jul@caltech.edu</a></span>
+    <span class="sep">·</span>
+    <a href="https://github.com/truejulosdu13/ai4chemistry-bootcamp" style="color:inherit;display:flex;align-items:center;gap:5px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      GitHub
+    </a>
+  </footer>
+
+</body>
+</html>
