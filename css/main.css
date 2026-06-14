@@ -249,6 +249,10 @@ main {
   background: rgba(255,180,50,0.12);
   border-color: rgba(255,180,50,0.3);
 }
+.session.introductions {
+  background: rgba(123, 192, 255, 0.14);
+  border-color: rgba(123, 192, 255, 0.35);
+}
 .session.free {
   background: var(--surface2);
   border-color: var(--border);
@@ -265,6 +269,7 @@ main {
 }
 .lecture  .session-type { color: var(--accent); }
 .tutorial .session-type { color: #FFB432; }
+.introductions .session-type { color: #7BC0FF; }
 .free     .session-type { color: var(--text-dim); }
 
 .session-title {
