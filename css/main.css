@@ -117,6 +117,21 @@ nav {
   color: var(--accent-dim);
   margin-bottom: 28px;
 }
+.schedule-notice {
+  max-width: 1100px;
+  margin: 22px auto 0;
+  padding: 14px 18px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-left: 3px solid #FFB432;
+  border-radius: 10px;
+  background: rgba(255,180,50,0.08);
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+.schedule-notice strong {
+  color: #FFB432;
+}
 .hero-pills {
   display: flex;
   gap: 10px;
@@ -369,6 +384,7 @@ footer .sep { color: var(--border); }
   nav { padding: 0 20px; }
   .hero { padding: 40px 20px 36px; }
   .hero h1 { font-size: 38px; }
+  .schedule-notice { margin: 18px 20px 0; }
   main { padding: 24px 20px 60px; }
   .schedule-grid { grid-template-columns: 70px repeat(5, 1fr); font-size: 11px; }
   .session-title { font-size: 10.5px; }

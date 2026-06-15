@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 3 — Model Training &amp; Evaluation · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 8 — Data Stewardship · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,6 +40,7 @@
     .question-item .q-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFB432; margin-bottom: 6px; }
     .question-item .q-label::before { content: 'Q' counter(q-counter) ' — '; }
     .question-item p { font-size: 14px; color: var(--text); line-height: 1.65; margin: 0; }
+    .question-item .q-hint { font-size: 12.5px; color: var(--text-dim); margin-top: 8px; font-style: italic; }
     .question-item .q-difficulty { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-top: 8px; }
     .q-difficulty.easy    { background: rgba(93,218,180,0.15); color: var(--accent); }
     .q-difficulty.medium  { background: rgba(255,180,50,0.15); color: #FFB432; }
@@ -77,20 +78,20 @@
 
   <div class="tutorial-hero">
     <div class="tutorial-hero-meta">
-      <span class="tutorial-badge">Tutorial 3</span>
+      <span class="tutorial-badge">Tutorial 8</span>
     </div>
-    <h1>Model Training <em>&amp; Evaluation</em></h1>
+    <h1>Data <em>Stewardship</em></h1>
     <p class="tutorial-tagline">
-      Diagnose overfitting, prevent data leakage, and select hyperparameters rigorously for chemical property prediction.
+      Organise research data so it stays findable, reusable, and ready for downstream modelling and collaboration.
     </p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        August 11, 2026 · 10:15 – 12:00
+        August 17, 2026 · 15:15 – 16:45
       </div>
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        105 min
+        90 min
       </div>
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -123,10 +124,10 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Split chemical datasets using random, scaffold, and time-based strategies with DeepChem or RDKit</li>
-        <li>Implement nested cross-validation to tune hyperparameters without touching the test set</li>
-        <li>Plot learning curves and validation curves to diagnose underfitting and overfitting</li>
-        <li>Detect and fix a data leakage bug in a preprocessing pipeline</li>
+        <li>Record data with enough context that you can interpret it months later.</li>
+        <li>Track preprocessing, provenance, and file naming in a consistent way.</li>
+        <li>Prepare datasets for sharing, review, and reproducible modelling.</li>
+        <li>Recognise the difference between raw data, cleaned data, and analysis-ready data.</li>
       </ul>
     </div>
 
@@ -135,13 +136,12 @@
     <div class="content-section">
       <p class="content-section-label">Instructions</p>
       <h2>Getting started</h2>
-      <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
+      <p>Open the Colab notebook using the button above. Run the notebook from top to bottom and complete the short exercises along the way.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install deepchem, scikit-learn, and rdkit. Confirm the dataset loads and SMILES parse cleanly.</p></li>
-        <li><p><strong>Explore the dataset.</strong> Load the BBBP (blood–brain barrier permeability) dataset. Plot the class balance and identify any duplicated SMILES strings.</p></li>
-        <li><p><strong>Implement splitting strategies.</strong> Complete the three splitting cells: random split, scaffold split (Bemis–Murcko), and temporal split (by year of publication). Compare the resulting class distributions in each split.</p></li>
-        <li><p><strong>Tune with nested cross-validation.</strong> Fill in the inner-loop hyperparameter grid for a <code>RandomForestClassifier</code> (<code>n_estimators</code>, <code>max_depth</code>, <code>min_samples_leaf</code>). Report AUC-ROC on the outer test fold only.</p></li>
-        <li><p><strong>Diagnose your model.</strong> Plot a learning curve (training size vs. validation AUC) and a validation curve (<code>max_depth</code> vs. AUC). Identify the bias-variance regime your model is in.</p></li>
+        <li><p><strong>Inspect the dataset.</strong> Identify the raw files, metadata, and any missing or ambiguous fields.</p></li>
+        <li><p><strong>Standardise the schema.</strong> Rename columns, choose units, and write down the provenance for each transformation.</p></li>
+        <li><p><strong>Version the data.</strong> Keep raw, cleaned, and analysis-ready copies separate so you can always trace results back to the source.</p></li>
+        <li><p><strong>Document the workflow.</strong> Add a short README-style note that explains how someone else could reproduce the dataset build.</p></li>
       </ol>
     </div>
 
@@ -151,31 +151,21 @@
       <p class="content-section-label">Questions</p>
       <p>Answer these questions as you work through the notebook. Discuss with your neighbour — some have no single right answer.</p>
       <ol class="questions-list">
-
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>What fraction of molecules are BBB-positive? Would you expect this class imbalance to affect AUC-ROC? What about accuracy?</p>
+          <p>What information would you want before trusting a dataset for a modelling task?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
-
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Compare test AUC under random vs. scaffold splitting. Which is lower? By how much? What does this gap imply for model deployment?</p>
+          <p>Which parts of your current workflow are easiest to reproduce, and which are most fragile?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
-
-        <div class="question-item">
-          <div class="q-label">Core</div>
-          <p>Identify the data leakage bug introduced in the notebook (hint: look at where <code>StandardScaler</code> is fit). Fix it and report how test AUC changes.</p>
-          <span class="q-difficulty medium">Medium</span>
-        </div>
-
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Implement a stratified scaffold split that preserves class balance within each fold. How does the AUC distribution across folds compare to an unstratified scaffold split?</p>
+          <p>Design a minimal metadata schema for a chemistry dataset that another lab could use without extra explanation.</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
-
       </ol>
     </div>
 
@@ -188,11 +178,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
-        <a class="resource-link" href="#">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub repo
-        </a>
-        <a class="resource-link" href="../lectures/supervised-learning.html">
+        <a class="resource-link" href="../lectures/data-stewardship.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
