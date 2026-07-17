@@ -356,6 +356,46 @@ footer .sep { color: var(--border); }
 .session.hackathon:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .hackathon .session-type { color: #63B3ED; }
 
+/* ── Instructor social links (lecture/tutorial detail pages) ── */
+.instructor-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.instructor-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.instructor-name svg { opacity: 0.7; flex-shrink: 0; }
+.instructor-social {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.social-link:hover {
+  background: rgba(93,218,180,0.12);
+  border-color: rgba(93,218,180,0.4);
+  color: var(--accent);
+}
+.social-link svg { flex-shrink: 0; }
+
 /* ── Break rows ── */
 .break-row {
   grid-column: 1 / -1;
