@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 4 — Feed-Forward Net — Formation Energy · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 4 — Neural Networks in Practice · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -78,9 +78,9 @@
     <div class="tutorial-hero-meta">
       <span class="tutorial-badge">Tutorial 4</span>
     </div>
-    <h1>Feed-Forward Net — <em>Formation Energy</em></h1>
+    <h1>Neural Networks in Practice — <em>Fast Molecular MLPs</em></h1>
     <p class="tutorial-tagline">
-      Implement a PyTorch MLP from scratch to predict formation energies of inorganic crystals, with early stopping and learning-rate scheduling.
+      Build and train a PyTorch MLP from scratch on a chemistry dataset, then compare models on a fixed held-out test set for a class Pareto front.
     </p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
@@ -121,10 +121,10 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Build a configurable MLP in PyTorch using <code>nn.Module</code>, <code>nn.Linear</code>, and <code>nn.ReLU</code></li>
-        <li>Implement a full training loop: forward pass, MSE loss, backward pass, Adam step</li>
-        <li>Apply early stopping on a validation set to prevent overfitting</li>
-        <li>Use a learning-rate scheduler (<code>ReduceLROnPlateau</code>) and plot the loss and LR curves</li>
+        <li>Build a configurable MLP in PyTorch using <code>nn.Module</code>, stacked <code>nn.Linear</code> layers, nonlinear activations, and dropout</li>
+        <li>Implement one full optimization step: forward pass, loss computation, backward pass, and parameter update</li>
+        <li>Use fixed train, validation, and held-out test splits for fair model comparison across teams</li>
+        <li>Plot learning curves and submit final runs to compare training cost versus fixed-test performance</li>
       </ul>
     </div>
 
@@ -135,11 +135,12 @@
       <h2>Getting started</h2>
       <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install torch, numpy, and matplotlib. Confirm <code>torch.cuda.is_available()</code> and choose the appropriate device.</p></li>
-        <li><p><strong>Load and preprocess the dataset.</strong> Download the OQMD formation energy dataset subset. Standardise input features (composition-derived descriptors) using the training set statistics only.</p></li>
-        <li><p><strong>Build the MLP.</strong> Complete the <code>FormationEnergyMLP</code> class: add hidden layers, ReLU activations, and dropout. Expose layer widths and dropout rate as constructor arguments.</p></li>
-        <li><p><strong>Implement the training loop.</strong> Fill in the <code>train_one_epoch()</code> and <code>evaluate()</code> functions. Log train and validation MAE each epoch. Implement early stopping with <code>patience=20</code>.</p></li>
-        <li><p><strong>Tune and analyse.</strong> Experiment with depth (2 vs. 4 layers) and width (128 vs. 512 neurons). Plot train/val MAE curves. Identify the epoch where the best validation MAE occurs.</p></li>
+        <li><p><strong>Set up the environment.</strong> Install the required packages and confirm the runtime device with <code>torch.cuda.is_available()</code>. Keep CPU-compatible defaults so everyone can finish within the tutorial slot.</p></li>
+        <li><p><strong>Load the fixed split files.</strong> Download the pre-defined <code>train.csv</code>, <code>val.csv</code>, and <code>test.csv</code> index files. Do not re-split the data in notebook cells. The held-out test set must remain identical for all students.</p></li>
+        <li><p><strong>Build the neural network.</strong> Complete the <code>MolecularMLP</code> class: choose hidden depth, width, activation, and dropout. Print the parameter count so you can track model complexity.</p></li>
+        <li><p><strong>Implement backpropagation training.</strong> Fill in <code>train_one_epoch()</code> and <code>evaluate()</code>: forward pass, loss (<code>BCEWithLogitsLoss</code> or <code>MSELoss</code> depending on the notebook target), <code>loss.backward()</code>, optimizer step, and validation logging.</p></li>
+        <li><p><strong>Tune on validation only.</strong> Run at least three hyperparameter configurations and plot train/validation learning curves. Select your best configuration using validation metrics, not test metrics.</p></li>
+        <li><p><strong>Final fixed-test evaluation and submission.</strong> Evaluate once on the held-out test set with your chosen model, then submit run metadata (architecture, parameter count, training time, validation score, test score) to the shared leaderboard sheet.</p></li>
       </ol>
     </div>
 
@@ -152,25 +153,25 @@
 
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>What is the MAE of a baseline model that always predicts the training set mean? How does your MLP compare?</p>
+          <p>What is your baseline performance before training (for example, mean predictor or majority baseline)? How much does your first MLP improve over it?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>How does adding dropout (p=0.3) affect training vs. validation MAE at convergence? Does it help or hurt, and why?</p>
+          <p>How does adding dropout (for example <code>p=0.3</code>) change the gap between training and validation curves? Does it reduce overfitting for your model size?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Plot the gradient norm of the first layer over training. Do you observe vanishing or exploding gradients? How would you fix either?</p>
+          <p>Plot the gradient norm of the first hidden layer across epochs. Do you observe unstable gradients, and which change (learning rate, initialization, clipping, activation) helped most?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Replace the Adam optimiser with SGD + momentum (lr=0.01, momentum=0.9) with a cosine annealing schedule. Compare convergence speed and final MAE to Adam.</p>
+          <p>Compare two non-dominated runs for a Pareto analysis: one optimized for fastest training and one optimized for best fixed-test score. Which hyperparameters moved each run along the tradeoff frontier?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -188,9 +189,13 @@
         </a>
         <a class="resource-link" href="#">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub repo
+          Split files + starter code
         </a>
-        <a class="resource-link" href="../lectures/04-neural-networks.html">
+        <a class="resource-link" href="#" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H4z"/><path d="M4 16l4-4 4 3 4-5 4 6"/><path d="M10 20h4"/></svg>
+          Leaderboard sheet (Pareto)
+        </a>
+        <a class="resource-link" href="../lectures/neural-networks.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
