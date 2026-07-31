@@ -1,0 +1,1 @@
+run_id,timestamp_utc,student_or_team,dataset_name,task_type,split_version,model_family,hidden_layers,hidden_width,activation,dropout,optimizer,learning_rate,batch_size,weight_decay,epochs_trained,param_count,train_time_sec,best_val_score,test_score,metric_name,device,seed,notebook_version,notes
