@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 2 — Molecular Property Prediction · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 1 — Molecular Representations · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -337,20 +337,20 @@
   <!-- Hero -->
   <div class="tutorial-hero">
     <div class="tutorial-hero-meta">
-      <span class="tutorial-badge">Tutorial 2</span>
+      <span class="tutorial-badge">Tutorial 1</span>
     </div>
-    <h1>Molecular Property <em>Prediction</em></h1>
+    <h1>Molecular <em>Representations</em></h1>
     <p class="tutorial-tagline">
-      Build an end-to-end prediction pipeline — from SMILES to a trained scikit-learn model — using RDKit fingerprints.
+      Build, visualize, and compare five molecule-to-vector representations — physicochemical descriptors, Morgan fingerprints, an xtb solvation-energy descriptor, a ChemBERTa foundation-model embedding, and molecular graphs — using the ESOL solubility dataset.
     </p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        August 10, 2026 · 14:45 – 17:00
+        August 10, 2026 · 15:15 – 16:45
       </div>
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        105 min
+        90 min
       </div>
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -370,7 +370,7 @@
     <div class="colab-banner">
       <div class="colab-banner-text">
         <h3>Open in Google Colab</h3>
-        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
+        <p>The notebook has most of the code pre-filled. Complete the exercises marked <strong>Exercise</strong> or <code>your code here</code> as you go.</p>
       </div>
       <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/molecular-representations.ipynb" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -385,10 +385,11 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Compute Morgan fingerprints from SMILES strings using RDKit's AllChem module</li>
-        <li>Build a scikit-learn pipeline with feature scaling and a random forest regressor</li>
-        <li>Evaluate model performance using RMSE, R², and a parity plot</li>
-        <li>Compare random vs. scaffold-based train/test splits and explain the difference in reported performance</li>
+        <li>Understand why PCA needs standardized, decorrelated features — and compare PCA, t-SNE, and UMAP on the same data</li>
+        <li>Build and quantitatively evaluate a hand-designed molecular representation, then compare it to an expert-defined descriptor set</li>
+        <li>Compute Morgan fingerprints with RDKit, and clean up sparse/zero-variance bits before analysis</li>
+        <li>Featurize molecules with an xtb gas-phase-vs-solvation energy descriptor and a pretrained ChemBERTa embedding</li>
+        <li>Define a molecular graph with real bond-type edges, and see why variable graph size forces a pooling step before visualization</li>
       </ul>
     </div>
 
@@ -401,14 +402,19 @@
       <p>
         Open the Colab notebook using the button above. The notebook is structured into
         clearly labelled sections. Run each cell in order; cells marked
-        <strong>Exercise</strong> require you to fill in code.
+        <strong>Exercise</strong> require you to fill in code. Stuck on one? The solutions
+        notebook (see Resources below) has a worked example for every exercise.
       </p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Run the first cell to install rdkit, scikit-learn, and matplotlib. Verify that <code>from rdkit import Chem</code> works without errors.</p></li>
-        <li><p><strong>Load the dataset.</strong> The notebook downloads the ESOL aqueous solubility dataset automatically. Inspect the first few rows, check the distribution of logS values, and identify any outliers.</p></li>
-        <li><p><strong>Featurize molecules.</strong> Complete the <code>featurize()</code> function to compute Morgan fingerprints (radius=2, 2048 bits) for each SMILES string using <code>AllChem.GetMorganFingerprintAsBitVect</code>.</p></li>
-        <li><p><strong>Train the model.</strong> Fit a <code>RandomForestRegressor</code> on the training fingerprints. Experiment with <code>n_estimators</code> and <code>max_depth</code> using the config dict at the top of the training cell.</p></li>
-        <li><p><strong>Evaluate and visualise.</strong> Run the evaluation cell to compute RMSE and R², generate a predicted-vs-true parity plot, and compare performance under random vs. scaffold split.</p></li>
+        <li><p><strong>RDKit setup.</strong> Load the ESOL dataset and get comfortable with RDKit's <code>Mol</code> objects, drawing, and the <code>Descriptors</code> module.</p></li>
+        <li><p><strong>Dimensionality reduction.</strong> Build the reusable <code>plot_chemical_space</code>/<code>evaluate_representation_knn</code> toolkit, and see why standardization, correlated-feature removal, and the choice of PCA vs. t-SNE vs. UMAP all change what the resulting 2D map looks like.</p></li>
+        <li><p><strong>Data visualization example.</strong> Run the toolkit end-to-end on a trivial representation to confirm the pipeline works.</p></li>
+        <li><p><strong>Build your own representation.</strong> Hypothesize which molecular properties drive solubility, implement <code>compute_custom_features</code>, and see how it scores.</p></li>
+        <li><p><strong>Compare with an expert-defined representation.</strong> Build RDKit's physicochemical descriptors (plus charge/pKa) and compare against your own.</p></li>
+        <li><p><strong>Morgan fingerprints.</strong> Compute ECFP4 fingerprints, see how sparse they are, and remove zero-variance bits before visualizing.</p></li>
+        <li><p><strong>Featurize with xtb.</strong> Run a real gas-phase-vs-solvation single-point calculation live on 20 molecules, then switch to a precomputed CSV for the full dataset.</p></li>
+        <li><p><strong>Featurize with ChemBERTa.</strong> Extract a frozen embedding per molecule from a pretrained foundation model and visualize its chemical space.</p></li>
+        <li><p><strong>Graph definition.</strong> Implement bond-type edge features, compare two molecules' graph sizes directly, and see why pooling is needed before a graph can be visualized like every other representation.</p></li>
       </ol>
     </div>
 
@@ -423,25 +429,37 @@
 
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>How many molecules are in the ESOL dataset? What is the mean and standard deviation of the target logS? Are there any invalid SMILES strings?</p>
+          <p>Are the descriptors standardized before PCA is run today? How many descriptors does it take before standardization visibly changes what PC1 is made of?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>How does model RMSE change when you increase the fingerprint radius from 2 to 3? What structural information does a larger radius capture?</p>
+          <p>What fraction of the 2048 Morgan fingerprint bits are zero-variance on this ~1128-molecule dataset?</p>
+          <span class="q-difficulty easy">Easy</span>
+        </div>
+
+        <div class="question-item">
+          <div class="q-label">Core</div>
+          <p>Compare PCA, t-SNE, and UMAP on the same descriptor block — which shows the clearest logS-correlated structure? How does removing correlated features change what PC1 is made of?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Compare RMSE on a random split vs. a scaffold split. Which is higher? What does the gap tell you about the model's ability to generalise to new scaffolds?</p>
+          <p>Rank every representation you build (your own, the expert descriptors, fingerprints, xtb, ChemBERTa, mean-pooled graph) by <code>evaluate_representation_knn</code> RMSE. Does the ranking match your visual impression from the Bokeh plots?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Replace Morgan fingerprints with RDKit 2-D descriptors (<code>Descriptors.CalcMolDescriptors</code>). How does performance compare? Which descriptor subset is most predictive according to feature importance?</p>
+          <p>Does adding the xtb solvation descriptor or the ChemBERTa embedding improve <code>evaluate_representation_knn</code> RMSE over the expert descriptor set alone? What about all of them concatenated together?</p>
+          <span class="q-difficulty hard">Challenge</span>
+        </div>
+
+        <div class="question-item">
+          <div class="q-label">Challenge</div>
+          <p>Why can't a molecular graph be fed directly into <code>plot_chemical_space</code>, and what does mean-pooling the atom features fix?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -458,11 +476,15 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/molecular-representations_solutions.ipynb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Solutions notebook (Colab)
+        </a>
         <a class="resource-link" href="#">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           GitHub repo
         </a>
-        <a class="resource-link" href="../lectures/02-molecular-representations.html">
+        <a class="resource-link" href="../lectures/molecular-representations.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
