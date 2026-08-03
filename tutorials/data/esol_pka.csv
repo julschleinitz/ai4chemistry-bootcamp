@@ -1,0 +1,6 @@
+smiles,pka,is_ionizable
+CC(=O)O,4.76,1
+c1ccc(cc1)O,10.0,1
+c1ccccc1N,4.6,1
+CCO,,0
+c1ccc(cc1)C(=O)O,4.2,1
