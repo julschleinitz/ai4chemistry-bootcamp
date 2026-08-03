@@ -81,7 +81,7 @@
     </div>
     <h1>Neural Networks <em>in Practice</em></h1>
     <p class="tutorial-tagline">
-      Predict Tox21 toxicity with an MLP built from scratch in PyTorch — choose a fingerprint featurization, question architecture against dataset size, run a fixed-split hyperparameter search, and extend to multi-task learning.
+      Predict Tox21 toxicity with an MLP built from scratch in PyTorch — choose a fingerprint featurization, fight overfitting with regularization, question architecture against dataset size, run a fixed-split hyperparameter search, and extend to multi-task learning.
     </p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
@@ -111,7 +111,7 @@
         <h3>Open in Google Colab</h3>
         <p>The notebook has most of the code pre-filled. Complete the exercises marked <strong>Exercise</strong> or <code>your code here</code> as you go.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/mlp-formation-energy.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/deep-learning-neural-network.ipynb" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/>
           <path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/>
@@ -126,6 +126,7 @@
         <li>Get to know the Tox21 toxicity dataset — 12 sparse-labeled assays — and pick a featurization by visualizing and quantitatively evaluating it</li>
         <li>Build an MLP from scratch in PyTorch, starting from the simplest possible single-hidden-layer network and generalizing it into a configurable model</li>
         <li>Implement the training loop by hand: forward pass, loss, backpropagation, optimizer updates, and early stopping on a validation metric</li>
+        <li>Recognize overfitting in a learning curve and fight it with regularization — early stopping, weight decay, and dropout</li>
         <li>Question whether a bigger architecture is justified by the training set size, and compare learning curves across hyperparameters</li>
         <li>Run a fixed train/val/test hyperparameter search and submit a standardized payload for the class Pareto-front analysis</li>
         <li><strong>Advanced:</strong> extend the model to multi-task learning across all 12 Tox21 assays with a masked loss</li>
@@ -138,17 +139,18 @@
       <p class="content-section-label">Instructions</p>
       <h2>Getting started</h2>
       <p>
-        Open the Colab notebook using the button above. The notebook is structured as nine
+        Open the Colab notebook using the button above. The notebook is structured as ten
         exercises, in order. Run each cell in order; cells marked <strong>Exercise</strong>
         require you to fill in code. Stuck on one? The solutions notebook (see Resources
         below) has a worked example for every exercise.
       </p>
       <ol class="instructions-list">
         <li><p><strong>Introduce the Tox21 dataset.</strong> Load <code>dataset.csv</code> and look at per-task label counts, positive rates, and the missing-label pattern across all 12 assays.</p></li>
-        <li><p><strong>Visualize and choose a featurization.</strong> Compute Morgan fingerprints from SMILES, project them to 2D with PCA, and sanity-check them with a quick k-NN classifier.</p></li>
-        <li><p><strong>Introduce the neural network.</strong> Build the simplest possible single-hidden-layer network, then generalize it into the configurable <code>MolecularMLP</code> class.</p></li>
+        <li><p><strong>Visualize and choose a featurization.</strong> Compute Morgan fingerprints from SMILES, project them to 2D with PCA, sanity-check them with a quick k-NN classifier, and use Tanimoto similarity to compare positively- vs. negatively-labeled molecules.</p></li>
+        <li><p><strong>Introduce the neural network.</strong> Build the simplest possible single-hidden-layer network, write one manual optimization cycle by hand, then generalize it into the configurable <code>MolecularMLP</code> class.</p></li>
         <li><p><strong>Train a baseline model.</strong> Load the fixed train/val/test split for one Tox21 task and train a first MLP configuration end to end.</p></li>
-        <li><p><strong>Question architecture vs. dataset size.</strong> Sweep model capacity (tiny/medium/large) at fixed dataset size and see where overfitting kicks in.</p></li>
+        <li><p><strong>Regularization.</strong> Recognize the overfitting in the baseline's learning curve, then fight it with dropout, weight decay, and tighter early stopping.</p></li>
+        <li><p><strong>Question architecture vs. dataset size.</strong> Sweep model capacity (tiny/medium/large) at fixed dataset size, see where overfitting kicks in, and quantify how much a single score varies by weight-init seed vs. by train/val/test split.</p></li>
         <li><p><strong>Visualize learning curves vs. hyperparameters.</strong> Overlay validation curves across a swept hyperparameter (e.g. learning rate).</p></li>
         <li><p><strong>Run a hyperparameter search.</strong> Sweep a small grid, select the best run by validation score only, and plot the efficiency/performance frontier.</p></li>
         <li><p><strong>Draw conclusions.</strong> Plot an ROC curve for the best model and submit your run to the class leaderboard.</p></li>
@@ -177,19 +179,31 @@
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>In the capacity sweep (Exercise 5), does the largest model actually win on test ROC-AUC, or does the train/val loss gap tell a different story? What does that imply about picking model size relative to labeled dataset size?</p>
+          <p>In Exercise 5, which regularizer (dropout, weight decay, or tighter early stopping) shrinks the baseline's train/val loss gap the most? Does that same regularizer also give the best test ROC-AUC, or is there a cost/benefit tradeoff?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Across the learning-rate sweep (Exercise 6), which value converges fastest, and which oscillates or fails to converge within the epoch budget? How do you tell the difference from the loss curve shape alone?</p>
+          <p>In the capacity sweep (Exercise 6), does the largest model actually win on test ROC-AUC, or does the train/val loss gap tell a different story? What does that imply about picking model size relative to labeled dataset size?</p>
+          <span class="q-difficulty medium">Medium</span>
+        </div>
+
+        <div class="question-item">
+          <div class="q-label">Core</div>
+          <p>Still in Exercise 6: which is larger for these models — the variability from a different weight-init/shuffling seed, or from a different train/val/test split? What does that tell you about how much to trust a single reported test score?</p>
+          <span class="q-difficulty medium">Medium</span>
+        </div>
+
+        <div class="question-item">
+          <div class="q-label">Core</div>
+          <p>Across the learning-rate sweep (Exercise 7), which value converges fastest, and which oscillates or fails to converge within the epoch budget? How do you tell the difference from the loss curve shape alone?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Does multi-task training (Exercise 9) improve or hurt your primary task's test ROC-AUC compared to the single-task baseline? Which of the 12 tasks benefit most from sharing a hidden trunk, and why might that be?</p>
+          <p>Does multi-task training (Exercise 10) improve or hurt your primary task's test ROC-AUC compared to the single-task baseline? Which of the 12 tasks benefit most from sharing a hidden trunk, and why might that be?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -201,11 +215,11 @@
     <div class="content-section">
       <p class="content-section-label">Resources</p>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/mlp-formation-energy.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/deep-learning-neural-network.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/mlp-formation-energy_solutions.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/deep-learning-neural-network_solutions.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Solutions notebook (Colab)
         </a>

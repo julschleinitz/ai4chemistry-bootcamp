@@ -4,7 +4,7 @@ splits for the Neural Networks tutorial from the real Tox21 dataset.
 This is NOT run by students — per splits/README.md, instructors publish one
 fixed set of split files before class, and students must not re-split. Run
 this once, commit the resulting dataset.csv/splits/*.csv, and the tutorial
-notebook (mlp-formation-energy.ipynb) reads them as fixed artifacts.
+notebook (deep-learning-neural-network.ipynb) reads them as fixed artifacts.
 
 Usage:
     python build_dataset.py
