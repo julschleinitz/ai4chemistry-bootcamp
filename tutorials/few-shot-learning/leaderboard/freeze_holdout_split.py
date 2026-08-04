@@ -44,19 +44,22 @@ def download_experimental_data():
         return
     print("Downloading experimental 1H NMR dataset (Jonas & Kuhn, 2019 SI)...")
     urllib.request.urlretrieve(MOESM_URL, LOCAL_GZ)
-    extracted = False
-    if tarfile.is_tarfile(LOCAL_GZ):
-        with tarfile.open(LOCAL_GZ, "r:*") as tf:
-            members = [m for m in tf.getmembers() if os.path.basename(m.name) == "data_1H.pickle"]
-            if members:
-                member = members[0]
-                member.name = os.path.basename(member.name)
-                tf.extract(member, ".")
-                extracted = True
-    if not extracted:
-        with gzip.open(LOCAL_GZ, "rb") as gz_f, open(LOCAL_PICKLE, "wb") as out_f:
-            out_f.write(gz_f.read())
-    assert os.path.exists(LOCAL_PICKLE), "failed to extract data_1H.pickle -- inspect archive manually"
+
+    # This supplementary file is a gzip-compressed tarball. The 1H pickle inside is NOT named
+    # "data_1H.pickle" -- it's nested under a long, dataset-specific filename containing ".1H."
+    # (e.g. "...data.1H.nmrshiftdb_....mol_dict.pickle"), so we match on that substring.
+    assert tarfile.is_tarfile(LOCAL_GZ), (
+        f"Expected '{LOCAL_GZ}' to be a tar.gz archive -- open it manually to inspect its format.")
+    with tarfile.open(LOCAL_GZ, "r:*") as tf:
+        names = tf.getnames()
+        members = [m for m in tf.getmembers()
+                   if ".1H." in os.path.basename(m.name) and m.name.endswith(".pickle")]
+        assert members, f"Could not find a '*.1H.*.pickle' member in the archive; contents were: {names}"
+        member = members[0]
+        member.name = os.path.basename(member.name)
+        tf.extract(member, ".")
+        if member.name != LOCAL_PICKLE:
+            os.replace(member.name, LOCAL_PICKLE)
 
 
 def usable_test_molecule(mol, shifts):
@@ -83,8 +86,9 @@ def main():
     np.random.seed(args.seed)
 
     download_experimental_data()
-    with open(LOCAL_PICKLE, "rb") as f:
-        nmr_1h = pickle.load(f)
+    # pd.read_pickle (not raw pickle.load) -- pandas needs its own unpickling machinery to
+    # correctly restore DataFrame/Index internals saved by an older pandas version.
+    nmr_1h = pd.read_pickle(LOCAL_PICKLE)
     test_df = nmr_1h["test_df"]
 
     candidates = []
