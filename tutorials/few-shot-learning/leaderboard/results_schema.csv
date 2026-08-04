@@ -1,0 +1,1 @@
+run_id,timestamp_utc,team_name,model_family,pretrained,fine_tune_fraction,n_frozen_layers,learning_rate,epochs_trained,param_count,train_time_sec,test_mae_ppm,test_rmse_ppm,n_atoms_scored,n_atoms_expected,coverage_pct,split_version,notebook_version,seed,device,notes
