@@ -177,8 +177,8 @@
   <script>
   (function () {
     // ---- Fill these in after completing leaderboard/SETUP.md ----
-    var LEADERBOARD_SHEET_ID = 'PASTE_PUBLISHED_SHEET_ID_HERE';
-    var LEADERBOARD_GID = 'PASTE_LEADERBOARD_TAB_GID_HERE';
+    var LEADERBOARD_SHEET_ID = '1cCC-D7OW7kwmfYq4DT5SHm4pA3aI0xxPoVFWgstDtBY';
+    var LEADERBOARD_GID = '0';
     var AUTO_REFRESH_MS = 60000;
     // ---------------------------------------------------------------
 
@@ -213,9 +213,9 @@
       var bestByTeam = {};
       rows.forEach(function (r) {
         var team = r.team_name || 'unknown';
-        var mae = Number(r.mae_ppm);
+        var mae = Number(r.test_mae_ppm);
         if (!bestByTeam[team] || mae < bestByTeam[team].mae_ppm) {
-          bestByTeam[team] = { team_name: team, mae_ppm: mae, rmse_ppm: Number(r.rmse_ppm),
+          bestByTeam[team] = { team_name: team, mae_ppm: mae, rmse_ppm: Number(r.test_rmse_ppm),
                                 coverage_pct: Number(r.coverage_pct), timestamp_utc: r.timestamp_utc };
         }
       });
