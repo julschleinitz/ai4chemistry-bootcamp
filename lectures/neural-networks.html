@@ -22,10 +22,8 @@
     .content-section { margin-bottom: 44px; }
     .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
-    .video-placeholder { width: 100%; aspect-ratio: 16 / 9; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: var(--text-dim); }
-    .video-placeholder-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(93,218,180,0.1); border: 1px solid rgba(93,218,180,0.2); display: flex; align-items: center; justify-content: center; }
-    .video-placeholder p { font-size: 13.5px; color: var(--text-dim); margin: 0; text-align: center; }
-    .video-placeholder small { font-size: 11.5px; color: var(--text-dim); opacity: 0.6; }
+    /* Swap the disabled .resource-btn.is-disabled span for a real link once the recording is up, or embed it directly:
+       <iframe class="video-embed" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> */
     .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .objectives-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
     .objectives-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
@@ -45,9 +43,31 @@
     .ref-tag.paper   { background: rgba(93,218,180,0.15); color: var(--accent); }
     .ref-tag.book    { background: rgba(255,180,50,0.15);  color: #FFB432; }
     .ref-tag.website { background: rgba(99,179,237,0.15);  color: #63B3ED; }
-    .resource-link { display: inline-flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 13.5px; font-weight: 500; padding: 10px 18px; border-radius: 8px; transition: background 0.15s, border-color 0.15s; margin-right: 10px; margin-bottom: 10px; }
-    .resource-link:hover { background: rgba(93,218,180,0.1); border-color: rgba(93,218,180,0.4); color: var(--accent); }
-    .resource-link svg { opacity: 0.8; flex-shrink: 0; }
+    /* ── Resource buttons (slides + recording) ── */
+    .resource-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .resource-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 12px 18px;
+      border-radius: 8px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .resource-btn:hover { background: rgba(93,218,180,0.1); border-color: rgba(93,218,180,0.4); color: var(--accent); }
+    .resource-btn svg { opacity: 0.8; flex-shrink: 0; }
+    .resource-btn.is-disabled { opacity: 0.5; cursor: default; pointer-events: none; }
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 32px; transition: color 0.15s; }
     .back-link:hover { color: var(--accent); }
     @media (max-width: 700px) { .lecture-hero { padding: 36px 20px 32px; } .lecture-hero h1 { font-size: 28px; } .lecture-body { padding: 28px 20px 60px; } }
@@ -104,24 +124,16 @@
       Back to schedule
     </a>
 
-    <div style="margin-bottom: 36px;">
-      <a class="resource-link" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+    <div class="resource-buttons">
+      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
       </a>
+      <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Recording (after bootcamp)
+      </span>
     </div>
-
-    <div class="content-section">
-      <p class="content-section-label">Recording</p>
-      <div class="video-placeholder">
-        <div class="video-placeholder-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <p>Recording will be available after the bootcamp.</p>
-        <small>August 2026</small>
-      </div>
-    </div>
-
     <hr class="divider">
 
     <div class="content-section">
