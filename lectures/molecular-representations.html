@@ -46,10 +46,27 @@
     .ref-tag.book    { background: rgba(255,180,50,0.15);  color: #FFB432; }
     .ref-tag.website { background: rgba(99,179,237,0.15);  color: #63B3ED; }
     .ref-tag.video   { background: rgba(239,68,68,0.15);   color: #F87171; }
-    .citation-list { list-style: none; counter-reset: cite-counter; display: flex; flex-direction: column; gap: 8px; }
-    .citation-list li { counter-increment: cite-counter; display: flex; gap: 10px; font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
-    .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); flex-shrink: 0; font-variant-numeric: tabular-nums; }
-    .citation-list a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(168,232,212,0.3); }
+    .citation-list { list-style: none; counter-reset: cite-counter; display: flex; flex-direction: column; }
+    .citation-list li {
+      counter-increment: cite-counter;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 14px;
+      row-gap: 2px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .citation-list li:last-child { border-bottom: none; }
+    .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .cite-authors { color: var(--text); }
+    .cite-journal { color: var(--text-muted); }
+    .cite-journal em { color: var(--text-dim); font-style: italic; }
+    .cite-doi { white-space: nowrap; }
+    .citation-list a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(168,232,212,0.3); font-size: 11.5px; }
     .citation-list a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     .related-resources { background: rgba(255,180,50,0.06); border: 1px solid rgba(255,180,50,0.25); border-radius: 12px; padding: 20px 22px; }
     .related-resources .content-section-label { color: #FFB432; }
@@ -275,28 +292,116 @@
     <div class="content-section">
       <p class="content-section-label">References Cited in the Slides</p>
       <ol class="citation-list">
-        <li>Williams, W. L.; Zeng, L.; Gensch, T.; Sigman, M. S.; Doyle, A. G.; Anslyn, E. V. <em>ACS Cent. Sci.</em> 2021, 7 (10), 1622–1637. <a href="https://doi.org/10.1021/acscentsci.1c00535" target="_blank" rel="noopener">doi.org/10.1021/acscentsci.1c00535</a></li>
-        <li>Wigh, D. S.; Goodman, J. M.; Lapkin, A. A. <em>WIREs Comput Mol Sci</em> 2022, 12 (5). <a href="https://doi.org/10.1002/wcms.1603" target="_blank" rel="noopener">doi.org/10.1002/wcms.1603</a></li>
-        <li>Weininger, D. <em>J. Chem. Inf. Comput. Sci.</em> 1988, 28 (1), 31–36. <a href="https://doi.org/10.1021/ci00057a005" target="_blank" rel="noopener">doi.org/10.1021/ci00057a005</a></li>
-        <li>Krenn, M.; Häse, F.; Nigam, A.; Friederich, P.; Aspuru-Guzik, A. <em>Mach. Learn.: Sci. Technol.</em> 2020, 1 (4), 045024. <a href="https://doi.org/10.1088/2632-2153/aba947" target="_blank" rel="noopener">doi.org/10.1088/2632-2153/aba947</a></li>
-        <li>Krenn, M. et al. <em>Patterns</em> 2022, 3 (10), 100588. <a href="https://doi.org/10.1016/j.patter.2022.100588" target="_blank" rel="noopener">doi.org/10.1016/j.patter.2022.100588</a></li>
-        <li>Rogers, D.; Hahn, M. <em>J. Chem. Inf. Model.</em> 2010, 50 (5), 742–754. <a href="https://doi.org/10.1021/ci100050t" target="_blank" rel="noopener">doi.org/10.1021/ci100050t</a></li>
-        <li>Riniker, S.; Landrum, G. A. <em>J. Cheminform.</em> 2013, 5 (1). <a href="https://doi.org/10.1186/1758-2946-5-43" target="_blank" rel="noopener">doi.org/10.1186/1758-2946-5-43</a></li>
-        <li>Um, I.-H.; Chung, E.-K.; Kwon, D.-S. <em>Tetrahedron Letters</em> 1997, 38 (27), 4787–4790. <a href="https://doi.org/10.1016/S0040-4039(97)01033-2" target="_blank" rel="noopener">doi.org/10.1016/S0040-4039(97)01033-2</a></li>
-        <li>Schleinitz, J. PhD thesis. <a href="https://theses.hal.science/tel-05018662" target="_blank" rel="noopener">theses.hal.science/tel-05018662</a></li>
-        <li>Payard, P.-A.; Perego, L. A.; Grimaud, L.; Ciofini, I. <em>Organometallics</em> 2020, 39 (17), 3121–3130. <a href="https://doi.org/10.1021/acs.organomet.0c00309" target="_blank" rel="noopener">doi.org/10.1021/acs.organomet.0c00309</a></li>
-        <li>Jensen, F. R.; Bushweller, C. H.; Beck, B. H. <em>J. Am. Chem. Soc.</em> 1969, 91 (2), 344–351. <a href="https://doi.org/10.1021/ja01030a023" target="_blank" rel="noopener">doi.org/10.1021/ja01030a023</a></li>
-        <li>Brethomé, A. V.; Fletcher, S. P.; Paton, R. S. <em>ACS Catal.</em> 2019, 9 (3), 2313–2323. <a href="https://doi.org/10.1021/acscatal.8b04043" target="_blank" rel="noopener">doi.org/10.1021/acscatal.8b04043</a></li>
-        <li>Gensch, T.; et al.; Sigman, M. S.; Aspuru-Guzik, A. <em>J. Am. Chem. Soc.</em> 2022, 144 (3), 1205–1217. <a href="https://doi.org/10.1021/jacs.1c09718" target="_blank" rel="noopener">doi.org/10.1021/jacs.1c09718</a></li>
-        <li>S. V., S. S.; Kim, Y.; Kim, S.; St. John, P. C.; Paton, R. S. <em>Digital Discovery</em> 2023, 2 (6), 1900–1910. <a href="https://doi.org/10.1039/D3DD00169E" target="_blank" rel="noopener">doi.org/10.1039/D3DD00169E</a></li>
-        <li>Quirion, K. P.; Kong, W.-Y.; Stanley, B.; Joy, J.; Ess, D. H. <em>ACS Catal.</em> 2026, 16 (9), 8053–8066. <a href="https://doi.org/10.1021/acscatal.5c09093" target="_blank" rel="noopener">doi.org/10.1021/acscatal.5c09093</a></li>
-        <li>Ball, M.; Horvath, D.; Kogej, T.; Kabeshov, M.; Varnek, A. <em>Chem. Sci.</em> 2025, 16 (38), 17523–17541. <a href="https://doi.org/10.1039/D5SC03045E" target="_blank" rel="noopener">doi.org/10.1039/D5SC03045E</a></li>
-        <li>Schneider, N.; Lowe, D. M.; Sayle, R. A.; Landrum, G. A. <em>J. Chem. Inf. Model.</em> 2015, 55 (1), 39–53. <a href="https://doi.org/10.1021/ci5006614" target="_blank" rel="noopener">doi.org/10.1021/ci5006614</a></li>
-        <li>Probst, D.; Schwaller, P.; Reymond, J.-L. <em>Digital Discovery</em> 2022, 1 (2), 91–97. <a href="https://doi.org/10.1039/D1DD00006C" target="_blank" rel="noopener">doi.org/10.1039/D1DD00006C</a></li>
-        <li>Schwaller, P.; Laino, T.; Gaudin, T.; Bolgar, P.; Hunter, C. A.; Bekas, C.; Lee, A. A. <em>ACS Cent. Sci.</em> 2019, 5 (9), 1572–1583. <a href="https://doi.org/10.1021/acscentsci.9b00576" target="_blank" rel="noopener">doi.org/10.1021/acscentsci.9b00576</a></li>
-        <li>Worakul, T.; Laplaza, R.; Das, S.; Wodrich, M. D.; Corminboeuf, C. <em>ACS Catal.</em> 2024, 14 (13), 9829–9839. <a href="https://doi.org/10.1021/acscatal.4c01175" target="_blank" rel="noopener">doi.org/10.1021/acscatal.4c01175</a></li>
-        <li>Pattanaik, L.; Coley, C. W. <em>Chem</em> 2020, 6 (6), 1204–1207. <a href="https://doi.org/10.1016/j.chempr.2020.05.002" target="_blank" rel="noopener">doi.org/10.1016/j.chempr.2020.05.002</a></li>
-        <li>Delaney, J. S. <em>J. Chem. Inf. Comput. Sci.</em> 2004, 44 (3), 1000–1005. <a href="https://doi.org/10.1021/ci034243x" target="_blank" rel="noopener">doi.org/10.1021/ci034243x</a></li>
+        <li>
+          <span class="cite-authors">Williams, W. L.; Zeng, L.; Gensch, T.; Sigman, M. S.; Doyle, A. G.; Anslyn, E. V.</span>
+          <span class="cite-journal"><em>ACS Cent. Sci.</em> 2021, 7 (10), 1622–1637.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/acscentsci.1c00535" target="_blank" rel="noopener">doi.org/10.1021/acscentsci.1c00535</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Wigh, D. S.; Goodman, J. M.; Lapkin, A. A.</span>
+          <span class="cite-journal"><em>WIREs Comput Mol Sci</em> 2022, 12 (5).</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1002/wcms.1603" target="_blank" rel="noopener">doi.org/10.1002/wcms.1603</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Weininger, D.</span>
+          <span class="cite-journal"><em>J. Chem. Inf. Comput. Sci.</em> 1988, 28 (1), 31–36.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ci00057a005" target="_blank" rel="noopener">doi.org/10.1021/ci00057a005</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Krenn, M.; Häse, F.; Nigam, A.; Friederich, P.; Aspuru-Guzik, A.</span>
+          <span class="cite-journal"><em>Mach. Learn.: Sci. Technol.</em> 2020, 1 (4), 045024.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1088/2632-2153/aba947" target="_blank" rel="noopener">doi.org/10.1088/2632-2153/aba947</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Krenn, M. et al.</span>
+          <span class="cite-journal"><em>Patterns</em> 2022, 3 (10), 100588.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1016/j.patter.2022.100588" target="_blank" rel="noopener">doi.org/10.1016/j.patter.2022.100588</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Rogers, D.; Hahn, M.</span>
+          <span class="cite-journal"><em>J. Chem. Inf. Model.</em> 2010, 50 (5), 742–754.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ci100050t" target="_blank" rel="noopener">doi.org/10.1021/ci100050t</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Riniker, S.; Landrum, G. A.</span>
+          <span class="cite-journal"><em>J. Cheminform.</em> 2013, 5 (1).</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1186/1758-2946-5-43" target="_blank" rel="noopener">doi.org/10.1186/1758-2946-5-43</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Um, I.-H.; Chung, E.-K.; Kwon, D.-S.</span>
+          <span class="cite-journal"><em>Tetrahedron Letters</em> 1997, 38 (27), 4787–4790.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1016/S0040-4039(97)01033-2" target="_blank" rel="noopener">doi.org/10.1016/S0040-4039(97)01033-2</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Schleinitz, J.</span>
+          <span class="cite-journal">PhD thesis.</span>
+          <span class="cite-doi"><a href="https://theses.hal.science/tel-05018662" target="_blank" rel="noopener">theses.hal.science/tel-05018662</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Payard, P.-A.; Perego, L. A.; Grimaud, L.; Ciofini, I.</span>
+          <span class="cite-journal"><em>Organometallics</em> 2020, 39 (17), 3121–3130.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/acs.organomet.0c00309" target="_blank" rel="noopener">doi.org/10.1021/acs.organomet.0c00309</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Jensen, F. R.; Bushweller, C. H.; Beck, B. H.</span>
+          <span class="cite-journal"><em>J. Am. Chem. Soc.</em> 1969, 91 (2), 344–351.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ja01030a023" target="_blank" rel="noopener">doi.org/10.1021/ja01030a023</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Brethomé, A. V.; Fletcher, S. P.; Paton, R. S.</span>
+          <span class="cite-journal"><em>ACS Catal.</em> 2019, 9 (3), 2313–2323.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/acscatal.8b04043" target="_blank" rel="noopener">doi.org/10.1021/acscatal.8b04043</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Gensch, T.; et al.; Sigman, M. S.; Aspuru-Guzik, A.</span>
+          <span class="cite-journal"><em>J. Am. Chem. Soc.</em> 2022, 144 (3), 1205–1217.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/jacs.1c09718" target="_blank" rel="noopener">doi.org/10.1021/jacs.1c09718</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">S. V., S. S.; Kim, Y.; Kim, S.; St. John, P. C.; Paton, R. S.</span>
+          <span class="cite-journal"><em>Digital Discovery</em> 2023, 2 (6), 1900–1910.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1039/D3DD00169E" target="_blank" rel="noopener">doi.org/10.1039/D3DD00169E</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Quirion, K. P.; Kong, W.-Y.; Stanley, B.; Joy, J.; Ess, D. H.</span>
+          <span class="cite-journal"><em>ACS Catal.</em> 2026, 16 (9), 8053–8066.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/acscatal.5c09093" target="_blank" rel="noopener">doi.org/10.1021/acscatal.5c09093</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Ball, M.; Horvath, D.; Kogej, T.; Kabeshov, M.; Varnek, A.</span>
+          <span class="cite-journal"><em>Chem. Sci.</em> 2025, 16 (38), 17523–17541.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1039/D5SC03045E" target="_blank" rel="noopener">doi.org/10.1039/D5SC03045E</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Schneider, N.; Lowe, D. M.; Sayle, R. A.; Landrum, G. A.</span>
+          <span class="cite-journal"><em>J. Chem. Inf. Model.</em> 2015, 55 (1), 39–53.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ci5006614" target="_blank" rel="noopener">doi.org/10.1021/ci5006614</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Probst, D.; Schwaller, P.; Reymond, J.-L.</span>
+          <span class="cite-journal"><em>Digital Discovery</em> 2022, 1 (2), 91–97.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1039/D1DD00006C" target="_blank" rel="noopener">doi.org/10.1039/D1DD00006C</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Schwaller, P.; Laino, T.; Gaudin, T.; Bolgar, P.; Hunter, C. A.; Bekas, C.; Lee, A. A.</span>
+          <span class="cite-journal"><em>ACS Cent. Sci.</em> 2019, 5 (9), 1572–1583.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/acscentsci.9b00576" target="_blank" rel="noopener">doi.org/10.1021/acscentsci.9b00576</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Worakul, T.; Laplaza, R.; Das, S.; Wodrich, M. D.; Corminboeuf, C.</span>
+          <span class="cite-journal"><em>ACS Catal.</em> 2024, 14 (13), 9829–9839.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/acscatal.4c01175" target="_blank" rel="noopener">doi.org/10.1021/acscatal.4c01175</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Pattanaik, L.; Coley, C. W.</span>
+          <span class="cite-journal"><em>Chem</em> 2020, 6 (6), 1204–1207.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1016/j.chempr.2020.05.002" target="_blank" rel="noopener">doi.org/10.1016/j.chempr.2020.05.002</a></span>
+        </li>
+        <li>
+          <span class="cite-authors">Delaney, J. S.</span>
+          <span class="cite-journal"><em>J. Chem. Inf. Comput. Sci.</em> 2004, 44 (3), 1000–1005.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ci034243x" target="_blank" rel="noopener">doi.org/10.1021/ci034243x</a></span>
+        </li>
       </ol>
     </div>
 
