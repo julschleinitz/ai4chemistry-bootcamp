@@ -46,6 +46,16 @@
     .ref-tag.book    { background: rgba(255,180,50,0.15);  color: #FFB432; }
     .ref-tag.website { background: rgba(99,179,237,0.15);  color: #63B3ED; }
     .ref-tag.video   { background: rgba(239,68,68,0.15);   color: #F87171; }
+    .citation-list { list-style: none; counter-reset: cite-counter; display: flex; flex-direction: column; gap: 8px; }
+    .citation-list li { counter-increment: cite-counter; display: flex; gap: 10px; font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+    .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .citation-list a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(168,232,212,0.3); }
+    .citation-list a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .related-resources { background: rgba(255,180,50,0.06); border: 1px solid rgba(255,180,50,0.25); border-radius: 12px; padding: 20px 22px; }
+    .related-resources .content-section-label { color: #FFB432; }
+    .related-resources .ref-item { background: var(--surface); }
+    .related-resources .ref-item:hover { background: rgba(255,180,50,0.08); border-color: rgba(255,180,50,0.35); }
+    .related-resources .ref-item-icon { background: rgba(255,180,50,0.12); border-color: rgba(255,180,50,0.25); color: #FFB432; }
     /* ── Resource buttons (slides + recording) ── */
     .resource-buttons {
       display: flex;
@@ -132,9 +142,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_02_chemical-representations/lecture_01-chemical-representations_v2.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_02_chemical-representations/lecture_01-chemical-representations_v2.pptx" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -163,28 +177,35 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> SMILES are compact and human-readable but encode the same molecule in multiple ways — always canonicalise before featurising to avoid data leakage.</p>
+          <p><strong>Takeaway 1.</strong> No representation is neutral. From Hammett parameters (1937) to SMILES, ECFPs, graph neural networks, VAEs and transformers, every representation is a choice about which structural information the model gets to see — and that choice caps what it can ever learn.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> Morgan fingerprints (ECFP) remain a strong baseline: they are interpretable, fast to compute, and perform well on small datasets where neural representations overfit.</p>
+          <p><strong>Takeaway 2.</strong> String-based representations (SMILES, SELFIES, and extensions like BigSMILES for polymers or HELM for proteins) are compact and easy to generate, but always check what they silently drop — stereochemistry, hapticity, and tautomers are common blind spots.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Representations are not neutral — they embed assumptions about which structural features matter. A fingerprint that ignores 3-D geometry will fail on conformer-sensitive properties.</p>
+          <p><strong>Takeaway 3.</strong> Extended-Connectivity Fingerprints (ECFPs) remain a strong, fast, interpretable baseline for small-molecule QSAR on datasets of roughly 100–10k molecules — but they carry no 3-D or conformer information, so they fail on shape-sensitive properties.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> SELFIES guarantee syntactic validity by construction, making them the preferred string encoding for generative models where invalid SMILES outputs would break the pipeline.</p>
+          <p><strong>Takeaway 4.</strong> Expert-crafted descriptors (Hammett, Sterimol, DFT-derived) trade cost and availability for interpretability and data efficiency. ML surrogates (MLIPs, learned BDE/pKa predictors) can approximate expensive quantum-chemistry descriptors at a fraction of the compute, but must be benchmarked against a reference method and evaluated for domain of applicability.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 5.</strong> Reactions and multi-component systems can be encoded by concatenating per-component descriptors or by encoding the whole reaction (reaction SMILES, DRFP, learned transformer encodings) — universality trades off against mechanistic interpretability. Before modeling, standardize features and visualize with PCA or UMAP to catch structure and outliers, but never over-interpret UMAP cluster sizes or distances.</p>
         </li>
 
       </ul>
@@ -192,51 +213,235 @@
 
     <hr class="divider">
 
-    <div class="content-section">
-      <p class="content-section-label">Further Reading &amp; Resources</p>
+    <div class="content-section related-resources">
+      <p class="content-section-label">Related Resources — Same Topics, Other Angles</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://github.com/BingqingCheng/ML-in-chemistry-101/blob/master/slides/l5.pdf" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://github.com/BingqingCheng.png" alt="Bingqing Cheng logo" style="width:20px;height:20px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Rogers &amp; Hahn — "Extended-Connectivity Fingerprints" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">JCIM, 2010 · Original ECFP paper; essential reading for anyone using Morgan fingerprints</div>
+            <div class="ref-item-title">Dimensionality Reduction, in more depth (Bingqing Cheng) <span class="ref-tag website">Slides</span></div>
+            <div class="ref-item-meta">ML-in-Chemistry-101, lecture 5 · The PCA figures on this page are adapted from these slides</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://zzhenglab.github.io/ai4chem/lecture-11.html" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://github.com/zzhenglab.png" alt="Zheng Lab logo" style="width:20px;height:20px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Krenn et al. — "Self-referencing embedded strings (SELFIES)" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Machine Learning: Science and Technology, 2020 · Introduces SELFIES and motivates its use in generative chemistry</div>
+            <div class="ref-item-title">Dimensionality Reduction (Zhiling Zheng) <span class="ref-tag website">Lecture</span></div>
+            <div class="ref-item-meta">zzhenglab.github.io/ai4chem · Another treatment of PCA/UMAP for chemistry</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://github.com/camlcworkshop/camlcworkshop.github.io/blob/master/Sessions/Paton/Paton_2D_3D_Featurization.pdf" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <img src="https://github.com/camlcworkshop.png" alt="CAMLC Workshop logo" style="width:20px;height:20px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">RDKit Documentation <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">rdkit.org · Covers fingerprint generation, descriptor computation, and molecular I/O</div>
+            <div class="ref-item-title">Molecular Representations — 2D/3D Featurization (Paton) <span class="ref-tag website">Slides</span></div>
+            <div class="ref-item-meta">CAMLC Workshop · Complementary take on featurization from the Paton group</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://github.com/camlcworkshop/camlcworkshop.github.io/blob/master/Sessions/Cadge/Introduction%20to%20ML%20and%20data%20science%20in%20chemistry.pdf" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <img src="https://github.com/camlcworkshop.png" alt="CAMLC Workshop logo" style="width:20px;height:20px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Leach &amp; Gillet — "An Introduction to Chemoinformatics" <span class="ref-tag book">Book</span></div>
-            <div class="ref-item-meta">Springer, 2007 · Classic reference for molecular representations and similarity measures</div>
+            <div class="ref-item-title">Introduction to ML &amp; Data Science in Chemistry (Cadge) <span class="ref-tag website">Slides</span></div>
+            <div class="ref-item-meta">CAMLC Workshop · How to process molecular features for modeling</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/camlcworkshop/camlcworkshop.github.io/blob/master/Sessions/Alegre/Descriptors.pptx" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/camlcworkshop.png" alt="CAMLC Workshop logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Descriptors, in more depth (Alegre) <span class="ref-tag website">Slides</span></div>
+            <div class="ref-item-meta">CAMLC Workshop · Further detail on descriptor generation</div>
           </div>
         </a>
 
       </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">References Cited in the Slides</p>
+      <ol class="citation-list">
+        <li>Williams, W. L.; Zeng, L.; Gensch, T.; Sigman, M. S.; Doyle, A. G.; Anslyn, E. V. <em>ACS Cent. Sci.</em> 2021, 7 (10), 1622–1637. <a href="https://doi.org/10.1021/acscentsci.1c00535" target="_blank" rel="noopener">doi.org/10.1021/acscentsci.1c00535</a></li>
+        <li>Wigh, D. S.; Goodman, J. M.; Lapkin, A. A. <em>WIREs Comput Mol Sci</em> 2022, 12 (5). <a href="https://doi.org/10.1002/wcms.1603" target="_blank" rel="noopener">doi.org/10.1002/wcms.1603</a></li>
+        <li>Weininger, D. <em>J. Chem. Inf. Comput. Sci.</em> 1988, 28 (1), 31–36. <a href="https://doi.org/10.1021/ci00057a005" target="_blank" rel="noopener">doi.org/10.1021/ci00057a005</a></li>
+        <li>Krenn, M.; Häse, F.; Nigam, A.; Friederich, P.; Aspuru-Guzik, A. <em>Mach. Learn.: Sci. Technol.</em> 2020, 1 (4), 045024. <a href="https://doi.org/10.1088/2632-2153/aba947" target="_blank" rel="noopener">doi.org/10.1088/2632-2153/aba947</a></li>
+        <li>Krenn, M. et al. <em>Patterns</em> 2022, 3 (10), 100588. <a href="https://doi.org/10.1016/j.patter.2022.100588" target="_blank" rel="noopener">doi.org/10.1016/j.patter.2022.100588</a></li>
+        <li>Rogers, D.; Hahn, M. <em>J. Chem. Inf. Model.</em> 2010, 50 (5), 742–754. <a href="https://doi.org/10.1021/ci100050t" target="_blank" rel="noopener">doi.org/10.1021/ci100050t</a></li>
+        <li>Riniker, S.; Landrum, G. A. <em>J. Cheminform.</em> 2013, 5 (1). <a href="https://doi.org/10.1186/1758-2946-5-43" target="_blank" rel="noopener">doi.org/10.1186/1758-2946-5-43</a></li>
+        <li>Um, I.-H.; Chung, E.-K.; Kwon, D.-S. <em>Tetrahedron Letters</em> 1997, 38 (27), 4787–4790. <a href="https://doi.org/10.1016/S0040-4039(97)01033-2" target="_blank" rel="noopener">doi.org/10.1016/S0040-4039(97)01033-2</a></li>
+        <li>Schleinitz, J. PhD thesis. <a href="https://theses.hal.science/tel-05018662" target="_blank" rel="noopener">theses.hal.science/tel-05018662</a></li>
+        <li>Payard, P.-A.; Perego, L. A.; Grimaud, L.; Ciofini, I. <em>Organometallics</em> 2020, 39 (17), 3121–3130. <a href="https://doi.org/10.1021/acs.organomet.0c00309" target="_blank" rel="noopener">doi.org/10.1021/acs.organomet.0c00309</a></li>
+        <li>Jensen, F. R.; Bushweller, C. H.; Beck, B. H. <em>J. Am. Chem. Soc.</em> 1969, 91 (2), 344–351. <a href="https://doi.org/10.1021/ja01030a023" target="_blank" rel="noopener">doi.org/10.1021/ja01030a023</a></li>
+        <li>Brethomé, A. V.; Fletcher, S. P.; Paton, R. S. <em>ACS Catal.</em> 2019, 9 (3), 2313–2323. <a href="https://doi.org/10.1021/acscatal.8b04043" target="_blank" rel="noopener">doi.org/10.1021/acscatal.8b04043</a></li>
+        <li>Gensch, T.; et al.; Sigman, M. S.; Aspuru-Guzik, A. <em>J. Am. Chem. Soc.</em> 2022, 144 (3), 1205–1217. <a href="https://doi.org/10.1021/jacs.1c09718" target="_blank" rel="noopener">doi.org/10.1021/jacs.1c09718</a></li>
+        <li>S. V., S. S.; Kim, Y.; Kim, S.; St. John, P. C.; Paton, R. S. <em>Digital Discovery</em> 2023, 2 (6), 1900–1910. <a href="https://doi.org/10.1039/D3DD00169E" target="_blank" rel="noopener">doi.org/10.1039/D3DD00169E</a></li>
+        <li>Quirion, K. P.; Kong, W.-Y.; Stanley, B.; Joy, J.; Ess, D. H. <em>ACS Catal.</em> 2026, 16 (9), 8053–8066. <a href="https://doi.org/10.1021/acscatal.5c09093" target="_blank" rel="noopener">doi.org/10.1021/acscatal.5c09093</a></li>
+        <li>Ball, M.; Horvath, D.; Kogej, T.; Kabeshov, M.; Varnek, A. <em>Chem. Sci.</em> 2025, 16 (38), 17523–17541. <a href="https://doi.org/10.1039/D5SC03045E" target="_blank" rel="noopener">doi.org/10.1039/D5SC03045E</a></li>
+        <li>Schneider, N.; Lowe, D. M.; Sayle, R. A.; Landrum, G. A. <em>J. Chem. Inf. Model.</em> 2015, 55 (1), 39–53. <a href="https://doi.org/10.1021/ci5006614" target="_blank" rel="noopener">doi.org/10.1021/ci5006614</a></li>
+        <li>Probst, D.; Schwaller, P.; Reymond, J.-L. <em>Digital Discovery</em> 2022, 1 (2), 91–97. <a href="https://doi.org/10.1039/D1DD00006C" target="_blank" rel="noopener">doi.org/10.1039/D1DD00006C</a></li>
+        <li>Schwaller, P.; Laino, T.; Gaudin, T.; Bolgar, P.; Hunter, C. A.; Bekas, C.; Lee, A. A. <em>ACS Cent. Sci.</em> 2019, 5 (9), 1572–1583. <a href="https://doi.org/10.1021/acscentsci.9b00576" target="_blank" rel="noopener">doi.org/10.1021/acscentsci.9b00576</a></li>
+        <li>Worakul, T.; Laplaza, R.; Das, S.; Wodrich, M. D.; Corminboeuf, C. <em>ACS Catal.</em> 2024, 14 (13), 9829–9839. <a href="https://doi.org/10.1021/acscatal.4c01175" target="_blank" rel="noopener">doi.org/10.1021/acscatal.4c01175</a></li>
+        <li>Pattanaik, L.; Coley, C. W. <em>Chem</em> 2020, 6 (6), 1204–1207. <a href="https://doi.org/10.1016/j.chempr.2020.05.002" target="_blank" rel="noopener">doi.org/10.1016/j.chempr.2020.05.002</a></li>
+        <li>Delaney, J. S. <em>J. Chem. Inf. Comput. Sci.</em> 2004, 44 (3), 1000–1005. <a href="https://doi.org/10.1021/ci034243x" target="_blank" rel="noopener">doi.org/10.1021/ci034243x</a></li>
+      </ol>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Tools &amp; Datasets Cited in the Slides</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="https://www.rdkit.org/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/rdkit.png" alt="RDKit logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">RDKit <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">rdkit.org · SMILES manipulation, fingerprints, descriptors</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://openbabel.org/index.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/openbabel.png" alt="OpenBabel logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">OpenBabel <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">openbabel.org · Chemical file format conversion and SMILES manipulation</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://pubchem.ncbi.nlm.nih.gov/pcfe/favicon/favicon-32x32.png" alt="PubChem logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">PubChem <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">pubchem.ncbi.nlm.nih.gov · Public compound database</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://greglandrum.github.io/rdkit-blog/posts/2023-01-18-fingerprint-generator-tutorial.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/rdkit.png" alt="RDKit logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">RDKit Blog — Fingerprint Generator Tutorial <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">greglandrum.github.io · Practical walkthrough of fingerprint generation options</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://descriptor-libraries.molssi.org/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://education.molssi.org/images/molssi_main_logo.png" alt="MolSSI logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">MolSSI Descriptor Libraries <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">descriptor-libraries.molssi.org · Precomputed conformer &amp; descriptor databases (e.g. ligand descriptors)</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://xundrug.cn/molgpka" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://xundrug.cn/favicon.ico" alt="MolGpKa logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">MolGpKa <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">xundrug.cn/molgpka · ML-based pKa prediction, cited as a descriptor ML-surrogate example</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://pair-code.github.io/understanding-umap/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://pair-code.github.io/understanding-umap/favicon.png" alt="Google PAIR logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Understanding UMAP (Google PAIR) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">pair-code.github.io · Interactive explainer on UMAP hyperparameters and pitfalls</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Coding Resources for Descriptor Generation</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="https://github.com/rdkit/rdkit" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/rdkit.png" alt="RDKit logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">RDKit <span class="ref-tag website">Code</span></div>
+            <div class="ref-item-meta">github.com/rdkit · Fingerprints, 2D/3D descriptors, molecular I/O</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/mordred-descriptor/mordred" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/mordred-descriptor.png" alt="Mordred logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Mordred <span class="ref-tag website">Code</span></div>
+            <div class="ref-item-meta">github.com/mordred-descriptor · 1800+ 2D/3D molecular descriptor calculator</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/digital-chemistry-laboratory/morfeus" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/digital-chemistry-laboratory.png" alt="Digital Chemistry Laboratory logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">morfeus-ml <span class="ref-tag website">Code</span></div>
+            <div class="ref-item-meta">github.com/digital-chemistry-laboratory · Steric &amp; electronic descriptors (Sterimol, buried volume, cone angles) from 3D structures</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/SigmanGroup/Get_Properties" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/SigmanGroup.png" alt="Sigman Group logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Sigman Group — Get_Properties <span class="ref-tag website">Code</span></div>
+            <div class="ref-item-meta">github.com/SigmanGroup · Workflow for extracting quantum-chemical properties for physical-organic modeling</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/doyle-lab-ucla/auto-qchem" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/doyle-lab-ucla.png" alt="Doyle Lab logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">AutoQChem <span class="ref-tag website">Code</span></div>
+            <div class="ref-item-meta">github.com/doyle-lab-ucla · Automated DFT descriptor calculation and workflow management</div>
+          </div>
+        </a>
+
+      </div>
+      <p style="font-size:12.5px;color:var(--text-dim);margin-top:12px;">
+        For learned or unsupervised descriptors, see the lectures on
+        <a href="neural-networks.html" style="color:var(--accent-dim);">Neural Networks</a>,
+        <a href="gnns.html" style="color:var(--accent-dim);">GNNs</a>, and
+        <a href="transformers.html" style="color:var(--accent-dim);">Transformers</a>.
+      </p>
     </div>
 
   </div>
