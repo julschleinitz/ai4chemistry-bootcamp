@@ -108,63 +108,6 @@
       border-radius: 12px;
     }
 
-    /* ── Objectives list ── */
-    .objectives-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .objectives-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .objectives-list li::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-      margin-top: 7px;
-    }
-
-    /* ── Key takeaways ── */
-    .takeaways-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .takeaway-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      background: rgba(93,218,180,0.06);
-      border: 1px solid rgba(93,218,180,0.18);
-      border-left: 3px solid var(--accent);
-      border-radius: 8px;
-      padding: 14px 16px;
-    }
-    .takeaway-item .takeaway-icon {
-      color: var(--accent);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .takeaway-item p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-    .takeaway-item strong {
-      color: var(--text);
-    }
-
     /* ── Reference / further reading links ── */
     .ref-list {
       display: flex;
@@ -328,7 +271,11 @@
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        August 10, 2026 · 8:30 – 10:00
+        August 10, 2026 · 9:00 – 10:30
+      </div>
+      <div class="lecture-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Spalding 102
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -349,6 +296,10 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
       </a>
+      <a class="resource-btn" href="lecture_01_bootcamp_introduction/AI4Chem_Bootcamp_Introduction.pptx" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Slides (PPTX)
+      </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Recording (after bootcamp)
@@ -356,99 +307,198 @@
     </div>
     <hr class="divider">
 
-    <!-- ── Learning Objectives ── -->
+    <!-- ── Other Bootcamps & Resources ── -->
     <div class="content-section">
-      <p class="content-section-label">Learning Objectives</p>
-      <ul class="objectives-list">
-        <li>Describe the ML workflow (data → features → model → evaluation) and map it to a chemistry problem</li>
-        <li>Identify the main families of ML algorithms and know which problem types each suits</li>
-        <li>Understand what this bootcamp covers and how the two weeks are structured</li>
-        <li>Set up a Python environment with the key libraries (scikit-learn, RDKit, PyTorch)</li>
-      </ul>
-    </div>
-
-    <hr class="divider">
-
-    <!-- ── Key Takeaways ── -->
-    <div class="content-section">
-      <p class="content-section-label">Key Takeaways</p>
-      <ul class="takeaways-list">
-
-        <li class="takeaway-item">
-          <span class="takeaway-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <p><strong>Takeaway 1.</strong> ML models learn statistical patterns from data — they do not encode physical laws, so the quality of training data is the single biggest lever on model quality.</p>
-        </li>
-
-        <li class="takeaway-item">
-          <span class="takeaway-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <p><strong>Takeaway 2.</strong> The ML workflow is a loop: data curation → featurisation → training → evaluation → iteration. Skipping evaluation or treating it as a formality is the most common source of over-optimistic results.</p>
-        </li>
-
-        <li class="takeaway-item">
-          <span class="takeaway-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <p><strong>Takeaway 3.</strong> Chemistry imposes domain constraints (molecular validity, physical plausibility) that purely data-driven models can violate — always sanity-check predictions against chemical intuition.</p>
-        </li>
-
-        <li class="takeaway-item">
-          <span class="takeaway-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <p><strong>Takeaway 4.</strong> No model family dominates all tasks. Random forests, neural networks, and Gaussian processes each have regimes where they excel; choose based on dataset size, interpretability requirements, and uncertainty needs.</p>
-        </li>
-
-      </ul>
-    </div>
-
-    <hr class="divider">
-
-    <!-- ── Further Reading ── -->
-    <div class="content-section">
-      <p class="content-section-label">Further Reading &amp; Resources</p>
+      <p class="content-section-label">Other Bootcamps &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://aichemist.eu/lectures" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://aichemist.eu/sites/default/files/2025-07/logo_EU_new.png" alt="AIchemist logo" style="width:20px;height:20px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Gilmer et al. — "Neural Message Passing for Quantum Chemistry" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ICML 2017 · Foundational paper linking graph NNs to quantum chemistry</div>
+            <div class="ref-item-title">AIchemist — Lecture Series <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">aichemist.eu/lectures · Sister lecture series on AI for chemistry</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://github.com/camlcworkshop/camlcworkshop.github.io/tree/master/Sessions" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <img src="https://github.com/camlcworkshop.png" alt="CAMLC Workshop logo" style="width:20px;height:20px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Hastie, Tibshirani &amp; Friedman — "The Elements of Statistical Learning" <span class="ref-tag book">Book</span></div>
-            <div class="ref-item-meta">Springer, 2009 · Chapters 1–4 cover the ML foundations in this lecture</div>
+            <div class="ref-item-title">CAMLC 2025 Workshop — Sessions <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">camlcworkshop.github.io · Slides and materials from the CAMLC workshop sessions</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://ccas.nd.edu/research/data-sets-tools-and-workflows/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://cdn.bsky.app/img/avatar/plain/did:plc:tofg622qly3tbtyymyepsf3o/bafkreibs3ok5afp4z2epzf4ojzdfrjj2tlbeqtpntfcs3j657ij2zmgcme" alt="C-CAS logo" style="width:20px;height:20px;object-fit:contain;border-radius:50%;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">CCAS — Data Sets, Tools &amp; Workflows <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">ccas.nd.edu · Curated datasets, tools, and workflows for chemistry AI research</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://ccas.nd.edu/research/training-materials/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://cdn.bsky.app/img/avatar/plain/did:plc:tofg622qly3tbtyymyepsf3o/bafkreibs3ok5afp4z2epzf4ojzdfrjj2tlbeqtpntfcs3j657ij2zmgcme" alt="C-CAS logo" style="width:20px;height:20px;object-fit:contain;border-radius:50%;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">CCAS — Training Materials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">ccas.nd.edu · Training materials from the Center for Chemistry-Advanced Simulation (Notre Dame)</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/ghR4s-_7" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/schwallergroup.png" alt="Schwaller Group (LIAC, EPFL) logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Philippe Schwaller — Teaching &amp; Tutorials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">EPFL · Courses and tutorials on ML for chemistry</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/gx4DATY7" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/zzhenglab.png" alt="Zheng Lab logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Zhiling Zheng — Teaching &amp; Tutorials (I) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Courses and tutorials on ML for chemistry</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/gNAEjF3k" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://zhenglab.wustl.edu/wp-content/themes/wutheme_chauvenet/_assets/img/favicon/favicon-32x32.png?v=20160912" alt="Zheng Lab logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Zhiling Zheng — Teaching &amp; Tutorials (II) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Courses and tutorials on ML for chemistry</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/gUPUCTx6" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://sites.rutgers.edu/sun-lab/wp-content/uploads/sites/1433/2018/01/android-chrome-192x192.png" alt="Sun Lab (Rutgers) logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Chong Sun — Teaching &amp; Tutorials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Courses and tutorials on ML for chemistry</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/ghjaSDa8" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/mlederbauer.png" alt="Magdalena Lederbauer logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Magdalena Lederbauer — Teaching &amp; Tutorials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Collection referencing multiple ML-for-chemistry resources</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/gSUHnugm" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/PatWalters.png" alt="Pat Walters logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Pat Walters — Tutorials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Practical tutorials on cheminformatics and ML for drug discovery</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://lnkd.in/gPUkjipy" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/deepchem.png" alt="DeepChem logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">DeepChem Tutorials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">deepchem.io · Hands-on tutorials for deep learning in chemistry &amp; biology</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://education.molssi.org/resources.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://education.molssi.org/images/molssi_main_logo.png" alt="MolSSI logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">MolSSI Education Resources <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">education.molssi.org · Molecular Sciences Software Institute teaching resources</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://atomistic-cookbook.org/index.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://atomistic-cookbook.org/_static/cookbook-icon.svg" alt="Atomistic Cookbook logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Atomistic Cookbook <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">atomistic-cookbook.org · Worked examples for atomistic modelling &amp; ML potentials</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/volkamerlab/teachopencadd" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/volkamerlab.png" alt="Volkamer Lab logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">TeachOpenCADD (Volkamer Lab) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">github.com/volkamerlab · Talktorials for computer-aided drug design</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/BingqingCheng/ML-in-chemistry-101/tree/master" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/BingqingCheng.png" alt="Bingqing Cheng logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">ML-in-Chemistry-101 (Bingqing Cheng) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">github.com/BingqingCheng · Course materials on machine learning in chemistry</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── References ── -->
+    <div class="content-section">
+      <p class="content-section-label">References</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="https://ourworldindata.org/ai-timelines" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">scikit-learn User Guide <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">scikit-learn.org · Official documentation with interactive examples for all classical ML algorithms</div>
+            <div class="ref-item-title">Our World in Data — AI Timelines <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">ourworldindata.org · Cited on the AI forecasts slide</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://ourworldindata.org/artificial-intelligence" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Muratov et al. — "QSAR without borders" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Chemical Society Reviews, 2020 · Broad survey of ML applied to chemical property prediction</div>
+            <div class="ref-item-title">Our World in Data — Artificial Intelligence <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">ourworldindata.org · Cited on the AI &amp; Society slide</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://ourworldindata.org/how-much-energy-do-data-centers-and-artificial-intelligence-use" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Our World in Data — Data Center Energy Use <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">ourworldindata.org · Cited on the AI &amp; Society slide</div>
           </div>
         </a>
 
