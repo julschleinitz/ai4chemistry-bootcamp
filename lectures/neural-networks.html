@@ -129,9 +129,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_04_intro_to_DL/lecture_04-intro-deep-learning.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_04_intro_to_DL/lecture_04-intro-deep-learning.pptx" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -143,10 +147,10 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Implement a multi-layer perceptron (MLP) in PyTorch from first principles</li>
-        <li>Derive the backpropagation algorithm and explain how automatic differentiation (autograd) implements it</li>
-        <li>Apply common regularisation techniques — dropout, batch normalisation, weight decay — and know when to use each</li>
-        <li>Select a learning-rate scheduler and understand the role of momentum in Adam</li>
+        <li>Explain why linear models fail on tasks like XOR, and how stacking nonlinear layers (a multi-layer perceptron) overcomes this</li>
+        <li>Train a small neural network by hand — forward pass, backpropagation, gradient descent — and diagnose why training isn't guaranteed to succeed (initialization, learning rate, plateaus)</li>
+        <li>Reason about model capacity and apply regularization (early stopping, weight decay, dropout) to control overfitting</li>
+        <li>Match an architecture (convolution and pooling, message passing, physics-informed networks) to the structure of your data, and judge when deep learning beats classical ML based on dataset size</li>
       </ul>
     </div>
 
@@ -160,28 +164,28 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> Backpropagation is just the chain rule applied recursively. Understanding this demystifies "black box" neural networks and helps diagnose vanishing/exploding gradient issues.</p>
+          <p><strong>Takeaway 1.</strong> A neural network is layers of weighted sums glued together by nonlinear activations — nothing more mysterious than that.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> Adam is the default optimiser for most tasks, but its adaptive learning rates can cause poor generalisation; SGD with momentum often wins on large, well-tuned experiments.</p>
+          <p><strong>Takeaway 2.</strong> Training means following the gradient of the loss downhill. It works well, but it is not guaranteed: initialization, learning rate, and plateaus all matter.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Batch normalisation and dropout are complementary: BatchNorm stabilises training dynamics; dropout prevents co-adaptation of neurons. Use both carefully, not by default.</p>
+          <p><strong>Takeaway 3.</strong> Capacity cuts both ways. Count your parameters, watch a validation set, and regularize with early stopping, weight decay, and dropout.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> The training loop — forward pass, loss, backward pass, step — is the same for every architecture. Mastering it in PyTorch lets you customise any model in the literature.</p>
+          <p><strong>Takeaway 4.</strong> Choose the architecture that matches the structure of your data — and in chemistry, build the symmetry in.</p>
         </li>
 
       </ul>
@@ -193,43 +197,93 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://dmol.pub/" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=dmol.pub" alt="dmol.pub logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Goodfellow, Bengio &amp; Courville — "Deep Learning" <span class="ref-tag book">Book</span></div>
-            <div class="ref-item-meta">MIT Press, 2016 · Chapters 6–8 are the canonical reference for MLPs, backprop, and optimisation</div>
+            <div class="ref-item-title">White, A. D. — Deep Learning for Molecules &amp; Materials <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">dmol.pub · Chemistry-first, with runnable notebooks</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://introtodeeplearning.com/" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=introtodeeplearning.com" alt="MIT 6.S191 logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">PyTorch Documentation <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">pytorch.org · Official tutorials covering autograd, nn.Module, and DataLoader</div>
+            <div class="ref-item-title">MIT 6.S191 — Introduction to Deep Learning <span class="ref-tag website">Course</span></div>
+            <div class="ref-item-meta">introtodeeplearning.com · Excellent lectures on the perceptron, training, and regularization</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=nips.cc" alt="NeurIPS logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Kingma &amp; Ba — "Adam: A Method for Stochastic Optimization" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ICLR, 2015 · Original paper for the Adam optimiser</div>
+            <div class="ref-item-title">Krizhevsky, Sutskever &amp; Hinton — ImageNet Classification with Deep CNNs (AlexNet) <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2012 · 15.3% vs. 26.2% error on ImageNet — the result that restarted deep learning</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://proceedings.mlr.press/v70/gilmer17a.html" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=proceedings.mlr.press" alt="PMLR logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Ioffe &amp; Szegedy — "Batch Normalization" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ICML, 2015 · Introduces batch normalisation and explains its effect on training stability</div>
+            <div class="ref-item-title">Gilmer et al. — Neural Message Passing for Quantum Chemistry <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICML, 2017 · arXiv:1704.01212 · Message-passing neural networks for molecular property prediction</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-021-03819-2" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=nature.com" alt="Nature logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Jumper et al. — Highly Accurate Protein Structure Prediction with AlphaFold <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature 596, 583 (2021) · ~1 Å backbone accuracy on a 50-year-old problem</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-023-06735-9" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=nature.com" alt="Nature logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Merchant et al. — Scaling Deep Learning for Materials Discovery (GNoME) <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature 624, 80 (2023) · 380k+ new stable crystals predicted</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41467-022-29939-5" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=nature.com" alt="Nature Communications logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Batzner et al. — E(3)-Equivariant GNNs for Interatomic Potentials (NequIP) <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nat. Commun. 13, 2453 (2022) · Building the symmetry of physics directly into the network</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1016/j.jcp.2018.10.045" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=sciencedirect.com" alt="ScienceDirect logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Raissi, Perdikaris &amp; Karniadakis — Physics-Informed Neural Networks <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. Comput. Phys. 378, 686 (2019) · Baking known PDEs directly into the loss function</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://playground.tensorflow.org/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/tensorflow.png" alt="TensorFlow logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">TensorFlow Playground <span class="ref-tag website">Interactive</span></div>
+            <div class="ref-item-meta">playground.tensorflow.org · Tinker with layers, activations, and learning rate live in the browser — a hands-on complement to the capacity/overfitting demos in this lecture</div>
           </div>
         </a>
 
