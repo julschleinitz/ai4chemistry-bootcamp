@@ -50,22 +50,25 @@
     .citation-list li {
       counter-increment: cite-counter;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: baseline;
-      column-gap: 14px;
-      row-gap: 2px;
+      gap: 10px;
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
-      font-size: 12.5px;
+      font-size: 12px;
       line-height: 1.5;
       color: var(--text-muted);
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: thin;
     }
     .citation-list li:last-child { border-bottom: none; }
     .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); font-variant-numeric: tabular-nums; flex-shrink: 0; }
-    .cite-authors { color: var(--text); }
-    .cite-journal { color: var(--text-muted); }
+    .cite-logo { width: 14px; height: 14px; object-fit: contain; flex-shrink: 0; border-radius: 2px; opacity: 0.9; }
+    .cite-authors { color: var(--text); flex-shrink: 0; }
+    .cite-journal { color: var(--text-muted); flex-shrink: 0; }
     .cite-journal em { color: var(--text-dim); font-style: italic; }
-    .cite-doi { white-space: nowrap; }
+    .cite-doi { white-space: nowrap; flex-shrink: 0; }
     .citation-list a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(168,232,212,0.3); font-size: 11.5px; }
     .citation-list a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     /* ── Resource buttons (slides + recording) ── */
@@ -231,42 +234,49 @@
       <ol class="citation-list">
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=link.springer.com" alt="Springer logo">
           <span class="cite-authors">Giessler, G. A.; Leopold, A.; Germann, G.; Heitmann, C.</span>
           <span class="cite-journal">Explosionsverletzungen der Hände. <em>Unfallchirurg</em> 2006, 109, 956–963.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1007/s00113-006-1139-9" target="_blank" rel="noopener">doi.org/10.1007/s00113-006-1139-9</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=pubs.acs.org" alt="ACS Publications logo">
           <span class="cite-authors">Schleinitz, J.; Langevin, M.; Smail, C.; Wehnert, B.; Grimaud, L.; et al.</span>
           <span class="cite-journal">Machine Learning Yield Prediction from NiCOlit, a Small-Size Literature Data Set of Nickel Catalyzed C–O Couplings. <em>J. Am. Chem. Soc.</em> 2022, 144, 14722–14730.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1021/jacs.2c05302" target="_blank" rel="noopener">doi.org/10.1021/jacs.2c05302</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=begellhouse.com" alt="Begell House logo">
           <span class="cite-authors">Wahler, S.; Klapötke, T. M.</span>
           <span class="cite-journal">Rose Small-Scale Shock Reactivity Test (SSRT) Equation — A Simple Linear Correlation between the Dent Volume in a SSRT and the Heat of Detonation. <em>Int. J. Energ. Mater. Chem. Propuls.</em> 2023.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1615/intjenergeticmaterialschemprop.2023047029" target="_blank" rel="noopener">doi.org/10.1615/intjenergeticmaterialschemprop.2023047029</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=onlinelibrary.wiley.com" alt="Wiley logo">
           <span class="cite-authors">Wahler, S.</span>
           <span class="cite-journal">Putting an End to the Handcuffs of the Periodic Table: Using Atomic Features for Predicting Detonation Velocity. <em>Propellants Explos. Pyrotech.</em> 2025, 50.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1002/prep.12045" target="_blank" rel="noopener">doi.org/10.1002/prep.12045</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=tandfonline.com" alt="Taylor & Francis logo">
           <span class="cite-authors">Wahler, S.; Klapötke, T. M.; Chung, P.</span>
           <span class="cite-journal">Training Machine Learning Models Based on the Structural Formula for the Enthalpy of Vaporization and Sublimation and a Thorough Analysis of Trouton's Rules. <em>J. Energ. Mater.</em> 2023.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1080/07370652.2023.2219678" target="_blank" rel="noopener">doi.org/10.1080/07370652.2023.2219678</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=pubs.acs.org" alt="ACS Publications logo">
           <span class="cite-authors">Westwell, M. S.; Searle, M. S.; Wales, D. J.; Williams, D. H.</span>
           <span class="cite-journal">Empirical Correlations between Thermodynamic Properties and Intermolecular Forces. <em>J. Am. Chem. Soc.</em> 1995, 117, 5013.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1021/ja00123a001" target="_blank" rel="noopener">doi.org/10.1021/ja00123a001</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=onlinelibrary.wiley.com" alt="Wiley logo">
           <span class="cite-authors">Wahler, S.</span>
           <span class="cite-journal">Reparametrizing Joback's Group Additivity Theory — Thermochemical Building Blocks for Targeted Design of New Compounds. <em>Propellants Explos. Pyrotech.</em> 2024.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1002/prep.202400060" target="_blank" rel="noopener">doi.org/10.1002/prep.202400060</a></span>
