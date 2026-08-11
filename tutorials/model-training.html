@@ -52,6 +52,38 @@
     .colab-banner { background: rgba(249,171,0,0.08); border: 1px solid rgba(249,171,0,0.25); border-radius: 12px; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 44px; }
     .colab-banner-text h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .colab-banner-text p { font-size: 13px; color: var(--text-dim); margin: 0; }
+    .ref-list { display: flex; flex-direction: column; gap: 10px; }
+    .ref-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-decoration: none; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+    .ref-item:hover { background: rgba(255,180,50,0.08); border-color: rgba(255,180,50,0.35); }
+    .ref-item-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,180,50,0.12); border: 1px solid rgba(255,180,50,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFB432; }
+    .ref-item-body { flex: 1; min-width: 0; }
+    .ref-item-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ref-item-meta { font-size: 12px; color: var(--text-dim); }
+    .ref-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+    .ref-tag.paper   { background: rgba(93,218,180,0.15); color: var(--accent); }
+    .ref-tag.website { background: rgba(99,179,237,0.15); color: #63B3ED; }
+    .citation-list { list-style: none; counter-reset: cite-counter; display: flex; flex-direction: column; }
+    .citation-list li {
+      counter-increment: cite-counter;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 14px;
+      row-gap: 2px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .citation-list li:last-child { border-bottom: none; }
+    .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .cite-authors { color: var(--text); }
+    .cite-journal { color: var(--text-muted); }
+    .cite-journal em { color: var(--text-dim); font-style: italic; }
+    .cite-doi { white-space: nowrap; }
+    .citation-list a { color: #FFB432; text-decoration: none; border-bottom: 1px solid rgba(255,180,50,0.3); font-size: 11.5px; }
+    .citation-list a:hover { color: #FFC94D; border-bottom-color: #FFC94D; }
     @media (max-width: 700px) { .tutorial-hero { padding: 36px 20px 32px; } .tutorial-hero h1 { font-size: 28px; } .tutorial-body { padding: 28px 20px 60px; } }
   </style>
 </head>
@@ -81,7 +113,7 @@
     </div>
     <h1>Model Training <em>&amp; Evaluation</em></h1>
     <p class="tutorial-tagline">
-      Diagnose overfitting, prevent data leakage, and select hyperparameters rigorously for chemical property prediction.
+      A hands-on lab on the BBBP blood–brain barrier dataset: random vs. scaffold vs. temporal splitting, nested cross-validation, learning/validation curves, and a real data-leakage bug to find and fix.
     </p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
@@ -117,9 +149,9 @@
     <div class="colab-banner">
       <div class="colab-banner-text">
         <h3>Open in Google Colab</h3>
-        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
+        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### EXERCISE</code> and <code># YOUR CODE HERE</code>. End-to-end runtime once fully filled in is ~4–5 minutes on Colab's free CPU tier.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/model-training.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/Supervised%20Learning%20Tutorial/BBBP_Splitting_LeakageLab_EXERCISE.ipynb" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/>
           <path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/>
@@ -131,10 +163,11 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Split chemical datasets using random, scaffold, and time-based strategies with DeepChem or RDKit</li>
-        <li>Implement nested cross-validation to tune hyperparameters without touching the test set</li>
-        <li>Plot learning curves and validation curves to diagnose underfitting and overfitting</li>
-        <li>Detect and fix a data leakage bug in a preprocessing pipeline</li>
+        <li>Split the BBBP dataset using random, scaffold (Bemis–Murcko), and simulated temporal strategies with RDKit and scikit-learn</li>
+        <li>Implement nested cross-validation to tune Random Forest hyperparameters without touching the test set</li>
+        <li>Plot learning curves and validation curves to diagnose the bias–variance regime of a model</li>
+        <li>Find and fix a "fit-before-split" data leakage bug, and see why its impact differs across model types</li>
+        <li>Extend a greedy scaffold splitter to balance class rate across folds, not just fold size</li>
       </ul>
     </div>
 
@@ -143,13 +176,15 @@
     <div class="content-section">
       <p class="content-section-label">Instructions</p>
       <h2>Getting started</h2>
-      <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
+      <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <code>### EXERCISE</code> require you to fill in code — everything else is provided scaffolding.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install deepchem, scikit-learn, and rdkit. Confirm the dataset loads and SMILES parse cleanly.</p></li>
-        <li><p><strong>Explore the dataset.</strong> Load the BBBP (blood–brain barrier permeability) dataset. Plot the class balance and identify any duplicated SMILES strings.</p></li>
-        <li><p><strong>Implement splitting strategies.</strong> Complete the three splitting cells: random split, scaffold split (Bemis–Murcko), and temporal split (by year of publication). Compare the resulting class distributions in each split.</p></li>
-        <li><p><strong>Tune with nested cross-validation.</strong> Fill in the inner-loop hyperparameter grid for a <code>RandomForestClassifier</code> (<code>n_estimators</code>, <code>max_depth</code>, <code>min_samples_leaf</code>). Report AUC-ROC on the outer test fold only.</p></li>
-        <li><p><strong>Diagnose your model.</strong> Plot a learning curve (training size vs. validation AUC) and a validation curve (<code>max_depth</code> vs. AUC). Identify the bias-variance regime your model is in.</p></li>
+        <li><p><strong>Set up the environment.</strong> Install rdkit, scikit-learn, pandas, and matplotlib. Confirm the setup cell prints <code>Setup OK.</code></p></li>
+        <li><p><strong>Explore the dataset.</strong> Load the 2050-molecule BBBP (blood–brain barrier permeability) table. <em>Exercise 2.1:</em> count duplicated raw vs. canonical SMILES, flag duplicate groups with conflicting labels, and resolve them before splitting. Then plot the class balance.</p></li>
+        <li><p><strong>Implement splitting strategies.</strong> Featurize once with 1024-bit Morgan fingerprints, then complete three splits: <em>3a</em> an 80/20 stratified random split; <em>3b</em> a scaffold split that computes each molecule's Bemis–Murcko scaffold and greedily packs whole scaffold groups (largest first, shuffled for tie-breaking) into train/valid/test; <em>3c</em> a temporal split on a provided simulated <code>sim_year</code> column (the public BBBP table has no real publication dates). Compare class distributions and visualize both splits in PCA space.</p></li>
+        <li><p><strong>Tune with nested cross-validation.</strong> <em>Exercise 4:</em> fill in a small hyperparameter grid for a <code>RandomForestClassifier</code> (<code>n_estimators</code>, <code>max_depth</code>, <code>min_samples_leaf</code>) and complete <code>nested_cv_auc</code> — an inner <code>GridSearchCV</code> fit on the training indices only, scored once on held-out test indices.</p></li>
+        <li><p><strong>Diagnose your model.</strong> On the scaffold split's training set, plot a learning curve (training size vs. AUC) in <em>5a</em> and a validation curve (<code>max_depth</code> vs. AUC) in <em>5b</em>. Identify the bias–variance regime your model is in.</p></li>
+        <li><p><strong>Find and fix the leakage bug.</strong> <em>Exercise 6:</em> implement a buggy branch that fits <code>StandardScaler</code> on train+test stacked together, and a fixed branch that fits it on the training data only. Compare AUC for a Random Forest, then <em>6b</em> for a KNN and a Logistic Regression model.</p></li>
+        <li><p><strong>Challenge: balanced scaffold folds.</strong> <em>Exercise 7:</em> extend the greedy scaffold packer from step 3 into a k-fold splitter (<code>balanced_scaffold_folds</code>) that also balances each fold's positive rate, not just its size.</p></li>
       </ol>
     </div>
 
@@ -174,13 +209,13 @@
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Identify the data leakage bug introduced in the notebook (hint: look at where <code>StandardScaler</code> is fit). Fix it and report how test AUC changes.</p>
+          <p>Identify the data leakage bug in the provided preprocessing helper (hint: look at where <code>StandardScaler</code> is fit). Fix it and report how test AUC changes — for Random Forest, and for at least one other model type. Why does the size of the effect differ between models?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Implement a stratified scaffold split that preserves class balance within each fold. How does the AUC distribution across folds compare to an unstratified scaffold split?</p>
+          <p>Extend the greedy scaffold packer to also balance class rate across folds. How does the AUC distribution across folds compare to an unstratified scaffold split? Which would you trust more to judge whether a new featurization is an improvement?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -192,11 +227,15 @@
     <div class="content-section">
       <p class="content-section-label">Resources</p>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/model-training.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/Supervised%20Learning%20Tutorial/BBBP_Splitting_LeakageLab_EXERCISE.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
-        <a class="resource-link" href="#">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/Supervised%20Learning%20Tutorial/BBBP_Splitting_LeakageLab_SOLUTION.ipynb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Solutions notebook (Colab)
+        </a>
+        <a class="resource-link" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/tutorials/Supervised%20Learning%20Tutorial" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           GitHub repo
         </a>
@@ -205,6 +244,72 @@
           Paired lecture notes
         </a>
       </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Dataset &amp; Tools Used in This Tutorial</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="https://github.com/GLambard/Molecules_Dataset_Collection/blob/master/latest/BBBP.csv" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/GLambard.png" alt="GLambard logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">BBBP Dataset (MoleculeNet mirror) <span class="ref-tag website">Data</span></div>
+            <div class="ref-item-meta">github.com/GLambard/Molecules_Dataset_Collection · 2050-molecule blood–brain barrier permeability table loaded directly in the notebook</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.rdkit.org/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/rdkit.png" alt="RDKit logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">RDKit <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">rdkit.org · SMILES parsing, Morgan fingerprints, Bemis–Murcko scaffold extraction</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://scikit-learn.org/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/scikit-learn.png" alt="scikit-learn logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">scikit-learn <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">scikit-learn.org · Splitting, GridSearchCV, RandomForestClassifier, learning/validation curves</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">References Cited in the Notebook</p>
+      <ol class="citation-list">
+
+        <li>
+          <span class="cite-authors">Martins, I. F.; Teixeira, A. L.; Pinheiro, L.; Falcão, A. O.</span>
+          <span class="cite-journal">A Bayesian Approach to <em>in Silico</em> Blood-Brain Barrier Penetration Modeling. <em>J. Chem. Inf. Model.</em> 2012, 52 (6), 1686–1697.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ci300124c" target="_blank" rel="noopener">doi.org/10.1021/ci300124c</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Bemis, G. W.; Murcko, M. A.</span>
+          <span class="cite-journal">The Properties of Known Drugs. 1. Molecular Frameworks. <em>J. Med. Chem.</em> 1996, 39 (15), 2887–2893.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/jm9602928" target="_blank" rel="noopener">doi.org/10.1021/jm9602928</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Ambroise, C.; McLachlan, G. J.</span>
+          <span class="cite-journal">Selection Bias in Gene Extraction on the Basis of Microarray Gene-Expression Data. <em>Proc. Natl. Acad. Sci.</em> 2002, 99 (10), 6562–6566.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1073/pnas.102102699" target="_blank" rel="noopener">doi.org/10.1073/pnas.102102699</a></span>
+        </li>
+
+      </ol>
     </div>
 
   </div>
