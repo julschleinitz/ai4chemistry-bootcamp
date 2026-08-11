@@ -46,6 +46,28 @@
     .ref-tag.book    { background: rgba(255,180,50,0.15);  color: #FFB432; }
     .ref-tag.website { background: rgba(99,179,237,0.15);  color: #63B3ED; }
     .ref-tag.video   { background: rgba(239,68,68,0.15);   color: #F87171; }
+    .citation-list { list-style: none; counter-reset: cite-counter; display: flex; flex-direction: column; }
+    .citation-list li {
+      counter-increment: cite-counter;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 14px;
+      row-gap: 2px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .citation-list li:last-child { border-bottom: none; }
+    .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .cite-authors { color: var(--text); }
+    .cite-journal { color: var(--text-muted); }
+    .cite-journal em { color: var(--text-dim); font-style: italic; }
+    .cite-doi { white-space: nowrap; }
+    .citation-list a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(168,232,212,0.3); font-size: 11.5px; }
+    .citation-list a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     /* ── Resource buttons (slides + recording) ── */
     .resource-buttons {
       display: flex;
@@ -132,9 +154,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_03_supervised_learning/Supervised%20Learning_with_examples.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_03_supervised_learning/Supervised%20Learning_with_examples.pptx" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -146,11 +172,12 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Explain the bias-variance trade-off and use it to diagnose underfitting and overfitting</li>
-        <li>Implement cross-validation correctly for chemical datasets, avoiding scaffold leakage</li>
-        <li>Apply random forests and gradient boosting to regression and classification tasks</li>
-        <li>Tune hyperparameters with grid search or random search and report generalisation performance honestly</li>
+        <li>Define supervised learning and its two flavors — regression (continuous output) and classification (discrete label)</li>
+        <li>Explain why we split data into train / validation / test, and spot chemistry-specific pitfalls like scaffold leakage</li>
+        <li>Decompose prediction error into bias, variance, and irreducible noise — and read a learning curve</li>
+        <li>Tell model parameters apart from hyperparameters, and tune the latter without contaminating the test set</li>
       </ul>
+      <p style="margin-top:14px;">Along the way: a full worked case study on reaction-yield prediction, a real example of data bias becoming model bias, missing data in a chemistry context, and three baseline models (linear regression, Gaussian process regression, decision trees) worth always trying.</p>
     </div>
 
     <hr class="divider">
@@ -163,28 +190,35 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> Random train/test splits overestimate real-world performance on chemical data — always use scaffold or time-based splits to measure how well a model extrapolates.</p>
+          <p><strong>Takeaway 1.</strong> Supervised learning is learning from labeled chemistry data — how you evaluate it matters as much as the model itself.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> More features are not always better. Feature selection and regularisation are essential when the number of descriptors (thousands of fingerprint bits) exceeds the number of training molecules.</p>
+          <p><strong>Takeaway 2.</strong> Split by scaffold, not randomly — interpolation is easy, extrapolation isn't. Molecules cluster into structural families, and a random split puts near-duplicates of the same scaffold on both sides of the split, making performance look better than it really is.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Gradient boosting (XGBoost, LightGBM) consistently outperforms random forests on tabular chemical data when the dataset is large enough, but random forests are more robust on very small datasets.</p>
+          <p><strong>Takeaway 3.</strong> Prediction error decomposes into bias² + variance + irreducible noise — learning curves (training vs. validation error vs. training-set size) tell you which one is hurting your model.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> Hyperparameter optimisation on the test set is data leakage. Always tune on a held-out validation set or inner cross-validation fold, and report the final metric on an untouched test set.</p>
+          <p><strong>Takeaway 4.</strong> Parameters are learned from data; hyperparameters are tuned on validation data, never on the test set. Touch the test set exactly once, at the very end, for an honest final number.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 5.</strong> Data bias becomes model bias — and it's invisible in a standard train/test split because the bias is present on both sides. In the NiCOlit reaction-yield case study, a trivial baseline that just knows which table a reaction came from performed almost as well as the trained model, because the model was mostly learning the data-collection process, not the chemistry.</p>
         </li>
 
       </ul>
@@ -193,46 +227,126 @@
     <hr class="divider">
 
     <div class="content-section">
+      <p class="content-section-label">References Cited in the Slides</p>
+      <ol class="citation-list">
+
+        <li>
+          <span class="cite-authors">Giessler, G. A.; Leopold, A.; Germann, G.; Heitmann, C.</span>
+          <span class="cite-journal">Explosionsverletzungen der Hände. <em>Unfallchirurg</em> 2006, 109, 956–963.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1007/s00113-006-1139-9" target="_blank" rel="noopener">doi.org/10.1007/s00113-006-1139-9</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Schleinitz, J.; Langevin, M.; Smail, C.; Wehnert, B.; Grimaud, L.; et al.</span>
+          <span class="cite-journal">Machine Learning Yield Prediction from NiCOlit, a Small-Size Literature Data Set of Nickel Catalyzed C–O Couplings. <em>J. Am. Chem. Soc.</em> 2022, 144, 14722–14730.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/jacs.2c05302" target="_blank" rel="noopener">doi.org/10.1021/jacs.2c05302</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Wahler, S.; Klapötke, T. M.</span>
+          <span class="cite-journal">Rose Small-Scale Shock Reactivity Test (SSRT) Equation — A Simple Linear Correlation between the Dent Volume in a SSRT and the Heat of Detonation. <em>Int. J. Energ. Mater. Chem. Propuls.</em> 2023.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1615/intjenergeticmaterialschemprop.2023047029" target="_blank" rel="noopener">doi.org/10.1615/intjenergeticmaterialschemprop.2023047029</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Wahler, S.</span>
+          <span class="cite-journal">Putting an End to the Handcuffs of the Periodic Table: Using Atomic Features for Predicting Detonation Velocity. <em>Propellants Explos. Pyrotech.</em> 2025, 50.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1002/prep.12045" target="_blank" rel="noopener">doi.org/10.1002/prep.12045</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Wahler, S.; Klapötke, T. M.; Chung, P.</span>
+          <span class="cite-journal">Training Machine Learning Models Based on the Structural Formula for the Enthalpy of Vaporization and Sublimation and a Thorough Analysis of Trouton's Rules. <em>J. Energ. Mater.</em> 2023.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1080/07370652.2023.2219678" target="_blank" rel="noopener">doi.org/10.1080/07370652.2023.2219678</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Westwell, M. S.; Searle, M. S.; Wales, D. J.; Williams, D. H.</span>
+          <span class="cite-journal">Empirical Correlations between Thermodynamic Properties and Intermolecular Forces. <em>J. Am. Chem. Soc.</em> 1995, 117, 5013.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1021/ja00123a001" target="_blank" rel="noopener">doi.org/10.1021/ja00123a001</a></span>
+        </li>
+
+        <li>
+          <span class="cite-authors">Wahler, S.</span>
+          <span class="cite-journal">Reparametrizing Joback's Group Additivity Theory — Thermochemical Building Blocks for Targeted Design of New Compounds. <em>Propellants Explos. Pyrotech.</em> 2024.</span>
+          <span class="cite-doi"><a href="https://doi.org/10.1002/prep.202400060" target="_blank" rel="noopener">doi.org/10.1002/prep.202400060</a></span>
+        </li>
+
+      </ol>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
-          <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="ref-item-body">
-            <div class="ref-item-title">Sheridan et al. — "Extreme Gradient Boosting as a Method for Quantitative Structure–Activity Relationships" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">JCIM, 2016 · Benchmarks gradient boosting on real QSAR tasks</div>
-          </div>
-        </a>
-
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
-          <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="ref-item-body">
-            <div class="ref-item-title">Ramsundar et al. — "Is Multitask Deep Learning Practical for Pharma?" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">JCIM, 2017 · Compares classical ML and deep learning on pharmaceutical datasets</div>
-          </div>
-        </a>
-
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://hastie.su.domains/ElemStatLearn/" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           </div>
           <div class="ref-item-body">
             <div class="ref-item-title">Hastie, Tibshirani &amp; Friedman — "The Elements of Statistical Learning" <span class="ref-tag book">Book</span></div>
-            <div class="ref-item-meta">Springer, 2009 · Chapters 7–10 cover model selection, boosting, and random forests</div>
+            <div class="ref-item-meta">Free PDF from the authors · Chapters on bias-variance, model selection, and tree-based methods covered in this lecture</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">scikit-learn — Model Selection <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">scikit-learn.org · Official guide to cross-validation, grid search, and pipeline construction</div>
+            <div class="ref-item-title">scikit-learn — Cross-Validation &amp; Model Selection <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">scikit-learn.org · Official guide to k-fold CV, grid/random search, and learning curves</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="../tutorials/model-training.html">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Paired Tutorial — Model Training &amp; Evaluation <span class="ref-tag website">Tutorial</span></div>
+            <div class="ref-item-meta">Hands-on lab applying scaffold splitting, nested CV, and leakage debugging to the BBBP dataset</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Dig Deeper into Supervised Learning</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="https://scikit-learn.org/stable/supervised_learning.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/scikit-learn.png" alt="scikit-learn logo" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">scikit-learn — Supervised Learning User Guide <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">scikit-learn.org · Full reference on every model family covered today — linear models, GPR, trees, ensembles</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.kaggle.com/learn/intro-to-machine-learning" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.kaggle.com/static/images/favicon.ico" alt="Kaggle logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Kaggle — Intro to Machine Learning <span class="ref-tag website">Course</span></div>
+            <div class="ref-item-meta">kaggle.com/learn · Free, hands-on course covering the basics of model fitting and validation</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.kaggle.com/learn/intermediate-machine-learning" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.kaggle.com/static/images/favicon.ico" alt="Kaggle logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Kaggle — Intermediate Machine Learning <span class="ref-tag website">Course</span></div>
+            <div class="ref-item-meta">kaggle.com/learn · Missing values, categorical variables, pipelines, cross-validation, and hyperparameter tuning</div>
           </div>
         </a>
 
