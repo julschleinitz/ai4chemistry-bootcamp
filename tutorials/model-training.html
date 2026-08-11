@@ -66,22 +66,25 @@
     .citation-list li {
       counter-increment: cite-counter;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: baseline;
-      column-gap: 14px;
-      row-gap: 2px;
+      gap: 10px;
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
-      font-size: 12.5px;
+      font-size: 12px;
       line-height: 1.5;
       color: var(--text-muted);
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: thin;
     }
     .citation-list li:last-child { border-bottom: none; }
     .citation-list li::before { content: '[' counter(cite-counter) ']'; color: var(--text-dim); font-variant-numeric: tabular-nums; flex-shrink: 0; }
-    .cite-authors { color: var(--text); }
-    .cite-journal { color: var(--text-muted); }
+    .cite-logo { width: 14px; height: 14px; object-fit: contain; flex-shrink: 0; border-radius: 2px; opacity: 0.9; }
+    .cite-authors { color: var(--text); flex-shrink: 0; }
+    .cite-journal { color: var(--text-muted); flex-shrink: 0; }
     .cite-journal em { color: var(--text-dim); font-style: italic; }
-    .cite-doi { white-space: nowrap; }
+    .cite-doi { white-space: nowrap; flex-shrink: 0; }
     .citation-list a { color: #FFB432; text-decoration: none; border-bottom: 1px solid rgba(255,180,50,0.3); font-size: 11.5px; }
     .citation-list a:hover { color: #FFC94D; border-bottom-color: #FFC94D; }
     @media (max-width: 700px) { .tutorial-hero { padding: 36px 20px 32px; } .tutorial-hero h1 { font-size: 28px; } .tutorial-body { padding: 28px 20px 60px; } }
@@ -292,18 +295,21 @@
       <ol class="citation-list">
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=pubs.acs.org" alt="ACS Publications logo">
           <span class="cite-authors">Martins, I. F.; Teixeira, A. L.; Pinheiro, L.; Falcão, A. O.</span>
           <span class="cite-journal">A Bayesian Approach to <em>in Silico</em> Blood-Brain Barrier Penetration Modeling. <em>J. Chem. Inf. Model.</em> 2012, 52 (6), 1686–1697.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1021/ci300124c" target="_blank" rel="noopener">doi.org/10.1021/ci300124c</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=pubs.acs.org" alt="ACS Publications logo">
           <span class="cite-authors">Bemis, G. W.; Murcko, M. A.</span>
           <span class="cite-journal">The Properties of Known Drugs. 1. Molecular Frameworks. <em>J. Med. Chem.</em> 1996, 39 (15), 2887–2893.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1021/jm9602928" target="_blank" rel="noopener">doi.org/10.1021/jm9602928</a></span>
         </li>
 
         <li>
+          <img class="cite-logo" src="https://www.google.com/s2/favicons?sz=64&domain=pnas.org" alt="PNAS logo">
           <span class="cite-authors">Ambroise, C.; McLachlan, G. J.</span>
           <span class="cite-journal">Selection Bias in Gene Extraction on the Basis of Microarray Gene-Expression Data. <em>Proc. Natl. Acad. Sci.</em> 2002, 99 (10), 6562–6566.</span>
           <span class="cite-doi"><a href="https://doi.org/10.1073/pnas.102102699" target="_blank" rel="noopener">doi.org/10.1073/pnas.102102699</a></span>
