@@ -98,7 +98,7 @@
     </div>
     <h1>LLMs as Chemistry <em>Assistants</em></h1>
     <p class="lecture-tagline">
-      RAG pipelines, tool use, literature extraction, and the hallucination limits of large language models in the chemical sciences.
+      How retrieval-augmented generation grounds LLM answers in real documents — the end-to-end pipeline, retrieval strategies, evaluation, and when a system should retrieve at all.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
@@ -128,9 +128,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_06_RAG/CCE%20AI4ChemicalSciences%20Bootcamp%20-%20RAG.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_06_RAG/CCE%20AI4ChemicalSciences%20Bootcamp%20-%20RAG.pptx" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -142,10 +146,11 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Explain retrieval-augmented generation (RAG) and implement a simple chemistry paper Q&amp;A system</li>
-        <li>Describe how tool use (function calling) enables LLMs to interact with RDKit, databases, and simulation codes</li>
-        <li>Identify failure modes of LLMs on chemistry tasks: hallucinated reactions, incorrect SMILES, wrong stereochemistry</li>
-        <li>Evaluate LLM outputs critically using literature cross-referencing and automated validity checks</li>
+        <li>Explain why LLMs alone are unreliable knowledge sources, and how retrieval grounds their answers in real documents</li>
+        <li>Describe the end-to-end RAG pipeline: data ingestion &amp; cleaning, chunking, embedding, encoder ranking, and context construction</li>
+        <li>Compare sparse (TF-IDF, BM25) and dense (nearest-neighbor) retrieval, and know when hybrid retrieval, query rewriting, or reranking help</li>
+        <li>Evaluate a retriever with precision, recall, and reciprocal rank — and use a debugging playbook when a RAG pipeline underperforms</li>
+        <li>(Advanced) Understand when to retrieve — once at the start vs. iteratively vs. every token — and the long-context tradeoffs involved</li>
       </ul>
     </div>
 
@@ -159,28 +164,35 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> RAG grounds LLM answers in retrieved documents, dramatically reducing hallucination rates on factual chemistry questions — but retrieval quality is the bottleneck, not the language model.</p>
+          <p><strong>Takeaway 1.</strong> A prompt only contains what you put in it — instructions, context, data, and constraints. An LLM "doesn't know" what you want unless it's actually written into the prompt; RAG is fundamentally about automating what goes into that context.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> LLMs are poor chemistry calculators: they hallucinate reaction mechanisms, confidently produce invalid SMILES, and make errors in stoichiometry. Always validate programmatically with RDKit or similar tools.</p>
+          <p><strong>Takeaway 2.</strong> RAG doesn't fix a "dumb" model — it fixes a knowledge-access problem. Grounding generation in retrieved documents the model wasn't trained on (or has forgotten) is why retrieval quality, not the LLM itself, is usually the bottleneck.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Tool use transforms LLMs from text generators into orchestrators of computation — they can call a yield predictor, retrieve a crystal structure, or run a retrosynthesis engine without the user writing any integration code.</p>
+          <p><strong>Takeaway 3.</strong> A RAG pipeline has far more moving parts than "retrieve then generate" — data cleaning, chunking strategy, and the choice of retrieval/ranking method each independently affect answer quality, and each is a separate place to debug.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> The bottleneck in LLM-assisted chemistry is not language understanding but knowledge currency: models have training cutoffs, cannot access paywalled journals, and lack lab-specific institutional knowledge unless explicitly provided.</p>
+          <p><strong>Takeaway 4.</strong> No single retrieval method wins outright — sparse methods (TF-IDF, BM25) match exact terms, dense nearest-neighbor search captures semantic similarity, and hybrid retrieval, query rewriting, and cross-encoder reranking each patch a different weakness. Evaluation metrics like precision, recall, and reciprocal rank can disagree, so the right one depends on how the system is actually used.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 5.</strong> When to retrieve is a design choice, not a fixed rule: once at the start (standard RAG), a few times during generation when the model is uncertain (FLARE), or at every token (kNN-LM, Unlimiformer) — each trades compute cost against how current and precise the retrieved knowledge needs to be.</p>
         </li>
 
       </ul>
@@ -192,43 +204,103 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
             <div class="ref-item-title">Lewis et al. — "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">NeurIPS, 2020 · Foundational RAG paper</div>
+            <div class="ref-item-meta">arXiv:2005.11401 · NeurIPS 2020 · The original RAG paper — end-to-end retriever + generator training</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2212.10496" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Bran et al. — "ChemCrow: Augmenting large-language models with chemistry tools" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2024 · LLM with chemistry tool-use for autonomous synthesis planning</div>
+            <div class="ref-item-title">Gao et al. — "Precise Zero-Shot Dense Retrieval without Relevance Labels" (HyDE) <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2212.10496, 2022 · Retrieves using embeddings of a hypothetical LLM-generated answer instead of the raw query</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/1911.00172" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">White et al. — "Assessment of Chemistry Knowledge in Large Language Models" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ACS Central Science, 2023 · Systematic evaluation of LLM capabilities on chemistry benchmarks</div>
+            <div class="ref-item-title">Khandelwal et al. — "Generalization through Memorization: Nearest Neighbor Language Models" (kNN-LM) <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:1911.00172 · ICLR 2020 · Retrieves at every token by interpolating with a nearest-neighbor datastore lookup</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2305.06983" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">LangChain Documentation <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">python.langchain.com · Framework for building RAG and tool-use pipelines</div>
+            <div class="ref-item-title">Jiang et al. — "Active Retrieval Augmented Generation" (FLARE) <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2305.06983 · EMNLP 2023 · Retrieves again mid-generation whenever the model's own confidence drops</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Schick et al. — "Toolformer: Language Models Can Teach Themselves to Use Tools" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2302.04761, 2023 · Models learn to emit API/search calls on their own during generation</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/2305.01625" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Bertsch et al. — "Unlimiformer: Long-Range Transformers with Unlimited Length Input" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2305.01625 · NeurIPS 2023 · Approximates full attention with a nearest-neighbor index over token embeddings</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/2301.12652" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Shi et al. — "REPLUG: Retrieval-Augmented Black-Box Language Models" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2301.12652, 2023 · Treats the LLM as a frozen black box and tunes only the retriever around it</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.sbert.net/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=www.sbert.net" alt="sentence-transformers logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">sentence-transformers Documentation <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">sbert.net · The embedding model library used in the paired tutorial's retriever</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/facebookresearch/faiss" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://github.com/facebookresearch.png" alt="FAISS logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">FAISS (Facebook AI Similarity Search) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">github.com/facebookresearch/faiss · The vector index used for nearest-neighbor retrieval in the paired tutorial</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="../tutorials/rag-assistant.html">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Paired Tutorial — Chemistry RAG Assistant <span class="ref-tag website">Tutorial</span></div>
+            <div class="ref-item-meta">Hands-on lab building a chunk/embed/retrieve/generate pipeline over chemistry abstracts, with faithfulness &amp; relevance evaluation</div>
           </div>
         </a>
 
