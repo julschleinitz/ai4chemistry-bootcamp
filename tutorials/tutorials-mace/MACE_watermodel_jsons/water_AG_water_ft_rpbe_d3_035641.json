@@ -1,0 +1,22 @@
+{
+ "student": "AG",
+ "model": "water_ft_rpbe_d3",
+ "dataset": "rpbe_d3",
+ "train_file": "data/water_train_rpbe_d3_50.xyz",
+ "n_train": 50,
+ "density": 0.8608590623286828,
+ "density_spread": 0.0233719067610223,
+ "converged": false,
+ "density_error_pct": -13.65505894396361,
+ "F_rmse_meV_A": 28.26244234847902,
+ "F_rmse_pct": 1.9373606046030407,
+ "train_time_s": 319.0,
+ "measure_time_s": 254.2172679901123,
+ "gpu": "Tesla T4",
+ "torch": "2.5.1+cu124",
+ "method": "Berendsen NPT",
+ "exported": "2026-08-04T03:56:41",
+ "foundation_model": "small",
+ "batch_size": 5,
+ "max_num_epochs": 50
+}
