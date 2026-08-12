@@ -183,17 +183,6 @@
     </div>
 
     <div class="content-section">
-      <p class="content-section-label">Things to Try</p>
-      <ul class="objectives-list">
-        <li>Set the classifier to <strong style="color:var(--text)">Random guess</strong> — the two distributions coincide, and no matter where you drag the threshold, the ROC point sits on the diagonal (AUC ≈ 0.5).</li>
-        <li>Switch to <strong style="color:var(--text)">Worse than random</strong> — the curve dips <em>below</em> the diagonal. This doesn't mean the score is useless: it's anti-correlated with the label, so flipping the decision rule (or the sign of the score) recovers AUC = 1 − original AUC.</li>
-        <li>Compare <strong style="color:var(--text)">Excellent</strong> vs. <strong style="color:var(--text)">Fair</strong> at the same threshold position — more overlap between the distributions bows the ROC curve closer to the diagonal.</li>
-        <li>Try the <strong style="color:var(--text)">Bimodal negative class</strong> shape — even with very different-looking distributions, a threshold sitting between two symmetric sub-populations can still leave AUC near 0.5, because AUC only cares about separation, not distribution shape.</li>
-        <li>Watch how a single threshold movement changes TPR and FPR together but leaves the AUC badge untouched — AUC is a property of the whole curve, not of any one threshold.</li>
-      </ul>
-    </div>
-
-    <div class="content-section">
       <p class="content-section-label">Key Formulas</p>
       <div class="formula-block">
 <span class="fname">TPR</span> (sensitivity)   = TP / (TP + FN)<br>
