@@ -1,0 +1,22 @@
+name: mlchem-bootcamp
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - bokeh
+  - scikit-learn
+  - ipython
+  - jupyter
+  - rdkit
+  - xtb
+  - umap-learn
+  - pip:
+      - torch
+      - torch-geometric
+      - deepchem
+      - transformers

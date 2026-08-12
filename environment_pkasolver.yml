@@ -1,0 +1,22 @@
+name: pkasolver-env
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.9
+  - rdkit
+  - pytorch
+  - cpuonly
+  - numpy
+  - scipy
+  - tqdm
+  - svgutils
+  - cairosvg
+  - pip
+  - pip:
+      - pandas
+      - torch-geometric==2.0.1
+      - torch-scatter
+      - torch-sparse
+      - molvs
+      - git+https://github.com/mayrf/pkasolver.git
