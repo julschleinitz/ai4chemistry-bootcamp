@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Figure — The ROC-AUC Curve · AI4Chemical Sciences Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .lecture-hero { background: var(--surface); padding: 52px 40px 44px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .lecture-hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .lecture-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(93,218,180,0.15); border: 1px solid rgba(93,218,180,0.3); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+    .lecture-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .lecture-hero h1 em { font-style: normal; color: var(--accent); }
+    .lecture-tagline { font-size: 15px; color: var(--accent-dim); max-width: 680px; margin-bottom: 24px; line-height: 1.6; }
+    .lecture-meta-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .lecture-meta-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); }
+    .lecture-meta-item svg { opacity: 0.7; flex-shrink: 0; }
+    .lecture-meta-item a { color: inherit; text-decoration: underline; text-decoration-color: rgba(200,237,227,0.35); }
+    .lecture-meta-item a:hover { color: var(--accent); }
+    .lecture-body { max-width: 900px; margin: 0 auto; padding: 44px 40px 80px; }
+    .content-section { margin-bottom: 44px; }
+    .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .content-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+    .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .objectives-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .objectives-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .resource-buttons { display: flex; gap: 10px; margin-bottom: 36px; flex-wrap: wrap; }
+    .resource-btn { flex: 1; min-width: 180px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 13.5px; font-weight: 500; padding: 12px 18px; border-radius: 8px; transition: background 0.15s, border-color 0.15s; }
+    .resource-btn:hover { background: rgba(93,218,180,0.1); border-color: rgba(93,218,180,0.4); color: var(--accent); }
+    .resource-btn svg { opacity: 0.8; flex-shrink: 0; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 32px; transition: color 0.15s; }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Interactive widget ── */
+    .roc-widget { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px 26px; margin: 6px 0 10px; }
+    .roc-controls { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .roc-control { display: flex; flex-direction: column; gap: 6px; }
+    .roc-control label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .roc-control select {
+      background: rgba(0,0,0,0.18); border: 1px solid var(--border); color: var(--text);
+      font-size: 13px; font-family: inherit; padding: 8px 12px; border-radius: 7px; min-width: 190px;
+      cursor: pointer;
+    }
+    .roc-control select:focus { outline: none; border-color: var(--accent); }
+    .roc-panels { display: grid; grid-template-columns: 1.5fr 1fr; gap: 26px; align-items: start; }
+    @media (max-width: 760px) { .roc-panels { grid-template-columns: 1fr; } }
+    .roc-panel-title { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    svg.dist-svg, svg.roc-svg {
+      width: 100%; height: auto; display: block; touch-action: none; cursor: ew-resize;
+      background: rgba(0,0,0,0.15); border-radius: 10px; border: 1px solid var(--border);
+    }
+    svg.roc-svg { cursor: default; }
+    .roc-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; font-size: 11.5px; color: var(--text-dim); }
+    .roc-legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+    .roc-threshold-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .roc-threshold-row span.tlabel { font-size: 11.5px; color: var(--text-dim); white-space: nowrap; }
+    .roc-threshold-row input[type=range] { flex: 1; accent-color: var(--accent); }
+    .roc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 10px; margin-top: 20px; }
+    .roc-stat { background: rgba(0,0,0,0.18); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+    .roc-stat .rlabel { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 4px; }
+    .roc-stat .rvalue { font-size: 18px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+    .roc-stat.auc { border-color: rgba(93,218,180,0.35); background: rgba(93,218,180,0.08); }
+    .roc-stat.auc .rvalue { color: var(--accent); }
+    .formula-block { background: rgba(0,0,0,0.18); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 12.5px; line-height: 2; color: var(--text-muted); overflow-x: auto; }
+    .formula-block .fname { color: var(--accent); }
+    @media (max-width: 700px) {
+      .lecture-hero { padding: 36px 20px 32px; } .lecture-hero h1 { font-size: 26px; }
+      .lecture-body { padding: 28px 20px 60px; }
+      .roc-widget { padding: 18px 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">
+      <div class="nav-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+        </svg>
+      </div>
+      AI<em>4</em>Chemical Sciences
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Schedule</a></li>
+      <li><a href="../lectures/" class="active">Lectures</a></li>
+      <li><a href="../tutorials/">Tutorials</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="lecture-hero">
+    <div class="lecture-hero-meta">
+      <span class="lecture-badge">Interactive Figure</span>
+    </div>
+    <h1>Understanding the <em>ROC-AUC</em> Curve</h1>
+    <p class="lecture-tagline">
+      Drag a classification threshold across two overlapping score distributions and watch it trace out the ROC curve in real time — companion figure to <a href="supervised-learning.html" style="color:inherit;text-decoration:underline;">Lecture 3: Supervised Learning</a>.
+    </p>
+    <div class="lecture-meta-row">
+      <div class="lecture-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Companion to <a href="supervised-learning.html">Lecture 3</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lecture-body">
+
+    <a class="back-link" href="supervised-learning.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Lecture 3 — Supervised Learning
+    </a>
+
+    <div class="content-section">
+      <p class="content-section-label">Why a Threshold Matters</p>
+      <p>A classifier rarely outputs a label directly — it outputs a continuous score: a hit-probability from a virtual screen, a blood–brain-barrier permeability estimate, a toxicity risk. Turning that score into a yes/no call requires picking a threshold, and where you set it trades false positives against false negatives. The <strong style="color:var(--text)">ROC curve</strong> (Receiver Operating Characteristic) plots the True Positive Rate against the False Positive Rate as that threshold sweeps across every possible value; the <strong style="color:var(--text)">AUC</strong> (Area Under the Curve) summarizes classifier quality independent of any single threshold choice.</p>
+    </div>
+
+    <div class="content-section">
+      <p class="content-section-label">Interactive Figure</p>
+      <h2>Drag the threshold, watch the curve</h2>
+      <p>The left panel shows the score distributions for the negative class (blue) and the positive class (orange). Drag the vertical line — or the slider below it — to move the classification threshold; everything to the right of it is predicted <em>positive</em>. The right panel shows the full ROC curve for the current pair of distributions, with a marker at the point corresponding to your current threshold.</p>
+
+      <div class="roc-widget">
+        <div class="roc-controls">
+          <div class="roc-control">
+            <label for="shapeSelect">Distribution shape</label>
+            <select id="shapeSelect">
+              <option value="gaussian">Gaussian (symmetric)</option>
+              <option value="skewed">Skewed (log-normal)</option>
+              <option value="bimodal">Bimodal negative class</option>
+              <option value="uniform">Uniform (boxcar)</option>
+            </select>
+          </div>
+          <div class="roc-control">
+            <label for="presetSelect">Classifier quality</label>
+            <select id="presetSelect">
+              <option value="excellent">Excellent classifier</option>
+              <option value="good" selected>Good classifier</option>
+              <option value="fair">Fair classifier</option>
+              <option value="random">Random guess</option>
+              <option value="poor">Worse than random</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="roc-panels">
+          <div>
+            <p class="roc-panel-title">Score distributions &amp; decision threshold</p>
+            <svg id="distSvg" class="dist-svg" viewBox="0 0 640 220" preserveAspectRatio="xMidYMid meet"></svg>
+            <div class="roc-legend">
+              <span><span class="sw" style="background:#63B3ED"></span>Negative class</span>
+              <span><span class="sw" style="background:#F2994A"></span>Positive class</span>
+              <span><span class="sw" style="background:rgba(255,255,255,0.85)"></span>Threshold (drag me)</span>
+            </div>
+            <div class="roc-threshold-row">
+              <span class="tlabel">Threshold</span>
+              <input type="range" id="thresholdSlider" step="0.001">
+              <span class="tlabel" id="thresholdValue" style="min-width:48px;text-align:right;">0.00</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="roc-panel-title">ROC curve</p>
+            <svg id="rocSvg" class="roc-svg" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+
+        <div class="roc-stats">
+          <div class="roc-stat"><div class="rlabel">TPR (Sens.)</div><div class="rvalue" id="statTPR">–</div></div>
+          <div class="roc-stat"><div class="rlabel">FPR</div><div class="rvalue" id="statFPR">–</div></div>
+          <div class="roc-stat"><div class="rlabel">Precision</div><div class="rvalue" id="statPrecision">–</div></div>
+          <div class="roc-stat"><div class="rlabel">Accuracy</div><div class="rvalue" id="statAccuracy">–</div></div>
+          <div class="roc-stat auc"><div class="rlabel">AUC</div><div class="rvalue" id="statAUC">–</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <p class="content-section-label">Things to Try</p>
+      <ul class="objectives-list">
+        <li>Set the classifier to <strong style="color:var(--text)">Random guess</strong> — the two distributions coincide, and no matter where you drag the threshold, the ROC point sits on the diagonal (AUC ≈ 0.5).</li>
+        <li>Switch to <strong style="color:var(--text)">Worse than random</strong> — the curve dips <em>below</em> the diagonal. This doesn't mean the score is useless: it's anti-correlated with the label, so flipping the decision rule (or the sign of the score) recovers AUC = 1 − original AUC.</li>
+        <li>Compare <strong style="color:var(--text)">Excellent</strong> vs. <strong style="color:var(--text)">Fair</strong> at the same threshold position — more overlap between the distributions bows the ROC curve closer to the diagonal.</li>
+        <li>Try the <strong style="color:var(--text)">Bimodal negative class</strong> shape — even with very different-looking distributions, a threshold sitting between two symmetric sub-populations can still leave AUC near 0.5, because AUC only cares about separation, not distribution shape.</li>
+        <li>Watch how a single threshold movement changes TPR and FPR together but leaves the AUC badge untouched — AUC is a property of the whole curve, not of any one threshold.</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <p class="content-section-label">Key Formulas</p>
+      <div class="formula-block">
+<span class="fname">TPR</span> (sensitivity)   = TP / (TP + FN)<br>
+<span class="fname">FPR</span> (1 − specificity) = FP / (FP + TN)<br>
+<span class="fname">Precision</span>             = TP / (TP + FP)<br>
+<span class="fname">Accuracy</span>              = (TP + TN) / (TP + TN + FP + FN)<br>
+<span class="fname">AUC</span> = P( score<sub>positive</sub> &gt; score<sub>negative</sub> ) for a randomly drawn positive/negative pair
+      </div>
+      <p style="margin-top:12px;">Because AUC integrates over every possible threshold, it doesn't depend on how the scores are scaled, or on where you'd eventually set the cutoff — that choice comes later, driven by the relative cost of a false positive vs. a false negative in your specific screening campaign.</p>
+    </div>
+
+    <div class="content-section">
+      <p class="content-section-label">Companion Notebook</p>
+      <p>The same distribution families and the from-scratch ROC/AUC computation used in the figure above are reproduced in a Python notebook, then cross-checked against real sampled data and scikit-learn's <code style="background:rgba(0,0,0,0.2);padding:1px 5px;border-radius:4px;">roc_curve</code> / <code style="background:rgba(0,0,0,0.2);padding:1px 5px;border-radius:4px;">roc_auc_score</code>, and finally applied to a trained logistic regression classifier.</p>
+      <div class="resource-buttons">
+        <a class="resource-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/lectures/lecture_03_supervised_learning/roc_auc_interactive.ipynb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open in Colab
+        </a>
+        <a class="resource-btn" href="lecture_03_supervised_learning/roc_auc_interactive.ipynb" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Notebook (.ipynb)
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Division of Chemistry and Chemical Engineering · Caltech</span>
+    <span class="sep">·</span>
+    <span>Contact: <a href="mailto:jul@caltech.edu" style="color:inherit">jul@caltech.edu</a></span>
+    <span class="sep">·</span>
+    <a href="https://github.com/julschleinitz/ai4chemistry-bootcamp" style="color:inherit;display:flex;align-items:center;gap:5px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      GitHub
+    </a>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // ── Probability density helpers ──
+    function normalPdf(x, mu, sigma) {
+      var z = (x - mu) / sigma;
+      return Math.exp(-0.5 * z * z) / (sigma * Math.sqrt(2 * Math.PI));
+    }
+    function lognormalPdf(x, mu, sigma) {
+      if (x <= 0) return 0;
+      var z = (Math.log(x) - mu) / sigma;
+      return Math.exp(-0.5 * z * z) / (x * sigma * Math.sqrt(2 * Math.PI));
+    }
+    function uniformPdf(x, a, b) {
+      return (x >= a && x <= b) ? 1 / (b - a) : 0;
+    }
+    function bimodalPdf(x, muA, muB, sigma) {
+      return 0.5 * normalPdf(x, muA, sigma) + 0.5 * normalPdf(x, muB, sigma);
+    }
+
+    // ── Distribution shape families ──
+    // d = separation parameter supplied by the classifier-quality preset
+    var SHAPES = {
+      gaussian: {
+        label: 'Gaussian (symmetric)', xMin: -9, xMax: 9, n: 900, defaultT: 0,
+        dist: function (d) {
+          return { pdfNeg: function (x) { return normalPdf(x, -d / 2, 1); },
+                    pdfPos: function (x) { return normalPdf(x, d / 2, 1); } };
+        }
+      },
+      skewed: {
+        label: 'Skewed (log-normal)', xMin: 0.02, xMax: 30, n: 1400, defaultT: 2.72,
+        dist: function (d) {
+          var shift = d / 6;
+          return { pdfNeg: function (x) { return lognormalPdf(x, 1.0 - shift, 0.5); },
+                    pdfPos: function (x) { return lognormalPdf(x, 1.0 + shift, 0.5); } };
+        }
+      },
+      bimodal: {
+        label: 'Bimodal negative class', xMin: -11, xMax: 11, n: 1100, defaultT: 0,
+        dist: function (d) {
+          return { pdfNeg: function (x) { return bimodalPdf(x, -d / 2 - 1.8, -d / 2 + 1.8, 0.6); },
+                    pdfPos: function (x) { return normalPdf(x, d / 2, 1); } };
+        }
+      },
+      uniform: {
+        label: 'Uniform (boxcar)', xMin: -9, xMax: 9, n: 1000, defaultT: 0,
+        dist: function (d) {
+          return { pdfNeg: function (x) { return uniformPdf(x, -d / 2 - 2, -d / 2 + 2); },
+                    pdfPos: function (x) { return uniformPdf(x, d / 2 - 2, d / 2 + 2); } };
+        }
+      }
+    };
+
+    var PRESETS = {
+      excellent: { label: 'Excellent classifier', d: 5 },
+      good:      { label: 'Good classifier', d: 3 },
+      fair:      { label: 'Fair classifier', d: 1.5 },
+      random:    { label: 'Random guess', d: 0 },
+      poor:      { label: 'Worse than random', d: -3 }
+    };
+
+    // ── From-scratch ROC/AUC via numerical integration of the two densities ──
+    function computeROC(pdfNeg, pdfPos, xMin, xMax, n) {
+      var xs = new Array(n), pn = new Array(n), pp = new Array(n);
+      var dx = (xMax - xMin) / (n - 1);
+      for (var i = 0; i < n; i++) {
+        xs[i] = xMin + i * dx;
+        pn[i] = pdfNeg(xs[i]);
+        pp[i] = pdfPos(xs[i]);
+      }
+      var cdfNeg = new Array(n), cdfPos = new Array(n);
+      cdfNeg[0] = 0; cdfPos[0] = 0;
+      for (i = 1; i < n; i++) {
+        cdfNeg[i] = cdfNeg[i - 1] + 0.5 * (pn[i - 1] + pn[i]) * dx;
+        cdfPos[i] = cdfPos[i - 1] + 0.5 * (pp[i - 1] + pp[i]) * dx;
+      }
+      var totalNeg = cdfNeg[n - 1] || 1, totalPos = cdfPos[n - 1] || 1;
+      var fpr = new Array(n), tpr = new Array(n);
+      for (i = 0; i < n; i++) {
+        fpr[i] = 1 - cdfNeg[i] / totalNeg;
+        tpr[i] = 1 - cdfPos[i] / totalPos;
+      }
+      var auc = 0;
+      for (i = 1; i < n; i++) {
+        auc += 0.5 * (tpr[i - 1] + tpr[i]) * Math.abs(fpr[i - 1] - fpr[i]);
+      }
+      return { xs: xs, pn: pn, pp: pp, fpr: fpr, tpr: tpr, auc: auc };
+    }
+
+    // ── State ──
+    var state = { shapeKey: 'gaussian', presetKey: 'good', thresholdIdx: 0, data: null };
+
+    var distSvg = document.getElementById('distSvg');
+    var rocSvg = document.getElementById('rocSvg');
+    var shapeSelect = document.getElementById('shapeSelect');
+    var presetSelect = document.getElementById('presetSelect');
+    var thresholdSlider = document.getElementById('thresholdSlider');
+    var thresholdValue = document.getElementById('thresholdValue');
+
+    var NS = 'http://www.w3.org/2000/svg';
+    function el(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ── Distribution plot geometry ──
+    var DW = 640, DH = 220, DML = 34, DMR = 14, DMT = 14, DMB = 28;
+    function dxScale(shape, x) { return DML + (x - shape.xMin) / (shape.xMax - shape.xMin) * (DW - DML - DMR); }
+    function dyScale(yMax, y) { return (DH - DMB) - (y / yMax) * (DH - DMT - DMB); }
+
+    function areaPathStr(xs, ys, from, to, shape, yMax, baseline) {
+      var d = 'M ' + dxScale(shape, xs[from]).toFixed(2) + ' ' + baseline.toFixed(2);
+      for (var i = from; i <= to; i++) {
+        d += ' L ' + dxScale(shape, xs[i]).toFixed(2) + ' ' + dyScale(yMax, ys[i]).toFixed(2);
+      }
+      d += ' L ' + dxScale(shape, xs[to]).toFixed(2) + ' ' + baseline.toFixed(2) + ' Z';
+      return d;
+    }
+
+    var distEls = {};
+    function buildDistSvg() {
+      distSvg.innerHTML = '';
+      distEls.axis = el('line', { x1: DML, y1: DH - DMB, x2: DW - DMR, y2: DH - DMB, stroke: 'rgba(255,255,255,0.3)', 'stroke-width': 1 });
+      distEls.negFill = el('path', { fill: '#63B3ED', 'fill-opacity': '0.22', stroke: '#63B3ED', 'stroke-width': '1.5' });
+      distEls.posFill = el('path', { fill: '#F2994A', 'fill-opacity': '0.22', stroke: '#F2994A', 'stroke-width': '1.5' });
+      distEls.negShade = el('path', { fill: '#63B3ED', 'fill-opacity': '0.55' });
+      distEls.posShade = el('path', { fill: '#F2994A', 'fill-opacity': '0.55' });
+      distEls.thresholdLine = el('line', { y1: DMT, y2: DH - DMB, stroke: 'rgba(255,255,255,0.9)', 'stroke-width': 2 });
+      distEls.thresholdHandle = el('circle', { r: 5, cy: DMT, fill: '#fff', stroke: 'rgba(0,0,0,0.3)' });
+      distEls.labelNeg = el('text', { y: 11, fill: '#63B3ED', 'font-size': '10', 'font-weight': '600', 'text-anchor': 'end' });
+      distEls.labelNeg.textContent = '← predict negative';
+      distEls.labelPos = el('text', { y: 11, fill: '#F2994A', 'font-size': '10', 'font-weight': '600', 'text-anchor': 'start' });
+      distEls.labelPos.textContent = 'predict positive →';
+      var hit = el('rect', { x: 0, y: 0, width: DW, height: DH, fill: 'transparent' });
+      distSvg.appendChild(distEls.axis);
+      distSvg.appendChild(distEls.negFill);
+      distSvg.appendChild(distEls.posFill);
+      distSvg.appendChild(distEls.negShade);
+      distSvg.appendChild(distEls.posShade);
+      distSvg.appendChild(distEls.labelNeg);
+      distSvg.appendChild(distEls.labelPos);
+      distSvg.appendChild(distEls.thresholdLine);
+      distSvg.appendChild(distEls.thresholdHandle);
+      distSvg.appendChild(hit);
+      attachDrag(distSvg, hit);
+    }
+
+    // ── ROC plot geometry ──
+    var RW = 300, RH = 300, RML = 38, RMR = 14, RMT = 14, RMB = 34;
+    function rxScale(fpr) { return RML + fpr * (RW - RML - RMR); }
+    function ryScale(tpr) { return (RH - RMB) - tpr * (RH - RMT - RMB); }
+
+    var rocEls = {};
+    function buildRocSvg() {
+      rocSvg.innerHTML = '';
+      var axisX = el('line', { x1: RML, y1: RH - RMB, x2: RW - RMR, y2: RH - RMB, stroke: 'rgba(255,255,255,0.3)', 'stroke-width': 1 });
+      var axisY = el('line', { x1: RML, y1: RMT, x2: RML, y2: RH - RMB, stroke: 'rgba(255,255,255,0.3)', 'stroke-width': 1 });
+      var diag = el('line', { x1: rxScale(0), y1: ryScale(0), x2: rxScale(1), y2: ryScale(1), stroke: 'rgba(255,255,255,0.25)', 'stroke-width': 1, 'stroke-dasharray': '4,4' });
+      rocEls.curve = el('path', { fill: 'none', stroke: '#5DDAB4', 'stroke-width': 2.5 });
+      rocEls.marker = el('circle', { r: 5, fill: '#fff', stroke: '#5DDAB4', 'stroke-width': 2.5 });
+      var tick0x = el('text', { x: rxScale(0), y: RH - RMB + 13, fill: 'rgba(200,237,227,0.75)', 'font-size': '9.5', 'text-anchor': 'start' });
+      tick0x.textContent = '0';
+      var tick1x = el('text', { x: rxScale(1), y: RH - RMB + 13, fill: 'rgba(200,237,227,0.75)', 'font-size': '9.5', 'text-anchor': 'end' });
+      tick1x.textContent = '1';
+      var tick0y = el('text', { x: RML - 6, y: ryScale(0) + 3, fill: 'rgba(200,237,227,0.75)', 'font-size': '9.5', 'text-anchor': 'end' });
+      tick0y.textContent = '0';
+      var tick1y = el('text', { x: RML - 6, y: ryScale(1) + 8, fill: 'rgba(200,237,227,0.75)', 'font-size': '9.5', 'text-anchor': 'end' });
+      tick1y.textContent = '1';
+      var labelX = el('text', { x: (RML + RW - RMR) / 2, y: RH - 6, fill: 'rgba(200,237,227,0.85)', 'font-size': '11', 'font-weight': '600', 'text-anchor': 'middle' });
+      labelX.textContent = 'False Positive Rate';
+      var labelY = el('text', { x: -(RH / 2), y: 12, fill: 'rgba(200,237,227,0.85)', 'font-size': '11', 'font-weight': '600', 'text-anchor': 'middle', transform: 'rotate(-90)' });
+      labelY.textContent = 'True Positive Rate';
+      rocEls.aucText = el('text', { x: RW - RMR, y: RMT + 12, fill: '#5DDAB4', 'font-size': '12', 'font-weight': '700', 'text-anchor': 'end' });
+      rocSvg.appendChild(axisX);
+      rocSvg.appendChild(tick0x);
+      rocSvg.appendChild(tick1x);
+      rocSvg.appendChild(tick0y);
+      rocSvg.appendChild(tick1y);
+      rocSvg.appendChild(axisY);
+      rocSvg.appendChild(diag);
+      rocSvg.appendChild(rocEls.curve);
+      rocSvg.appendChild(rocEls.marker);
+      rocSvg.appendChild(labelX);
+      rocSvg.appendChild(labelY);
+      rocSvg.appendChild(rocEls.aucText);
+    }
+
+    // ── Drag handling on the distribution plot ──
+    function attachDrag(svg, hitRect) {
+      var dragging = false;
+      function setFromClientX(clientX) {
+        var rect = svg.getBoundingClientRect();
+        var fx = (clientX - rect.left) / rect.width;
+        fx = Math.max(0, Math.min(1, fx));
+        var pxX = fx * DW;
+        var shape = SHAPES[state.shapeKey];
+        var dataX = shape.xMin + (pxX - DML) / (DW - DML - DMR) * (shape.xMax - shape.xMin);
+        dataX = Math.max(shape.xMin, Math.min(shape.xMax, dataX));
+        thresholdSlider.value = dataX;
+        onThresholdChange();
+      }
+      hitRect.addEventListener('pointerdown', function (e) { dragging = true; setFromClientX(e.clientX); svg.setPointerCapture(e.pointerId); });
+      hitRect.addEventListener('pointermove', function (e) { if (dragging) setFromClientX(e.clientX); });
+      hitRect.addEventListener('pointerup', function () { dragging = false; });
+      hitRect.addEventListener('pointercancel', function () { dragging = false; });
+    }
+
+    // ── Rendering ──
+    function recompute() {
+      var shape = SHAPES[state.shapeKey];
+      var preset = PRESETS[state.presetKey];
+      var dd = shape.dist(preset.d);
+      state.data = computeROC(dd.pdfNeg, dd.pdfPos, shape.xMin, shape.xMax, shape.n);
+    }
+
+    function nearestIndex(shape, t) {
+      var frac = (t - shape.xMin) / (shape.xMax - shape.xMin);
+      var idx = Math.round(frac * (shape.n - 1));
+      return Math.max(0, Math.min(shape.n - 1, idx));
+    }
+
+    function renderDist() {
+      var shape = SHAPES[state.shapeKey];
+      var data = state.data;
+      var yMax = 0;
+      for (var i = 0; i < data.pn.length; i++) { if (data.pn[i] > yMax) yMax = data.pn[i]; if (data.pp[i] > yMax) yMax = data.pp[i]; }
+      yMax *= 1.18;
+      if (yMax <= 0) yMax = 1;
+      var baseline = DH - DMB;
+      distEls.negFill.setAttribute('d', areaPathStr(data.xs, data.pn, 0, data.pn.length - 1, shape, yMax, baseline));
+      distEls.posFill.setAttribute('d', areaPathStr(data.xs, data.pp, 0, data.pp.length - 1, shape, yMax, baseline));
+
+      var idx = state.thresholdIdx;
+      distEls.negShade.setAttribute('d', areaPathStr(data.xs, data.pn, idx, data.pn.length - 1, shape, yMax, baseline));
+      distEls.posShade.setAttribute('d', areaPathStr(data.xs, data.pp, idx, data.pp.length - 1, shape, yMax, baseline));
+
+      var tx = dxScale(shape, data.xs[idx]);
+      distEls.thresholdLine.setAttribute('x1', tx); distEls.thresholdLine.setAttribute('x2', tx);
+      distEls.thresholdHandle.setAttribute('cx', tx);
+      distEls.labelNeg.setAttribute('x', tx - 8);
+      distEls.labelPos.setAttribute('x', tx + 8);
+    }
+
+    function renderRoc() {
+      var data = state.data;
+      var d = 'M ' + rxScale(data.fpr[0]).toFixed(2) + ' ' + ryScale(data.tpr[0]).toFixed(2);
+      for (var i = 1; i < data.fpr.length; i++) {
+        d += ' L ' + rxScale(data.fpr[i]).toFixed(2) + ' ' + ryScale(data.tpr[i]).toFixed(2);
+      }
+      rocEls.curve.setAttribute('d', d);
+      var idx = state.thresholdIdx;
+      rocEls.marker.setAttribute('cx', rxScale(data.fpr[idx]));
+      rocEls.marker.setAttribute('cy', ryScale(data.tpr[idx]));
+      rocEls.aucText.textContent = 'AUC = ' + data.auc.toFixed(3);
+    }
+
+    function renderStats() {
+      var data = state.data, idx = state.thresholdIdx;
+      var tpr = data.tpr[idx], fpr = data.fpr[idx];
+      var precision = (tpr + fpr) > 0 ? tpr / (tpr + fpr) : 0;
+      var accuracy = 0.5 * tpr + 0.5 * (1 - fpr);
+      document.getElementById('statTPR').textContent = tpr.toFixed(3);
+      document.getElementById('statFPR').textContent = fpr.toFixed(3);
+      document.getElementById('statPrecision').textContent = precision.toFixed(3);
+      document.getElementById('statAccuracy').textContent = accuracy.toFixed(3);
+      document.getElementById('statAUC').textContent = data.auc.toFixed(3);
+      thresholdValue.textContent = data.xs[idx].toFixed(2);
+    }
+
+    function onThresholdChange() {
+      var shape = SHAPES[state.shapeKey];
+      var t = parseFloat(thresholdSlider.value);
+      state.thresholdIdx = nearestIndex(shape, t);
+      renderDist(); renderRoc(); renderStats();
+    }
+
+    function onControlsChange() {
+      state.shapeKey = shapeSelect.value;
+      state.presetKey = presetSelect.value;
+      var shape = SHAPES[state.shapeKey];
+      recompute();
+      thresholdSlider.min = shape.xMin;
+      thresholdSlider.max = shape.xMax;
+      thresholdSlider.step = (shape.xMax - shape.xMin) / 500;
+      thresholdSlider.value = shape.defaultT;
+      state.thresholdIdx = nearestIndex(shape, shape.defaultT);
+      renderDist(); renderRoc(); renderStats();
+    }
+
+    shapeSelect.addEventListener('change', onControlsChange);
+    presetSelect.addEventListener('change', onControlsChange);
+    thresholdSlider.addEventListener('input', onThresholdChange);
+
+    buildDistSvg();
+    buildRocSvg();
+    onControlsChange();
+  })();
+  </script>
+
+</body>
+</html>

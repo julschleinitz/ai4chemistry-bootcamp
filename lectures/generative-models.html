@@ -98,7 +98,7 @@
     </div>
     <h1>Learned <em>Representations</em></h1>
     <p class="lecture-tagline">
-      Pre-training on large chemical corpora and fine-tuning on task-specific data — transferring chemical knowledge across domains.
+      Unsupervised learning, autoencoders and VAEs, self-supervised pre-training and transfer learning — what happens when the model, not you, chooses the features.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
@@ -128,9 +128,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures/lecture_07_learned-representations" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        Slides (PDF)
+        Slides
+      </a>
+      <a class="resource-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/learned-representations.ipynb" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Notebook (Colab)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -142,10 +146,12 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Explain the pre-training / fine-tuning paradigm and contrast masked-language-model and contrastive objectives</li>
-        <li>Identify when transfer learning helps (small labelled dataset, large unlabelled corpus) and when it does not</li>
-        <li>Fine-tune a pre-trained molecular model (e.g., ChemBERTa, GNN pre-training) on a downstream task</li>
-        <li>Evaluate whether learned representations generalise better than fixed fingerprints on a given benchmark</li>
+        <li>Describe what unsupervised learning is, and use PCA, t-SNE/UMAP and Butina clustering on a molecular dataset — while reading the resulting maps honestly</li>
+        <li>Explain why a Bemis–Murcko scaffold split is not optional, and what a random split hides</li>
+        <li>Read an autoencoder or VAE figure in a paper and say what is and is not being claimed about the latent space</li>
+        <li>Contrast the two families of self-supervised pre-training — masked prediction and contrastive learning</li>
+        <li>Choose between frozen, partial and full fine-tuning from your dataset size, and recognise negative transfer when it happens</li>
+        <li>Measure, rather than assume, the training-set size at which a pre-trained representation stops beating ECFP + random forest</li>
       </ul>
     </div>
 
@@ -159,28 +165,42 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> Pre-training forces a model to learn general chemical knowledge (atom environments, bond patterns) before it ever sees task labels — this regularisation often outperforms task-specific models on low-data regimes.</p>
+          <p><strong>Labels are the bottleneck, not molecules.</strong> We can enumerate 10<sup>11</sup> molecules and have measured 10<sup>3</sup>. Unsupervised and self-supervised learning exist to spend the first to make up for the second.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> The choice of pre-training objective matters: masked-atom prediction captures local chemistry; contrastive objectives (e.g., MolCLR) encourage global molecular similarity.</p>
+          <p><strong>Unsupervised methods find real structure — but a 2-D map is a picture of your fingerprint.</strong> Word2vec on 3.3 M abstracts recovers the periodic table; masked pre-training recovers 82% of 792 reaction classes with no labels. Equally, t-SNE produces convincing clusters from pure noise.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Fine-tuning all layers (full fine-tuning) beats frozen-encoder approaches when you have more than a few hundred labelled examples, but risks catastrophic forgetting on very small datasets.</p>
+          <p><strong>The VAE's decoder disappointed; its encoder changed the field.</strong> As generators, molecular VAEs lose to a 30-second graph genetic algorithm and, on some benchmarks, to random screening. The pretext-task-then-keep-the-encoder pattern is what survived.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> Learned representations are not always better than ECFP — always run fingerprint baselines before investing in pre-training pipelines.</p>
+          <p><strong>Validity was the easy metric.</strong> JT-VAE and SELFIES reach 100% validity by construction, not by learning — and the model with perfect validity often matches real chemistry worst.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Pre-training is a prior.</strong> Worth ~3× at a hundred labels (NMR transfer: 0.43 vs 1.35 ppm), worth nothing by a thousand, and occasionally worth less than nothing — pre-training a GAT cost 6.5 points of ROC-AUC.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Always run ECFP + random forest, and always split by scaffold.</strong> In the largest independent replication (25 models × 25 datasets, 2025), almost nothing beat that baseline significantly.</p>
         </li>
 
       </ul>
@@ -192,43 +212,123 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1021/acscentsci.7b00572" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Hu et al. — "Strategies for Pre-training Graph Neural Networks" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ICLR, 2020 · Systematic study of GNN pre-training objectives for molecular tasks</div>
+            <div class="ref-item-title">Gómez-Bombarelli et al. — “Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ACS Cent. Sci., 2018, 4, 268 · The chemical VAE: 250k ZINC molecules, a 196-D latent space, and the joint property head</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1088/2632-2153/aba947" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Chithrananda et al. — "ChemBERTa: Large-Scale Self-Supervised Pretraining for Molecular Property Prediction" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">arXiv, 2020 · ChemBERTa pre-training on SMILES with BERT objectives</div>
+            <div class="ref-item-title">Krenn et al. — “SELFIES: A 100% robust molecular string representation” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Mach. Learn.: Sci. Technol., 2020, 1, 045024 · A grammar that cannot emit an invalid molecule</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1038/s42256-024-00821-x" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Wang et al. — "MolCLR: Molecular Contrastive Learning of Representations via Graph Neural Networks" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2022 · Contrastive pre-training for molecular graphs</div>
+            <div class="ref-item-title">Skinnider — “Invalid SMILES are beneficial rather than detrimental to chemical language models” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Machine Intelligence, 2024, 6, 437 · Breaking SELFIES on purpose improves distribution match</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/1905.12265" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Hu et al. — “Strategies for Pre-training Graph Neural Networks” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICLR, 2020 · Node-level plus graph-level pre-training (+7.2 ROC-AUC) — and explicit negative transfer</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s42256-022-00580-7" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Ross et al. — “Large-scale chemical language representations capture molecular structure and properties” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Machine Intelligence, 2022, 4, 1256 · MoLFormer-XL: 1.1 B SMILES on 16 GPUs</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s42256-022-00447-x" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Wang et al. — “MolCLR: Molecular Contrastive Learning of Representations via Graph Neural Networks” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Machine Intelligence, 2022, 4, 279 · Contrastive pre-training and its three graph augmentations</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s42256-020-00284-w" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Schwaller et al. — “Mapping the space of chemical reactions using attention-based neural networks” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Machine Intelligence, 2021, 3, 144 · Self-supervised pre-training alone recovers 82% of 792 reaction classes</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1021/acs.jpclett.1c00578" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Han &amp; Choi — “Transfer Learning from Simulation to Experimental Data: NMR Chemical Shift Predictions” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. Phys. Chem. Lett., 2021, 12, 3662 · The learning-curve crossover, measured</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41467-023-41948-6" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Deng et al. — “A systematic study of key elements underlying molecular property prediction” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Communications, 2023, 14, 6395 · 62,820 models; fixed descriptors win below ~10³–10⁴ labels</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/2508.06199" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Praski, Adamczyk &amp; Czech — “Benchmarking Pretrained Molecular Embedding Models” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2508.06199, 2025 · 25 models × 25 datasets: nearly all show no improvement over ECFP</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1021/acs.jcim.2c01073" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">van Tilborg, Alenicheva &amp; Grisoni — “Exposing the Limitations of Molecular Machine Learning with Activity Cliffs” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. Chem. Inf. Model., 2022, 62, 5938 · Where every smooth representation breaks</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://distill.pub/2016/misread-tsne/" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">HuggingFace Transformers Docs <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">huggingface.co/docs/transformers · Practical guide for loading and fine-tuning pre-trained chemical language models</div>
+            <div class="ref-item-title">Wattenberg, Viégas &amp; Johnson — “How to Use t-SNE Effectively” <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Distill, 2016 · Why gap widths, cluster sizes and clusters-in-noise will mislead you</div>
           </div>
         </a>
 

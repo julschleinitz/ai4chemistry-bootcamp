@@ -98,6 +98,12 @@
     .resource-btn.is-disabled { opacity: 0.5; cursor: default; pointer-events: none; }
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 32px; transition: color 0.15s; }
     .back-link:hover { color: var(--accent); }
+    .interactive-callout { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(135deg, rgba(93,218,180,0.14), rgba(99,179,237,0.08)); border: 1px solid rgba(93,218,180,0.35); border-radius: 12px; padding: 18px 22px; text-decoration: none; color: var(--text); transition: transform 0.15s, border-color 0.15s; }
+    .interactive-callout:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .interactive-callout-text h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .interactive-callout-text p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5; }
+    .interactive-callout-cta { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--accent); white-space: nowrap; flex-shrink: 0; }
+    @media (max-width: 600px) { .interactive-callout { flex-direction: column; align-items: flex-start; } }
     @media (max-width: 700px) { .lecture-hero { padding: 36px 20px 32px; } .lecture-hero h1 { font-size: 28px; } .lecture-body { padding: 28px 20px 60px; } }
   </style>
 </head>
@@ -181,6 +187,22 @@
         <li>Tell model parameters apart from hyperparameters, and tune the latter without contaminating the test set</li>
       </ul>
       <p style="margin-top:14px;">Along the way: a full worked case study on reaction-yield prediction, a real example of data bias becoming model bias, missing data in a chemistry context, and three baseline models (linear regression, Gaussian process regression, decision trees) worth always trying.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">Interactive Figure</p>
+      <a class="interactive-callout" href="roc-auc.html">
+        <div class="interactive-callout-text">
+          <h3>Explore the ROC-AUC Curve</h3>
+          <p>Drag a classification threshold across two overlapping score distributions and watch it trace out the ROC curve live — compare different classifier qualities and distribution shapes.</p>
+        </div>
+        <span class="interactive-callout-cta">
+          Launch figure
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
     </div>
 
     <hr class="divider">
@@ -318,6 +340,16 @@
           <div class="ref-item-body">
             <div class="ref-item-title">Paired Tutorial — Model Training &amp; Evaluation <span class="ref-tag website">Tutorial</span></div>
             <div class="ref-item-meta">Hands-on lab applying scaffold splitting, nested CV, and leakage debugging to the BBBP dataset</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="roc-auc.html">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8a10 10 0 0 1-14.5 9.5"/><circle cx="18.7" cy="8" r="1.5"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Interactive Figure — The ROC-AUC Curve <span class="ref-tag website">Interactive</span></div>
+            <div class="ref-item-meta">Drag a threshold across two score distributions and watch it trace the ROC curve, with a companion notebook</div>
           </div>
         </a>
 
