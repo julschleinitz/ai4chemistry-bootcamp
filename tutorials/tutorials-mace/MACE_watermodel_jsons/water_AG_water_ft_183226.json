@@ -1,0 +1,22 @@
+{
+ "student": "AG",
+ "model": "water_ft",
+ "dataset": "revpbe0_d3",
+ "train_file": "data/water_train_revpbe0_d3_250.xyz",
+ "n_train": 250,
+ "density": 0.8984696248112056,
+ "density_spread": 0.011098031137520836,
+ "converged": true,
+ "density_error_pct": -9.882685575606256,
+ "F_rmse_meV_A": 66.7084246137078,
+ "F_rmse_pct": 2.9290962214983796,
+ "train_time_s": 1005.0,
+ "measure_time_s": 185.49114656448364,
+ "gpu": "NVIDIA A100-SXM4-40GB",
+ "torch": "2.5.1+cu124",
+ "method": "Berendsen NPT",
+ "exported": "2026-08-03T18:32:26",
+ "foundation_model": "small",
+ "batch_size": 5,
+ "max_num_epochs": 50
+}

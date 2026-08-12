@@ -1,0 +1,19 @@
+{
+ "student": "AG",
+ "model": "foundation",
+ "dataset": "revpbe_d3",
+ "train_file": null,
+ "n_train": null,
+ "density": 0.9347937201210095,
+ "density_spread": 0.006763972246363825,
+ "converged": true,
+ "density_error_pct": -6.239346025976983,
+ "F_rmse_meV_A": null,
+ "F_rmse_pct": null,
+ "train_time_s": 0.0,
+ "measure_time_s": 273.20052099227905,
+ "gpu": "Tesla T4",
+ "torch": "2.5.1+cu124",
+ "method": "Berendsen NPT",
+ "exported": "2026-08-04T03:56:41"
+}
