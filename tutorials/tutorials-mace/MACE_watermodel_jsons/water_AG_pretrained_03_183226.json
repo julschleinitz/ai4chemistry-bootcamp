@@ -1,0 +1,19 @@
+{
+ "student": "AG",
+ "model": "pretrained_03",
+ "dataset": "revpbe_d3",
+ "train_file": null,
+ "n_train": null,
+ "density": 0.9738521057491385,
+ "density_spread": 0.017163640571074668,
+ "converged": false,
+ "density_error_pct": -2.321754689153611,
+ "F_rmse_meV_A": null,
+ "F_rmse_pct": null,
+ "train_time_s": null,
+ "measure_time_s": 336.70371198654175,
+ "gpu": "NVIDIA A100-SXM4-40GB",
+ "torch": "2.5.1+cu124",
+ "method": "Berendsen NPT",
+ "exported": "2026-08-03T18:32:26"
+}
