@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://julschleinitz.github.io/ai4chemistry-bootcamp/sitemap.xml
