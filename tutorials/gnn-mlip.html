@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 5 — Molecular Property Prediction with GNNs · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 5 — Machine Learning Interatomic Potentials (MLIPs) · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,8 +30,8 @@
 
   <div class="tutorial-hero">
     <div class="tutorial-hero-meta"><span class="tutorial-badge">Tutorial 5</span></div>
-    <h1>Molecular Property Prediction <em>with GNNs</em></h1>
-    <p class="tutorial-tagline">Apply an MPNN to the QM9 dataset in PyTorch Geometric to predict HOMO-LUMO gaps, then visualise learned atom embeddings with UMAP.</p>
+    <h1>Machine Learning <em>Interatomic Potentials</em></h1>
+    <p class="tutorial-tagline">Train and evaluate a MACE machine-learning interatomic potential from molecular simulation data, run it in molecular dynamics, and explore Meta's UMA universal atomic simulator.</p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -64,22 +64,23 @@
 
     <div class="colab-banner">
       <div class="colab-banner-text">
-        <h3>Open in Google Colab</h3>
-        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
+        <h3>Tutorial slides &amp; the MACE Colab notebooks</h3>
+        <p>This session follows the tutorial slides below and the official MACE quick-start notebooks — there's no separate bootcamp-specific notebook to fill in.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/gnn-homo-lumo.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="https://colab.research.google.com/drive/1ZrTuTvavXiCxTFyjBV4GqlARxgFwYAtX" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/><path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
-        Open Notebook
+        Open MACE Notebook
       </a>
     </div>
 
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Construct molecular graphs from SMILES using PyTorch Geometric's <code>Data</code> objects</li>
-        <li>Implement one full message-passing layer (aggregate → update) using PyG's <code>MessagePassing</code> base class</li>
-        <li>Train an MPNN end-to-end on QM9 and track validation MAE</li>
-        <li>Visualise atom-level embeddings with UMAP coloured by atom type and partial charge</li>
+        <li>Understand what an MLIP training dataset actually is: DFT-computed energies and forces on snapshots from molecular simulation</li>
+        <li>Train a MACE machine-learning interatomic potential and know what its key hyperparameters (<code>num_channels</code>, <code>max_L</code>, <code>r_max</code>) control</li>
+        <li>Evaluate a trained potential against DFT with test-set errors and parity plots</li>
+        <li>Run molecular dynamics with the trained potential and check both stability and accuracy against experimental observables</li>
+        <li>Apply the workflow to water, then compare against Meta's UMA (Universal Model for Atoms) universal atomic simulator</li>
       </ul>
     </div>
 
@@ -88,13 +89,15 @@
     <div class="content-section">
       <p class="content-section-label">Instructions</p>
       <h2>Getting started</h2>
-      <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
+      <p>Open the tutorial slides (PDF, linked below) and the MACE notebook using the buttons above. The session runs in two parts: training/evaluating a MACE model, then exploring UMA.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install torch-geometric and its dependencies (torch-scatter, torch-sparse). Confirm that <code>torch_geometric.datasets.QM9</code> loads without errors.</p></li>
-        <li><p><strong>Explore QM9.</strong> Load the dataset and inspect a sample graph: number of nodes, edge_index shape, and node features. Filter to molecules with ≤20 heavy atoms for faster training.</p></li>
-        <li><p><strong>Build the MPNN.</strong> Complete the <code>MessagePassing</code> subclass: implement <code>message()</code> (concatenate source and edge features, apply a linear layer), <code>aggregate()</code> (sum), and <code>update()</code> (GRU). Add a global sum readout and a final MLP head.</p></li>
-        <li><p><strong>Train the model.</strong> Run the training loop for 50 epochs. Plot train and validation MAE for the HOMO-LUMO gap target. Compare to a baseline that predicts the mean gap.</p></li>
-        <li><p><strong>Visualise embeddings.</strong> Extract atom embeddings from the last message-passing layer. Run UMAP on 2000 randomly sampled atoms. Plot a 2-D scatter coloured by atom type.</p></li>
+        <li><p><strong>Understand the data.</strong> Look at the training set of atomic structures — snapshots from molecular simulation, each labeled with a DFT-computed total energy and per-atom forces. Check whether the structures actually sample the geometries you want to model, and whether the DFT level of theory is high enough for your question.</p></li>
+        <li><p><strong>Explore the MACE dataset &amp; train a model.</strong> Work through the MACE Colab notebook: load the dataset, fit atomization energies (<code>E_atm = E_tot − Σᵢ E₀</code>), and train a model.</p></li>
+        <li><p><strong>Understand model parameters.</strong> Vary <code>num_channels</code> (64 → 128 → 256, trading model size for speed) and <code>max_L</code> (L=0 trains on scalar features only; L=1 adds vector features). Note that the effective interaction cutoff is <code>num_interactions × r_max</code>.</p></li>
+        <li><p><strong>Fit and test the model.</strong> Check how well the model reproduces DFT on a held-out test set using test-set errors and parity plots.</p></li>
+        <li><p><strong>Run molecular dynamics.</strong> Use the trained potential to run MD and check: is the dynamics stable? Does it reproduce experimental quantities of interest — density, g(r)/structure factor, transport properties (conductivity, self-diffusion)?</p></li>
+        <li><p><strong>Try it yourself on water.</strong> Repeat the workflow — data, training, parameters, testing, MD — for a water system.</p></li>
+        <li><p><strong>Explore UMA.</strong> Visit Meta's <a href="https://aidemos.atmeta.com/uma" target="_blank" rel="noopener" style="color:var(--accent-dim)">UMA universal atomic simulator</a> to visualize molecular motion and compute energies/forces on the fly with a general-purpose foundation model, with no training required.</p></li>
       </ol>
     </div>
 
@@ -107,25 +110,31 @@
 
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>What is the mean HOMO-LUMO gap in QM9? What is the standard deviation? How does MAE/std compare for your trained model vs. the mean baseline?</p>
+          <p>Look at the training structures for the model you're about to fit. Do they sample the range of geometries you'd actually need for your molecule of interest? What would you expect to happen if the model is later asked to predict on a geometry far outside that range?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>How does increasing the number of message-passing steps from 3 to 6 affect validation MAE? At what depth do you start to see over-smoothing?</p>
+          <p>Train MACE models with <code>num_channels</code> = 64, 128, and 256. How does test-set parity-plot accuracy change, and how does that trade off against training/inference speed? Where does the extra accuracy stop being worth the cost?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>In your UMAP embedding, are atoms of the same type clustered together? Are carbon atoms in aromatic rings separated from aliphatic carbons? What does this tell you about the learned representation?</p>
+          <p>Compare <code>max_L</code> = 0 (scalar features only) vs. <code>max_L</code> = 1 (adds vector features). Does allowing directional messages change the parity-plot accuracy? Does it change the stability of a molecular dynamics run?</p>
+          <span class="q-difficulty medium">Medium</span>
+        </div>
+
+        <div class="question-item">
+          <div class="q-label">Core</div>
+          <p>Run your trained water potential in molecular dynamics. Is the dynamics stable? Does it reproduce experimental density and the radial distribution function g(r)? If it diverges or gives unphysical structure, what in the training data or hyperparameters would you check first?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Add edge features (bond type, aromaticity) to the message function. How does validation MAE change relative to the node-only model?</p>
+          <p>Compare your custom-trained water MACE model against Meta's UMA universal atomic simulator on the same water system. How close are UMA's zero-shot energies and forces to your specifically-trained model's? What does that tell you about when a general-purpose foundation potential is "good enough" vs. when it's worth training your own?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -137,15 +146,23 @@
     <div class="content-section">
       <p class="content-section-label">Resources</p>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/gnn-homo-lumo.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="../lectures/lecture_05_mlips_and_gnns/mlip-tutorial.pdf" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Tutorial Slides (PDF)
+        </a>
+        <a class="resource-link" href="https://colab.research.google.com/drive/1ZrTuTvavXiCxTFyjBV4GqlARxgFwYAtX" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          Notebook (Colab)
+          MACE Training &amp; Evaluation (Colab)
         </a>
-        <a class="resource-link" href="#">
+        <a class="resource-link" href="https://aidemos.atmeta.com/uma" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          UMA Universal Atomic Simulator
+        </a>
+        <a class="resource-link" href="https://github.com/ACEsuit/mace" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub repo
+          MACE GitHub repo
         </a>
-        <a class="resource-link" href="../lectures/05-gnns.html">
+        <a class="resource-link" href="../lectures/gnns.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
