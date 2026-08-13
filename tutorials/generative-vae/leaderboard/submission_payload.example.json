@@ -1,0 +1,9 @@
+{
+  "action": "submit",
+  "run_id": "b3f1c2a0-1c1e-4b7a-9e3e-6b0c9e6a2f11",
+  "timestamp_utc": "2026-08-13T15:42:03Z",
+  "team_name": "team-caffeine",
+  "smiles": "COC1=C(C=C2C(=C1)N=CN=C2NC3=CC(=C(C=C3)F)Cl)OCCCN4CCOCC4",
+  "method_family": "genetic_algorithm",
+  "notes": "cheap-settings score -8.400 kcal/mol"
+}
