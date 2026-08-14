@@ -112,7 +112,7 @@
     <!-- ── Start here ── -->
     <div class="content-section">
       <p class="content-section-label">Start here</p>
-      <p>Everything for today is in the shared Drive folder <a href="https://drive.google.com/drive/u/1/folders/13K7_MkQaOliLaPPVdgrz1kjB-eKwg-Og" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3)"><strong>OpenADMET Hackathon!</strong></a></p>
+      <p>Everything for today is in the shared Drive folder <a href="https://drive.google.com/drive/u/0/folders/0AFbgsCBKDKnMUk9PVA" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3)"><strong>OpenADMET Hackathon!</strong></a></p>
 
       <h3>One-time setup, takes a minute</h3>
       <ol class="instructions-list">
@@ -156,7 +156,18 @@
 
         <div class="notebook-card">
           <div class="notebook-card-text">
-            <h3><span class="notebook-card-order">1</span>Descriptors and regressors</h3>
+            <h3><span class="notebook-card-order">1</span>Validation</h3>
+            <p>Build a trustworthy way to estimate your test score, since you only get a handful of leaderboard submissions today. The trick: you're not looking for the split that gives the best score, you're looking for the split whose score best predicts the test score &mdash; and those pull in opposite directions.</p>
+          </div>
+          <a class="colab-btn-sm" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/hackathon_1/01_validation%20%28STUDENT%29.ipynb" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/><path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
+            Open
+          </a>
+        </div>
+
+        <div class="notebook-card">
+          <div class="notebook-card-text">
+            <h3><span class="notebook-card-order">2</span>Descriptors and regressors</h3>
             <p>Compare classical molecular descriptors and fingerprints paired with different regressors to see how much the choice of representation moves predictive performance. It's the first lever most teams pull, and often the one with the biggest early payoff.</p>
           </div>
           <a class="colab-btn-sm" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/hackathon_1/Descriptors%20%28STUDENT%29.ipynb" target="_blank" rel="noopener">
@@ -167,7 +178,7 @@
 
         <div class="notebook-card">
           <div class="notebook-card-text">
-            <h3><span class="notebook-card-order">2</span>Ensembles</h3>
+            <h3><span class="notebook-card-order">3</span>Ensembles</h3>
             <p>Combine models that fail in different ways to see when an ensemble actually beats its best individual member. The question isn't which model wins alone, but how correlated your models' errors are &mdash; before you spend a submission finding out.</p>
           </div>
           <a class="colab-btn-sm" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/hackathon_1/Ensembles%20%28STUDENTS%29.ipynb" target="_blank" rel="noopener">
@@ -178,7 +189,7 @@
 
         <div class="notebook-card">
           <div class="notebook-card-text">
-            <h3><span class="notebook-card-order">3</span>External data</h3>
+            <h3><span class="notebook-card-order">4</span>External data</h3>
             <p>Pull in public ADMET data from sources like TDC, Polaris, and ChEMBL to expand your training set beyond what's provided. The catch: an assay value measured by someone else isn't the same measurement as yours, and this notebook walks through making them comparable.</p>
           </div>
           <a class="colab-btn-sm" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/hackathon_1/External_Data%20%28STUDENT%29.ipynb" target="_blank" rel="noopener">
@@ -189,7 +200,7 @@
 
         <div class="notebook-card">
           <div class="notebook-card-text">
-            <h3><span class="notebook-card-order">4</span>Multitask learning with Chemprop</h3>
+            <h3><span class="notebook-card-order">5</span>Multitask learning with Chemprop</h3>
             <p>Train one Chemprop model with a shared molecular encoder and nine task-specific output heads, instead of nine separate models. Data-rich endpoints end up improving the shared representation that data-poor endpoints then get to use for free.</p>
           </div>
           <a class="colab-btn-sm" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/hackathon_1/Multitask%20%28STUDENT%29.ipynb" target="_blank" rel="noopener">
@@ -200,7 +211,7 @@
 
         <div class="notebook-card">
           <div class="notebook-card-text">
-            <h3><span class="notebook-card-order">5</span>Pretrained models</h3>
+            <h3><span class="notebook-card-order">6</span>Pretrained models</h3>
             <p>Fine-tune CheMeleon, a Chemprop encoder pretrained on a large molecular corpus, and try TabPFN, a tabular transformer that predicts on your data without training on it at all. Everything here is single-task, so you can see the effect of pretraining on its own before combining it with multitask learning.</p>
           </div>
           <a class="colab-btn-sm" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/hackathon_1/Pretrained%20%28STUDENT%29.ipynb" target="_blank" rel="noopener">
