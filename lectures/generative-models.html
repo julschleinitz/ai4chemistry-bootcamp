@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lecture 7 — Learned Representations · AI4Chemical Sciences Bootcamp</title>
+  <title>Lecture 8 — Generative Models · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,9 +15,10 @@
     .lecture-hero h1 { font-size: 38px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px; }
     .lecture-hero h1 em { font-style: normal; color: var(--accent); }
     .lecture-tagline { font-size: 15px; color: var(--accent-dim); max-width: 640px; margin-bottom: 24px; line-height: 1.6; }
-    .lecture-meta-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .lecture-meta-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
     .lecture-meta-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); }
     .lecture-meta-item svg { opacity: 0.7; flex-shrink: 0; }
+    .lecture-credit { font-size: 12px; color: var(--text-dim); margin-top: 16px; }
     .lecture-body { max-width: 820px; margin: 0 auto; padding: 44px 40px 80px; }
     .content-section { margin-bottom: 44px; }
     .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
@@ -94,20 +95,32 @@
 
   <div class="lecture-hero">
     <div class="lecture-hero-meta">
-      <span class="lecture-badge">Lecture 7</span>
+      <span class="lecture-badge">Lecture 8</span>
     </div>
-    <h1>Learned <em>Representations</em></h1>
+    <h1>Generative <em>Models</em></h1>
     <p class="lecture-tagline">
-      Unsupervised learning, autoencoders and VAEs, self-supervised pre-training and transfer learning — what happens when the model, not you, chooses the features.
+      Diffusion, flow matching and the dynamical-systems view of generative modelling — how to fine-tune and steer a pretrained generator toward a reward, and what it takes to make any of this work for proteins, enzymes and molecular crystals.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <a href="https://www.linkedin.com/in/jules-schleinitz-90a5a1161/" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3);">J. Schleinitz</a>
+        <div class="instructor-block">
+          <span class="instructor-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Chenghao Liu
+          </span>
+          <div class="instructor-social">
+            <a class="social-link" href="https://pchliu.github.io/" target="_blank" rel="noopener" title="Website">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </a>
+            <a class="social-link" href="https://www.linkedin.com/in/chenghao-peter-liu/" target="_blank" rel="noopener" title="LinkedIn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        August 12, 2026 · 13:30 – 15:00
+        August 13, 2026 · 13:30 – 15:00
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -118,6 +131,7 @@
         90 min
       </div>
     </div>
+    <p class="lecture-credit">Slides developed in part with Alex Tong.</p>
   </div>
 
   <div class="lecture-body">
@@ -128,17 +142,9 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="lecture_07_learned-representations/lecture_07-learned-representations_final.pdf" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_08_generative_modelling/generative_modelling_crashcourse.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
-      </a>
-      <a class="resource-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/learned-representations.ipynb" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        Notebook (Colab)
-      </a>
-      <a class="resource-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/learned-representations_solutions.ipynb" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        Solutions (Colab)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -150,12 +156,13 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Describe what unsupervised learning is, and use PCA, t-SNE/UMAP and Butina clustering on a molecular dataset — while reading the resulting maps honestly</li>
-        <li>Explain why a Bemis–Murcko scaffold split is not optional, and what a random split hides</li>
-        <li>Read an autoencoder or VAE figure in a paper and say what is and is not being claimed about the latent space</li>
-        <li>Contrast the two families of self-supervised pre-training — masked prediction and contrastive learning</li>
-        <li>Choose between frozen, partial and full fine-tuning from your dataset size, and recognise negative transfer when it happens</li>
-        <li>Measure, rather than assume, the training-set size at which a pre-trained representation stops beating ECFP + random forest</li>
+        <li>State the generative-modelling problem as learning parameters θ so that a generator ψ<sub>θ</sub> pushes samples from an easy source p onto the unknown data distribution q — and judge a model on fidelity, coverage and sampling speed rather than any one alone</li>
+        <li>Contrast one-step generators (GANs, VAEs, normalizing flows) with simulation-based continuous-time models (continuous normalizing flows, score-based diffusion) and simulation-free flow matching, and explain why flow matching avoids the ~100-network-evaluation cost of training a neural ODE</li>
+        <li>Derive why a diffusion SDE and a flow ODE are two instances of the same continuity/Fokker–Planck equation, and read off from the three-line flow-matching training loop why straighter conditional paths sample in fewer steps</li>
+        <li>Explain the reward-tilted distribution p*(x) ∝ p<sub>ref</sub>(x)·exp(R(x)/β) that unifies supervised fine-tuning, Best-of-N, DPO, RLHF and inference-time guidance, and choose between them given a dataset size and compute budget</li>
+        <li>Describe why classifier(-free) guidance does not actually sample from the reward-tilted target, and how Feynman–Kac steering (particle resampling via Sequential Monte Carlo) provably converges to it as the number of particles grows</li>
+        <li>Explain why jointly sampling sequence, structure and small-molecule/DNA/RNA tokens from a multimodal diffusion model needs inference-time corrections — self-correction, entropy-annealed tempering, noisy cross-modal guidance — even when the underlying theory is exact</li>
+        <li>Describe how diffusion reframes molecular crystal structure prediction as sampling rather than exhaustive search-and-rank, and what that trades against classical enumeration plus DFT</li>
       </ul>
     </div>
 
@@ -169,42 +176,49 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Labels are the bottleneck, not molecules.</strong> We can enumerate 10<sup>11</sup> molecules and have measured 10<sup>3</sup>. Unsupervised and self-supervised learning exist to spend the first to make up for the second.</p>
+          <p><strong>Generative modelling is a coupling problem.</strong> GANs, VAEs, normalizing flows, diffusion and flow matching are all different ways to build and train a map ψ<sub>θ</sub> that pushes an easy source distribution p onto the unknown data distribution q. The differences are training signal and inference cost, not the goal.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Unsupervised methods find real structure — but a 2-D map is a picture of your fingerprint.</strong> Word2vec on 3.3 M abstracts recovers the periodic table; masked pre-training recovers 82% of 792 reaction classes with no labels. Equally, t-SNE produces convincing clusters from pure noise.</p>
+          <p><strong>Flow and diffusion solve the same equation — and straightness is what buys fewer steps.</strong> A diffusion SDE and a flow ODE both push a density through the same continuity/Fokker–Planck dynamics. Flow matching regresses directly to a closed-form, single-pair velocity — the entire training loop is <code>x_t = (1-t)x₀ + t·x₁; loss = ‖v(x_t,t) − (x₁−x₀)‖²</code> — so it never needs to simulate an ODE to get a training signal. Because Euler error comes from path curvature, that straight-line path is also why flow matching needs 5–50 sampling steps against diffusion's 10–100+, and consistency/flow-map models push that down to 1–4.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>The VAE's decoder disappointed; its encoder changed the field.</strong> As generators, molecular VAEs lose to a 30-second graph genetic algorithm and, on some benchmarks, to random screening. The pretext-task-then-keep-the-encoder pattern is what survived.</p>
+          <p><strong>Every alignment method targets the same reward-tilted distribution.</strong> Supervised fine-tuning, Best-of-N, DPO, RLHF and inference-time guidance are all ways to sample from p*(x) ∝ p<sub>ref</sub>(x)·exp(R(x)/β) — they only differ in whether they retrain the model, need a differentiable reward, or run online. Retrain when you have a lot of data; steer at inference otherwise.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Validity was the easy metric.</strong> JT-VAE and SELFIES reach 100% validity by construction, not by learning — and the model with perfect validity often matches real chemistry worst.</p>
+          <p><strong>Classifier-free guidance is a useful hack; it doesn't reach the true target.</strong> Reward and classifier(-free) guidance don't actually converge to p*(x). Feynman–Kac steering — sampling N candidates and resampling them by an importance weight at every step, via Sequential Monte Carlo — provably converges to the reward-tilted target as N → ∞, without training anything new.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Pre-training is a prior.</strong> Worth ~3× at a hundred labels (NMR transfer: 0.43 vs 1.35 ppm), worth nothing by a thousand, and occasionally worth less than nothing — pre-training a GAT cost 6.5 points of ROC-AUC.</p>
+          <p><strong>Joint multimodal generation breaks in practice, not in theory.</strong> Sampling sequence and structure from their true joint marginals is exact in theory, but naive joint discretization drifts badly. Fixing it takes explicit inference-time interventions: letting the model self-correct early wrong tokens, annealing its confidence upward over time, and conditioning each modality on a deliberately noisier version of the other.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Always run ECFP + random forest, and always split by scaffold.</strong> In the largest independent replication (25 models × 25 datasets, 2025), almost nothing beat that baseline significantly.</p>
+          <p><strong>New-to-nature enzymes no longer need a pre-existing catalytic motif.</strong> By generating protein sequence and structure simultaneously, a multimodal diffusion model can build new motifs directly onto a ligand, DNA or RNA target — using one to two orders of magnitude fewer samples than motif-scaffolding pipelines, and producing lab-validated designs (a Zn-metallohydrolase, a retroaldase, a Morita–Baylis–Hillman catalyst).</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Crystal structure prediction is moving from search to sampling.</strong> Classical CSP enumerates tens of thousands of candidate packings and ranks them with DFT — accurate but computationally prohibitive, and blind to which minima kinetics actually favors. A diffusion model trained on ~600k crystal structures (OXtal) matches DFT-competitive accuracy at orders of magnitude lower inference cost — the first generative model shown to scale to molecular crystals.</p>
         </li>
 
       </ul>
@@ -216,123 +230,263 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="https://doi.org/10.1021/acscentsci.7b00572" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/1806.07366" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Gómez-Bombarelli et al. — “Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ACS Cent. Sci., 2018, 4, 268 · The chemical VAE: 250k ZINC molecules, a 196-D latent space, and the joint property head</div>
+            <div class="ref-item-title">Chen et al. — “Neural Ordinary Differential Equations” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2018 · Continuous-depth networks trained via the adjoint method — the origin of continuous normalizing flows</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1088/2632-2153/aba947" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/1810.01367" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Krenn et al. — “SELFIES: A 100% robust molecular string representation” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Mach. Learn.: Sci. Technol., 2020, 1, 045024 · A grammar that cannot emit an invalid molecule</div>
+            <div class="ref-item-title">Grathwohl et al. — “FFJORD: Free-Form Continuous Dynamics for Scalable Reversible Generative Models” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICLR, 2019 · Hutchinson's trace estimator makes CNFs scale to high dimensions with unrestricted architectures</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1038/s42256-024-00821-x" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2011.13456" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Skinnider — “Invalid SMILES are beneficial rather than detrimental to chemical language models” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2024, 6, 437 · Breaking SELFIES on purpose improves distribution match</div>
+            <div class="ref-item-title">Song et al. — “Score-Based Generative Modeling through Stochastic Differential Equations” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICLR, 2021 (Oral) · Unifies score matching and diffusion under a single forward/reverse SDE framework</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://arxiv.org/abs/1905.12265" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2406.07524" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Hu et al. — “Strategies for Pre-training Graph Neural Networks” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ICLR, 2020 · Node-level plus graph-level pre-training (+7.2 ROC-AUC) — and explicit negative transfer</div>
+            <div class="ref-item-title">Sahoo et al. — “Simple and Effective Masked Diffusion Language Models” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2024 · A principled variational bound for masked discrete diffusion, closing much of the gap to autoregressive LMs</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1038/s42256-022-00580-7" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2506.07903" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Ross et al. — “Large-scale chemical language representations capture molecular structure and properties” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2022, 4, 1256 · MoLFormer-XL: 1.1 B SMILES on 16 GPUs</div>
+            <div class="ref-item-title">Rojas et al. — “Diffuse Everything: Multimodal Diffusion Models on Arbitrary State Spaces” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICML, 2025 · A general denoising Markov model for multimodal diffusion across heterogeneous continuous/discrete spaces</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1038/s42256-022-00447-x" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Wang et al. — “MolCLR: Molecular Contrastive Learning of Representations via Graph Neural Networks” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2022, 4, 279 · Contrastive pre-training and its three graph augmentations</div>
+            <div class="ref-item-title">Ouyang et al. — “Training Language Models to Follow Instructions with Human Feedback” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2022 · The InstructGPT paper — SFT plus RLHF (PPO on a learned reward model) as the canonical alignment recipe</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1038/s42256-020-00284-w" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2311.12908" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Schwaller et al. — “Mapping the space of chemical reactions using attention-based neural networks” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2021, 3, 144 · Self-supervised pre-training alone recovers 82% of 792 reaction classes</div>
+            <div class="ref-item-title">Wallace et al. — “Diffusion Model Alignment Using Direct Preference Optimization” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">CVPR, 2024 · Adapts DPO to diffusion models, aligning text-to-image generators to preference pairs with no reward model</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1021/acs.jpclett.1c00578" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2205.11275" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Han &amp; Choi — “Transfer Learning from Simulation to Experimental Data: NMR Chemical Shift Predictions” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">J. Phys. Chem. Lett., 2021, 12, 3662 · The learning-curve crossover, measured</div>
+            <div class="ref-item-title">Korbak, Perez &amp; Buckley — “RL with KL Penalties Is Better Viewed as Bayesian Inference” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Findings of EMNLP, 2022 · KL-regularized RL fine-tuning is variational inference over a Bayesian posterior — why it converges to the reward-tilted target</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1038/s41467-023-41948-6" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2105.05233" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Deng et al. — “A systematic study of key elements underlying molecular property prediction” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Communications, 2023, 14, 6395 · 62,820 models; fixed descriptors win below ~10³–10⁴ labels</div>
+            <div class="ref-item-title">Dhariwal &amp; Nichol — “Diffusion Models Beat GANs on Image Synthesis” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2021 · Introduces classifier guidance and pushes diffusion sample quality past GANs on ImageNet</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://arxiv.org/abs/2508.06199" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2207.12598" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Praski, Adamczyk &amp; Czech — “Benchmarking Pretrained Molecular Embedding Models” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">arXiv:2508.06199, 2025 · 25 models × 25 datasets: nearly all show no improvement over ECFP</div>
+            <div class="ref-item-title">Ho &amp; Salimans — “Classifier-Free Diffusion Guidance” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv, 2022 · Guidance without a separate classifier, by jointly training and interpolating conditional/unconditional scores</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://doi.org/10.1021/acs.jcim.2c01073" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2503.02819" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">van Tilborg, Alenicheva &amp; Grisoni — “Exposing the Limitations of Molecular Machine Learning with Activity Cliffs” <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">J. Chem. Inf. Model., 2022, 62, 5938 · Where every smooth representation breaks</div>
+            <div class="ref-item-title">Skreta et al. — “Feynman–Kac Correctors in Diffusion: Annealing, Guidance, and Product of Experts” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICML, 2025 (Spotlight) · Weighted-SMC correctors that provably steer a pretrained diffusion model to the reward-tilted target</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://distill.pub/2016/misread-tsne/" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1111/j.1467-9868.2006.00553.x" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Wattenberg, Viégas &amp; Johnson — “How to Use t-SNE Effectively” <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">Distill, 2016 · Why gap widths, cluster sizes and clusters-in-noise will mislead you</div>
+            <div class="ref-item-title">Del Moral, Doucet &amp; Jasra — “Sequential Monte Carlo Samplers” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. R. Stat. Soc. B, 2006, 68, 411 · The SMC machinery behind Feynman–Kac steering: weighted particle propagation between distributions</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1098/rsif.2008.0085" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Dryden, Thomson &amp; White — “How Much of Protein Sequence Space Has Been Explored by Life on Earth?” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. R. Soc. Interface, 2008, 5, 953 · Bounds on the sliver of protein sequence space life has actually sampled</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-021-03819-2" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Jumper et al. — “Highly Accurate Protein Structure Prediction with AlphaFold” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2021, 596, 583 · Near-experimental-accuracy structure prediction from sequence alone</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-023-06415-8" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Watson et al. — “De Novo Design of Protein Structure and Function with RFdiffusion” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2023, 620, 1089 · Fine-tunes RoseTTAFold as a diffusion model over backbones — de novo binders, oligomers and motif scaffolds</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/2502.03540" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Peng, Bezemek et al. — “Path Planning for Masked Diffusion Model Sampling” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv, 2025 · Splits masked-diffusion sampling into a planning stage (what to unmask) and a denoising stage — the self-correction idea</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/2509.23405" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Peng, Bezemek et al. — “Planner Aware Path Learning in Diffusion Language Models Training” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICLR, 2026 (Oral) · A “Planned ELBO” that trains against planner-guided denoising paths instead of random ones</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1126/science.adl2528" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Krishna et al. — “Generalized Biomolecular Modeling and Design with RoseTTAFold All-Atom” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Science, 2024, 384, eadl2528 · Extends RoseTTAFold to arbitrary biomolecular assemblies — proteins, nucleic acids, small molecules, metals</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1101/2025.11.20.689494" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Stark et al. — “BoltzGen: Toward Universal Binder Design” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">bioRxiv, 2025 · An all-atom generative model unifying binder design and structure prediction, validated in the wet lab</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1101/2025.09.18.676967" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Butcher et al. — “De Novo Design of All-Atom Biomolecular Interactions with RFdiffusion3” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">bioRxiv, 2025 · An all-atom diffusion model generating protein structure in context with ligands and nucleic acids, ~10× cheaper</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/nature24996" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Arnold et al. — “Genetically Programmed Chiral Organoborane Synthesis” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2017, 552, 132 · Directed evolution of a carbene-transferase cytochrome — the first enzymatic C–B bond-forming catalyst</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-018-0808-5" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Zhang et al. — “Enzymatic Assembly of Carbon–Carbon Bonds via Iron-Catalysed sp³ C–H Functionalization” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2019, 565, 67 · Evolved cytochrome P411 enzymes form new C–C bonds by intermolecular carbene C–H insertion</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1021/jacs.5c07015" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Kennemur, Ko &amp; Arnold — “Enzymatic Stereodivergent Synthesis of Azaspiro[2.y]alkanes” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. Am. Chem. Soc., 2025, 147, 27165 · Engineered carbene transferases give scalable, stereodivergent access to azaspiroalkanes</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1126/science.1231434" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Coelho et al. — “Olefin Cyclopropanation via Carbene Transfer Catalyzed by Engineered Cytochrome P450 Enzymes” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Science, 2013, 339, 307 · The founding demonstration that engineered heme proteins catalyze abiological carbene transfer</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1073/pnas.1915054117" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Stenner et al. — “A De Novo Peroxidase Is Also a Promiscuous yet Stereoselective Carbene Transferase” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">PNAS, 2020, 117, 1419 · A fully de novo (not evolved-from-natural) heme protein catalyzing stereoselective carbene transfer</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1126/science.adt7268" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">DeGrado et al. — “De Novo Design of Porphyrin-Containing Proteins as Efficient and Stereoselective Catalysts” <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Science, 2025, 388, 665 · Fully computationally designed porphyrin proteins catalyze carbene cyclopropanation and Si–H insertion</div>
           </div>
         </a>
 

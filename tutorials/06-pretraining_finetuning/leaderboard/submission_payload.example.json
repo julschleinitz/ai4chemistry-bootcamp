@@ -1,0 +1,23 @@
+{
+  "run_id": "b3f1c2a0-1c1e-4b7a-9e3e-6b0c9e6a2f11",
+  "timestamp_utc": "2026-08-13T15:42:03Z",
+  "team_name": "team-caffeine",
+  "model_family": "pretrain+finetune",
+  "pretrained": true,
+  "fine_tune_fraction": 0.10,
+  "n_frozen_layers": 2,
+  "learning_rate": 0.0001,
+  "epochs_trained": 25,
+  "param_count": 184193,
+  "train_time_sec": 41.7,
+  "test_mae_ppm": 0.284,
+  "test_rmse_ppm": 0.391,
+  "n_atoms_scored": 118,
+  "n_atoms_expected": 120,
+  "coverage_pct": 98.3,
+  "split_version": "v1",
+  "notebook_version": "pretraining_finetuning.ipynb v1",
+  "seed": 42,
+  "device": "cuda",
+  "notes": "part (d) transfer-learning model, budget fraction 10%"
+}

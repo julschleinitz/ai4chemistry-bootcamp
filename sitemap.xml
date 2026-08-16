@@ -31,17 +31,17 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/foundational-models.html</loc>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/generative-models.html</loc>
     <lastmod>2026-08-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/generative-models.html</loc>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/learned-representations.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/gnns.html</loc>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/mlips.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.6</priority>
   </url>
@@ -56,7 +56,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/llm-assistants.html</loc>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.6</priority>
   </url>
@@ -196,12 +196,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/few-shot-learning.html</loc>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/pretraining_finetuning.html</loc>
     <lastmod>2026-08-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/generative-vae.html</loc>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/molecule-generation.html</loc>
     <lastmod>2026-08-10</lastmod>
     <priority>0.6</priority>
   </url>

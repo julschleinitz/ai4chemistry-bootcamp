@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lecture 9 — Model Interpretability · AI4Chemical Sciences Bootcamp</title>
+  <title>Lecture 5 — Machine-Learned Interatomic Potentials (MLIP) · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -94,20 +94,20 @@
 
   <div class="lecture-hero">
     <div class="lecture-hero-meta">
-      <span class="lecture-badge">Lecture 9</span>
+      <span class="lecture-badge">Lecture 5</span>
     </div>
-    <h1>Model <em>Interpretability</em></h1>
+    <h1>Machine-Learned Interatomic <em>Potentials</em> (MLIP)</h1>
     <p class="lecture-tagline">
-      Opening the black box: SHAP, LIME, attention maps, and concept-based explanations for chemical ML models.
+      Accelerating molecular dynamics simulations with GNNs - achieving quantum accuracy at classical cost. In this lecture, we will explore how to represent molecules as graphs and how to build and train graph neural networks (GNNs) for predicting energies and forces of atomic configurations.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        M. Yusov
+        <a href="https://www.linkedin.com/in/madeline-murphy22/" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3);">M. Murphy</a>
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        August 17, 2026 · 9:00 – 10:30
+        August 12, 2026 · 9:00 – 10:30
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -128,7 +128,7 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_05_mlips_and_gnns/mlip-lecture-final-version.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
       </a>
@@ -142,10 +142,10 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Compute SHAP values for fingerprint-based models and map them back to molecular substructures</li>
-        <li>Apply LIME to explain individual predictions from any black-box model</li>
-        <li>Visualise attention weights in a GNN and critically evaluate what they do and do not tell you</li>
-        <li>Distinguish local explanations (per prediction) from global explanations (model-wide) and choose appropriately</li>
+        <li>Introduction to Machine Learning Interatomic Potentials (MLIPs)</li>
+        <li>Basics of Graph Neural Networks (GNNs)</li>
+        <li>Foundation models in the context of molecular modeling</li>
+        <li>Data generation and training MLIPs from scratch</li>
       </ul>
     </div>
 
@@ -159,32 +159,40 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> SHAP values are grounded in cooperative game theory and satisfy desirable axioms (efficiency, symmetry, dummy). They are the most principled attribution method for feature-based models.</p>
+          <p><strong>Takeaway 1.</strong> Machine Learning Interatomic Potentials (MLIPs) are a class of models trained on ab initio data to predict the energy and forces of atomic configurations. The ability to accurately predict forces is crucial for their implementation in molecular dynamics simulations.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> Attention weights are not explanations — high attention on an atom does not mean it causes the predicted property. Treat attention visualisations as hypotheses to test, not ground truth.</p>
+          <p><strong>Takeaway 2.</strong> Graph Neural Networks (GNNs) are a powerful tool for modeling molecular systems, as they can capture the complex relationships between atoms in close proximity. Many GNN architectures have been crafted to address the specific symmetries and invariances of molecular data.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Interpretability methods can reveal when a model has learned a spurious correlation (e.g., a solvent artifact rather than a true structure–activity relationship), making them a quality-control tool.</p>
+          <p><strong>Takeaway 3.</strong>Foundation models are a powerful tool for prediciton on common molecular tasks, as they can be fine-tuned for specific applications with relatively small amounts of data.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> The right level of explanation depends on the audience: chemists want highlighted substructures on a 2-D drawing; regulators may need counterfactual explanations ("what would need to change to flip this prediction?").</p>
+          <p><strong>Takeaway 4.</strong> Data generation and training of MLIPs from scratch is a complex process that requires careful consideration of the choice of training data, the selection of appropriate architectures, and the optimization of hyperparameters.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 5.</strong>Garbage in, garbage out. The quality of the training data is crucial for the success of any machine learning model, including MLIPs. Poor data quality will lead to poor model performance, regardless of the complexity of the model or the sophistication of the training process.</p>
         </li>
 
       </ul>
     </div>
+
 
     <hr class="divider">
 
@@ -192,73 +200,123 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2503.09814" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Lundberg &amp; Lee — "A Unified Approach to Interpreting Model Predictions" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">NeurIPS, 2017 · Introduces SHAP and its axiomatic foundation</div>
+            <div class="ref-item-title">Ryan et al. — "A Practical Guide to Machine Learning Interatomic Potentials" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">2025 · Overview of best practices for building and training ML interatomic potentials</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://www.nature.com/articles/s43246-022-00315-6" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Ribeiro et al. — "Why Should I Trust You? Explaining the Predictions of Any Classifier" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">KDD, 2016 · Original LIME paper</div>
+            <div class="ref-item-title">Reiser et al. — "Graph Neural Networks for Materials Science and Chemistry" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Communications Materials, 2022 · Review of GNN architectures applied to materials and chemical systems</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.20517/jmi.2025.17" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Rodríguez-Pérez &amp; Bajorath — "Interpretation of Machine Learning Models Using Shapley Values" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">JCIM, 2020 · SHAP applied to QSAR models with chemical context</div>
+            <div class="ref-item-title">"A Critical Review of ML Interatomic Potentials and Hamiltonian" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Journal of Material Informatics, 2025 · Critical assessment of ML interatomic potential and Hamiltonian learning methods</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1021/acs.chemrev.5c00728" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">SHAP Documentation <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">shap.readthedocs.io · Official library docs with chemistry-relevant examples</div>
+            <div class="ref-item-title">"Reactive Machine Learning Interatomic Potentials" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Chemical Reviews, 2026 · Review of MLIPs capable of modeling bond breaking and forming</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://www.youtube.com/watch?v=9kS4KUyFIvI&list=PLG_BlTsVPpLA&index=11" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2104.13478" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <img src="https://www.youtube.com/favicon.ico" alt="YouTube logo" style="width:20px;height:20px;object-fit:contain;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Class-Aware Explainability for ML-Guided Catalyst Discovery <span class="ref-tag video">Video</span></div>
-            <div class="ref-item-meta">Parastoo Semnani · AiChemist-MSCA-DN lecture series</div>
+            <div class="ref-item-title">Bronstein et al. — "Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">2021 · Unifying framework for deep learning on non-Euclidean data</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://www.youtube.com/watch?v=Hr2cmKDL3J4&list=PLG_BlTsVPpLA" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/1704.01212" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <img src="https://www.youtube.com/favicon.ico" alt="YouTube logo" style="width:20px;height:20px;object-fit:contain;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">The Role of Interpretability in Protein Language Models <span class="ref-tag video">Video</span></div>
-            <div class="ref-item-meta">Dr. Alex Vicente Sola · AiChemist-MSCA-DN lecture series</div>
+            <div class="ref-item-title">Gilmer et al. — "Neural Message Passing for Quantum Chemistry" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">ICML, 2017 · Introduces the MPNN framework unifying prior GNN architectures</div>
           </div>
         </a>
 
-        <a class="ref-item" href="https://www.youtube.com/watch?v=-2RJl7pxXtk&list=PLG_BlTsVPpLA&index=6" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://www.nature.com/articles/s41467-022-29939-5" target="_blank" rel="noopener">
           <div class="ref-item-icon">
-            <img src="https://www.youtube.com/favicon.ico" alt="YouTube logo" style="width:20px;height:20px;object-fit:contain;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Formal Reasoning for Explainable Neural Network Classification <span class="ref-tag video">Video</span></div>
-            <div class="ref-item-meta">Dr. Michael Wand · AiChemist-MSCA-DN lecture series</div>
+            <div class="ref-item-title">Batzner et al. — "NequIP" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Communications, 2022 · E(3)-equivariant GNN interatomic potential</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.nature.com/articles/s41467-023-36329-y" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Musaelian et al. — "Allegro" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature Communications, 2023 · Local equivariant GNN potential designed for scalability</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/4a36c3c51af11ed9f34615b81edb5bbc-Abstract-Conference.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Batatia et al. — "MACE" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2022 · Higher-order equivariant message passing interatomic potential</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/1911.03550" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Dusson et al. — "Atomic Cluster Expansion (ACE)" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">2019 · Systematic body-ordered expansion for atomic descriptors</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/0910.1019" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Bartók et al. — "Smooth Overlap of Atomic Positions (SOAP)" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">2010 · Rotationally invariant descriptor of local atomic environments</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1103/PhysRevLett.98.146401" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Behler & Parrinello — "Atom-Centered Symmetry Functions (ACSF)" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">2007 · Symmetry function descriptors for neural network potentials</div>
           </div>
         </a>
 
