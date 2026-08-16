@@ -98,7 +98,7 @@
     </div>
     <h1>Model <em>Interpretability</em></h1>
     <p class="lecture-tagline">
-      Opening the black box: SHAP, LIME, attention maps, and concept-based explanations for chemical ML models.
+      Interpretable-by-design models vs. post-hoc explanation — MDI, permutation importance, ICE/PDP, LIME, and SHAP — and how to tell whether a model learned real chemistry or a shortcut.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
@@ -128,7 +128,7 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_09_interpretability/Model%20interpretability%20for%20chemical%20machine%20learning%201.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
       </a>
@@ -142,10 +142,13 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Compute SHAP values for fingerprint-based models and map them back to molecular substructures</li>
-        <li>Apply LIME to explain individual predictions from any black-box model</li>
-        <li>Visualise attention weights in a GNN and critically evaluate what they do and do not tell you</li>
-        <li>Distinguish local explanations (per prediction) from global explanations (model-wide) and choose appropriately</li>
+        <li>Recognise the Clever Hans effect — a model can reach high accuracy while relying on the wrong signal — and explain why that risk motivates interpretability</li>
+        <li>Distinguish interpretable-by-design models (linear coefficients, decision trees) from post-hoc explanations applied after training</li>
+        <li>Compute mean decrease in impurity (MDI) for random forests and gradient-boosted trees, and know why it is model-specific and global-only</li>
+        <li>Build a local surrogate explanation with LIME, and read what perturbing, predicting, weighting, and fitting each contribute to the result</li>
+        <li>Compute Shapley-value-based SHAP attributions and interpret a beeswarm or force plot</li>
+        <li>Use ICE and PDP curves to read the direction, nonlinearity, and feature interactions a model has learned</li>
+        <li>Match the right method to the right question, and recognise the common failure modes — correlated descriptors, local explanations mistaken for global rules, attributions mistaken for causal mechanisms</li>
       </ul>
     </div>
 
@@ -159,28 +162,35 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> SHAP values are grounded in cooperative game theory and satisfy desirable axioms (efficiency, symmetry, dummy). They are the most principled attribution method for feature-based models.</p>
+          <p><strong>The Clever Hans effect is not hypothetical.</strong> Lapuschkin et al. found published image classifiers winning a benchmark by keying on a source-tag watermark, not the object itself — a reminder that high performance alone never proves a model learned the right chemistry.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> Attention weights are not explanations — high attention on an atom does not mean it causes the predicted property. Treat attention visualisations as hypotheses to test, not ground truth.</p>
+          <p><strong>There is no single best method — pick by the question.</strong> MDI and permutation importance answer "which features matter globally," ICE/PDP answer "how does a feature act," and LIME/SHAP answer "why this specific prediction."</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Interpretability methods can reveal when a model has learned a spurious correlation (e.g., a solvent artifact rather than a true structure–activity relationship), making them a quality-control tool.</p>
+          <p><strong>SHAP is grounded in cooperative game theory.</strong> Shapley values are the unique attribution satisfying efficiency (contributions sum exactly to the prediction), symmetry, and the dummy-feature axiom — a guarantee LIME's local surrogate does not carry.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> The right level of explanation depends on the audience: chemists want highlighted substructures on a 2-D drawing; regulators may need counterfactual explanations ("what would need to change to flip this prediction?").</p>
+          <p><strong>The performance–interpretability trade-off is a common misconception, not a law.</strong> Recent large-scale benchmarking (Kruschel et al., 2026) finds interpretable and black-box models are frequently statistically indistinguishable in predictive accuracy.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Explanations can mislead as easily as they inform.</strong> Correlated descriptors split or hide each other's importance, a local explanation is not a global rule, and a feature attribution is not proof of causal mechanism.</p>
         </li>
 
       </ul>
@@ -192,7 +202,47 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1038/s41467-019-08987-4" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Lapuschkin et al. — "Unmasking Clever Hans Predictors and Assessing What Machines Really Learn" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nat. Commun., 2019, 10, 1096 · Models winning benchmarks via a copyright watermark, not the object</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://christophm.github.io/interpretable-ml-book/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Molnar — "Interpretable Machine Learning: A Guide for Making Black Box Models Explainable" <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">3rd edn., 2025 · The taxonomy of interpretability methods used throughout this lecture</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/d41586-023-02980-0" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Van Noorden &amp; Perkel — "AI and Science: What 1,600 Researchers Think" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2023, 621, 672 · Survey on trust, transparency, and adoption of AI in research</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1007/s12599-024-00922-2" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Kruschel et al. — "Challenging the Performance-Interpretability Trade-Off" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Bus. Inf. Syst. Eng., 2026, 68, 159 · Interpretable models often match black-box accuracy</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/1705.07874" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
@@ -202,7 +252,7 @@
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1145/2939672.2939778" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
@@ -212,23 +262,93 @@
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1007/s10822-020-00314-0" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
             <div class="ref-item-title">Rodríguez-Pérez &amp; Bajorath — "Interpretation of Machine Learning Models Using Shapley Values" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">JCIM, 2020 · SHAP applied to QSAR models with chemical context</div>
+            <div class="ref-item-meta">J. Comput. Aided Mol. Des., 2020, 34, 1013 · SHAP applied to QSAR models with chemical context</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1111/rssb.12377" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Apley &amp; Zhu — "Visualizing the Effects of Predictor Variables in Black Box Supervised Learning Models" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. R. Stat. Soc. B, 2020, 82, 1059 · Accumulated local effects (ALE) — feature-effect plots robust to correlated features</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1038/s42256-019-0048-x" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Rudin — "Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nat. Mach. Intell., 2019, 1, 206 · A cautionary perspective on post-hoc explanation in high-stakes settings</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/1810.03292" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Adebayo et al. — "Sanity Checks for Saliency Maps" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2018 · Tests whether explanation maps actually depend on the model and data</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/1903.03894" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Ying et al. — "GNNExplainer: Generating Explanations for Graph Neural Networks" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:1903.03894 · Subgraph and node-feature explanations for GNNs</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://captum.ai" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">SHAP Documentation <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">shap.readthedocs.io · Official library docs with chemistry-relevant examples</div>
+            <div class="ref-item-title">Captum <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">captum.ai · Integrated-gradients attribution for differentiable (neural-network) molecular models</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://interpret.ml/docs/ebm.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Explainable Boosting Machines <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">interpret.ml/docs/ebm.html · Interpretable GAM-like models with learned nonlinear feature functions</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://interpret.ml/DiCE" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Counterfactual Explanations (DiCE) <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">interpret.ml/DiCE · "What minimal molecular/property change would flip the prediction?"</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://quantus.readthedocs.io" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Quantus <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">quantus.readthedocs.io · Benchmarking library for robustness and faithfulness of explanations</div>
           </div>
         </a>
 

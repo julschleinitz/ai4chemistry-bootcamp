@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 6 — Explaining ML Predictions · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 9 — Explaining ML Predictions · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
   <style>
-    .tutorial-hero{background:var(--surface);padding:52px 40px 44px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}.tutorial-hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}.tutorial-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,180,50,0.15);border:1px solid rgba(255,180,50,0.35);color:#FFB432;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px}.tutorial-hero h1{font-size:38px;font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}.tutorial-hero h1 em{font-style:normal;color:#FFB432}.tutorial-tagline{font-size:15px;color:var(--accent-dim);max-width:640px;margin-bottom:24px;line-height:1.6}.tutorial-meta-row{display:flex;gap:20px;flex-wrap:wrap}.tutorial-meta-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted)}.tutorial-meta-item svg{opacity:.7;flex-shrink:0}.colab-btn{display:inline-flex;align-items:center;gap:10px;background:#F9AB00;color:#000;font-size:14px;font-weight:700;padding:11px 22px;border-radius:8px;text-decoration:none;transition:filter .15s,transform .12s;margin-bottom:6px}.colab-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.colab-btn svg{flex-shrink:0}.tutorial-body{max-width:820px;margin:0 auto;padding:44px 40px 80px}.content-section{margin-bottom:44px}.content-section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFB432;margin-bottom:14px}.content-section h2{font-size:20px;font-weight:700;margin-bottom:16px}.content-section p{font-size:14.5px;color:var(--text-muted);line-height:1.75;margin-bottom:12px}.objectives-list{list-style:none;display:flex;flex-direction:column;gap:10px}.objectives-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-muted);line-height:1.6}.objectives-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:#FFB432;flex-shrink:0;margin-top:7px}.instructions-list{list-style:none;counter-reset:step-counter;display:flex;flex-direction:column;gap:16px}.instructions-list li{counter-increment:step-counter;display:flex;gap:14px;align-items:flex-start}.instructions-list li::before{content:counter(step-counter);background:rgba(255,180,50,0.15);border:1px solid rgba(255,180,50,0.3);color:#FFB432;font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}.instructions-list li p{font-size:14px;color:var(--text-muted);line-height:1.65;margin:0}.instructions-list li strong{color:var(--text)}.instructions-list code{background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12.5px;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--accent-dim)}.questions-list{list-style:none;counter-reset:q-counter;display:flex;flex-direction:column;gap:20px}.question-item{counter-increment:q-counter;background:var(--surface2);border:1px solid var(--border);border-left:3px solid rgba(255,180,50,0.5);border-radius:8px;padding:16px 18px}.question-item .q-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFB432;margin-bottom:6px}.question-item .q-label::before{content:'Q' counter(q-counter) ' — '}.question-item p{font-size:14px;color:var(--text);line-height:1.65;margin:0}.question-item .q-difficulty{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:8px}.q-difficulty.easy{background:rgba(93,218,180,0.15);color:var(--accent)}.q-difficulty.medium{background:rgba(255,180,50,0.15);color:#FFB432}.q-difficulty.hard{background:rgba(239,68,68,0.15);color:#F87171}.resource-link{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:13.5px;font-weight:500;padding:10px 18px;border-radius:8px;transition:background .15s,border-color .15s;margin-right:10px;margin-bottom:10px}.resource-link:hover{background:rgba(255,180,50,0.1);border-color:rgba(255,180,50,0.4);color:#FFB432}.resource-link svg{opacity:.8;flex-shrink:0}.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-dim);text-decoration:none;font-size:13px;margin-bottom:32px;transition:color .15s}.back-link:hover{color:#FFB432}.colab-banner{background:rgba(249,171,0,0.08);border:1px solid rgba(249,171,0,0.25);border-radius:12px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}.colab-banner-text h3{font-size:15px;font-weight:700;margin-bottom:4px}.colab-banner-text p{font-size:13px;color:var(--text-dim);margin:0}@media(max-width:700px){.tutorial-hero{padding:36px 20px 32px}.tutorial-hero h1{font-size:28px}.tutorial-body{padding:28px 20px 60px}}
+    .tutorial-hero{background:var(--surface);padding:52px 40px 44px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}.tutorial-hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}.tutorial-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,180,50,0.15);border:1px solid rgba(255,180,50,0.35);color:#FFB432;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px}.tutorial-hero h1{font-size:38px;font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}.tutorial-hero h1 em{font-style:normal;color:#FFB432}.tutorial-tagline{font-size:15px;color:var(--accent-dim);max-width:640px;margin-bottom:24px;line-height:1.6}.tutorial-meta-row{display:flex;gap:20px;flex-wrap:wrap}.tutorial-meta-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted)}.tutorial-meta-item svg{opacity:.7;flex-shrink:0}.colab-btn{display:inline-flex;align-items:center;gap:10px;background:#F9AB00;color:#000;font-size:14px;font-weight:700;padding:11px 22px;border-radius:8px;text-decoration:none;transition:filter .15s,transform .12s;margin-bottom:6px}.colab-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.colab-btn svg{flex-shrink:0}.tutorial-body{max-width:820px;margin:0 auto;padding:44px 40px 80px}.content-section{margin-bottom:44px}.content-section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFB432;margin-bottom:14px}.content-section h2{font-size:20px;font-weight:700;margin-bottom:16px}.content-section p{font-size:14.5px;color:var(--text-muted);line-height:1.75;margin-bottom:12px}.objectives-list{list-style:none;display:flex;flex-direction:column;gap:10px}.objectives-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-muted);line-height:1.6}.objectives-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:#FFB432;flex-shrink:0;margin-top:7px}.instructions-list{list-style:none;counter-reset:step-counter;display:flex;flex-direction:column;gap:16px}.instructions-list li{counter-increment:step-counter;display:flex;gap:14px;align-items:flex-start}.instructions-list li::before{content:counter(step-counter);background:rgba(255,180,50,0.15);border:1px solid rgba(255,180,50,0.3);color:#FFB432;font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}.instructions-list li p{font-size:14px;color:var(--text-muted);line-height:1.65;margin:0}.instructions-list li strong{color:var(--text)}.instructions-list code{background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12.5px;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--accent-dim)}.questions-list{list-style:none;counter-reset:q-counter;display:flex;flex-direction:column;gap:20px}.question-item{counter-increment:q-counter;background:var(--surface2);border:1px solid var(--border);border-left:3px solid rgba(255,180,50,0.5);border-radius:8px;padding:16px 18px}.question-item .q-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFB432;margin-bottom:6px}.question-item .q-label::before{content:'Q' counter(q-counter) ' — '}.question-item p{font-size:14px;color:var(--text);line-height:1.65;margin:0}.question-item .q-difficulty{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:8px}.q-difficulty.easy{background:rgba(93,218,180,0.15);color:var(--accent)}.q-difficulty.medium{background:rgba(255,180,50,0.15);color:#FFB432}.q-difficulty.hard{background:rgba(239,68,68,0.15);color:#F87171}.resource-link{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:13.5px;font-weight:500;padding:10px 18px;border-radius:8px;transition:background .15s,border-color .15s;margin-right:10px;margin-bottom:10px}.resource-link:hover{background:rgba(255,180,50,0.1);border-color:rgba(255,180,50,0.4);color:#FFB432}.resource-link svg{opacity:.8;flex-shrink:0}.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-dim);text-decoration:none;font-size:13px;margin-bottom:32px;transition:color .15s}.back-link:hover{color:#FFB432}.colab-banner{background:rgba(249,171,0,0.08);border:1px solid rgba(249,171,0,0.25);border-radius:12px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}.colab-banner-text h3{font-size:15px;font-weight:700;margin-bottom:4px}.colab-banner-text p{font-size:13px;color:var(--text-dim);margin:0}.ref-list{display:flex;flex-direction:column;gap:10px}.ref-item{display:flex;align-items:flex-start;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--text);transition:background .15s,border-color .15s}.ref-item:hover{background:rgba(255,180,50,0.08);border-color:rgba(255,180,50,0.3)}.ref-item-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,180,50,0.12);border:1px solid rgba(255,180,50,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#FFB432}.ref-item-body{flex:1;min-width:0}.ref-item-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ref-item-meta{font-size:12px;color:var(--text-dim)}.ref-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}.ref-tag.paper{background:rgba(255,180,50,0.15);color:#FFB432}.ref-tag.website{background:rgba(99,179,237,0.15);color:#63B3ED}
+@media(max-width:700px){.tutorial-hero{padding:36px 20px 32px}.tutorial-hero h1{font-size:28px}.tutorial-body{padding:28px 20px 60px}}
   </style>
 </head>
 <body>
@@ -29,9 +30,9 @@
   </nav>
 
   <div class="tutorial-hero">
-    <div class="tutorial-hero-meta"><span class="tutorial-badge">Tutorial 6</span></div>
+    <div class="tutorial-hero-meta"><span class="tutorial-badge">Tutorial 9</span></div>
     <h1>Explaining ML <em>Predictions</em></h1>
-    <p class="tutorial-tagline">Compute SHAP values on molecular fingerprints and visualise attention weights on GNN predictions to understand model behaviour.</p>
+    <p class="tutorial-tagline">Train interpretable and black-box models to predict blood–brain barrier permeability, then explain them with permutation importance, ICE/PDP, SHAP, and LIME — and check whether the explanations make chemical sense.</p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -65,9 +66,9 @@
     <div class="colab-banner">
       <div class="colab-banner-text">
         <h3>Open in Google Colab</h3>
-        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
+        <p>The notebook has most of the code pre-filled. Complete the six exercises marked <code># TODO</code>.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/interpretability.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/09-interpretability/interpretability.ipynb" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/><path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
         Open Notebook
       </a>
@@ -76,10 +77,12 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Compute SHAP values for a fingerprint-based random forest and map them back to molecular substructures</li>
-        <li>Use LIME to produce local explanations for individual molecular predictions</li>
-        <li>Extract and visualise attention weights from a trained Graph Attention Network (GAT)</li>
-        <li>Critically evaluate what SHAP and attention do and do not tell you about model decision-making</li>
+        <li>Compute interpretable molecular descriptors (MW, LogP, TPSA, H-bond counts, ring counts, shape indices) with RDKit and use them to predict BBB permeability</li>
+        <li>Compare an interpretable-by-design logistic regression against a gradient-boosted tree, and know which one to trust for explanation vs. for raw accuracy</li>
+        <li>Rank descriptors globally with permutation importance, and read direction/nonlinearity with ICE and PDP curves</li>
+        <li>Compute SHAP values for individual molecules and summarize them with a beeswarm plot</li>
+        <li>Compare a SHAP explanation to a LIME local surrogate for the same molecule</li>
+        <li>Map important Morgan fingerprint bits back to molecular substructures with mean decrease in impurity (MDI)</li>
       </ul>
     </div>
 
@@ -90,11 +93,16 @@
       <h2>Getting started</h2>
       <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install shap, lime, and torch-geometric. Load the pre-trained random forest (ESOL dataset) and GAT (QM9 HOMO-LUMO gap) provided in the notebook.</p></li>
-        <li><p><strong>Compute SHAP values.</strong> Run the SHAP <code>TreeExplainer</code> on the random forest. Produce a beeswarm summary plot. Identify the top 10 most important fingerprint bits.</p></li>
-        <li><p><strong>Map bits to substructures.</strong> For each of the top 10 bits, use RDKit to find the corresponding Morgan substructure (radius, center atom). Render the molecules with those substructures highlighted using <code>rdkit.Chem.Draw</code>.</p></li>
-        <li><p><strong>Compute attention weights.</strong> Pass five molecules through the GAT. Extract edge-level attention coefficients from the last attention head. Render each molecule with bond widths proportional to attention.</p></li>
-        <li><p><strong>Apply LIME.</strong> Use the LIME tabular explainer on three molecules that the RF mispredicts. Compare LIME explanations to SHAP explanations for the same molecules.</p></li>
+        <li><p><strong>Load and clean the BBBP dataset.</strong> Pull the MoleculeNet blood–brain-barrier-penetration dataset (~2,050 molecules), parse each SMILES with RDKit, and drop the ~11 rows that fail to parse — checking that this doesn't bias the class balance.</p></li>
+        <li><p><strong>Compute interpretable descriptors.</strong> Build ~25 chemically meaningful descriptors per molecule (size, lipophilicity, polarity/H-bonding, flexibility, ring counts, shape indices), then remove one from each highly-correlated pair so importances aren't split arbitrarily.</p></li>
+        <li><p><strong>Exercise 1 — Interpretable-by-design baseline.</strong> Train a standardized logistic regression and read its coefficients directly as a first, fully transparent model.</p></li>
+        <li><p><strong>Train a gradient-boosted tree.</strong> Tune it via cross-validation, then compare its accuracy against the logistic regression before reaching for post-hoc explanations.</p></li>
+        <li><p><strong>Exercise 2 — Permutation importance.</strong> Write a helper that shuffles one descriptor at a time and measures the drop in held-out ROC-AUC, for a model-agnostic global ranking.</p></li>
+        <li><p><strong>Exercise 3 — ICE and PDP.</strong> Pick a handful of descriptors and plot individual conditional expectation curves plus their partial-dependence average to see <em>how</em>, not just <em>whether</em>, each one moves the prediction.</p></li>
+        <li><p><strong>Exercise 4 — SHAP.</strong> Build a model-agnostic SHAP explainer, compute values for a subset of test molecules, and render a beeswarm plot.</p></li>
+        <li><p><strong>Exercise 5 — SHAP vs. LIME.</strong> For one test molecule, compare its additive SHAP attribution to a local LIME surrogate fit around that same point.</p></li>
+        <li><p><strong>Exercise 6 — Fingerprint bits.</strong> Retrain on Morgan fingerprints, extract MDI importances from the tree model, and draw the substructures behind the most important bits.</p></li>
+        <li><p><strong>Capstone.</strong> Pick your own question about the BBBP data and design a question → features → model → evaluation → interpretation workflow to answer it.</p></li>
       </ol>
     </div>
 
@@ -107,25 +115,31 @@
 
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>According to the SHAP summary plot, which fingerprint bits contribute most positively to predicted solubility? Can you identify the functional groups they correspond to?</p>
+          <p>BBBP is class-imbalanced (BBB-permeable is the majority class). Why does that make raw accuracy a misleading metric here, and which metric should you check instead?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>For a correctly predicted molecule, compare the SHAP-highlighted substructure to the attention-highlighted bonds. Do they agree? What does agreement (or disagreement) tell you?</p>
+          <p>Compare the logistic regression coefficients to the permutation importance ranking from the gradient-boosted tree. Do both models agree that polar surface area (TPSA) matters most? Where do they disagree?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Find a molecule for which the model is confidently wrong (large error, low uncertainty). Do the SHAP values point to a plausible chemical reason for the error?</p>
+          <p>Look at the ICE/PDP curves for molecular weight and TPSA. Does the model's learned relationship match the chemical intuition that BBB permeability favors moderate size, lower polarity, and fewer H-bond donors — or has it learned something else?</p>
+          <span class="q-difficulty medium">Medium</span>
+        </div>
+
+        <div class="question-item">
+          <div class="q-label">Core</div>
+          <p>Pick a test molecule and compare its SHAP attribution to its LIME explanation. Do they agree on the direction and rough magnitude of the top 2–3 descriptors? If they disagree, which explanation would you trust more, and why?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Compute SHAP interaction values for two fingerprint bits that are individually unimportant but jointly predictive. Visualise the interaction plot and interpret it chemically.</p>
+          <p>A Morgan fingerprint bit can correspond to more than one substructure because of hash collisions. How would you check whether a bit's high MDI importance reflects one consistent chemical motif or several unrelated ones — and does its presence actually shift the BBB-positive fraction the way you'd expect?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -137,11 +151,19 @@
     <div class="content-section">
       <p class="content-section-label">Resources</p>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/interpretability.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/09-interpretability/interpretability.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
-        <a class="resource-link" href="#">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/09-interpretability/interpretability_solutions.ipynb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Solutions notebook (Colab)
+        </a>
+        <a class="resource-link" href="../lectures/lecture_09_interpretability/Model%20interpretability%20for%20chemical%20machine%20learning%201.pdf" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Lecture Slides (PDF)
+        </a>
+        <a class="resource-link" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/tutorials/09-interpretability" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           GitHub repo
         </a>
@@ -149,6 +171,85 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
+      <p class="content-section-label">References Cited in the Notebook</p>
+      <div class="ref-list">
+
+        <a class="ref-item" href="https://doi.org/10.1039/c7sc02664a" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=pubs.rsc.org" alt="RSC logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Wu et al. — "MoleculeNet: A Benchmark for Molecular Machine Learning" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Chem. Sci., 2018, 9, 513 · Source of the BBBP classification task used in this notebook</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1021/ci300124c" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=pubs.acs.org" alt="ACS Publications logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Martins et al. — "A Bayesian Approach to in Silico Blood–Brain Barrier Penetration Modeling" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">J. Chem. Inf. Model., 2012, 52, 1686 · Original curation of the 2,039-molecule BBBP dataset</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://arxiv.org/abs/1705.07874" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=arxiv.org" alt="arXiv logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Lundberg &amp; Lee — "A Unified Approach to Interpreting Model Predictions" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">NeurIPS, 2017 · The SHAP method used in Exercises 4 and 5</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1145/2939672.2939778" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=dl.acm.org" alt="ACM logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Ribeiro et al. — "Why Should I Trust You? Explaining the Predictions of Any Classifier" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">KDD, 2016 · The LIME method used in Exercise 5</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.rdkit.org" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=rdkit.org" alt="RDKit logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">RDKit Documentation <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">rdkit.org · Descriptor calculators and Morgan fingerprint generator used throughout</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://shap.readthedocs.io" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=shap.readthedocs.io" alt="SHAP docs logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">SHAP Documentation <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">shap.readthedocs.io · <code>shap.Explainer</code> and beeswarm plots used in Exercise 4</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://scikit-learn.org/stable/modules/permutation_importance.html" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=scikit-learn.org" alt="scikit-learn logo" style="width:18px;height:18px;object-fit:contain;">
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">scikit-learn — Permutation Feature Importance <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">scikit-learn.org · <code>permutation_importance</code> and <code>PartialDependenceDisplay</code> used in Exercises 2–3</div>
+          </div>
+        </a>
+
       </div>
     </div>
 
