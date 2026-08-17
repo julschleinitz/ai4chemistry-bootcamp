@@ -117,25 +117,25 @@
 
     <div class="colab-banner">
       <div class="colab-banner-text">
-        <h3>Open in Google Colab</h3>
-        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
+        <h3>Start here</h3>
+        <p>Open <code>sprint-briefing-card.docx</code> and <code>sprint-dataset-messy.xlsx</code> in Excel or Google Sheets — no Colab needed for this one.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/data-stewardship.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="10-data-stewardship/sprint-dataset-messy.xlsx" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/>
           <path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        Open Notebook
+        Download dataset
       </a>
     </div>
 
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Record data with enough context that you can interpret it months later.</li>
-        <li>Track preprocessing, provenance, and file naming in a consistent way.</li>
-        <li>Prepare datasets for sharing, review, and reproducible modelling.</li>
-        <li>Recognise the difference between raw data, cleaned data, and analysis-ready data.</li>
+        <li>Feel the real cost of undocumented, untidy data on a 5-minute timed sprint.</li>
+        <li>Apply the three tidy-data rules to turn a messy reactions log into linked, analysis-ready tables.</li>
+        <li>Write a lightweight data dictionary that lets a stranger understand your columns.</li>
+        <li>(Stretch) Turn a one-off cleaning script into a reusable, tested pipeline that generalises to a new dataset.</li>
       </ul>
     </div>
 
@@ -143,13 +143,31 @@
 
     <div class="content-section">
       <p class="content-section-label">Instructions</p>
-      <h2>Getting started</h2>
-      <p>Open the Colab notebook using the button above. Run the notebook from top to bottom and complete the short exercises along the way.</p>
+
+      <h2>Phase 1 — The sprint (5 min)</h2>
+      <p>Your labmate left the group for an industry job. Their reactions log — <code>sprint-dataset-messy.xlsx</code> — is now yours, and your PI wants an answer today.</p>
       <ol class="instructions-list">
-        <li><p><strong>Inspect the dataset.</strong> Identify the raw files, metadata, and any missing or ambiguous fields.</p></li>
-        <li><p><strong>Standardise the schema.</strong> Rename columns, choose units, and write down the provenance for each transformation.</p></li>
-        <li><p><strong>Version the data.</strong> Keep raw, cleaned, and analysis-ready copies separate so you can always trace results back to the source.</p></li>
-        <li><p><strong>Document the workflow.</strong> Add a short README-style note that explains how someone else could reproduce the dataset build.</p></li>
+        <li><p><strong>Read the briefing card.</strong> <code>sprint-briefing-card.docx</code> sets the scene and the question: which catalyst/temperature combination gives the highest mean yield?</p></li>
+        <li><p><strong>Set a 5-minute timer.</strong> Open <code>sprint-dataset-messy.xlsx</code> in Excel or Sheets and try to answer the PI's question before it runs out.</p></li>
+        <li><p><strong>Come back with an answer or an excuse.</strong> Either a number you'd defend, or a clear explanation of why the file wouldn't let you get one.</p></li>
+      </ol>
+
+      <h2>Phase 2 — The cleaning exercise (~30 min)</h2>
+      <p>Use <code>tidy-cleaning-cheatsheet.docx</code> as your guide and <code>relational-diagram.png</code> to see how the tables relate.</p>
+      <ol class="instructions-list">
+        <li><p><strong>Apply the three tidy-data rules.</strong> One variable per column, one observation per row, one table per kind of entity.</p></li>
+        <li><p><strong>Split the log into three linked tables.</strong> Produce <code>reactions_log_tidy.csv</code>, <code>catalyst_reference_tidy.csv</code>, and <code>solvent_reference_tidy.csv</code>, joined by ID columns.</p></li>
+        <li><p><strong>Watch for the common traps.</strong> Trailing spaces, mixed units in one cell, averaged replicates, and metadata rows mixed in with measurements.</p></li>
+        <li><p><strong>Start a data dictionary.</strong> Fill in <code>data-dictionary-template.xlsx</code> with the name, type, unit, and description of every column in your tidy reactions log.</p></li>
+      </ol>
+      <p>Check your work against the answer key and the "payoff" notebook under <strong>Resources</strong> below — it answers the PI's question from the tidy CSVs in a few lines of pandas.</p>
+
+      <h2>Phase 3 — Stretch / take-home</h2>
+      <p>If you finish early, or as take-home: turn the manual cleaning you just did into a reusable pipeline.</p>
+      <ol class="instructions-list">
+        <li><p><strong>Open <code>pipeline_starter.py</code>.</strong> Each function has a docstring and a <code>TODO</code> — fill them in following <code>stretch-pipeline-handout.docx</code>.</p></li>
+        <li><p><strong>Run <code>pytest test_pipeline.py</code>.</strong> The first six tests check individual helpers; the last two run the whole pipeline end to end.</p></li>
+        <li><p><strong>Generalise to a second dataset.</strong> The final test runs your pipeline on <code>new-experiments-messy.xlsx</code> — a log you haven't seen. If it passes, your pipeline is genuinely reusable.</p></li>
       </ol>
     </div>
 
@@ -157,21 +175,21 @@
 
     <div class="content-section">
       <p class="content-section-label">Questions</p>
-      <p>Answer these questions as you work through the notebook. Discuss with your neighbour — some have no single right answer.</p>
+      <p>These are the questions the facilitator will ask after the sprint. Discuss with your neighbour — some have no single right answer.</p>
       <ol class="questions-list">
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>What information would you want before trusting a dataset for a modelling task?</p>
+          <p>What answer did you land on for the PI's question, and how confident are you in it?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Which parts of your current workflow are easiest to reproduce, and which are most fragile?</p>
+          <p>What was the most annoying thing about the messy file — and which tidy-data rule would have prevented it?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Design a minimal metadata schema for a chemistry dataset that another lab could use without extra explanation.</p>
+          <p>If you handed your three tidy CSVs to a stranger, could they <code>pandas.merge</code> them and answer the PI's question in ~8 lines of code? What's still missing if not?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
       </ol>
@@ -181,11 +199,77 @@
 
     <div class="content-section">
       <p class="content-section-label">Resources</p>
+
+      <h2>Sprint &amp; cleaning</h2>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/data-stewardship.ipynb" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          Notebook (Colab)
+        <a class="resource-link" href="10-data-stewardship/sprint-briefing-card.docx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Sprint briefing card
         </a>
+        <a class="resource-link" href="10-data-stewardship/sprint-dataset-messy.xlsx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Messy dataset (xlsx)
+        </a>
+        <a class="resource-link" href="10-data-stewardship/tidy-cleaning-cheatsheet.docx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Tidy-data cleaning cheatsheet
+        </a>
+        <a class="resource-link" href="10-data-stewardship/relational-diagram.png" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Relational diagram
+        </a>
+        <a class="resource-link" href="10-data-stewardship/data-dictionary-template.xlsx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Data dictionary template
+        </a>
+      </div>
+
+      <h2>Answer key &amp; payoff notebook</h2>
+      <div>
+        <a class="resource-link" href="10-data-stewardship/Solutions/sprint-dataset-tidy-ANSWER-KEY/reactions_log_tidy.csv" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          reactions_log_tidy.csv
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Solutions/sprint-dataset-tidy-ANSWER-KEY/catalyst_reference_tidy.csv" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          catalyst_reference_tidy.csv
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Solutions/sprint-dataset-tidy-ANSWER-KEY/solvent_reference_tidy.csv" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          solvent_reference_tidy.csv
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Solutions/tidy-reaction-optimization.ipynb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Payoff notebook (tidy-reaction-optimization.ipynb)
+        </a>
+      </div>
+
+      <h2>Stretch take-home</h2>
+      <div>
+        <a class="resource-link" href="10-data-stewardship/Stretch%20take-home/stretch-pipeline-handout.docx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Stretch handout
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Stretch%20take-home/pipeline_starter.py" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          pipeline_starter.py
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Stretch%20take-home/test_pipeline.py" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          test_pipeline.py
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Stretch%20take-home/new-experiments-messy.xlsx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Second dataset (new-experiments-messy.xlsx)
+        </a>
+        <a class="resource-link" href="10-data-stewardship/Stretch%20take-home/stretch-pipeline.ipynb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Reference solution (stretch-pipeline.ipynb)
+        </a>
+      </div>
+
+      <h2>General</h2>
+      <div>
         <a class="resource-link" href="../lectures/data-stewardship.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes

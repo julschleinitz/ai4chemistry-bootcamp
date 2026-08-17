@@ -1,0 +1,11 @@
+solvent_canonical,family,boiling_point_C,density_g_ml,notes
+THF,polar aprotic,66.0,0.889,
+DMSO,polar aprotic,189.0,1.1,
+DMF,polar aprotic,153.0,0.944,
+MeCN,polar aprotic,82.0,0.786,acetonitrile
+toluene,nonpolar,110.6,0.867,
+DCM,nonpolar,40.0,1.326,dichloromethane
+water,polar protic,100.0,1.0,
+MeOH,polar protic,64.7,0.792,methanol
+EtOH,polar protic,78.4,0.789,ethanol
+"1,4-dioxane",polar aprotic,101.1,1.033,
