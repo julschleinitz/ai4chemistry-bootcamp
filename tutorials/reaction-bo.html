@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 11 — Reaction Yield Optimization with BO · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 11 — Bayesian Optimization for Reaction Conditions · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
   <style>
     .tutorial-hero{background:var(--surface);padding:52px 40px 44px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}.tutorial-hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}.tutorial-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,180,50,0.15);border:1px solid rgba(255,180,50,0.35);color:#FFB432;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px}.tutorial-hero h1{font-size:38px;font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}.tutorial-hero h1 em{font-style:normal;color:#FFB432}.tutorial-tagline{font-size:15px;color:var(--accent-dim);max-width:640px;margin-bottom:24px;line-height:1.6}.tutorial-meta-row{display:flex;gap:20px;flex-wrap:wrap}.tutorial-meta-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted)}.tutorial-meta-item svg{opacity:.7;flex-shrink:0}.colab-btn{display:inline-flex;align-items:center;gap:10px;background:#F9AB00;color:#000;font-size:14px;font-weight:700;padding:11px 22px;border-radius:8px;text-decoration:none;transition:filter .15s,transform .12s;margin-bottom:6px}.colab-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.colab-btn svg{flex-shrink:0}.tutorial-body{max-width:820px;margin:0 auto;padding:44px 40px 80px}.content-section{margin-bottom:44px}.content-section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFB432;margin-bottom:14px}.content-section h2{font-size:20px;font-weight:700;margin-bottom:16px}.content-section p{font-size:14.5px;color:var(--text-muted);line-height:1.75;margin-bottom:12px}.objectives-list{list-style:none;display:flex;flex-direction:column;gap:10px}.objectives-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-muted);line-height:1.6}.objectives-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:#FFB432;flex-shrink:0;margin-top:7px}.instructions-list{list-style:none;counter-reset:step-counter;display:flex;flex-direction:column;gap:16px}.instructions-list li{counter-increment:step-counter;display:flex;gap:14px;align-items:flex-start}.instructions-list li::before{content:counter(step-counter);background:rgba(255,180,50,0.15);border:1px solid rgba(255,180,50,0.3);color:#FFB432;font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}.instructions-list li p{font-size:14px;color:var(--text-muted);line-height:1.65;margin:0}.instructions-list li strong{color:var(--text)}.instructions-list code{background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12.5px;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--accent-dim)}.questions-list{list-style:none;counter-reset:q-counter;display:flex;flex-direction:column;gap:20px}.question-item{counter-increment:q-counter;background:var(--surface2);border:1px solid var(--border);border-left:3px solid rgba(255,180,50,0.5);border-radius:8px;padding:16px 18px}.question-item .q-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFB432;margin-bottom:6px}.question-item .q-label::before{content:'Q' counter(q-counter) ' — '}.question-item p{font-size:14px;color:var(--text);line-height:1.65;margin:0}.question-item .q-difficulty{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:8px}.q-difficulty.easy{background:rgba(93,218,180,0.15);color:var(--accent)}.q-difficulty.medium{background:rgba(255,180,50,0.15);color:#FFB432}.q-difficulty.hard{background:rgba(239,68,68,0.15);color:#F87171}.resource-link{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:13.5px;font-weight:500;padding:10px 18px;border-radius:8px;transition:background .15s,border-color .15s;margin-right:10px;margin-bottom:10px}.resource-link:hover{background:rgba(255,180,50,0.1);border-color:rgba(255,180,50,0.4);color:#FFB432}.resource-link svg{opacity:.8;flex-shrink:0}.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-dim);text-decoration:none;font-size:13px;margin-bottom:32px;transition:color .15s}.back-link:hover{color:#FFB432}.colab-banner{background:rgba(249,171,0,0.08);border:1px solid rgba(249,171,0,0.25);border-radius:12px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}.colab-banner-text h3{font-size:15px;font-weight:700;margin-bottom:4px}.colab-banner-text p{font-size:13px;color:var(--text-dim);margin:0}@media(max-width:700px){.tutorial-hero{padding:36px 20px 32px}.tutorial-hero h1{font-size:28px}.tutorial-body{padding:28px 20px 60px}}
+    .leaderboard-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface2)}.leaderboard-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap}.leaderboard-toolbar-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.leaderboard-status{font-size:12px;color:var(--text-dim)}.leaderboard-dataset-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:7px;cursor:pointer}.leaderboard-refresh{display:inline-flex;align-items:center;gap:6px;background:rgba(255,180,50,0.12);border:1px solid rgba(255,180,50,0.3);color:#FFB432;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;transition:background .15s}.leaderboard-refresh:hover{background:rgba(255,180,50,0.22)}.leaderboard-refresh svg{transition:transform .4s}.leaderboard-refresh.spinning svg{transform:rotate(360deg)}.leaderboard-table-wrap{overflow-x:auto}table.leaderboard-table{width:100%;border-collapse:collapse;font-size:13px}table.leaderboard-table th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);padding:10px 16px;border-bottom:1px solid var(--border);white-space:nowrap}table.leaderboard-table td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text-muted);white-space:nowrap}table.leaderboard-table tr:last-child td{border-bottom:none}table.leaderboard-table tr.rank-1 td{color:var(--text);font-weight:600}table.leaderboard-table td.rank-cell{font-weight:700;color:#FFB432}table.leaderboard-table td.team-cell{color:var(--text);font-weight:500}.leaderboard-empty,.leaderboard-error{padding:28px 16px;text-align:center;font-size:13px;color:var(--text-dim)}.coverage-pill{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:10px;background:rgba(93,218,180,0.12);color:var(--accent)}.coverage-pill.low{background:rgba(239,68,68,0.12);color:#F87171}
   </style>
 </head>
 <body>
@@ -30,8 +31,8 @@
 
   <div class="tutorial-hero">
     <div class="tutorial-hero-meta"><span class="tutorial-badge">Tutorial 11</span></div>
-    <h1>Reaction Yield Optimization <em>with BO</em></h1>
-    <p class="tutorial-tagline">Optimise Suzuki coupling yield using BoTorch, and compare Expected Improvement vs. Upper Confidence Bound acquisition functions.</p>
+    <h1>Bayesian Optimization <em>for Reaction Conditions</em></h1>
+    <p class="tutorial-tagline">Treat catalyst/ligand/base/solvent/temperature choice as a black box and use a Gaussian-Process-guided Bayesian optimization (BO) loop to find high-yield conditions in as few "experiments" as possible — closed-loop simulation against real (and one synthetic-representative) published reaction-condition datasets.</p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -67,7 +68,7 @@
         <h3>Open in Google Colab</h3>
         <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/reaction-bo.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/12-reaction-bo/reaction-bo.ipynb" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/><path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
         Open Notebook
       </a>
@@ -76,10 +77,11 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Build a Gaussian Process surrogate over a one-hot-encoded reaction condition space</li>
-        <li>Implement the BO loop: fit surrogate → optimise acquisition → observe yield → update</li>
-        <li>Compare EI and UCB acquisition functions on convergence speed and regret</li>
-        <li>Visualise the surrogate posterior and acquisition landscape over a 2-D condition grid</li>
+        <li>Load and interpret four real (and one clearly-labeled synthetic-representative) published reaction-condition datasets spanning Suzuki, C–N, and direct-arylation coupling chemistry</li>
+        <li>Precompute reaction-condition featurizations (one-hot, RDKit/COSMO-style descriptors, random projection) so the BO loop itself stays cheap</li>
+        <li>Compare initialization strategies (random vs. k-means) and acquisition functions (EI, UCB, batch qEI) under a fixed batch size of 4</li>
+        <li>Visually sanity-check a BO trajectory in 2D (PCA) before committing to an expensive multi-seed run</li>
+        <li>Run a 5-seed closed-loop BO simulation, compute AUC / std / max-score metrics, and submit your design choices to the live, per-dataset leaderboard</li>
       </ul>
     </div>
 
@@ -88,13 +90,16 @@
     <div class="content-section">
       <p class="content-section-label">Instructions</p>
       <h2>Getting started</h2>
-      <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
+      <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code. The eight numbered sections below match the notebook's section headers exactly.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install botorch and torch. Load the Suzuki coupling yield dataset (Doyle et al., Science 2019) with 3960 experimental conditions and their yields.</p></li>
-        <li><p><strong>Encode reaction conditions.</strong> One-hot-encode the four categorical inputs: aryl halide, additive, base, and ligand. Combine into a single feature vector per reaction condition.</p></li>
-        <li><p><strong>Build the GP surrogate.</strong> Initialise a <code>SingleTaskGP</code> with a Matérn-5/2 kernel on 10 random initial observations. Fit hyperparameters with <code>fit_gpytorch_mll</code>.</p></li>
-        <li><p><strong>Run the BO loop.</strong> For 30 rounds, optimise the EI acquisition function with <code>optimize_acqf</code>. Record the observed yield and update the surrogate. Track the best yield found so far.</p></li>
-        <li><p><strong>Compare acquisition functions.</strong> Repeat the loop with UCB (β=0.1 and β=2.0). Plot cumulative best yield vs. round for EI, UCB-0.1, and UCB-2.0. Which converges fastest?</p></li>
+        <li><p><strong>Present the dataset(s) and variables.</strong> Set <code>DATASET</code> to one of four options (Perera Suzuki grid, Reizman Suzuki, Shields direct arylation, Baumgartner C–N coupling). Each loader returns a dataframe, a factor dictionary (type, levels/range), and a yield column normalized to [0,1] by that dataset's own max observed yield. Print the summary table and yield histogram.</p></li>
+        <li><p><strong>Featurize the reaction.</strong> Set <code>FEATURIZATION</code> to <code>"onehot"</code>, <code>"descriptors"</code> (RDKit physicochemical descriptors on SMILES where available, COSMO-RS-style placeholders otherwise), or <code>"random_projection"</code> (a deliberately weak baseline). Features are computed once into a cached CSV so the BO loop only ever does a fast lookup.</p></li>
+        <li><p><strong>Choose an initialization technique.</strong> <code>INIT_METHOD</code>: <code>"random"</code> or <code>"kmeans"</code> (cluster the featurized space into <code>N_INIT = 10</code> clusters, take the point nearest each centroid).</p></li>
+        <li><p><strong>Choose an acquisition function.</strong> <code>ACQUISITION</code>: <code>"EI"</code>, <code>"UCB"</code> (editable <code>beta</code>), or <code>"qEI"</code> for the batch case.</p></li>
+        <li><p><strong>Batch size.</strong> Fixed at <code>BATCH_SIZE = 4</code> for everyone (not user-editable) — see the notebook for why — using <code>optimize_acqf</code> with <code>q=4</code>.</p></li>
+        <li><p><strong>Preview the trajectory on a 2D plot.</strong> Run one quick preview BO loop (single seed, 4 rounds) with your Section 1–5 config, project the featurized candidate pool to 2D with PCA, and check whether later rounds cluster near the best-yield region before committing to the full run.</p></li>
+        <li><p><strong>Submit the design choices.</strong> Assemble <code>dataset</code>/<code>featurization</code>/<code>init_method</code>/<code>acquisition</code>/<code>acquisition_hparams</code>/<code>batch_size</code>/<code>n_rounds</code> into a <code>design</code> dict, print it, and write it to a local JSON checkpoint.</p></li>
+        <li><p><strong>Launch the full run and submit to the leaderboard.</strong> Run the closed-loop BO simulation for 5 seeds x <code>N_ROUNDS = 8</code> rounds against the fixed lookup-table dataset, compute AUC (mean and std over seeds) and max score achieved, plot all 5 trajectories, and POST your results to the live leaderboard below.</p></li>
       </ol>
     </div>
 
@@ -107,25 +112,25 @@
 
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>What is the maximum yield in the dataset? After 10 random initial observations, what is the best yield observed so far as a fraction of the maximum?</p>
+          <p>For your chosen dataset, what is the best normalized yield among the 10 initial (random or k-means) points? How much of the way to the dataset's maximum (1.0, by construction) does that represent?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>After 30 BO rounds, how close is EI to the true maximum yield? How many rounds does it take to first exceed 90% of the maximum?</p>
+          <p>Look at your Section 6 2D preview plot. Do later rounds visibly cluster near the best-yield region, or stay scattered? If scattered, which single change (featurization or acquisition) would you try first, and why?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>How does increasing UCB β from 0.1 to 2.0 change the exploration-exploitation balance? In which phase of optimisation (early vs. late) does high-β UCB have the advantage?</p>
+          <p>Compare your 5-seed <code>auc_mean</code> and <code>auc_std</code> between EI and UCB (try at least two values of <code>beta</code>) on the same dataset/featurization/init. Which is more consistent across seeds, and does that match Shields et al.'s finding that BO's advantage over expert chemists was more about consistency than best-case performance?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Add a synthetic constraint: the base must not be Cs₂CO₃ (assume safety restriction). Modify the acquisition optimisation to exclude this base using a linear constraint. How does the constrained BO perform vs. unconstrained?</p>
+          <p>Run the same design (featurization, init, acquisition) on two different datasets, e.g. <code>reizman_suzuki</code> (small, noisy, ~96 reactions) vs. <code>baumgartner_cn_coupling</code> (96 reactions but COSMO-style descriptors available). Do the same design choices transfer well across datasets, or is the best acquisition/featurization pair dataset-dependent — consistent with Summit's finding that no single BO strategy dominates everywhere?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -135,24 +140,228 @@
     <hr class="divider">
 
     <div class="content-section">
+      <p class="content-section-label">Live leaderboard</p>
+      <h2>Class challenge results</h2>
+      <p>Run the notebook's Section 8 and submit cell — it self-computes <code>auc_mean</code>/<code>auc_std</code>/<code>max_score_achieved</code> for your 5-seed run and POSTs them directly from Colab. There is no independent instructor grading for this tutorial (unlike the docking-oracle leaderboard in Tutorial 8): scores are self-reported, and ranking is <strong>per dataset</strong> — a run on <code>perera_suzuki</code> is not comparable to one on <code>baumgartner_cn_coupling</code>. Pick a dataset below to see its ranking. Resubmit as many times as you like; each team's best <code>auc_mean</code> per dataset is shown.</p>
+      <div class="leaderboard-card">
+        <div class="leaderboard-toolbar">
+          <div class="leaderboard-toolbar-left">
+            <span class="leaderboard-status" id="leaderboard-status">Loading leaderboard…</span>
+            <select class="leaderboard-dataset-select" id="leaderboard-dataset-select">
+              <option value="perera_suzuki">perera_suzuki</option>
+              <option value="reizman_suzuki">reizman_suzuki</option>
+              <option value="shields_direct_arylation">shields_direct_arylation</option>
+              <option value="baumgartner_cn_coupling">baumgartner_cn_coupling</option>
+            </select>
+          </div>
+          <button class="leaderboard-refresh" id="leaderboard-refresh-btn" type="button">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+            Refresh
+          </button>
+        </div>
+        <div class="leaderboard-table-wrap" id="leaderboard-table-wrap">
+          <div class="leaderboard-empty">Loading…</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="content-section">
       <p class="content-section-label">Resources</p>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/reaction-bo.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/12-reaction-bo/reaction-bo.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
-        <a class="resource-link" href="#">
+        <a class="resource-link" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/tutorials/12-reaction-bo" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub repo
+          GitHub repo (notebook + leaderboard setup)
         </a>
         <a class="resource-link" href="../lectures/10-bayesian-optimization.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
+        <a class="resource-link" href="https://doi.org/10.1126/science.aap9112" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Perera et al., Science 2018
+        </a>
+        <a class="resource-link" href="https://doi.org/10.1039/C6RE00153J" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Reizman &amp; Jensen, React. Chem. Eng. 2016
+        </a>
+        <a class="resource-link" href="https://doi.org/10.1038/s41586-021-03213-y" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Shields et al., Nature 2021
+        </a>
+        <a class="resource-link" href="https://github.com/b-shields/edbo" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          EDBO (Shields et al. code)
+        </a>
+        <a class="resource-link" href="https://doi.org/10.1002/cmtd.202000051" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Felton, Rittig &amp; Lapkin, Chem. Methods 2021 (Summit)
+        </a>
+        <a class="resource-link" href="https://github.com/sustainable-processes/summit" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          Summit (Felton/Rittig/Lapkin code)
+        </a>
       </div>
     </div>
 
   </div>
+
+  <script>
+  (function () {
+    // ---- Leaderboard sheet, published via File -> Share -> Publish to web ----
+    // The published-to-web link looks like:
+    //   https://docs.google.com/spreadsheets/d/e/<PUBLISHED_ID>/pubhtml?gid=<GID>&single=true
+    // We read the CSV export variant of that same published link (no auth, no API key needed).
+    var LEADERBOARD_PUBLISHED_ID = '2PACX-1vQzA7UlegUw-ptH_qPCxaay1bMT_QmAeHm-tu0kxBgKtUo_B1Tx6GTw586rY5jsablWqUtuf9YK5TYj';
+    var LEADERBOARD_GID = '0';
+    var AUTO_REFRESH_MS = 60000;
+    // ---------------------------------------------------------------
+
+    var statusEl = document.getElementById('leaderboard-status');
+    var wrapEl = document.getElementById('leaderboard-table-wrap');
+    var refreshBtn = document.getElementById('leaderboard-refresh-btn');
+    var datasetSelect = document.getElementById('leaderboard-dataset-select');
+
+    var lastRows = null;
+
+    function renderMessage(html) {
+      wrapEl.innerHTML = '<div class="leaderboard-empty">' + html + '</div>';
+    }
+
+    function parseCsvResponse(text) {
+      // Minimal RFC-4180 CSV parser: handles quoted fields, escaped quotes ("") and embedded
+      // commas/newlines inside quotes (acquisition_hparams and notes can contain both).
+      var rows = [];
+      var row = [];
+      var field = '';
+      var inQuotes = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (inQuotes) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { field += '"'; i++; }
+            else { inQuotes = false; }
+          } else {
+            field += c;
+          }
+        } else if (c === '"') {
+          inQuotes = true;
+        } else if (c === ',') {
+          row.push(field); field = '';
+        } else if (c === '\n' || c === '\r') {
+          if (c === '\r' && text[i + 1] === '\n') i++;
+          row.push(field); field = '';
+          if (row.length > 1 || row[0] !== '') rows.push(row);
+          row = [];
+        } else {
+          field += c;
+        }
+      }
+      if (field !== '' || row.length) { row.push(field); rows.push(row); }
+      if (!rows.length) return [];
+
+      var cols = rows[0].map(function (c) { return c.trim(); });
+      return rows.slice(1).map(function (r) {
+        var obj = {};
+        cols.forEach(function (col, i) { obj[col] = r[i] !== undefined ? r[i] : null; });
+        return obj;
+      });
+    }
+
+    function renderTable(rows) {
+      var dataset = datasetSelect.value;
+      var filtered = rows.filter(function (r) { return r.dataset === dataset; });
+
+      if (!filtered.length) {
+        renderMessage('No submissions yet for <strong>' + dataset + '</strong> — be the first!');
+        return;
+      }
+      // keep each team's best (highest) auc_mean, per dataset
+      var bestByTeam = {};
+      filtered.forEach(function (r) {
+        var team = r.team_name || 'unknown';
+        var auc = Number(r.auc_mean);
+        if (!bestByTeam[team] || auc > bestByTeam[team].auc_mean) {
+          bestByTeam[team] = {
+            team_name: team, auc_mean: auc, auc_std: Number(r.auc_std),
+            max_score_achieved: Number(r.max_score_achieved),
+            featurization: r.featurization, init_method: r.init_method,
+            acquisition: r.acquisition, timestamp_utc: r.timestamp_utc,
+          };
+        }
+      });
+      var ranked = Object.values(bestByTeam).sort(function (a, b) { return b.auc_mean - a.auc_mean; });
+
+      var html = '<table class="leaderboard-table"><thead><tr>' +
+        '<th>Rank</th><th>Team</th><th>AUC (mean)</th><th>AUC (std)</th><th>Max score</th>' +
+        '<th>Featurization</th><th>Init</th><th>Acquisition</th><th>Last submission (UTC)</th>' +
+        '</tr></thead><tbody>';
+      ranked.forEach(function (r, i) {
+        html += '<tr class="' + (i === 0 ? 'rank-1' : '') + '">' +
+          '<td class="rank-cell">#' + (i + 1) + '</td>' +
+          '<td class="team-cell">' + escapeHtml(r.team_name) + '</td>' +
+          '<td>' + r.auc_mean.toFixed(4) + '</td>' +
+          '<td>' + (isNaN(r.auc_std) ? '—' : r.auc_std.toFixed(4)) + '</td>' +
+          '<td><span class="coverage-pill">' + (isNaN(r.max_score_achieved) ? '—' : r.max_score_achieved.toFixed(3)) + '</span></td>' +
+          '<td>' + escapeHtml(String(r.featurization || '—')) + '</td>' +
+          '<td>' + escapeHtml(String(r.init_method || '—')) + '</td>' +
+          '<td>' + escapeHtml(String(r.acquisition || '—')) + '</td>' +
+          '<td>' + escapeHtml(String(r.timestamp_utc || '—')) + '</td>' +
+          '</tr>';
+      });
+      html += '</tbody></table>';
+      wrapEl.innerHTML = html;
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function fetchLeaderboard() {
+      if (LEADERBOARD_PUBLISHED_ID.indexOf('PASTE_') === 0) {
+        statusEl.textContent = 'Leaderboard not configured yet.';
+        renderMessage('The instructor hasn’t connected this widget to the leaderboard sheet yet — ' +
+          'see leaderboard/SETUP.md.');
+        return;
+      }
+      refreshBtn.classList.add('spinning');
+      statusEl.textContent = 'Refreshing…';
+      var url = 'https://docs.google.com/spreadsheets/d/e/' + LEADERBOARD_PUBLISHED_ID +
+        '/pub?gid=' + LEADERBOARD_GID + '&single=true&output=csv&cachebust=' + Date.now();
+      fetch(url)
+        .then(function (resp) {
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          return resp.text();
+        })
+        .then(function (text) {
+          lastRows = parseCsvResponse(text);
+          renderTable(lastRows);
+          statusEl.textContent = 'Updated ' + new Date().toLocaleTimeString();
+        })
+        .catch(function (err) {
+          statusEl.textContent = 'Could not load leaderboard.';
+          renderMessage('Could not reach the leaderboard sheet. Make sure it is published to the web ' +
+            '(File → Share → Publish to web) and the published link/gid above are correct.');
+          console.error('Leaderboard fetch failed:', err);
+        })
+        .finally(function () {
+          refreshBtn.classList.remove('spinning');
+        });
+    }
+
+    refreshBtn.addEventListener('click', fetchLeaderboard);
+    datasetSelect.addEventListener('change', function () {
+      if (lastRows) { renderTable(lastRows); }
+    });
+    fetchLeaderboard();
+    setInterval(fetchLeaderboard, AUTO_REFRESH_MS);
+  })();
+  </script>
 
   <footer>
     <span>Division of Chemistry and Chemical Engineering · Caltech</span>

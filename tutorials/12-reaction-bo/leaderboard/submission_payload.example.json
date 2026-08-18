@@ -1,0 +1,18 @@
+{
+  "run_id": "b3f1c2a0-1c1e-4b7a-9e3e-6b0c9e6a2f11",
+  "timestamp_utc": "2026-08-18T15:42:03Z",
+  "team_name": "team-example",
+  "dataset": "perera_suzuki",
+  "featurization": "onehot",
+  "init_method": "random",
+  "acquisition": "EI",
+  "acquisition_hparams": "{}",
+  "batch_size": 4,
+  "n_rounds": 8,
+  "n_seeds": 5,
+  "auc_mean": 0.8123,
+  "auc_std": 0.0417,
+  "max_score_achieved": 0.9781,
+  "notebook_version": "reaction-bo.ipynb v1",
+  "notes": "baseline run, onehot + random init + EI"
+}

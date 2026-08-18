@@ -1,0 +1,1 @@
+run_id,timestamp_utc,team_name,dataset,featurization,init_method,acquisition,acquisition_hparams,batch_size,n_rounds,n_seeds,auc_mean,auc_std,max_score_achieved,notebook_version,notes
