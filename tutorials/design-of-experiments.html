@@ -58,6 +58,11 @@
     .factor-table th, .factor-table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
     .factor-table th { color: var(--text); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
     .factor-table td:first-child, .factor-table th:first-child { color: var(--text); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12.5px; }
+    .strategy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 4px 0 20px; }
+    .strategy-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+    .strategy-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .strategy-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
+    .strategy-card .resource-link { margin-right: 8px; margin-bottom: 8px; padding: 8px 14px; font-size: 12.5px; }
     @media (max-width: 700px) { .tutorial-hero { padding: 36px 20px 32px; } .tutorial-hero h1 { font-size: 28px; } .tutorial-body { padding: 28px 20px 60px; } }
   </style>
 </head>
@@ -87,8 +92,9 @@
     </div>
     <h1>Design of <em>Experiments</em></h1>
     <p class="tutorial-tagline">
-      Run a fixed-budget formulation campaign as a rubber-film R&amp;D team, then find out — when the customer
-      moves the goalposts — whether your experimental design could still answer the new question.
+      Run a fixed-budget formulation campaign as a rubber-film R&amp;D team. Your team is assigned one of three
+      classic strategies — OFAT, fractional factorial, or CCD — and has to defend its predicted-best formulation
+      against the other two.
     </p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
@@ -109,7 +115,7 @@
       </div>
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        Team exercise · Google Colab
+        Excel/Sheets · Google Colab
       </div>
     </div>
   </div>
@@ -124,8 +130,15 @@
     <div class="colab-banner">
       <div class="colab-banner-text">
         <h3>Start here</h3>
-        <p>No file to open yet. Your team designs experiments — on paper, in chat, however you like — within a fixed budget. The facilitator runs them against the (hidden) formulation model and reads your results back to you. The debrief notebook is linked under Resources at the bottom of this page, for after both rounds.</p>
+        <p>Pick up your team's briefing doc and template below (under Choose your strategy). Design and submit experiments on paper, in chat, however you like — the facilitator runs them and reads your results back. Once you have data, open the analysis notebook: it's the same notebook for all three archetypes, you just set which one you ran.</p>
       </div>
+      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/11-doe/analysis-notebook.ipynb" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/>
+          <path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Analysis notebook
+      </a>
     </div>
 
     <div class="content-section">
@@ -133,8 +146,8 @@
       <ul class="objectives-list">
         <li>Design a fixed-budget experimental campaign — one factor at a time, a fractional factorial, or a response-surface design — before seeing a single data point.</li>
         <li>Feel why center points and axial runs matter: they're the only way to catch curvature a corners-only design is blind to.</li>
-        <li>Experience a "customer twist" mid-project, and learn that your round-1 design decides what your round-2 data can and can't tell you.</li>
-        <li>Compare your team's real, executed design against the other archetypes in the room during the debrief.</li>
+        <li>Fit the model your design actually supports, and predict a best formulation from it — using the same analysis notebook regardless of which archetype you ran.</li>
+        <li>Compare your team's predicted-best formulation against the other two archetypes, and defend how you got there.</li>
       </ul>
     </div>
 
@@ -146,51 +159,86 @@
       <h2>The system</h2>
       <p>You are formulating a latex rubber film. You control five factors, each with a hard range:</p>
       <table class="factor-table">
-        <tr><th>factor</th><th>range</th></tr>
-        <tr><td>latex_pct</td><td>5 – 20 wt% (mixture is unstable above 20)</td></tr>
-        <tr><td>filler_phr</td><td>0 – 40 (parts per hundred rubber)</td></tr>
-        <tr><td>crosslinker_phr</td><td>0.5 – 4.0</td></tr>
-        <tr><td>plasticizer_phr</td><td>0 – 25</td></tr>
-        <tr><td>cure_temp_c</td><td>100 – 160 °C</td></tr>
+        <tr><th>factor</th><th>range</th><th>notes</th></tr>
+        <tr><td>latex_pct</td><td>5 – 20 wt%</td><td>hard constraint: latex ≤ 20 wt%</td></tr>
+        <tr><td>crosslinker</td><td>0.5 – 3.0 phr</td><td>phr = parts per hundred rubber</td></tr>
+        <tr><td>filler_loading</td><td>0 – 40 phr</td><td>phr = parts per hundred rubber</td></tr>
+        <tr><td>cure_temp</td><td>140 – 180 °C</td><td></td></tr>
+        <tr><td>cure_time</td><td>5 – 30 min</td><td></td></tr>
       </table>
-      <p>Every experiment you run reports back three responses: <code>tensile_mpa</code>, <code>elongation_pct</code>, and <code>hardness_shore_a</code>. You don't get the underlying formulas — that's exactly what your design has to probe for.</p>
+      <p>Every experiment reports back three responses: <code>tensile_mpa</code> (your target), <code>elongation_pct</code>, and <code>hardness_shore_a</code>. You don't get the underlying formulas — that's exactly what your design has to probe for.</p>
 
-      <h2>Round 1 — maximize tensile strength (15 experiment-$)</h2>
+      <h2>Choose your strategy</h2>
+      <p>Your team is assigned one of three classic designs. Each comes with its own team briefing (what your design lets you see, and how to run it) and its own spreadsheet template (blank for OFAT, a pre-computed run list for FRACTIONAL and CCD).</p>
+      <div class="strategy-grid">
+        <div class="strategy-card">
+          <h3>OFAT</h3>
+          <p>One-Factor-At-A-Time. No pre-computed run list — pick a baseline, vary one factor at a time, freeze the best, move on. Full freedom over what you test.</p>
+          <a class="resource-link" href="11-doe/team-briefing-OFAT.docx" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Briefing
+          </a>
+          <a class="resource-link" href="11-doe/team-template-OFAT.xlsx" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Template
+          </a>
+        </div>
+        <div class="strategy-card">
+          <h3>Fractional</h3>
+          <p>A 2^(5-1) half-fraction: 16 corner runs, cleanly separating main effects and two-way interactions across 4 of your 5 factors (your call which one to drop).</p>
+          <a class="resource-link" href="11-doe/team-briefing-FRACTIONAL.docx" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Briefing
+          </a>
+          <a class="resource-link" href="11-doe/team-template-FRACTIONAL.xlsx" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Template
+          </a>
+        </div>
+        <div class="strategy-card">
+          <h3>CCD</h3>
+          <p>A trimmed, face-centered central composite design: corners + axial "star" points, enough to fit a full quadratic response surface in 4 factors — saturated, so no lack-of-fit test.</p>
+          <a class="resource-link" href="11-doe/team-briefing-CCD.docx" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Briefing
+          </a>
+          <a class="resource-link" href="11-doe/team-template-CCD.xlsx" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Template
+          </a>
+        </div>
+      </div>
+
+      <h2>Run your experiments</h2>
       <ol class="instructions-list">
-        <li><p><strong>Pick a design strategy.</strong> As a team, decide how you'll spend 15 experiments to find the tensile-maximizing formulation: one factor at a time, a grid, a fractional factorial, a response-surface design — your call.</p></li>
-        <li><p><strong>Submit experiments to the facilitator.</strong> Paper, chat, or verbally — give five factor values per run. The facilitator runs each one and reads back your three responses (or tells you why a run was infeasible, which doesn't count against your budget).</p></li>
-        <li><p><strong>Land on your best formulation</strong> once your 15 experiment-dollars run out.</p></li>
+        <li><p><strong>Budget: 15 experiment-dollars.</strong> One submission = one dollar. Objective: maximize <code>tensile_mpa</code>.</p></li>
+        <li><p><strong>Submit to the facilitator</strong> — paper, chat, or verbally. They run each combination and read back your three responses, or tell you why a run is infeasible (no penalty for a caught typo; it costs a dollar if you hadn't checked the constraint yourself).</p></li>
+        <li><p><strong>No comparing notes with the other archetype teams.</strong> This is a competition — each team's answer is theirs to defend.</p></li>
       </ol>
 
-      <h2>Round 2 — the customer twist (+5 experiment-$)</h2>
-      <ol class="instructions-list">
-        <li><p><strong>The customer now also wants high elongation</strong> — not just tensile strength. You get 5 more experiment-dollars to respond.</p></li>
-        <li><p><strong>Decide what to do with them.</strong> Can your round-1 data already tell you anything about elongation? Or are you starting from scratch?</p></li>
-      </ol>
-
-      <h2>Debrief</h2>
-      <p>The facilitator exports the shared storefront workbook and runs the debrief notebook to project five plots comparing every team's trajectory, final formulation, and tensile/elongation trade-off.</p>
+      <h2>Analyze and predict</h2>
+      <p>Open the <strong>analysis notebook</strong> (button above) once your data is in. It's the same notebook for every archetype — set <code>TEAM_ARCHETYPE</code> to <code>'OFAT'</code>, <code>'FRAC'</code>, or <code>'CCD'</code> and it fits whichever model your design supports, then scans for the formulation it predicts will maximize tensile. Hand that predicted-best formulation to the facilitator — that's what you'll defend.</p>
     </div>
 
     <hr class="divider">
 
     <div class="content-section">
       <p class="content-section-label">Questions</p>
-      <p>Discuss with your team after the debrief plots go up — some of these have no single right answer.</p>
+      <p>Discuss with your team once you have a predicted-best formulation — some of these have no single right answer.</p>
       <ol class="questions-list">
         <li class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>What design did your team use in round 1 — one factor at a time, a grid, a fractional factorial, something else? Why that one, given a 15-run budget?</p>
+          <p>Which archetype did your team run — OFAT, fractional factorial, or CCD? What appealed to (or worried) you about it before you ran a single experiment?</p>
           <span class="q-difficulty easy">Easy</span>
         </li>
         <li class="question-item">
           <div class="q-label">Core</div>
-          <p>When the round-2 twist hit, could your round-1 runs tell you anything about elongation, or were you starting blind? What single change to your round-1 design would have helped most?</p>
+          <p>Walk through your factor-assignment decisions (FRACTIONAL/CCD) or your sweep order (OFAT). Where did your chemistry intuition get it right or wrong once the model was fit?</p>
           <span class="q-difficulty medium">Medium</span>
         </li>
         <li class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Looking at the debrief plots, which team adapted fastest and best to the round-2 twist — and what specific feature of their round-1 design (center points? axial runs? interior probes?) made the difference?</p>
+          <p>Compare your predicted-best formulation against the other two archetypes in class. Which team's design gives you the most confidence in its answer — and what specific feature (corners? axial points? center points?) earns that confidence?</p>
           <span class="q-difficulty hard">Challenge</span>
         </li>
       </ol>
@@ -201,15 +249,39 @@
     <div class="content-section">
       <p class="content-section-label">Resources</p>
 
-      <h2>The game</h2>
+      <h2>Team materials</h2>
       <div>
-        <a class="resource-link" href="11-doe/formulation-storefront.xlsx" target="_blank" rel="noopener">
+        <a class="resource-link" href="11-doe/team-briefing-OFAT.docx" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Storefront workbook (blank)
+          OFAT briefing
         </a>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/11-doe/reveal.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="11-doe/team-template-OFAT.xlsx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          OFAT template
+        </a>
+        <a class="resource-link" href="11-doe/team-briefing-FRACTIONAL.docx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Fractional briefing
+        </a>
+        <a class="resource-link" href="11-doe/team-template-FRACTIONAL.xlsx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Fractional template
+        </a>
+        <a class="resource-link" href="11-doe/team-briefing-CCD.docx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          CCD briefing
+        </a>
+        <a class="resource-link" href="11-doe/team-template-CCD.xlsx" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          CCD template
+        </a>
+      </div>
+
+      <h2>Analysis</h2>
+      <div>
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/11-doe/analysis-notebook.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          Debrief notebook (Colab)
+          Analysis notebook (Colab) — same notebook for all three archetypes
         </a>
       </div>
 
