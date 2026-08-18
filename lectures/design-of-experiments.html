@@ -38,6 +38,10 @@
     .ref-item-body { flex: 1; min-width: 0; }
     .ref-item-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ref-item-meta { font-size: 12px; color: var(--text-dim); }
+    .ref-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+    .ref-tag.paper   { background: rgba(93,218,180,0.15); color: var(--accent); }
+    .ref-tag.book    { background: rgba(255,180,50,0.15);  color: #FFB432; }
+    .ref-tag.website { background: rgba(99,179,237,0.15);  color: #63B3ED; }
     /* ── Resource buttons (slides + recording) ── */
     .resource-buttons {
       display: flex;
@@ -94,7 +98,7 @@
     </div>
     <h1>Design of <em>Experiments</em></h1>
     <p class="lecture-tagline">
-      A practical introduction to planning informative experiments, screening factors efficiently, and building response surfaces for chemistry workflows.
+      How to decide what data to collect: statistical thinking, the DOE toolkit for screening and optimisation, and how to turn a table of runs into a defensible answer.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
@@ -124,9 +128,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_11_doe/doe.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_11_doe/doe.pptx" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -138,10 +146,10 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Choose an experimental design that balances cost, coverage, and interpretability.</li>
-        <li>Use factorial and fractional-factorial designs to screen many variables quickly.</li>
-        <li>Fit simple response surface models and reason about interactions between factors.</li>
-        <li>Translate design choices into chemical experimentation workflows.</li>
+        <li>Decompose a measurement into signal, structural noise, and random noise — and use a measurement systems analysis to check whether your "ruler" is trustworthy before you trust the data it produces.</li>
+        <li>Match the design to the question: screening (which factors matter) needs a different design than optimisation (where's the peak) or mechanism (why).</li>
+        <li>See why one-factor-at-a-time experimentation hides interactions, and use factorial designs to estimate main effects, interactions, and curvature directly.</li>
+        <li>Run the full analysis loop — plot, fit, check, reduce, interpret, verify — and know when to reach for DOE versus active learning or Bayesian optimisation.</li>
       </ul>
     </div>
 
@@ -150,9 +158,10 @@
     <div class="content-section">
       <p class="content-section-label">Key Takeaways</p>
       <ul class="takeaways-list">
-        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Takeaway 1.</strong> DoE is about getting the most information per experiment, not about running more experiments.</p></li>
-        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Takeaway 2.</strong> Screening and optimisation are different phases of an experiment campaign and usually need different designs.</p></li>
-        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Takeaway 3.</strong> Strong factor interactions are easy to miss if you only vary one knob at a time.</p></li>
+        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Design first.</strong> The design step decides what you can learn — if you can't say what model, what runs, and what factors, don't start running yet.</p></li>
+        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Measure your ruler.</strong> A measurement systems analysis is not optional — if your ruler is worse than the effect, no design saves you, and bias isn't fixable by replication.</p></li>
+        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Use structure.</strong> One-factor-at-a-time freezes every other factor, so interactions — common in chemistry — stay invisible; factorial designs vary factors jointly to reveal them.</p></li>
+        <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Close the loop.</strong> Plot, fit, check, reduce, interpret, and verify with a confirmation run — the analysis is what turns a table of numbers into a defensible answer.</p></li>
       </ul>
     </div>
 
@@ -161,10 +170,63 @@
     <div class="content-section">
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-021-03213-y" target="_blank" rel="noopener">
           <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <div class="ref-item-body"><div class="ref-item-title">Lecture notes <span class="ref-tag paper">Slides</span></div><div class="ref-item-meta">Placeholder until the slide deck is uploaded.</div></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Shields et al. — "Bayesian Reaction Optimization as a Tool for Chemical Synthesis" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2021, 590, 89–96 · Doyle group; the DOE-vs-Bayesian-optimisation comparison referenced in Part 3</div>
+          </div>
         </a>
+
+        <a class="ref-item" href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments,+10th+Edition-p-9781119492443" target="_blank" rel="noopener">
+          <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Montgomery — "Design and Analysis of Experiments" <span class="ref-tag book">Book</span></div>
+            <div class="ref-item-meta">Wiley, 10th ed. · The canonical DOE textbook — factorial, fractional-factorial, and response-surface designs</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.wiley.com/en-us/Statistics+for+Experimenters:+Design,+Innovation,+and+Discovery,+2nd+Edition-p-9780471718130" target="_blank" rel="noopener">
+          <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Box, Hunter &amp; Hunter — "Statistics for Experimenters" <span class="ref-tag book">Book</span></div>
+            <div class="ref-item-meta">Wiley, 2nd ed. · Chemistry-friendly classic on design, innovation, and discovery</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm" target="_blank" rel="noopener">
+          <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">NIST/SEMATECH Engineering Statistics Handbook — Section 5, Process Improvement <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">itl.nist.gov · Free reference for factorial designs, ANOVA, and DOE analysis workflows</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.coursera.org/learn/statistical-thinking-applied-statistics" target="_blank" rel="noopener">
+          <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">"Statistical Thinking for Industrial Problem Solving" — presented by JMP <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">Coursera · Free course covering EDA, MSA, hypothesis testing, and DOE fundamentals</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://pypi.org/project/pyDOE2/" target="_blank" rel="noopener">
+          <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">pyDOE2 &amp; dexpy — Python design-generation packages <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">pypi.org/project/pyDOE2 · github.com/statease/dexpy · Generate factorial, Box-Behnken, and central-composite designs</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://www.statsmodels.org/" target="_blank" rel="noopener">
+          <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">statsmodels &amp; scikit-learn — Python analysis toolkit <span class="ref-tag website">Website</span></div>
+            <div class="ref-item-meta">statsmodels.org · scikit-learn.org · Model fits, ANOVA, and regression for analysing DOE results</div>
+          </div>
+        </a>
+
       </div>
     </div>
 
