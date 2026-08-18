@@ -128,9 +128,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_12_bo/bayesian-optimization.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_12_bo/bayesian-optimization.pptx" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -142,10 +146,11 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Construct a Gaussian Process surrogate model and interpret its posterior mean and variance</li>
-        <li>Derive and implement Expected Improvement (EI), Upper Confidence Bound (UCB), and Probability of Improvement (PI)</li>
-        <li>Run a Bayesian optimisation loop over a discrete molecular library using BoTorch</li>
-        <li>Apply multi-objective BO (Pareto front) to simultaneous optimisation of potency and selectivity</li>
+        <li>Recognise when data acquisition is expensive enough to justify Bayesian optimization over grid search, OVAT, or classical DOE</li>
+        <li>Walk through the BO loop — surrogate model, acquisition function, experiment, update — and construct a Gaussian Process surrogate with an interpretable posterior mean and variance</li>
+        <li>Derive Expected Improvement (EI) and Upper Confidence Bound (UCB), and diagnose the practical failure mode of setting the noise hyperparameter σₙ² ≈ 0</li>
+        <li>Handle categorical variables (ligands, solvents, bases) with encodings and kernels that preserve chemical similarity, instead of one-hot</li>
+        <li>Extend the single-objective loop to multi-objective (Pareto front, EHVI) and batched (q-EI, Thompson sampling) experimental campaigns</li>
       </ul>
     </div>
 
@@ -159,28 +164,28 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> The Gaussian Process posterior provides both a prediction and an uncertainty estimate in a single model — this joint output is what makes GPs the default surrogate for BO.</p>
+          <p><strong>Takeaway 1.</strong> At fixed GP hyperparameters, the posterior variance depends only on <em>where</em> you sampled, not on what you measured — so you can plan the informativeness of a campaign before running a single experiment.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> The acquisition function balances exploration (high uncertainty) and exploitation (high predicted value). UCB does this explicitly via a β parameter; EI integrates over the improvement distribution.</p>
+          <p><strong>Takeaway 2.</strong> The choice of acquisition function (EI, UCB, Thompson sampling) matters less than you'd think — on the EDBO reaction benchmark they converge to similar performance. Getting the noise model right matters far more: setting σₙ² ≈ 0 lets the surrogate interpolate a lucky measurement and turns the rest of the campaign into a lottery.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> BO is sample-efficient because it conditions on all previous observations before choosing the next experiment — each new data point updates the surrogate globally, not just locally.</p>
+          <p><strong>Takeaway 3.</strong> Categorical reaction variables (ligand, solvent, base) are chemically related to each other — one-hot encoding throws that away. Representation and kernel choice can move the needle more than the acquisition function does.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> Standard BO scales poorly beyond ~20 dimensions. For high-dimensional molecular spaces, use latent-space BO (optimise in the encoder space of a VAE or GNN) or trust-region methods (TuRBO).</p>
+          <p><strong>Takeaway 4.</strong> DOE and BO are complementary, not competing: DOE explains a system through main effects and interactions from a design fixed up front; BO adaptively hunts for the optimum. A common workflow screens with DOE to cut down the factor space, then hands the survivors to BO.</p>
         </li>
 
       </ul>
@@ -192,43 +197,63 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1038/s41586-021-03213-y" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Shields et al. — "Bayesian Reaction Optimization as a Tool for Chemical Synthesis" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Nature, 2021, 590, 89–96 · EDBO; the Suzuki-coupling human-vs-BO benchmark used throughout this lecture</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1109/JPROC.2015.2494218" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
             <div class="ref-item-title">Shahriari et al. — "Taking the Human Out of the Loop: A Review of Bayesian Optimization" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Proc. IEEE, 2016 · The standard BO review article</div>
+            <div class="ref-item-meta">Proc. IEEE, 2016, 104(1), 148–175 · The standard BO review article</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1109/TIT.2011.2182033" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Griffiths &amp; Hernández-Lobato — "Constrained Bayesian Optimization for Automatic Chemical Design" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ACS Central Science, 2020 · BO applied to molecular optimisation with property constraints</div>
+            <div class="ref-item-title">Srinivas et al. — "Information-Theoretic Regret Bounds for Gaussian Process Optimization in the Bandit Setting" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">IEEE Trans. Inf. Theory, 2012, 58(5), 3250–3265 · The GP-UCB acquisition function</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://doi.org/10.1126/sciadv.aaz8867" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">MacLeod et al. — "Self-Driving Laboratory for Accelerated Discovery of Thin-Film Materials" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Sci. Adv., 2020, 6(20), eaaz8867 · Materials example: autonomous BO of hole mobility for perovskite solar cells</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://doi.org/10.1039/D0SC06805E" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">Graff, Shakhnovich &amp; Coley — "Accelerating High-Throughput Virtual Screening through Molecular Pool-Based Active Learning" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">Chem. Sci., 2021, 12, 7866–7881 · Drug-discovery example: BO-guided screening over 100M+ compound libraries</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://botorch.org/" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="ref-item-body">
             <div class="ref-item-title">BoTorch Documentation <span class="ref-tag website">Website</span></div>
-            <div class="ref-item-meta">botorch.org · PyTorch-based BO library with molecular examples</div>
-          </div>
-        </a>
-
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
-          <div class="ref-item-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="ref-item-body">
-            <div class="ref-item-title">Daulton et al. — "Differentiable Expected Hypervolume Improvement for Parallel Multi-Objective Bayesian Optimization" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">NeurIPS, 2020 · Multi-objective BO for Pareto-optimal molecular candidates</div>
+            <div class="ref-item-meta">botorch.org · PyTorch-based BO library — implements q-EI, q-NEHVI, and the batch/multi-objective methods covered in this lecture</div>
           </div>
         </a>
 
