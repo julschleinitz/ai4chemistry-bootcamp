@@ -70,8 +70,21 @@ def scaffold_split(df, n_test: int, n_dev: int, seed: int, balance_subclass: boo
                 break
             if s in assignment:
                 continue
+            size = size_of[s]
+            # Guard against one oversized scaffold single-handedly blowing the
+            # quota. Murcko scaffolds collapse many chemically distinct
+            # molecules onto a bare-ring skeleton once substituents are
+            # stripped -- e.g. every simple substituted benzoic/phenylacetic
+            # acid reduces to plain "c1ccccc1" -- and that one scaffold can
+            # have hundreds to thousands of members. Without this check it
+            # can land entirely in dev/test_hidden and blow a quota several
+            # times over. Skip it here; it falls back to `pool` (a fine home
+            # for a large, generic scaffold students can buy many labels
+            # from) unless nothing smaller remains to reach target_n.
+            if size > max(2 * (target_n - got), 10):
+                continue
             assignment[s] = label
-            got += int(size_of[s])
+            got += int(size)
         return got
 
     if balance_subclass:

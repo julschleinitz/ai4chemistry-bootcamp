@@ -274,6 +274,7 @@ def main() -> None:
         print(f"fetching Ac1..Ac{n_want} from {API}")
         print(f"cache: {cache}")
         header_seen: list[str] | None = None
+        header_warned = set()
         frames = []
         for header, rows in fetch_all(n_want, cache, args.chunk):
             if header_seen is None:
@@ -283,9 +284,23 @@ def main() -> None:
                           "descriptor_spec.API_COLUMN_ORDER. Columns will be "
                           "matched BY NAME, which is safe, but run "
                           "--verify-header and update the spec.\n")
-            elif header != header_seen:
-                raise SystemExit("the API changed its header mid-run; "
-                                 "clear the cache and start again")
+            elif set(header) != set(header_seen):
+                # A chunk can drop a column outright when every molecule in that
+                # chunk has no data for it (seen in practice: a boltz_stdev extra
+                # vanishes for a batch where the underlying dihedral is
+                # undefined for every molecule). pd.concat aligns by column name
+                # and fills the gap with NaN, so this is safe as long as no
+                # *scored* TARGET_COLUMNS are among the missing ones -- checked
+                # against the full concatenated frame below.
+                missing_here = set(header_seen) - set(header)
+                extra_here = set(header) - set(header_seen)
+                new = (missing_here | extra_here) - header_warned
+                if new:
+                    print(f"\nNOTE: this chunk's header differs from the first "
+                          f"chunk's by {len(new)} column(s): {sorted(new)[:5]}"
+                          f"{'...' if len(new) > 5 else ''}. Matching by name; "
+                          "concat will fill the gap with NaN.\n")
+                    header_warned |= new
             frames.append(pd.DataFrame(rows, columns=header))
         if not frames:
             raise SystemExit("no data returned")
