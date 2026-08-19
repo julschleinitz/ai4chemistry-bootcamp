@@ -1,0 +1,21 @@
+# NEVER commit the hidden test labels or the split manifest.
+# `data/student/` IS committed -- the notebook downloads it from raw.githubusercontent.com.
+data/instructor/
+data/labels_all.csv
+data/labels_all.report.md
+data/labels_all.dropped.csv
+data/api_cache/
+
+# student working files, if you run the notebook in-place
+al_log*.jsonl
+my_spec.json
+my_seed.json
+submission_*/
+submission_*.zip
+local_leaderboard_log.csv
+leaderboard_submission.json
+chemprop_training/
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

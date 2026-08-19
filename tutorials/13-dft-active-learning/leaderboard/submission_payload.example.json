@@ -1,0 +1,21 @@
+{
+  "run_id": "team00_demo",
+  "timestamp_utc": "2026-08-19T05:05:31Z",
+  "team_name": "Team 00",
+  "head": "mve",
+  "ensemble_size": 3,
+  "seed_method": "maxmin",
+  "acquisition": "max_variance_scaled",
+  "n_seed": 100,
+  "n_rounds": 10,
+  "batch_size": 50,
+  "labels_used": 600,
+  "dev_smae": 0.3821,
+  "dev_ence": 0.1904,
+  "dev_combined": 0.5725,
+  "dev_aulc": 0.4713,
+  "dev_spearman": 0.612,
+  "cpu_hours_bought": 70380.0,
+  "notebook_version": "13-dft-active-learning/1.0",
+  "notes": "demo row"
+}
