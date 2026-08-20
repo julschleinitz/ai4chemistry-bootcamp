@@ -97,12 +97,12 @@
     </div>
     <h1>Agentic AI <em>for Chemistry</em></h1>
     <p class="lecture-tagline">
-      ReAct agents, multi-agent systems, and self-driving laboratories — closing the loop between AI reasoning and physical experimentation.
+      The right tool for the right job — data foundations, when to reach for an agent versus a statistical test, and how to build reproducible, optimizable LLM pipelines with DSPy.
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        B. Reiner | <a href="https://www.linkedin.com/in/jules-schleinitz-90a5a1161/" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3);">J. Schleinitz</a>
+        B. Reiner | J. Wade
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -127,9 +127,13 @@
     </a>
 
     <div class="resource-buttons">
-      <a class="resource-btn" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/lectures" target="_blank" rel="noopener">
+      <a class="resource-btn" href="lecture_15_agentic-ai/2026_AIBootcamp_AgenticChemistry.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PDF)
+      </a>
+      <a class="resource-btn" href="lecture_15_agentic-ai/2026_AIBootcamp_AgenticChemistry.pptx" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Slides (PPTX)
       </a>
       <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -141,10 +145,11 @@
     <div class="content-section">
       <p class="content-section-label">Learning Objectives</p>
       <ul class="objectives-list">
-        <li>Implement a ReAct (Reason + Act) agent that interleaves planning steps with tool calls</li>
-        <li>Describe the Coscientist architecture and how it achieved autonomous chemical synthesis planning</li>
-        <li>Design a multi-agent workflow where specialised agents (retrosynthesis, yield prediction, safety check) collaborate</li>
-        <li>Identify the safety, reproducibility, and accountability challenges of AI-driven self-driving laboratories</li>
+        <li>Recognize how training-set bias, characterization artifacts, and chemical-domain coverage limit what any agent can know or safely navigate</li>
+        <li>Apply a rubric for choosing between an LLM agent, a statistical test, or an existing ML model for a given chemistry problem</li>
+        <li>Describe the ReAct (reason + act) framework and the Coscientist multi-agent system as examples of agentic reasoning loops</li>
+        <li>Explain how DSPy separates a pipeline's signature, module, metric, and optimizer so prompts can be compiled and re-optimized instead of hand-tuned</li>
+        <li>Distinguish good from bad self-driving-lab and pipeline practices: safety guardrails, auditability, reproducibility, and cost-aware model matching</li>
       </ul>
     </div>
 
@@ -158,28 +163,42 @@
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 1.</strong> ReAct agents alternate between "thought" traces and "action" calls — this interleaving makes reasoning transparent and correctable, unlike end-to-end models that produce outputs without intermediate steps.</p>
+          <p><strong>Takeaway 1.</strong> An agent can only navigate the chemical domain its training data represents — homogeneous, dense coverage supports interpolation and extrapolation, while sparse or heterogeneous data (and uncaught characterization artifacts like bad calibration or matrix effects) silently breaks any downstream model.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 2.</strong> Coscientist demonstrated that LLM-orchestrated agents can autonomously plan, execute, and interpret multi-step organic synthesis — the bottleneck is now robotic hardware and safety validation, not AI reasoning.</p>
+          <p><strong>Takeaway 2.</strong> An agent is an LLM in a harness that calls tools repeatedly in a loop, deciding its next step from the last result — ReAct formalizes this by interleaving chain-of-thought reasoning with tool calls, and Coscientist (built on Gemini 2.0) applies the same idea as a multi-agent system for generating scientific hypotheses.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 3.</strong> Multi-agent systems achieve better results than single agents on complex tasks by decomposing problems across specialised models, but they introduce new failure modes: error propagation, agent disagreement, and circular reasoning.</p>
+          <p><strong>Takeaway 3.</strong> Not every problem needs an LLM "brain" — use a rubric (can it be represented mathematically? does a statistical test already exist? is there an off-the-shelf model?) to route A/B tests, regressions, and classification to conventional tools, reserving agents for tasks like open-ended semantic analysis.</p>
         </li>
 
         <li class="takeaway-item">
           <span class="takeaway-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
-          <p><strong>Takeaway 4.</strong> Self-driving laboratories require more than AI — they need robust experiment ontologies, FAIR data pipelines, physical failsafes, and human-in-the-loop checkpoints to be scientifically credible.</p>
+          <p><strong>Takeaway 4.</strong> Hand-tuned prompts are not reproducible and silently degrade when a model provider ships an update — DSPy compiles a program from a typed signature, a module, a metric, and an optimizer instead, so any one part can be swapped (a cheaper model, a new metric) without rewriting the rest.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 5.</strong> GEPA's reflection-based optimization beat GRPO reinforcement learning with 35× fewer rollouts and outperformed MIPROv2 by 10%, and Shopify used it to move a GPT-5 task onto a small Qwen model at ~75× lower cost — evidence that optimized small models can match hand-prompted frontier models.</p>
+        </li>
+
+        <li class="takeaway-item">
+          <span class="takeaway-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p><strong>Takeaway 6.</strong> Self-driving labs need more than a capable model — physical stops, human-in-the-loop checkpoints, and auditable (git-tracked, annotated) decision logs separate credible autonomous pipelines from irreproducible ones.</p>
         </li>
 
       </ul>
@@ -191,43 +210,63 @@
       <p class="content-section-label">Further Reading &amp; Resources</p>
       <div class="ref-list">
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
             <div class="ref-item-title">Yao et al. — "ReAct: Synergizing Reasoning and Acting in Language Models" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">ICLR, 2023 · Introduces the ReAct framework for tool-using LLM agents</div>
+            <div class="ref-item-meta">arXiv:2210.03629, 2022 · Interleaves chain-of-thought reasoning with external tool calls</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Boiko et al. — "Autonomous chemical research with large language models" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature, 2023 · Coscientist: autonomous LLM-driven experimental chemistry</div>
+            <div class="ref-item-title">Google Research — "Accelerating scientific breakthroughs with an AI co-scientist" <span class="ref-tag paper">Blog</span></div>
+            <div class="ref-item-meta">research.google, 2025 · Multi-agent system on Gemini 2.0 for hypothesis generation</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://tidydesign.substack.com/p/what-is-an-agent" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Abolhasani &amp; Kumacheva — "The rise of self-driving labs in chemical and materials sciences" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Synthesis, 2023 · Review of hardware and software stacks for self-driving labs</div>
+            <div class="ref-item-title">Wickham, H. — "What is an agent?" <span class="ref-tag paper">Blog</span></div>
+            <div class="ref-item-meta">tidydesign.substack.com · Plain-language definition of an LLM agent, with a worked example</div>
           </div>
         </a>
 
-        <a class="ref-item" href="#" target="_blank" rel="noopener">
+        <a class="ref-item" href="https://arxiv.org/abs/2507.19457" target="_blank" rel="noopener">
           <div class="ref-item-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="ref-item-body">
-            <div class="ref-item-title">Bran et al. — "ChemCrow: Augmenting large-language models with chemistry tools" <span class="ref-tag paper">Paper</span></div>
-            <div class="ref-item-meta">Nature Machine Intelligence, 2024 · Multi-tool chemistry agent</div>
+            <div class="ref-item-title">Agrawal et al. — "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning" <span class="ref-tag paper">Paper</span></div>
+            <div class="ref-item-meta">arXiv:2507.19457, ICLR 2026 · Optimizer behind dspy.Flex; beat GRPO with 35× fewer rollouts</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://dspy.ai/" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">DSPy — Programming, not prompting, foundation models <span class="ref-tag paper">Docs</span></div>
+            <div class="ref-item-meta">dspy.ai · Signatures, modules, metrics, and optimizers for compiled LM programs</div>
+          </div>
+        </a>
+
+        <a class="ref-item" href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener">
+          <div class="ref-item-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ref-item-body">
+            <div class="ref-item-title">rtk-ai/rtk — CLI proxy that reduces LLM token consumption <span class="ref-tag paper">Tool</span></div>
+            <div class="ref-item-meta">GitHub · Compresses commands before they reach the LLM, cutting tokens 60–90%</div>
           </div>
         </a>
 

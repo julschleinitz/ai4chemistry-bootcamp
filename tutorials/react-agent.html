@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 14 — Building a Chemistry ReAct Agent · AI4Chemical Sciences Bootcamp</title>
+  <title>Tutorial 14 — Does This Chemistry Task Need an LLM? · AI4Chemical Sciences Bootcamp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,12 +30,12 @@
 
   <div class="tutorial-hero">
     <div class="tutorial-hero-meta"><span class="tutorial-badge">Tutorial 14</span></div>
-    <h1>Building a Chemistry <em>ReAct Agent</em></h1>
-    <p class="tutorial-tagline">Wire up PubChem lookup, RDKit property tools, and a BO surrogate into a ReAct-style agent that autonomously designs experiments.</p>
+    <h1>Does This Chemistry Task Need <em>an LLM?</em></h1>
+    <p class="tutorial-tagline">Pit a manual parser, a direct LLM predictor, and a self-optimizing DSPy Flex program against each other on a chemical-record extraction task — and let a metric, not intuition, decide which one deserves a place in your pipeline.</p>
     <div class="tutorial-meta-row">
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <a href="https://www.linkedin.com/in/jules-schleinitz-90a5a1161/" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3);">J. Schleinitz</a> | B. Reiner
+        B. Reiner | J. Wade
       </div>
       <div class="tutorial-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -65,9 +65,9 @@
     <div class="colab-banner">
       <div class="colab-banner-text">
         <h3>Open in Google Colab</h3>
-        <p>The notebook has most of the code pre-filled. Complete the exercises marked <code>### YOUR CODE HERE ###</code>.</p>
+        <p>The notebook is fully runnable end to end — no fill-in-the-blank cells. When opened in Colab, the first cell auto-installs <code>dspy</code>, <code>pandas</code>, <code>python-dotenv</code>, and <code>deno</code> (Flex's sandbox runtime). You'll need an API key (e.g. <code>OPENAI_API_KEY</code>) for the LLM-backed cells — set it as a Colab secret or in a <code>.env</code> file.</p>
       </div>
-      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/react-agent.ipynb" target="_blank" rel="noopener">
+      <a class="colab-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/15-react-agent/does_chemistry_task_need_llm.ipynb" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 4a6 6 0 1 1 0 12A6 6 0 0 1 12 6z" fill="#000" opacity="0.15"/><path d="M9.5 8.5A3.5 3.5 0 1 0 9.5 15.5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
         Open Notebook
       </a>
@@ -76,10 +76,11 @@
     <div class="content-section">
       <p class="content-section-label">What you will learn</p>
       <ul class="objectives-list">
-        <li>Implement the ReAct (Reason + Act) loop: thought → tool call → observation → thought</li>
-        <li>Build three chemistry tools: PubChem SMILES lookup, RDKit property calculator, and a GP yield predictor</li>
-        <li>Wire the tools into an LLM agent using function calling (OpenAI API or local model)</li>
-        <li>Add guardrails that reject toxic molecules (using a pre-trained toxicity classifier) before synthesis proposals</li>
+        <li>Write a DSPy signature: a typed input/output contract for a task, kept separate from any one model or implementation</li>
+        <li>Compare a hand-written regex parser, a direct <code>dspy.Predict</code> baseline, and a self-optimizing <code>dspy.Flex</code> program on the same boiling-point extraction task</li>
+        <li>Design a metric where scientific correctness dominates but a small penalty discourages unnecessary predictor calls</li>
+        <li>Run GEPA optimization so Flex proposes and tests its own module source code, then inspect what it produces</li>
+        <li>Decide — from held-out test results, not a predetermined story — whether this chemistry task actually needs an LLM at inference time</li>
       </ul>
     </div>
 
@@ -90,11 +91,12 @@
       <h2>Getting started</h2>
       <p>Open the Colab notebook using the button above. Run each cell in order; cells marked <strong>Exercise</strong> require you to fill in code.</p>
       <ol class="instructions-list">
-        <li><p><strong>Set up the environment.</strong> Install openai, rdkit, requests, and botorch. Define the three tool schemas as JSON for function calling: <code>lookup_pubchem(name)</code>, <code>calculate_properties(smiles)</code>, <code>predict_yield(conditions)</code>.</p></li>
-        <li><p><strong>Implement the tools.</strong> Complete <code>lookup_pubchem</code> (PubChem REST API → canonical SMILES), <code>calculate_properties</code> (RDKit: MW, logP, TPSA, HBD, HBA, QED), and <code>predict_yield</code> (GP posterior mean for Suzuki conditions from Tutorial 11).</p></li>
-        <li><p><strong>Build the ReAct loop.</strong> Implement a loop that (a) calls the LLM with the current conversation, (b) parses the function call, (c) executes the tool, (d) appends the observation, and (e) repeats until the LLM returns a final answer.</p></li>
-        <li><p><strong>Add toxicity guardrails.</strong> Load a pre-trained toxicity classifier (provided). Intercept any <code>predict_yield</code> call: if the SMILES argument is predicted toxic (score &gt; 0.8), return a refusal observation instead of the yield.</p></li>
-        <li><p><strong>Run the agent.</strong> Give the agent the task: "Find the Suzuki coupling conditions that maximise yield for iodobenzene with phenylboronic acid, while avoiding toxic additives." Log the full thought-action-observation trace.</p></li>
+        <li><p><strong>Configure the runtime.</strong> Set <code>DSPY_STUDENT_MODEL</code> and <code>DSPY_REFLECTION_MODEL</code> (any LiteLLM identifier, e.g. <code>openai/gpt-5-mini</code>) and the matching API key. The dataset — 40 train, 15 validation, 20 held-out synthetic boiling-point records adapted from the NIST Chemistry WebBook — is embedded in the notebook, so no external files are needed.</p></li>
+        <li><p><strong>Define the signature.</strong> <code>ExtractBoilingPoint</code> declares the contract: text in; compound name, boiling point in kelvin, supporting evidence, and a <code>needs_review</code> flag out. All three approaches below implement this same signature.</p></li>
+        <li><p><strong>Build the three competing programs.</strong> A hand-written regex/arithmetic parser (0 LM calls), <code>dspy.Predict(ExtractBoilingPoint)</code> as a direct one-call baseline, and <code>dspy.Flex(ExtractBoilingPoint, max_predictor_calls=5)</code>, which starts as a predictor but can be rewritten entirely by an optimizer.</p></li>
+        <li><p><strong>Define the metric.</strong> <code>chemistry_metric</code> scores normalized value, compound name, exact evidence substring, and correct abstention — then subtracts a small penalty (capped at 0.10) per predictor call, so a correct zero-call answer never loses to a correct one-call answer.</p></li>
+        <li><p><strong>Run GEPA on Flex.</strong> With a 180-metric-call budget, GEPA runs the program, scores it, reflects on failures, and proposes new module source — not just new prompt text. Read the resulting <code>optimized_flex.module_src</code> and annotate which parts are deterministic parsing versus LM calls.</p></li>
+        <li><p><strong>Evaluate once, held out.</strong> Score the manual parser, direct predictor, and optimized Flex on the 20 held-out test records — the first and only time this split is used — and answer the reflection questions in the final section using the resulting table.</p></li>
       </ol>
     </div>
 
@@ -107,25 +109,25 @@
 
         <div class="question-item">
           <div class="q-label">Warm-up</div>
-          <p>How many tool calls does the agent make before reaching a final answer? Which tool is called most frequently?</p>
+          <p>On the held-out test set, what fraction of the optimized Flex program's predictions use zero, one, or more than one predictor call? Does zero-call execution coincide with correctness, or just with lower cost?</p>
           <span class="q-difficulty easy">Easy</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Does the agent ever call <code>predict_yield</code> for a molecule that the toxicity guardrail blocks? How does it respond to the refusal observation — does it recover gracefully or get stuck?</p>
+          <p>Read <code>optimized_flex.module_src</code>. Which branches are ordinary Python (parsing, unit conversion, validation) and which route to the student model? Is the split scientifically defensible, or did GEPA introduce brittle or unnecessary complexity?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Core</div>
-          <p>Examine the agent's "thought" traces. Does it reason correctly about the trade-off between exploration (trying new conditions) and exploitation (repeating high-yield conditions)? Quote an example of correct and incorrect reasoning.</p>
+          <p>Break down held-out accuracy by <code>challenge</code> category (celsius conversion, distractor numbers, ranges, conflicts, missing values). Which categories, if any, actually benefit from semantic interpretation rather than deterministic parsing?</p>
           <span class="q-difficulty medium">Medium</span>
         </div>
 
         <div class="question-item">
           <div class="q-label">Challenge</div>
-          <p>Add a memory tool that stores and retrieves previous (conditions, yield) observations. Does the agent with memory reach a higher maximum yield in fewer steps than the memoryless version?</p>
+          <p>Swap the metric's per-call penalty (currently capped at 0.10) for a larger or smaller value and rerun GEPA. Does the optimizer converge on a different implementation — e.g. one that never calls the LM, or one that calls it more freely?</p>
           <span class="q-difficulty hard">Challenge</span>
         </div>
 
@@ -137,15 +139,15 @@
     <div class="content-section">
       <p class="content-section-label">Resources</p>
       <div>
-        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/react-agent.ipynb" target="_blank" rel="noopener">
+        <a class="resource-link" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/tutorials/15-react-agent/does_chemistry_task_need_llm.ipynb" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Notebook (Colab)
         </a>
-        <a class="resource-link" href="#">
+        <a class="resource-link" href="https://github.com/julschleinitz/ai4chemistry-bootcamp/tree/main/tutorials/15-react-agent" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           GitHub repo
         </a>
-        <a class="resource-link" href="../lectures/12-agentic-ai.html">
+        <a class="resource-link" href="../lectures/agentic-ai.html">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Paired lecture notes
         </a>
