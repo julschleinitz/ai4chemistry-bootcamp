@@ -369,6 +369,15 @@ footer .sep { color: var(--border); }
 .session.hackathon:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .hackathon .session-type { color: #63B3ED; }
 
+/* ── Panel cards ── */
+.session.panel {
+  background: rgba(167,139,250,0.12);
+  border-color: rgba(167,139,250,0.35);
+  cursor: default;
+}
+.session.panel:hover { filter: none; transform: none; }
+.panel .session-type { color: #A78BFA; }
+
 /* ── Instructor social links (lecture/tutorial detail pages) ── */
 .instructor-block {
   display: flex;
