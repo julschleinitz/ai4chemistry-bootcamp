@@ -42,6 +42,8 @@
     .ref-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
     .ref-tag.paper   { background: rgba(93,218,180,0.15); color: var(--accent); }
     .ref-tag.website { background: rgba(99,179,237,0.15);  color: #63B3ED; }
+    .ref-tag.book    { background: rgba(255,180,50,0.15);  color: #FFB432; }
+    .ref-tag.video   { background: rgba(239,68,68,0.15);   color: #F87171; }
     /* ── Resource buttons (slides + recording) ── */
     .resource-buttons {
       display: flex;
@@ -102,8 +104,17 @@
     </p>
     <div class="lecture-meta-row">
       <div class="lecture-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <a href="https://www.linkedin.com/in/dr-sabrina-wahler-60b33b1a0/" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;border-bottom:1px solid rgba(168,232,212,0.3);">S. Wahler</a>
+        <div class="instructor-block">
+          <span class="instructor-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Sabrina Wahler
+          </span>
+          <div class="instructor-social">
+            <a class="social-link" href="https://www.linkedin.com/in/dr-sabrina-wahler-60b33b1a0/" target="_blank" rel="noopener" title="LinkedIn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="lecture-meta-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
