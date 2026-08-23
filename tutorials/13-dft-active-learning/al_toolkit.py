@@ -27,6 +27,26 @@ from pathlib import Path
 import numpy as np
 
 # --------------------------------------------------------------------------
+# NumPy 2.0 compatibility shim.
+#
+# NumPy 2.0 moved these warning classes from the top level into np.exceptions.
+# Several packages in the Chemprop dependency chain still read the old names and
+# blow up on import with
+#     AttributeError: module 'numpy' has no attribute 'VisibleDeprecationWarning'
+#
+# Restoring the aliases is additive and safe -- they point at the identical
+# classes. We deliberately do NOT restore the removed dtype aliases (np.float_,
+# np.NaN, ...): those are things *our* code should never use, and silently
+# reviving them would hide real bugs that tests/test_logic.py is there to catch.
+# --------------------------------------------------------------------------
+for _name in ("VisibleDeprecationWarning", "ComplexWarning",
+              "ModuleDeprecationWarning", "TooHardError", "AxisError"):
+    if not hasattr(np, _name) and hasattr(getattr(np, "exceptions", None), _name):
+        setattr(np, _name, getattr(np.exceptions, _name))
+del _name
+
+
+# --------------------------------------------------------------------------
 # 0. bundle loading
 # --------------------------------------------------------------------------
 DEFAULT_BUNDLE = Path("data/student")

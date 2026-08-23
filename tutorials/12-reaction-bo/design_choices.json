@@ -1,0 +1,11 @@
+{
+  "dataset": "perera_suzuki",
+  "featurization": "onehot",
+  "init_method": "random",
+  "acquisition": "EI",
+  "acquisition_hparams": {
+    "beta": 2.0
+  },
+  "batch_size": 4,
+  "n_rounds": 8
+}

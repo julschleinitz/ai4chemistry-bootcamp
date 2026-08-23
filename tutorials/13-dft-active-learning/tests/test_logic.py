@@ -634,6 +634,77 @@ def test_predict_hash() -> None:
               "regenerate with tools/refresh_checksum.sh")
 
 
+
+def test_notebook_apis() -> None:
+    """Scan notebook code cells for APIs removed in NumPy 2.0 / pandas 2.0.
+
+    The other notebook check only AST-parses cells, which happily accepts
+    `vals.ptp()` -- valid syntax, but `ndarray.ptp` was REMOVED in NumPy 2.0 and
+    Colab ships NumPy 2.x, so it raises AttributeError at runtime. Syntax checks
+    cannot catch that; this can.
+
+    Add to REMOVED whenever you trip over another one.
+    """
+    import json
+    import re
+
+    print("\nnotebook runtime-API scan")
+
+    REMOVED = {
+        r"\.ptp\(\)": "ndarray.ptp() removed in NumPy 2.0 -- use np.ptp(arr)",
+        r"\bnp\.float_\b": "np.float_ removed in NumPy 2.0 -- use np.float64",
+        r"\bnp\.NaN\b": "np.NaN removed in NumPy 2.0 -- use np.nan",
+        r"\bnp\.Inf\b": "np.Inf removed in NumPy 2.0 -- use np.inf",
+        r"\bnp\.alltrue\b": "np.alltrue removed in NumPy 2.0 -- use np.all",
+        r"\bnp\.sometrue\b": "np.sometrue removed in NumPy 2.0 -- use np.any",
+        r"\bnp\.product\(": "np.product removed in NumPy 2.0 -- use np.prod",
+        r"\bnp\.cumproduct\b": "np.cumproduct removed in NumPy 2.0 -- use np.cumprod",
+        r"\bnp\.round_\b": "np.round_ removed in NumPy 2.0 -- use np.round",
+        r"\bnp\.in1d\b": "np.in1d removed in NumPy 2.0 -- use np.isin",
+        r"\bnp\.row_stack\b": "np.row_stack removed in NumPy 2.0 -- use np.vstack",
+        r"\bnp\.trapz\(": "np.trapz removed in NumPy 2.0 -- use np.trapezoid with a getattr fallback",
+        r"\.iteritems\(": "Series.iteritems removed in pandas 2.0 -- use .items()",
+        r"\.append\([^)]*ignore_index": "DataFrame.append removed in pandas 2.0 -- use pd.concat",
+        r"delim_whitespace": "read_csv(delim_whitespace=) removed in pandas 2.2 -- use sep=r'\\s+'",
+    }
+
+    # works for both layouts: notebooks at the root (website) or under student/
+    nbs = sorted(set(ROOT.glob("*.ipynb")) | set(ROOT.glob("student/*.ipynb")))
+    if not nbs:
+        check("notebooks present", False, str(ROOT))
+        return
+    for nb_path in nbs:
+        nb = json.loads(nb_path.read_text(encoding="utf-8"))
+        hits = []
+        for n, cell in enumerate(nb["cells"]):
+            if cell["cell_type"] != "code":
+                continue
+            src = "\n".join(cell["source"])
+            for pat, msg in REMOVED.items():
+                if re.search(pat, src):
+                    hits.append(f"cell {n}: {msg}")
+        check(f"{nb_path.name}: no removed NumPy/pandas APIs", not hits,
+              "; ".join(hits[:3]))
+
+    # the NumPy 2.0 warning-class shim must survive notebook rebuilds
+    for nb_path in nbs:
+        nb = json.loads(nb_path.read_text(encoding="utf-8"))
+        setup = [c for c in nb["cells"] if c["cell_type"] == "code"
+                 and "al.load_bundle" in "\n".join(c["source"])]
+        src = "\n".join(setup[0]["source"]) if setup else ""
+        pos_shim = src.find("VisibleDeprecationWarning")
+        pos_chemprop = src.find("import chemprop")
+        check(f"{nb_path.name}: has the NumPy 2.0 warning shim", pos_shim >= 0)
+        check(f"{nb_path.name}: shim runs BEFORE importing chemprop",
+              pos_shim >= 0 and (pos_chemprop < 0 or pos_shim < pos_chemprop),
+              f"shim at {pos_shim}, chemprop import at {pos_chemprop}")
+
+    tk = ROOT / "al_toolkit.py"
+    if not tk.exists():
+        tk = ROOT / "student" / "al_toolkit.py"
+    check("al_toolkit.py carries the shim too",
+          "VisibleDeprecationWarning" in tk.read_text(encoding="utf-8"))
+
 def main() -> int:
     print("=" * 72)
     print("active learning tutorial -- logic tests")
@@ -651,6 +722,7 @@ def main() -> int:
         test_scaffold_split()
         test_validator(tmp)
         test_predict_hash()
+        test_notebook_apis()
 
     print("\n" + "=" * 72)
     if _failures:

@@ -1,0 +1,5 @@
+run_id,timestamp_utc,team_name,dataset,featurization,init_method,acquisition,acquisition_hparams,batch_size,n_rounds,n_seeds,auc_mean,auc_std,max_score_achieved,notebook_version,notes
+38bb539d-4924-49ae-8312-8a8c793fd3a6,2026-08-19T02:41:19Z,team-example,perera_suzuki,onehot,random,EI,"{""beta"": 2.0}",4,8,5,0.5269,0.2961,1.0,reaction-bo.ipynb v1,
+3f93853a-bfca-4c98-b72f-04d215b1d9d6,2026-08-19T02:41:27Z,team-example,perera_suzuki,onehot,random,EI,"{""beta"": 2.0}",4,8,5,0.5269,0.2961,1.0,reaction-bo.ipynb v1,
+fc2a3361-eddb-4bee-8d8f-809fbae261bc,2026-08-19T05:08:42Z,team-example,perera_suzuki,onehot,random,EI,"{""beta"": 2.0}",4,8,5,0.5269,0.2961,1.0,reaction-bo.ipynb v1,
+c08ec703-48e5-411e-86b7-01be16812649,2026-08-19T05:08:46Z,team-example,perera_suzuki,onehot,random,EI,"{""beta"": 2.0}",4,8,5,0.5269,0.2961,1.0,reaction-bo.ipynb v1,
