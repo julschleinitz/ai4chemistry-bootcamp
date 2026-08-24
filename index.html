@@ -94,6 +94,17 @@
 
   <main>
 
+    <!-- ── Goal of the bootcamp ── -->
+    <div class="about-card">
+      <p class="section-label">Goal of the bootcamp</p>
+      <p>
+        This bootcamp aims to give the audience an overview of the current machine learning and
+        artificial intelligence workflows used in chemistry — showing what is currently being done,
+        providing links to resources for students willing to learn more, and giving an introduction
+        on how and when to integrate ML/AI workflows in a research project.
+      </p>
+    </div>
+
     <!-- Legend -->
     <div class="legend">
       <div class="legend-item"><div class="legend-dot lecture"></div> Lecture</div>
@@ -109,239 +120,241 @@
       <span>Aug 10 – 14 </span>
     </div>
 
-    <div class="schedule-grid">
-      <!-- Column headers -->
-      <div class="grid-header time-col">Time</div>
-      <div class="grid-header">Monday<span class="date">Aug 10</span></div>
-      <div class="grid-header">Tuesday<span class="date">Aug 11</span></div>
-      <div class="grid-header">Wednesday<span class="date">Aug 12</span></div>
-      <div class="grid-header">Thursday<span class="date">Aug 13</span></div>
-      <div class="grid-header">Friday<span class="date">Aug 14</span></div>
+    <div class="schedule-scroll">
+      <div class="schedule-grid">
+        <!-- Column headers -->
+        <div class="grid-header time-col">Time</div>
+        <div class="grid-header">Monday<span class="date">Aug 10</span></div>
+        <div class="grid-header">Tuesday<span class="date">Aug 11</span></div>
+        <div class="grid-header">Wednesday<span class="date">Aug 12</span></div>
+        <div class="grid-header">Thursday<span class="date">Aug 13</span></div>
+        <div class="grid-header">Friday<span class="date">Aug 14</span></div>
 
-      <!-- 9:00–10:30 -->
-      <div class="time-slot">9:00<span class="slot-room">Spalding 102</span></div>
-      <!-- Mon: L1 -->
-      <a class="session lecture" href="lectures/ml-intro.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Bootcamp Introduction</span>
-        <span class="session-sub">Bootcamp objectives - Logistics</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-          <!-- Jules Schleinitz -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: L3 -->
-      <a class="session lecture" href="lectures/supervised-learning.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Supervised Learning</span>
-        <span class="session-sub">Definition, Data Splitting, Bias-variance, Examples on small datasets</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          S. Wahler<!-- Anjali Gurajapu x Jules Schleinitz -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: L5 -->
-      <a class="session lecture" href="lectures/mlips.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Machine-Learned Interatomic Potentials (MLIP)</span>
-        <span class="session-sub">Graph Neural Networks, Message Passing Neural Networks (MPNN), Application to Molecular Dynamics</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          M. Murphy
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Thu: L11 (swapped from Wed Aug 19 afternoon) -->
-      <a class="session lecture" href="lectures/rags.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Retrieval-Augmented Generation (RAG)</span>
-        <span class="session-sub">Retrieval-augmented literature extraction, hallucination limits</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          S. Wahler
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Fri: Hackathon -->
-      <a class="session hackathon" href="hackathon_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Day Hackathon</span>
-        <span class="session-sub">Morning session — apply week's concepts to a chemistry challenge</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          A. Gurajapu
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
+        <!-- 9:00–10:30 -->
+        <div class="time-slot">9:00<span class="slot-room">Spalding 102</span></div>
+        <!-- Mon: L1 -->
+        <a class="session lecture" href="lectures/ml-intro.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Bootcamp Introduction</span>
+          <span class="session-sub">Bootcamp objectives - Logistics</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+            <!-- Jules Schleinitz -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: L3 -->
+        <a class="session lecture" href="lectures/supervised-learning.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Supervised Learning</span>
+          <span class="session-sub">Definition, Data Splitting, Bias-variance, Examples on small datasets</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            S. Wahler<!-- Anjali Gurajapu x Jules Schleinitz -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: L5 -->
+        <a class="session lecture" href="lectures/mlips.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Machine-Learned Interatomic Potentials (MLIP)</span>
+          <span class="session-sub">Graph Neural Networks, Message Passing Neural Networks (MPNN), Application to Molecular Dynamics</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            M. Murphy
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Thu: L11 (swapped from Wed Aug 19 afternoon) -->
+        <a class="session lecture" href="lectures/rags.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Retrieval-Augmented Generation (RAG)</span>
+          <span class="session-sub">Retrieval-augmented literature extraction, hallucination limits</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            S. Wahler
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Fri: Hackathon -->
+        <a class="session hackathon" href="hackathon_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Day Hackathon</span>
+          <span class="session-sub">Morning session — apply week's concepts to a chemistry challenge</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            A. Gurajapu
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
 
-      <!-- Coffee break -->
-      <div class="break-row"><span class="break-label">☕ 10:30 – 10:45 &nbsp;Coffee break</span></div>
+        <!-- Coffee break -->
+        <div class="break-row"><span class="break-label">☕ 10:30 – 10:45 &nbsp;Coffee break</span></div>
 
-      <!-- 10:45–12:15 -->
-      <div class="time-slot">10:45<span class="slot-room">Spalding 102</span></div>
-      <!-- Mon: T1 -->
-      <div class="session tutorial introductions">
-        <span class="session-type">Student Introductions</span>
-        <span class="session-title">Attendees Introduction &amp; Areas of Research</span>
-        <span class="session-sub">Round-table introductions, research backgrounds, interest in the bootcamp</span>
+        <!-- 10:45–12:15 -->
+        <div class="time-slot">10:45<span class="slot-room">Spalding 102</span></div>
+        <!-- Mon: T1 -->
+        <div class="session tutorial introductions">
+          <span class="session-type">Student Introductions</span>
+          <span class="session-title">Attendees Introduction &amp; Areas of Research</span>
+          <span class="session-sub">Round-table introductions, research backgrounds, interest in the bootcamp</span>
+        </div>
+        <!-- Tue: T3 -->
+        <a class="session tutorial" href="tutorials/model-training.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Model Training 101</span>
+          <span class="session-sub">Data preprocessing, Train/val/test splitting, Avoiding data leakage, Baseline definition</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            S. Wahler
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: T5 -->
+        <a class="session tutorial" href="tutorials/gnn-mlip.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Machine-Learned Interatomic Potentials</span>
+          <span class="session-sub">How to train and validate an MLIP for Molecular Dynamics using a MACE model.</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            M. Murphy | A. Gurajapu
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Thu: T11 (swapped from Wed Aug 19 afternoon) -->
+        <a class="session tutorial" href="tutorials/rag-assistant.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Chemistry RAG Assistant</span>
+          <span class="session-sub">Index papers, Q&amp;A on reactions</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            S. Wahler
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Fri: Hackathon -->
+        <a class="session hackathon" href="hackathon_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Day Hackathon</span>
+          <span class="session-sub">Late morning — team work continues</span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <!-- Lunch -->
+        <div class="break-row"><span class="break-label">🍽️ 12:15 – 13:30 &nbsp;Lunch</span></div>
+
+        <!-- 13:30–15:00 -->
+        <div class="time-slot">13:30<span class="slot-room">RSC 275</span></div>
+        <!-- Mon: L2 -->
+        <a class="session lecture" href="lectures/molecular-representations.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Evolution of Molecular Representations</span>
+          <span class="session-sub">SMILES, InChI, SELFIES, fingerprints, expert-crafted, molecular graphs</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz<!-- Jules Schleinitz -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: L4 (was old L5 Neural Networks) -->
+        <a class="session lecture" href="lectures/neural-networks.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Introduction to Neural Networks &amp; Deep Learning</span>
+          <span class="session-sub">The perceptron, Neural networks, Overview of complex architectures</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: L6 (swapped from Wed Aug 19 afternoon) -->
+        <a class="session lecture" href="lectures/learned-representations.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Learned Representations</span>
+          <span class="session-sub">Unsupervised learning, self-supervised learning, applications including pre-training and fine-tuning</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Thu: L7 Diffusion (shifted from Thu 8:30) -->
+        <a class="session lecture" href="lectures/generative-models.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Generative Models</span>
+          <span class="session-sub">Overview of generative models including VAEs, GANs, and diffusion models</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            C. Liu<!-- Chenghao Liu -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Fri: Hackathon -->
+        <a class="session hackathon" href="hackathon_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Day Hackathon</span>
+          <span class="session-sub">Afternoon — final sprint &amp; preparation of results</span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <!-- Coffee break -->
+        <div class="break-row"><span class="break-label">☕ 15:00 – 15:15 &nbsp;Coffee break</span></div>
+
+        <!-- 15:15–16:45 -->
+        <div class="time-slot">15:15<span class="slot-room">RSC 275</span></div>
+        <!-- Mon: T1 -->
+        <a class="session tutorial" href="tutorials/molecular-representations.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Molecular Property Prediction</span>
+          <span class="session-sub">Building a pipeline using rdkit, feature engineering, training and performance evaluation</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: T3 -->
+        <a class="session tutorial" href="tutorials/deep-learning-neural-network.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Neural Networks in Practice</span>
+          <span class="session-sub">MLPs on Tox21 from scratch: training loop, overfitting, and regularization</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: T7 (swapped from Wed Aug 19 afternoon) -->
+        <a class="session tutorial" href="tutorials/pretraining_finetuning.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Few shot learning</span>
+          <span class="session-sub">Transfer learning, application, failure modes...</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Thu: T7 -->
+        <a class="session tutorial" href="tutorials/molecule-generation.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Molecular Generation</span>
+          <span class="session-sub">Comparison of generative models for molecular design, introduction to drug design.</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Fri: Hackathon -->
+        <a class="session hackathon" href="hackathon_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Day Hackathon</span>
+          <span class="session-sub">Presentations &amp; wrap-up of hackathon results</span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
       </div>
-      <!-- Tue: T3 -->
-      <a class="session tutorial" href="tutorials/model-training.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Model Training 101</span>
-        <span class="session-sub">Data preprocessing, Train/val/test splitting, Avoiding data leakage, Baseline definition</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          S. Wahler
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: T5 -->
-      <a class="session tutorial" href="tutorials/gnn-mlip.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Machine-Learned Interatomic Potentials</span>
-        <span class="session-sub">How to train and validate an MLIP for Molecular Dynamics using a MACE model.</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          M. Murphy | A. Gurajapu
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Thu: T11 (swapped from Wed Aug 19 afternoon) -->
-      <a class="session tutorial" href="tutorials/rag-assistant.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Chemistry RAG Assistant</span>
-        <span class="session-sub">Index papers, Q&amp;A on reactions</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          S. Wahler
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Fri: Hackathon -->
-      <a class="session hackathon" href="hackathon_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Day Hackathon</span>
-        <span class="session-sub">Late morning — team work continues</span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-
-      <!-- Lunch -->
-      <div class="break-row"><span class="break-label">🍽️ 12:15 – 13:30 &nbsp;Lunch</span></div>
-
-      <!-- 13:30–15:00 -->
-      <div class="time-slot">13:30<span class="slot-room">RSC 275</span></div>
-      <!-- Mon: L2 -->
-      <a class="session lecture" href="lectures/molecular-representations.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Evolution of Molecular Representations</span>
-        <span class="session-sub">SMILES, InChI, SELFIES, fingerprints, expert-crafted, molecular graphs</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz<!-- Jules Schleinitz -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: L4 (was old L5 Neural Networks) -->
-      <a class="session lecture" href="lectures/neural-networks.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Introduction to Neural Networks &amp; Deep Learning</span>
-        <span class="session-sub">The perceptron, Neural networks, Overview of complex architectures</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: L6 (swapped from Wed Aug 19 afternoon) -->
-      <a class="session lecture" href="lectures/learned-representations.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Learned Representations</span>
-        <span class="session-sub">Unsupervised learning, self-supervised learning, applications including pre-training and fine-tuning</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Thu: L7 Diffusion (shifted from Thu 8:30) -->
-      <a class="session lecture" href="lectures/generative-models.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Generative Models</span>
-        <span class="session-sub">Overview of generative models including VAEs, GANs, and diffusion models</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          C. Liu<!-- Chenghao Liu -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Fri: Hackathon -->
-      <a class="session hackathon" href="hackathon_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Day Hackathon</span>
-        <span class="session-sub">Afternoon — final sprint &amp; preparation of results</span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-
-      <!-- Coffee break -->
-      <div class="break-row"><span class="break-label">☕ 15:00 – 15:15 &nbsp;Coffee break</span></div>
-
-      <!-- 15:15–16:45 -->
-      <div class="time-slot">15:15<span class="slot-room">RSC 275</span></div>
-      <!-- Mon: T1 -->
-      <a class="session tutorial" href="tutorials/molecular-representations.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Molecular Property Prediction</span>
-        <span class="session-sub">Building a pipeline using rdkit, feature engineering, training and performance evaluation</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: T3 -->
-      <a class="session tutorial" href="tutorials/deep-learning-neural-network.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Neural Networks in Practice</span>
-        <span class="session-sub">MLPs on Tox21 from scratch: training loop, overfitting, and regularization</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: T7 (swapped from Wed Aug 19 afternoon) -->
-      <a class="session tutorial" href="tutorials/pretraining_finetuning.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Few shot learning</span>
-        <span class="session-sub">Transfer learning, application, failure modes...</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Thu: T7 -->
-      <a class="session tutorial" href="tutorials/molecule-generation.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Molecular Generation</span>
-        <span class="session-sub">Comparison of generative models for molecular design, introduction to drug design.</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Fri: Hackathon -->
-      <a class="session hackathon" href="hackathon_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Day Hackathon</span>
-        <span class="session-sub">Presentations &amp; wrap-up of hackathon results</span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
     </div>
 
     <hr class="divider">
@@ -353,221 +366,242 @@
       <span>Aug 17 – 21</span>
     </div>
 
-    <div class="schedule-grid">
-      <!-- Column headers -->
-      <div class="grid-header time-col">Time</div>
-      <div class="grid-header">Monday<span class="date">Aug 17</span></div>
-      <div class="grid-header">Tuesday<span class="date">Aug 18</span></div>
-      <div class="grid-header">Wednesday<span class="date">Aug 19</span></div>
-      <div class="grid-header">Thursday<span class="date">Aug 20</span></div>
-      <div class="grid-header">Friday<span class="date">Aug 21</span></div>
+    <div class="schedule-scroll">
+      <div class="schedule-grid">
+        <!-- Column headers -->
+        <div class="grid-header time-col">Time</div>
+        <div class="grid-header">Monday<span class="date">Aug 17</span></div>
+        <div class="grid-header">Tuesday<span class="date">Aug 18</span></div>
+        <div class="grid-header">Wednesday<span class="date">Aug 19</span></div>
+        <div class="grid-header">Thursday<span class="date">Aug 20</span></div>
+        <div class="grid-header">Friday<span class="date">Aug 21</span></div>
 
-      <!-- 9:00–10:30 -->
-      <div class="time-slot">9:00<span class="slot-room">Spalding 102</span></div>
-      <!-- Mon: Interpretability Lecture (swapped from Wed Aug 19 afternoon) -->
-      <a class="session lecture" href="lectures/interpretability.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Model Interpretability</span>
-        <span class="session-sub">Interpretable-by-design vs. post-hoc: MDI, permutation importance, ICE/PDP, LIME, and SHAP</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          M. Yusov<!-- Michael Yusov -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: DOE (new, before Active Learning) -->
-      <a class="session lecture" href="lectures/design-of-experiments.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Design of Experiments (DOE)</span>
-        <span class="session-sub">Factorial design, screening, response surfaces, and experimental planning strategies</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          A. Schmidt
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: Active Learning (rotated from Bayesian Optimization's slot) -->
-      <a class="session lecture" href="lectures/active-learning.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Active Learning</span>
-        <span class="session-sub">Query strategies: uncertainty, BALD, core-set, pool-based vs. stream-based</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz<!-- Jules Schleinitz -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Thu: L12 Agentic AI for Chemistry (swapped with LLMs) -->
-      <a class="session lecture" href="lectures/agentic-ai.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Agentic AI for Chemistry</span>
-        <span class="session-sub">ReAct, Coscientist, multi-agent, self-driving labs</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          B. Reiner | J. Wade
-        </span>
-        <span class="session-room-override">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Braun 152 (room change)
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Fri: Panel — Your Future at the Bench -->
-      <div class="session panel">
-        <span class="session-type">Panel</span>
-        <span class="session-title">Your Future at the Bench</span>
-        <span class="session-sub">What AI readiness means for the next generation of chemists</span>
+        <!-- 9:00–10:30 -->
+        <div class="time-slot">9:00<span class="slot-room">Spalding 102</span></div>
+        <!-- Mon: Interpretability Lecture (swapped from Wed Aug 19 afternoon) -->
+        <a class="session lecture" href="lectures/interpretability.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Model Interpretability</span>
+          <span class="session-sub">Interpretable-by-design vs. post-hoc: MDI, permutation importance, ICE/PDP, LIME, and SHAP</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            M. Yusov<!-- Michael Yusov -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: DOE (new, before Active Learning) -->
+        <a class="session lecture" href="lectures/design-of-experiments.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Design of Experiments (DOE)</span>
+          <span class="session-sub">Factorial design, screening, response surfaces, and experimental planning strategies</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            A. Schmidt
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: Active Learning (rotated from Bayesian Optimization's slot) -->
+        <a class="session lecture" href="lectures/active-learning.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Active Learning</span>
+          <span class="session-sub">Query strategies: uncertainty, BALD, core-set, pool-based vs. stream-based</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz<!-- Jules Schleinitz -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Thu: L12 Agentic AI for Chemistry (swapped with LLMs) -->
+        <a class="session lecture" href="lectures/agentic-ai.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Agentic AI for Chemistry</span>
+          <span class="session-sub">ReAct, Coscientist, multi-agent, self-driving labs</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            B. Reiner | J. Wade
+          </span>
+          <span class="session-room-override">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Braun 152 (room change)
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Fri: Panel — Your Future at the Bench -->
+        <div class="session panel">
+          <span class="session-type">Panel</span>
+          <span class="session-title">Your Future at the Bench</span>
+          <span class="session-sub">What AI readiness means for the next generation of chemists</span>
+        </div>
+        <!-- Coffee break -->
+        <div class="break-row"><span class="break-label">☕ 10:30 – 10:45 &nbsp;Coffee break</span></div>
+
+        <!-- 10:45–12:15 -->
+        <div class="time-slot">10:45<span class="slot-room">Spalding 102</span></div>
+        <!-- Mon: Explaining ML Predictions (swapped from Wed Aug 19 afternoon) -->
+        <a class="session tutorial" href="tutorials/interpretability.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Explaining ML Predictions</span>
+          <span class="session-sub">Permutation importance, ICE/PDP, SHAP, and LIME on a blood–brain barrier model</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            M. Yusov
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: T9 DOE Tutorial (aligned with DOE lecture) -->
+        <a class="session tutorial" href="tutorials/design-of-experiments.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Design of Experiments in Practice</span>
+          <span class="session-sub">Factorial screening, response surface setup, and experiment planning workflows</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            A. Schmidt
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: T10 Active Learning tutorial (rotated from Bayesian Optimization's slot) -->
+        <a class="session tutorial" href="tutorials/dft-active-learning.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Active Learning</span>
+          <span class="session-sub">600 DFT labels, spent wisely</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Thu: T12 ReAct Agent (aligned with Agentic AI lecture) -->
+        <a class="session tutorial" href="tutorials/react-agent.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Does This Chemistry Task Need an LLM?</span>
+          <span class="session-sub">Manual parser vs. LLM predictor vs. self-optimizing DSPy Flex</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            B. Reiner | J. Wade
+          </span>
+          <span class="session-room-override">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Braun 152 (room change)
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Fri: Hackathon (final prep before presentations) -->
+        <a class="session hackathon" href="personnal_project_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Prepare Presentations</span>
+          <span class="session-sub">Final polish on slides ahead of flash talks</span>
+        </a>
+
+        <!-- Lunch -->
+        <div class="break-row"><span class="break-label">🍽️ 12:15 – 13:30 &nbsp;Lunch</span></div>
+
+        <!-- 13:30–15:00 -->
+        <div class="time-slot">13:30<span class="slot-room">RSC 275</span></div>
+        <!-- Mon: Data Stewardship (fixed href — was mistakenly pointing to active-learning.html) -->
+        <a class="session lecture" href="lectures/data-stewardship.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Data Stewardship</span>
+          <span class="session-sub">Data management in experimental projects for efficient use in data-driven projects.</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            A. Schmidt<!-- Alix Schmidt -->
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: Bayesian Optimization (rotated from Transformers' slot) -->
+        <a class="session lecture" href="lectures/bayesian-optimization.html">
+          <span class="session-type">Lecture</span>
+          <span class="session-title">Bayesian Optimization</span>
+          <span class="session-sub">Surrogates, EI/UCB/PI, BO loop, molecular &amp; materials discovery, multi-objective BO</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: Hackathon (Transformers moved to Fri 9:00) -->
+        <a class="session hackathon" href="personnal_project_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Frame Your Own Project</span>
+          <span class="session-sub">Kickoff &amp; framing — data and split only, no models</span>
+        </a>
+        <!-- Thu: Hackathon -->
+        <a class="session hackathon" href="personnal_project_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Frame Your Own Project</span>
+          <span class="session-sub">Baseline, then a first model</span>
+        </a>
+        <!-- Fri: Hackathon (flash talks) -->
+        <a class="session hackathon" href="personnal_project_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Flash Talks</span>
+          <span class="session-sub">5 slides, 5 minutes, hard stop</span>
+        </a>
+
+        <!-- Coffee break -->
+        <div class="break-row"><span class="break-label">☕ 15:00 – 15:15 &nbsp;Coffee break</span></div>
+
+        <!-- 15:15–16:45 -->
+        <div class="time-slot">15:15<span class="slot-room">RSC 275</span></div>
+        <!-- Mon: T8 Data Stewardship (new, after Data Stewardship lecture) -->
+        <a class="session tutorial" href="tutorials/data-stewardship.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Data Stewardship</span>
+          <span class="session-sub">Organizing and managing research data, metadata standards, data sharing practices</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            A. Schmidt
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Tue: T10 Reaction Yield Optimization with BO (rotated from Transformers' slot) -->
+        <a class="session tutorial" href="tutorials/reaction-bo.html">
+          <span class="session-type">Tutorial</span>
+          <span class="session-title">Reaction Yield Optimization with BO</span>
+          <span class="session-sub">Suzuki coupling, BoTorch, EI vs. UCB convergence</span>
+          <span class="session-instructor">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            J. Schleinitz
+          </span>
+          <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <!-- Wed: Hackathon (Fine-tuning ChemBERTa removed) -->
+        <a class="session hackathon" href="personnal_project_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Frame Your Own Project</span>
+          <span class="session-sub">Finish the one-page plan — data, model job, and the split</span>
+        </a>
+        <!-- Thu: Hackathon -->
+        <a class="session hackathon" href="personnal_project_1/index.html">
+          <span class="session-type">🧑‍💻 Hackathon</span>
+          <span class="session-title">Frame Your Own Project</span>
+          <span class="session-sub">Peer review, honest evaluation, then build your 5 slides</span>
+        </a>
+        <!-- Fri: Closing -->
+        <div class="session free">
+          <span class="session-type">Closing</span>
+          <span class="session-title">Wrap-up &amp; Perspectives</span>
+        </div>
       </div>
-      <!-- Coffee break -->
-      <div class="break-row"><span class="break-label">☕ 10:30 – 10:45 &nbsp;Coffee break</span></div>
+    </div>
 
-      <!-- 10:45–12:15 -->
-      <div class="time-slot">10:45<span class="slot-room">Spalding 102</span></div>
-      <!-- Mon: Explaining ML Predictions (swapped from Wed Aug 19 afternoon) -->
-      <a class="session tutorial" href="tutorials/interpretability.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Explaining ML Predictions</span>
-        <span class="session-sub">Permutation importance, ICE/PDP, SHAP, and LIME on a blood–brain barrier model</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          M. Yusov
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: T9 DOE Tutorial (aligned with DOE lecture) -->
-      <a class="session tutorial" href="tutorials/design-of-experiments.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Design of Experiments in Practice</span>
-        <span class="session-sub">Factorial screening, response surface setup, and experiment planning workflows</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          A. Schmidt
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: T10 Active Learning tutorial (rotated from Bayesian Optimization's slot) -->
-      <a class="session tutorial" href="tutorials/dft-active-learning.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Active Learning</span>
-        <span class="session-sub">600 DFT labels, spent wisely</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Thu: T12 ReAct Agent (aligned with Agentic AI lecture) -->
-      <a class="session tutorial" href="tutorials/react-agent.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Does This Chemistry Task Need an LLM?</span>
-        <span class="session-sub">Manual parser vs. LLM predictor vs. self-optimizing DSPy Flex</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          B. Reiner | J. Wade
-        </span>
-        <span class="session-room-override">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Braun 152 (room change)
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Fri: Hackathon (final prep before presentations) -->
-      <a class="session hackathon" href="personnal_project_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Prepare Presentations</span>
-        <span class="session-sub">Final polish on slides ahead of flash talks</span>
-      </a>
-
-      <!-- Lunch -->
-      <div class="break-row"><span class="break-label">🍽️ 12:15 – 13:30 &nbsp;Lunch</span></div>
-
-      <!-- 13:30–15:00 -->
-      <div class="time-slot">13:30<span class="slot-room">RSC 275</span></div>
-      <!-- Mon: Data Stewardship (fixed href — was mistakenly pointing to active-learning.html) -->
-      <a class="session lecture" href="lectures/data-stewardship.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Data Stewardship</span>
-        <span class="session-sub">Data management in experimental projects for efficient use in data-driven projects.</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          A. Schmidt<!-- Alix Schmidt -->
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: Bayesian Optimization (rotated from Transformers' slot) -->
-      <a class="session lecture" href="lectures/bayesian-optimization.html">
-        <span class="session-type">Lecture</span>
-        <span class="session-title">Bayesian Optimization</span>
-        <span class="session-sub">Surrogates, EI/UCB/PI, BO loop, molecular &amp; materials discovery, multi-objective BO</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: Hackathon (Transformers moved to Fri 9:00) -->
-      <a class="session hackathon" href="personnal_project_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Frame Your Own Project</span>
-        <span class="session-sub">Kickoff &amp; framing — data and split only, no models</span>
-      </a>
-      <!-- Thu: Hackathon -->
-      <a class="session hackathon" href="personnal_project_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Frame Your Own Project</span>
-        <span class="session-sub">Baseline, then a first model</span>
-      </a>
-      <!-- Fri: Hackathon (flash talks) -->
-      <a class="session hackathon" href="personnal_project_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Flash Talks</span>
-        <span class="session-sub">5 slides, 5 minutes, hard stop</span>
-      </a>
-
-      <!-- Coffee break -->
-      <div class="break-row"><span class="break-label">☕ 15:00 – 15:15 &nbsp;Coffee break</span></div>
-
-      <!-- 15:15–16:45 -->
-      <div class="time-slot">15:15<span class="slot-room">RSC 275</span></div>
-      <!-- Mon: T8 Data Stewardship (new, after Data Stewardship lecture) -->
-      <a class="session tutorial" href="tutorials/data-stewardship.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Data Stewardship</span>
-        <span class="session-sub">Organizing and managing research data, metadata standards, data sharing practices</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          A. Schmidt
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Tue: T10 Reaction Yield Optimization with BO (rotated from Transformers' slot) -->
-      <a class="session tutorial" href="tutorials/reaction-bo.html">
-        <span class="session-type">Tutorial</span>
-        <span class="session-title">Reaction Yield Optimization with BO</span>
-        <span class="session-sub">Suzuki coupling, BoTorch, EI vs. UCB convergence</span>
-        <span class="session-instructor">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Schleinitz
-        </span>
-        <svg class="session-link-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <!-- Wed: Hackathon (Fine-tuning ChemBERTa removed) -->
-      <a class="session hackathon" href="personnal_project_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Frame Your Own Project</span>
-        <span class="session-sub">Finish the one-page plan — data, model job, and the split</span>
-      </a>
-      <!-- Thu: Hackathon -->
-      <a class="session hackathon" href="personnal_project_1/index.html">
-        <span class="session-type">🧑‍💻 Hackathon</span>
-        <span class="session-title">Frame Your Own Project</span>
-        <span class="session-sub">Peer review, honest evaluation, then build your 5 slides</span>
-      </a>
-      <!-- Fri: Closing -->
-      <div class="session free">
-        <span class="session-type">Closing</span>
-        <span class="session-title">Wrap-up &amp; Perspectives</span>
-      </div>
+    <!-- ── Acknowledgements ── -->
+    <div class="thanks">
+      <p class="section-label">Acknowledgements</p>
+      <p>
+        This bootcamp exists thanks to everyone who built its content — the lectures, the hands-on
+        tutorials, the notebooks, and the datasets behind them. Our sincere thanks to:
+      </p>
+      <ul class="thanks-list">
+        <li><a href="https://www.linkedin.com/in/alixschmidt/" target="_blank" rel="noopener">Alix Schmidt</a></li>
+        <li><a href="https://www.linkedin.com/in/dr-sabrina-wahler-60b33b1a0/" target="_blank" rel="noopener">Sabrina Wahler</a></li>
+        <li><a href="https://www.linkedin.com/in/michael-yusov/" target="_blank" rel="noopener">Michael Yusov</a></li>
+        <li><a href="https://www.linkedin.com/in/madeline-murphy22/" target="_blank" rel="noopener">Madeline Murphy</a></li>
+        <li><a href="https://www.linkedin.com/in/anjali-gurajapu/" target="_blank" rel="noopener">Anjali Gurajapu</a></li>
+        <li><a href="https://pchliu.github.io/" target="_blank" rel="noopener">Chenghao Liu</a></li>
+        <li><a href="https://www.linkedin.com/in/benjamin-reiner/" target="_blank" rel="noopener">Ben Reiner</a></li>
+        <li><span>James Wade</span></li>
+      </ul>
     </div>
 
   </main>
