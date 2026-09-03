@@ -86,16 +86,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/transformers.html</loc>
-    <lastmod>2026-08-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/uncertainty-quantification.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.8</priority>
@@ -176,11 +166,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/chemberta.html</loc>
-    <lastmod>2026-08-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/data-stewardship.html</loc>
     <lastmod>2026-08-10</lastmod>
     <priority>0.6</priority>
@@ -243,11 +228,6 @@
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/reaction-bo.html</loc>
     <lastmod>2026-08-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/uncertainty-quantification.html</loc>
-    <lastmod>2026-07-17</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
