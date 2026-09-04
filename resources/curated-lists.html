@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curated Lists &amp; Community · Resources · AI4Chemical Sciences Bootcamp</title>
+  <meta name="description" content="Awesome-lists, teaching collections, courses, books and blogs for machine learning in the chemical sciences — curated from the community.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .topic-hero { background: var(--surface); padding: 52px 40px 44px; border-bottom: 1px solid var(--border); }
+    .topic-hero h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .topic-hero h1 em { font-style: normal; color: var(--accent); }
+    .topic-hero p { font-size: 15px; color: var(--accent-dim); max-width: 580px; line-height: 1.6; }
+    .topic-body { max-width: 900px; margin: 0 auto; padding: 44px 40px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 36px; transition: color 0.15s; }
+    .back-link:hover { color: var(--accent); }
+    .res-section { margin-bottom: 48px; }
+    .res-section-header { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 18px; }
+    .res-section-header h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+    .res-section-header .res-count { font-size: 12px; color: var(--text-dim); }
+    .res-list { display: flex; flex-direction: column; gap: 10px; }
+    .res-card { display: flex; align-items: flex-start; gap: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+    .res-card:hover { background: rgba(93,218,180,0.06); border-color: rgba(93,218,180,0.3); }
+    .res-card-icon { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(93,218,180,0.1); border: 1px solid rgba(93,218,180,0.2); color: var(--accent); }
+    .res-card-icon.orange { background: rgba(255,180,50,0.12); border-color: rgba(255,180,50,0.25); color: #FFB432; }
+    .res-card-icon.blue   { background: rgba(99,179,237,0.12); border-color: rgba(99,179,237,0.25); color: #63B3ED; }
+    .res-card-icon.purple { background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.25); color: #A78BFA; }
+    .res-card-icon.rose   { background: rgba(245,101,101,0.12); border-color: rgba(245,101,101,0.25); color: #F56565; }
+    .res-card-body { flex: 1; min-width: 0; }
+    .res-card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .res-card-desc  { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+    .res-card-meta  { font-size: 11.5px; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
+    .res-ext { color: var(--text-dim); opacity: 0.4; flex-shrink: 0; margin-top: 2px; transition: opacity 0.15s; }
+    .res-card:hover .res-ext { opacity: 1; }
+    .res-card-meta a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(93,218,180,0.3); }
+    .res-card-meta a:hover { color: var(--accent); }
+    .res-card-desc code { background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+    .ds-card { cursor: default; }
+    .ds-card:hover { background: var(--surface2); border-color: var(--border); }
+    .res-card-title a.ds-src { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+    .res-card-title a.ds-src svg { opacity: 0.35; transition: opacity 0.15s; }
+    .res-card-title a.ds-src:hover { color: var(--accent); }
+    .res-card-title a.ds-src:hover svg { opacity: 1; }
+    .ds-note { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 14px 18px; margin-bottom: 32px; font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+    @media (max-width: 700px) { .topic-hero { padding: 36px 20px 32px; } .topic-hero h1 { font-size: 28px; } .topic-body { padding: 28px 20px 60px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">
+      <div class="nav-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+        </svg>
+      </div>
+      AI<em>4</em>Chemical Sciences
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Schedule</a></li>
+      <li><a href="../lectures/">Lectures</a></li>
+      <li><a href="../tutorials/">Tutorials</a></li>
+      <li><a href="../resources.html" class="active">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="topic-hero">
+    <h1>Curated <em>Lists</em></h1>
+    <p>Where the community already did the collecting — awesome-lists, teaching curricula, and the blogs worth following.</p>
+  </div>
+
+  <div class="topic-body">
+
+    <a class="back-link" href="../resources.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      All topics
+    </a>
+
+    <div class="ds-note">
+      <strong>Why this page exists.</strong> The topic pages list resources for one method at a time.
+      These are the cross-cutting collections — most are actively maintained by people in the field, so
+      they will stay current long after this bootcamp ends. Several were suggested by the community.
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Awesome-lists &amp; indexes</h2>
+        <span class="res-count">6 lists</span>
+      </div>
+      <div class="res-list">
+
+
+        <a class="res-card" href="https://github.com/lmmentel/awesome-python-chemistry" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-python-chemistry</div>
+            <div class="res-card-desc">Long-running index of Python packages for chemistry — cheminformatics, simulation, visualisation, databases, and machine learning.</div>
+            <div class="res-card-meta">Ł. Mentel · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/benb111/awesome-small-molecule-ml" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-small-molecule-ml</div>
+            <div class="res-card-desc">Focused list of models, datasets and tooling for small-molecule machine learning, with an emphasis on property prediction and generation.</div>
+            <div class="res-card-meta">B. Birnbaum · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/hsiaoyi0504/awesome-cheminformatics" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-cheminformatics</div>
+            <div class="res-card-desc">Cheminformatics-specific collection covering libraries, courses, books, blogs and databases.</div>
+            <div class="res-card-meta">H.-Y. Chen · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/blaiszik/awesome-matchem-datasets" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-matchem-datasets</div>
+            <div class="res-card-desc">Materials- and chemistry-ML datasets grouped by modality and task. Also listed on the Datasets page.</div>
+            <div class="res-card-meta">B. Blaiszik · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/kjappelbaum/awesome-chemistry-datasets" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-chemistry-datasets</div>
+            <div class="res-card-desc">Chemistry datasets and their flat-CSV mirrors — the source of several reaction benchmarks used in this bootcamp.</div>
+            <div class="res-card-meta">K. Jablonka · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/mlederbauer/awesome-learning-digital-chemistry" target="_blank" rel="noopener">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-learning-digital-chemistry</div>
+            <div class="res-card-desc">Learning-path oriented list for digital chemistry, curated for people entering the field.</div>
+            <div class="res-card-meta">M. Lederbauer · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Teaching collections &amp; courses</h2>
+        <span class="res-count">6 resources</span>
+      </div>
+      <div class="res-list">
+
+
+        <a class="res-card" href="https://education.molssi.org/resources.html" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">MolSSI Education Resources</div>
+            <div class="res-card-desc">Structured curriculum from introductory Python through software engineering to machine learning, built for computational molecular scientists.</div>
+            <div class="res-card-meta">Molecular Sciences Software Institute</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/volkamerlab/teachopencadd" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">TeachOpenCADD</div>
+            <div class="res-card-desc">Talktorials (talk + tutorial) on computer-aided drug design. Talktorials T033–T038 specifically cover molecular deep learning.</div>
+            <div class="res-card-meta">Volkamer Lab · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://atomistic-cookbook.org/index.html" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Atomistic Cookbook</div>
+            <div class="res-card-desc">Recipe-style, runnable examples for atomistic modelling and machine-learned interatomic potentials.</div>
+            <div class="res-card-meta">COSMO / EPFL</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://introtodeeplearning.com" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">MIT 6.S191 — Introduction to Deep Learning</div>
+            <div class="res-card-desc">Annually refreshed in-person course mixing lectures, labs and mentored projects, with all materials open-sourced after each run.</div>
+            <div class="res-card-meta">MIT · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://www.deeplearning.ai/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">DeepLearning.AI</div>
+            <div class="res-card-desc">Short courses and specialisations on deep learning, LLMs and agentic workflows.</div>
+            <div class="res-card-meta">DeepLearning.AI</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://chemetrian.com" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Chemetrian</div>
+            <div class="res-card-desc">Platform for AI/ML chemistry workflows with no local setup required. Free for academics and already used in undergraduate teaching labs.</div>
+            <div class="res-card-meta">Chemetrian · Free for academics</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Books, blogs &amp; handbooks</h2>
+        <span class="res-count">3 resources</span>
+      </div>
+      <div class="res-list">
+
+
+        <a class="res-card" href="https://practicalcheminformatics.blogspot.com/" target="_blank" rel="noopener">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Practical Cheminformatics — Pat Walters</div>
+            <div class="res-card-desc">Long-form posts working through real cheminformatics problems, usually with accompanying notebooks.</div>
+            <div class="res-card-meta">Pat Walters · Blog</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://cheminformania.com" target="_blank" rel="noopener">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Cheminformania</div>
+            <div class="res-card-desc">Blog posts on cheminformatics and machine learning for chemistry, with worked code examples.</div>
+            <div class="res-card-meta">E. Bjerrum · Blog</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://dmol.pub" target="_blank" rel="noopener">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Deep Learning for Molecules &amp; Materials</div>
+            <div class="res-card-desc">Free online textbook with runnable code throughout. Source repo: github.com/whitead/dmol-book.</div>
+            <div class="res-card-meta">A. White · Free book</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Division of Chemistry and Chemical Engineering · Caltech</span>
+    <span class="sep">·</span>
+    <span>Contact: <a href="mailto:jul@caltech.edu" style="color:inherit">jul@caltech.edu</a></span>
+    <span class="sep">·</span>
+    <a href="https://github.com/julschleinitz/ai4chemistry-bootcamp" style="color:inherit;display:flex;align-items:center;gap:5px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      GitHub
+    </a>
+  </footer>
+
+</body>
+</html>

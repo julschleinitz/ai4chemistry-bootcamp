@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datasets · Resources · AI4Chemical Sciences Bootcamp</title>
+  <meta name="description" content="Every dataset used in the AI4Chemical Sciences bootcamp lectures and tutorials, plus the catalogs and curated lists to find more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .topic-hero { background: var(--surface); padding: 52px 40px 44px; border-bottom: 1px solid var(--border); }
+    .topic-hero h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .topic-hero h1 em { font-style: normal; color: var(--accent); }
+    .topic-hero p { font-size: 15px; color: var(--accent-dim); max-width: 580px; line-height: 1.6; }
+    .topic-body { max-width: 900px; margin: 0 auto; padding: 44px 40px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 36px; transition: color 0.15s; }
+    .back-link:hover { color: var(--accent); }
+    .res-section { margin-bottom: 48px; }
+    .res-section-header { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 18px; }
+    .res-section-header h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+    .res-section-header .res-count { font-size: 12px; color: var(--text-dim); }
+    .res-list { display: flex; flex-direction: column; gap: 10px; }
+    .res-card { display: flex; align-items: flex-start; gap: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+    .res-card:hover { background: rgba(93,218,180,0.06); border-color: rgba(93,218,180,0.3); }
+    .res-card-icon { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(93,218,180,0.1); border: 1px solid rgba(93,218,180,0.2); color: var(--accent); }
+    .res-card-icon.orange { background: rgba(255,180,50,0.12); border-color: rgba(255,180,50,0.25); color: #FFB432; }
+    .res-card-icon.blue   { background: rgba(99,179,237,0.12); border-color: rgba(99,179,237,0.25); color: #63B3ED; }
+    .res-card-icon.purple { background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.25); color: #A78BFA; }
+    .res-card-icon.rose   { background: rgba(245,101,101,0.12); border-color: rgba(245,101,101,0.25); color: #F56565; }
+    .res-card-body { flex: 1; min-width: 0; }
+    .res-card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .res-card-desc  { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+    .res-card-meta  { font-size: 11.5px; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
+    .res-ext { color: var(--text-dim); opacity: 0.4; flex-shrink: 0; margin-top: 2px; transition: opacity 0.15s; }
+    .res-card:hover .res-ext { opacity: 1; }
+    .res-card-meta a { color: var(--accent-dim); text-decoration: none; border-bottom: 1px solid rgba(93,218,180,0.3); }
+    .res-card-meta a:hover { color: var(--accent); }
+    .res-card-desc code { background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+    .ds-card { cursor: default; }
+    .ds-card:hover { background: var(--surface2); border-color: var(--border); }
+    .res-card-title a.ds-src { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+    .res-card-title a.ds-src svg { opacity: 0.35; transition: opacity 0.15s; }
+    .res-card-title a.ds-src:hover { color: var(--accent); }
+    .res-card-title a.ds-src:hover svg { opacity: 1; }
+    .ds-note { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 14px 18px; margin-bottom: 32px; font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+    @media (max-width: 700px) { .topic-hero { padding: 36px 20px 32px; } .topic-hero h1 { font-size: 28px; } .topic-body { padding: 28px 20px 60px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="../index.html">
+      <div class="nav-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,3 19.8,7.5 19.8,16.5 12,21 4.2,16.5 4.2,7.5"/>
+          <circle cx="12" cy="12" r="3.5"/>
+        </svg>
+      </div>
+      AI<em>4</em>Chemical Sciences
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Schedule</a></li>
+      <li><a href="../lectures/">Lectures</a></li>
+      <li><a href="../tutorials/">Tutorials</a></li>
+      <li><a href="../resources.html" class="active">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="topic-hero">
+    <h1>Data<em>sets</em></h1>
+    <p>Every dataset the bootcamp actually trains on, with a link to the session that uses it — then the catalogs and curated lists to go further.</p>
+  </div>
+
+  <div class="topic-body">
+
+    <a class="back-link" href="../resources.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      All topics
+    </a>
+
+    <div class="ds-note">
+      <strong>How to read this page.</strong> The first section is what you will actually load in a
+      notebook during the two weeks. The second is where to look when you need data for a problem the
+      bootcamp does not cover. The third points into the per-topic pages, which list further datasets
+      in the context of the method that uses them.
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Used in this bootcamp</h2>
+        <span class="res-count">11 datasets</span>
+      </div>
+      <div class="res-list">
+
+
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://moleculenet.org/datasets-1" target="_blank" rel="noopener">ESOL (Delaney) — aqueous solubility<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">1,128 small molecules with measured log-solubility. Loaded via <code>dc.molnet.load_delaney</code>; the tutorial also ships derived pK<sub>a</sub> and xTB solvation columns.</div>
+            <div class="res-card-meta">MoleculeNet · used in <a href="../tutorials/molecular-representations.html">Molecular Property Prediction</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://moleculenet.org/datasets-1" target="_blank" rel="noopener">BBBP — blood–brain barrier penetration<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">~2,050 compounds labelled for blood–brain barrier permeability. Binary classification; the canonical scaffold-split teaching set.</div>
+            <div class="res-card-meta">MoleculeNet · used in <a href="../tutorials/model-training.html">Model Training</a> and <a href="../tutorials/interpretability.html">Explaining ML Predictions</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://moleculenet.org/datasets-1" target="_blank" rel="noopener">Tox21 — toxicology in the 21st century<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">~7,800 compounds across 12 nuclear-receptor and stress-response assays. Highly imbalanced and partly unlabelled — a realistic multitask target.</div>
+            <div class="res-card-meta">MoleculeNet · used in <a href="../tutorials/deep-learning-neural-network.html">Neural Networks in Practice</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://moleculenet.org/datasets-1" target="_blank" rel="noopener">Lipophilicity — octanol/water logD<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">4,200 compounds with experimental logD<sub>7.4</sub> from ChEMBL. Single-task regression baseline.</div>
+            <div class="res-card-meta">MoleculeNet · used in <a href="../tutorials/interpretability.html">Explaining ML Predictions</a> and the <a href="../hackathon_1/">hackathon</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://moldis-group.github.io/qm9nmr/" target="_blank" rel="noopener">QM9-NMR — DFT <sup>1</sup>H chemical shifts<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">DFT-computed NMR shifts over GDB10–17 molecules, used as the large pre-training corpus before fine-tuning on a small experimental shift set.</div>
+            <div class="res-card-meta">MOLDIS group · used in <a href="../tutorials/pretraining_finetuning.html">Few-Shot Learning</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://doi.org/10.1126/science.aap9112" target="_blank" rel="noopener">Perera et al. — Suzuki–Miyaura HTE grid<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">5,760 Suzuki–Miyaura couplings (7 substrate pairs × 12 ligands × 8 bases × 4 solvents) with UPLC-MS yields, from a nanomole-scale flow platform. A full combinatorial grid, so any subset can be queried offline to simulate closed-loop optimization.</div>
+            <div class="res-card-meta">Science 2018 · used in <a href="../tutorials/reaction-bo.html">Reaction Yield Optimization</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://doi.org/10.1039/C6RE00153J" target="_blank" rel="noopener">Reizman &amp; Jensen — automated-feedback Suzuki<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">~100 reactions across four ligand sub-datasets from closed-loop flow optimization. Smaller and noisier than the Perera grid — the low-data \"hard mode\" benchmark.</div>
+            <div class="res-card-meta">React. Chem. Eng. 2016 · used in <a href="../tutorials/reaction-bo.html">Reaction Yield Optimization</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://doi.org/10.1038/s41586-021-03213-y" target="_blank" rel="noopener">Shields et al. — direct-arylation benchmark<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">~1,536 experimentally measured conditions (ligand × base × solvent × concentration × temperature). Ships pre-computed Mordred and one-hot descriptor matrices via the EDBO codebase.</div>
+            <div class="res-card-meta">Nature 2021 · used in <a href="../tutorials/reaction-bo.html">Reaction Yield Optimization</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://doi.org/10.1039/D4DD00284A" target="_blank" rel="noopener">Sigman group — conformer-dependent DFT descriptors<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">55 base DFT properties × 5 aggregations for a large acid/amine pool, served over an open REST API by the MolSSI Descriptor Libraries. The tutorial spends a 600-label DFT budget against it.</div>
+            <div class="res-card-meta">Digital Discovery 2024 · used in <a href="../tutorials/dft-active-learning.html">Active Learning on DFT Descriptors</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://www.rcsb.org/" target="_blank" rel="noopener">RCSB Protein Data Bank<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">Experimental protein structures, fetched per-target to build the protein–ligand docking oracle that scores generated molecules.</div>
+            <div class="res-card-meta">RCSB PDB · used in <a href="../tutorials/molecule-generation.html">Molecular Generation</a></div>
+          </div>
+        </div>
+        <div class="res-card ds-card">
+          <div class="res-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title"><a class="ds-src" href="https://tdcommons.ai/single_pred_tasks/adme/" target="_blank" rel="noopener">ADMET endpoints — TDC, Polaris &amp; OpenADMET<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+            <div class="res-card-desc">Nine ADMET endpoints on a blinded test set for the hackathon, drawn from Therapeutics Data Commons ADME tasks, the Polaris antiviral-ADMET 2025 set, and Fang et al.'s Computational-ADME release.</div>
+            <div class="res-card-meta">TDC · Polaris · used in the <a href="../hackathon_1/">Day Hackathon</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>Collections &amp; catalogs</h2>
+        <span class="res-count">15 sources</span>
+      </div>
+      <div class="res-list">
+
+
+        <a class="res-card" href="https://github.com/blaiszik/awesome-matchem-datasets" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-matchem-datasets</div>
+            <div class="res-card-desc">Actively maintained index of materials- and chemistry-ML datasets, grouped by modality and task. The best single starting point when you need data for a new problem.</div>
+            <div class="res-card-meta">Ben Blaiszik · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/kjappelbaum/awesome-chemistry-datasets" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">awesome-chemistry-datasets</div>
+            <div class="res-card-desc">Companion list focused on chemistry datasets and their flat-CSV mirrors — several of this bootcamp's reaction benchmarks are sourced from here.</div>
+            <div class="res-card-meta">Kevin Jablonka · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://github.com/GLambard/Molecules_Dataset_Collection" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Molecules Dataset Collection</div>
+            <div class="res-card-desc">Clean CSV mirrors of the common MoleculeNet sets, ready to read straight into pandas without the DeepChem dependency. The BBBP file used in Model Training comes from here.</div>
+            <div class="res-card-meta">G. Lambard · GitHub</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://moleculenet.org/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">MoleculeNet</div>
+            <div class="res-card-desc">The standard molecular property prediction benchmark suite — solubility, toxicity, bioactivity, and quantum targets with recommended splits and baselines.</div>
+            <div class="res-card-meta">Stanford · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://tdcommons.ai/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Therapeutics Data Commons (TDC)</div>
+            <div class="res-card-desc">Unified access to therapeutic ML tasks across single-instance prediction, multi-instance prediction, and generation, with standardized splits and leaderboards.</div>
+            <div class="res-card-meta">Harvard · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://polarishub.io/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Polaris Hub</div>
+            <div class="res-card-desc">Benchmark platform emphasising rigorous, leakage-resistant evaluation for drug-discovery ML, including blinded test sets.</div>
+            <div class="res-card-meta">Polaris · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://ogb.stanford.edu/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Open Graph Benchmark (OGB)</div>
+            <div class="res-card-desc">Large-scale graph ML benchmarks with standardized scaffold splits, including the molecular <code>ogbg-mol*</code> family.</div>
+            <div class="res-card-meta">Stanford · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://open-reaction-database.org/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Open Reaction Database (ORD)</div>
+            <div class="res-card-desc">Community-curated open repository of chemical reaction data with a strict schema, covering both HTE campaigns and literature-extracted reactions.</div>
+            <div class="res-card-meta">ORD · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://www.ebi.ac.uk/chembl/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">ChEMBL</div>
+            <div class="res-card-desc">EBI's manually curated database of bioactive molecules with drug-like properties — ~2.4M compounds and their measured activities.</div>
+            <div class="res-card-meta">EMBL-EBI · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">PubChem</div>
+            <div class="res-card-desc">The largest open chemical information repository — structures, properties, bioassays, and literature links.</div>
+            <div class="res-card-meta">NCBI · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://zinc.docking.org/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">ZINC</div>
+            <div class="res-card-desc">Commercially available compounds in ready-to-dock 3D formats; ZINC250k is the standard subset for generative-model training.</div>
+            <div class="res-card-meta">UCSF · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://materialsproject.org/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Materials Project</div>
+            <div class="res-card-desc">150,000+ inorganic materials with DFT-computed properties, accessible through the <code>mp-api</code> Python client.</div>
+            <div class="res-card-meta">LBNL · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://descriptor-libraries.molssi.org/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">MolSSI Descriptor Libraries</div>
+            <div class="res-card-desc">Open REST API serving conformer-dependent DFT descriptor sets for common reagent classes — no authentication required.</div>
+            <div class="res-card-meta">MolSSI · Free API</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://www.kaggle.com/benchmarks/osamasarhan/iupac-namin/versions/1" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">IUPAC Naming Benchmark (Kaggle)</div>
+            <div class="res-card-desc">Molecular structure/IUPAC-name pairs for training and evaluating name-to-structure and structure-to-name models.</div>
+            <div class="res-card-meta">Kaggle · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="res-card" href="https://openml.org/" target="_blank" rel="noopener">
+          <div class="res-card-icon blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">OpenML</div>
+            <div class="res-card-desc">20,000+ general-purpose datasets with programmatic access — useful for method sanity checks outside chemistry.</div>
+            <div class="res-card-meta">OpenML · Free</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="res-section">
+      <div class="res-section-header">
+        <h2>More datasets by topic</h2>
+        <span class="res-count">15 topic pages</span>
+      </div>
+      <div class="res-list">
+
+
+        <a class="res-card" href="drug-discovery.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Drug Discovery & QSAR</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">7 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="generative-models.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Generative Models</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">7 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="materials-science.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Materials Science</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">7 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="quantum-chemistry.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Quantum Chemistry & DFT</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">7 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="graph-neural-networks.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Graph Neural Networks</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">6 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="chemical-representations.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Chemical Representations</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">5 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="self-driving-labs.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Self-Driving Laboratories</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">5 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="reaction-prediction.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Reaction Prediction & Synthesis</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">4 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="transformers.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Transformers for Chemistry</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">4 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="active-learning.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Active Learning</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">3 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="bayesian-optimization.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Bayesian Optimization</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">3 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="deep-learning.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Deep Learning</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">3 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="llm-agents.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">LLMs & Agentic AI</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">3 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="ml-fundamentals.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">ML Fundamentals</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">3 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a class="res-card" href="uncertainty-quantification.html">
+          <div class="res-card-icon purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="res-card-body">
+            <div class="res-card-title">Uncertainty Quantification</div>
+            <div class="res-card-desc">Topic page with a curated Datasets section alongside its courses, tutorials, tools and papers.</div>
+            <div class="res-card-meta">3 datasets listed</div>
+          </div>
+          <svg class="res-ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Division of Chemistry and Chemical Engineering · Caltech</span>
+    <span class="sep">·</span>
+    <span>Contact: <a href="mailto:jul@caltech.edu" style="color:inherit">jul@caltech.edu</a></span>
+    <span class="sep">·</span>
+    <a href="https://github.com/julschleinitz/ai4chemistry-bootcamp" style="color:inherit;display:flex;align-items:center;gap:5px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      GitHub
+    </a>
+  </footer>
+
+</body>
+</html>
