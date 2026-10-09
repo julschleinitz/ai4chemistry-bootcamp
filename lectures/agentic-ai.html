@@ -25,6 +25,7 @@
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
     /* Swap the disabled .resource-btn.is-disabled span for a real link once the recording is up, or embed it directly:
        <iframe class="video-embed" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> */
+    .video-embed { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 12px; }
     .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .objectives-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
     .objectives-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
@@ -154,10 +155,22 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PPTX)
       </a>
-      <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
+      <a class="resource-btn" href="https://youtu.be/2GSEWl0uy3Y" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Recording (after bootcamp)
-      </span>
+        Recording (YouTube)
+      </a>
+    </div>
+
+    <!-- ── Recording ── -->
+    <div class="content-section">
+      <p class="content-section-label">Recording</p>
+      <iframe class="video-embed"
+              src="https://www.youtube-nocookie.com/embed/2GSEWl0uy3Y"
+              title="Lecture 15 — Agentic AI for Chemistry (recording)"
+              loading="lazy"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
     </div>
     <hr class="divider">
 
