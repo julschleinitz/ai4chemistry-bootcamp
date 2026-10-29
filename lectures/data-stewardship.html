@@ -104,6 +104,7 @@
     .resource-btn:hover { background: rgba(93,218,180,0.1); border-color: rgba(93,218,180,0.4); color: var(--accent); }
     .resource-btn svg { opacity: 0.8; flex-shrink: 0; }
     .resource-btn.is-disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+    .video-embed { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 12px; }
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 13px; margin-bottom: 32px; transition: color 0.15s; }
     .back-link:hover { color: var(--accent); }
     @media (max-width: 700px) { .lecture-hero { padding: 36px 20px 32px; } .lecture-hero h1 { font-size: 28px; } .lecture-body { padding: 28px 20px 60px; } }
@@ -182,10 +183,22 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Slides (PPTX)
       </a>
-      <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
+      <a class="resource-btn" href="https://youtu.be/OIxvp2xvrvs" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Recording (after bootcamp)
-      </span>
+        Recording (YouTube)
+      </a>
+    </div>
+
+    <!-- ── Recording ── -->
+    <div class="content-section">
+      <p class="content-section-label">Recording</p>
+      <iframe class="video-embed"
+              src="https://www.youtube-nocookie.com/embed/OIxvp2xvrvs"
+              title="Lecture 10 — Research Data Stewardship for Chemistry (recording)"
+              loading="lazy"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
     </div>
     <hr class="divider">
 
