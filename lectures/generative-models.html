@@ -63,8 +63,8 @@
        <iframe class="video-embed" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> */
     .video-embed { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 12px; }
     .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .objectives-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
-    .objectives-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .objectives-list li { position: relative; padding-left: 16px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .objectives-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
     .takeaways-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .takeaway-item { display: flex; gap: 14px; align-items: flex-start; background: rgba(93,218,180,0.06); border: 1px solid rgba(93,218,180,0.18); border-left: 3px solid var(--accent); border-radius: 8px; padding: 14px 16px; }
     .takeaway-item .takeaway-icon { color: var(--accent); flex-shrink: 0; margin-top: 1px; }

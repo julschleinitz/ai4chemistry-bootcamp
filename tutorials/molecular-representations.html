@@ -173,21 +173,21 @@
       gap: 10px;
     }
     .objectives-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
+      position: relative;
+      padding-left: 16px;
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.6;
     }
     .objectives-list li::before {
       content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: #FFB432;
-      flex-shrink: 0;
-      margin-top: 7px;
     }
 
     /* ── Instructions (numbered steps) ── */
@@ -200,12 +200,14 @@
     }
     .instructions-list li {
       counter-increment: step-counter;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
+      position: relative;
+      padding-left: 38px;
     }
     .instructions-list li::before {
       content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 1px;
       background: rgba(255,180,50,0.15);
       border: 1px solid rgba(255,180,50,0.3);
       color: #FFB432;
@@ -217,8 +219,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
     }
     .instructions-list li p {
       font-size: 14px;

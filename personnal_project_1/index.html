@@ -36,11 +36,11 @@
     .content-section h3{font-size:15px;font-weight:700;margin:24px 0 10px}
     .content-section p{font-size:14.5px;color:var(--text-muted);line-height:1.75;margin-bottom:12px}
     .content-section ul.plain-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-    .content-section ul.plain-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-muted);line-height:1.6}
-    .content-section ul.plain-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:#63B3ED;flex-shrink:0;margin-top:7px}
+    .content-section ul.plain-list li{position:relative;padding-left:16px;font-size:14px;color:var(--text-muted);line-height:1.6}
+    .content-section ul.plain-list li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#63B3ED}
     .instructions-list{list-style:none;counter-reset:step-counter;display:flex;flex-direction:column;gap:16px}
-    .instructions-list li{counter-increment:step-counter;display:flex;gap:14px;align-items:flex-start}
-    .instructions-list li::before{content:counter(step-counter);background:rgba(99,179,237,0.15);border:1px solid rgba(99,179,237,0.3);color:#63B3ED;font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .instructions-list li{counter-increment:step-counter;position:relative;padding-left:38px}
+    .instructions-list li::before{content:counter(step-counter);position:absolute;left:0;top:1px;background:rgba(99,179,237,0.15);border:1px solid rgba(99,179,237,0.3);color:#63B3ED;font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
     .instructions-list li p{font-size:14px;color:var(--text-muted);line-height:1.65;margin:0}
     .instructions-list li strong{color:var(--text)}
     .instructions-list code, .content-section code{background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12.5px;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--accent-dim)}
