@@ -3,8 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lecture 7 — Retrieval-Augmented Generation (RAG) · AI4Chemical Sciences Bootcamp</title>
+  <link rel="icon" href="../favicon.ico" sizes="48x48">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <title>Retrieval-Augmented Generation (RAG) for Chemistry · Lecture 7 · AI4Chemical Sciences Bootcamp, Caltech</title>
   <meta name="description" content="How retrieval-augmented generation grounds LLM answers in real documents — the end-to-end pipeline, retrieval strategies, evaluation, and when a…">
+  <link rel="canonical" href="https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AI4Chemical Sciences Bootcamp">
+  <meta property="og:title" content="Retrieval-Augmented Generation (RAG) for Chemistry · Lecture 7 · AI4Chemical Sciences Bootcamp, Caltech">
+  <meta property="og:description" content="How retrieval-augmented generation grounds LLM answers in real documents — the end-to-end pipeline, retrieval strategies, evaluation, and when a…">
+  <meta property="og:url" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LearningResource",
+        "@id": "https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html#resource",
+        "url": "https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html",
+        "name": "Retrieval-Augmented Generation (RAG) for Chemistry",
+        "description": "How retrieval-augmented generation grounds LLM answers in real documents — the end-to-end pipeline, retrieval strategies, evaluation, and when a…",
+        "inLanguage": "en",
+        "learningResourceType": "Lecture",
+        "isPartOf": {
+          "@id": "https://julschleinitz.github.io/ai4chemistry-bootcamp/#course"
+        },
+        "provider": {
+          "@type": "CollegeOrUniversity",
+          "name": "California Institute of Technology (Caltech)",
+          "url": "https://www.caltech.edu",
+          "sameAs": "https://en.wikipedia.org/wiki/California_Institute_of_Technology"
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +60,7 @@
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
     /* Swap the disabled .resource-btn.is-disabled span for a real link once the recording is up, or embed it directly:
        <iframe class="video-embed" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> */
+    .video-embed { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 12px; }
     .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .objectives-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
     .objectives-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
@@ -148,10 +184,22 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Slides (PPTX)
       </a>
-      <span class="resource-btn is-disabled" title="Recording will be available after the bootcamp">
+      <a class="resource-btn" href="https://youtu.be/XdjTfDP2LJE" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Recording (after bootcamp)
-      </span>
+        Recording (YouTube)
+      </a>
+    </div>
+
+    <!-- ── Recording ── -->
+    <div class="content-section">
+      <p class="content-section-label">Recording</p>
+      <iframe class="video-embed"
+              src="https://www.youtube-nocookie.com/embed/XdjTfDP2LJE"
+              title="Lecture 7 — Retrieval-Augmented Generation (RAG) for Chemistry (recording)"
+              loading="lazy"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
     </div>
     <hr class="divider">
 

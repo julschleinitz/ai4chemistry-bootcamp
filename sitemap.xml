@@ -2,257 +2,257 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/hackathon_1/index.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/hackathon_1/</loc>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/personnal_project_1/index.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/design-of-experiments.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/active-learning.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/agentic-ai.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/bayesian-optimization.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/data-stewardship.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/design-of-experiments.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/generative-models.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/learned-representations.html</loc>
-    <lastmod>2026-08-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/mlips.html</loc>
-    <lastmod>2026-08-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/index.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/</loc>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/interpretability.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/learned-representations.html</loc>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/ml-intro.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/mlips.html</loc>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/molecular-representations.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/neural-networks.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/rags.html</loc>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/roc-auc.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/supervised-learning.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/personnal_project_1/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/active-learning.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/datasets.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/curated-lists.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/bayesian-optimization.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/chemical-representations.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/curated-lists.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/datasets.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/deep-learning.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/drug-discovery.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/generative-models.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/graph-neural-networks.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/llm-agents.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/materials-science.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/ml-fundamentals.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/quantum-chemistry.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/reaction-prediction.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/self-driving-labs.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/transformers.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/resources/uncertainty-quantification.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/data-stewardship.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/deep-learning-neural-network.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/design-of-experiments.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/dft-active-learning.html</loc>
-    <lastmod>2026-08-19</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/pretraining_finetuning.html</loc>
-    <lastmod>2026-08-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/molecule-generation.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/gnn-mlip.html</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/index.html</loc>
-    <lastmod>2026-08-12</lastmod>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/</loc>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/interpretability.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/model-training.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/molecular-representations.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/molecule-generation.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/pretraining_finetuning.html</loc>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/rag-assistant.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/react-agent.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://julschleinitz.github.io/ai4chemistry-bootcamp/tutorials/reaction-bo.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
