@@ -89,7 +89,7 @@
       color: var(--accent);
       margin-bottom: 14px;
     }
-    .content-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .content-section h2:not(.content-section-label) { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
 
     /* Swap the disabled .resource-btn.is-disabled span for a real link once the recording is up, or embed it directly:
@@ -284,7 +284,7 @@
 
     <!-- ── Learning Objectives ── -->
     <div class="content-section">
-      <p class="content-section-label">Learning Objectives</p>
+      <h2 class="content-section-label">Learning Objectives</h2>
       <ul class="objectives-list">
         <li>Objective 1</li>
         <li>Objective 2</li>
@@ -297,7 +297,7 @@
 
     <!-- ── Key Takeaways ── -->
     <div class="content-section">
-      <p class="content-section-label">Key Takeaways</p>
+      <h2 class="content-section-label">Key Takeaways</h2>
       <ul class="takeaways-list">
 
         <li class="takeaway-item">
@@ -328,7 +328,7 @@
 
     <!-- ── Further Reading ── -->
     <div class="content-section">
-      <p class="content-section-label">Further Reading &amp; Resources</p>
+      <h2 class="content-section-label">Further Reading &amp; Resources</h2>
       <div class="ref-list">
 
         <a class="ref-item" href="#" target="_blank" rel="noopener">

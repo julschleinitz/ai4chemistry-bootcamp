@@ -14,7 +14,11 @@
   <meta property="og:title" content="ROC Curve &amp; AUC Explained: Interactive Figure · AI4Chemical Sciences Bootcamp, Caltech">
   <meta property="og:description" content="Drag a classification threshold across two overlapping score distributions and watch it trace out the ROC curve in real time — companion figure to…">
   <meta property="og:url" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/roc-auc.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI4Chemical Sciences Bootcamp — machine learning and AI for chemistry, Caltech, August 2026">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -59,7 +63,7 @@
     .lecture-body { max-width: 900px; margin: 0 auto; padding: 44px 40px 80px; }
     .content-section { margin-bottom: 44px; }
     .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-    .content-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .content-section h2:not(.content-section-label) { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
     .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .objectives-list li { position: relative; padding-left: 16px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
@@ -154,12 +158,12 @@
     </a>
 
     <div class="content-section">
-      <p class="content-section-label">Why a Threshold Matters</p>
+      <h2 class="content-section-label">Why a Threshold Matters</h2>
       <p>A classifier rarely outputs a label directly — it outputs a continuous score: a hit-probability from a virtual screen, a blood–brain-barrier permeability estimate, a toxicity risk. Turning that score into a yes/no call requires picking a threshold, and where you set it trades false positives against false negatives. The <strong style="color:var(--text)">ROC curve</strong> (Receiver Operating Characteristic) plots the True Positive Rate against the False Positive Rate as that threshold sweeps across every possible value; the <strong style="color:var(--text)">AUC</strong> (Area Under the Curve) summarizes classifier quality independent of any single threshold choice.</p>
     </div>
 
     <div class="content-section">
-      <p class="content-section-label">Interactive Figure</p>
+      <h2 class="content-section-label">Interactive Figure</h2>
       <h2>Drag the threshold, watch the curve</h2>
       <p>The left panel shows the score distributions for the negative class (blue) and the positive class (orange). Drag the vertical line — or the slider below it — to move the classification threshold; everything to the right of it is predicted <em>positive</em>. The right panel shows the full ROC curve for the current pair of distributions, with a marker at the point corresponding to your current threshold.</p>
 
@@ -219,7 +223,7 @@
     </div>
 
     <div class="content-section">
-      <p class="content-section-label">Key Formulas</p>
+      <h2 class="content-section-label">Key Formulas</h2>
       <div class="formula-block">
 <span class="fname">TPR</span> (sensitivity)   = TP / (TP + FN)<br>
 <span class="fname">FPR</span> (1 − specificity) = FP / (FP + TN)<br>
@@ -231,7 +235,7 @@
     </div>
 
     <div class="content-section">
-      <p class="content-section-label">Companion Notebook</p>
+      <h2 class="content-section-label">Companion Notebook</h2>
       <p>The same distribution families and the from-scratch ROC/AUC computation used in the figure above are reproduced in a Python notebook, then cross-checked against real sampled data and scikit-learn's <code style="background:rgba(0,0,0,0.2);padding:1px 5px;border-radius:4px;">roc_curve</code> / <code style="background:rgba(0,0,0,0.2);padding:1px 5px;border-radius:4px;">roc_auc_score</code>, and finally applied to a trained logistic regression classifier.</p>
       <div class="resource-buttons">
         <a class="resource-btn" href="https://colab.research.google.com/github/julschleinitz/ai4chemistry-bootcamp/blob/main/lectures/lecture_03_supervised_learning/roc_auc_interactive.ipynb" target="_blank" rel="noopener">

@@ -14,7 +14,11 @@
   <meta property="og:title" content="Supervised Learning for Chemistry: Regression &amp; Classification · Lecture 3 · AI4Chemical Sciences Bootcamp, Caltech">
   <meta property="og:description" content="Core supervised ML methods — bias-variance trade-off, model selection, and hyperparameter optimisation — applied to chemical property prediction.">
   <meta property="og:url" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/supervised-learning.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI4Chemical Sciences Bootcamp — machine learning and AI for chemistry, Caltech, August 2026">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,7 +77,7 @@
     .lecture-body { max-width: 820px; margin: 0 auto; padding: 44px 40px 80px; }
     .content-section { margin-bottom: 44px; }
     .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-    .content-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .content-section h2:not(.content-section-label) { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
     /* Swap the disabled .resource-btn.is-disabled span for a real link once the recording is up, or embed it directly:
        <iframe class="video-embed" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> */
@@ -240,7 +244,7 @@
 
     <!-- ── Recording ── -->
     <div class="content-section">
-      <p class="content-section-label">Recording</p>
+      <h2 class="content-section-label">Recording</h2>
       <iframe class="video-embed"
               src="https://www.youtube-nocookie.com/embed/hjiRs5sK1oE"
               title="Lecture 3 — Supervised Learning: Regression &amp; Classification (recording)"
@@ -252,7 +256,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Learning Objectives</p>
+      <h2 class="content-section-label">Learning Objectives</h2>
       <ul class="objectives-list">
         <li>Define supervised learning and its two flavors — regression (continuous output) and classification (discrete label)</li>
         <li>Explain why we split data into train / validation / test, and spot chemistry-specific pitfalls like scaffold leakage</li>
@@ -265,7 +269,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Interactive Figure</p>
+      <h2 class="content-section-label">Interactive Figure</h2>
       <a class="interactive-callout" href="roc-auc.html">
         <div class="interactive-callout-text">
           <h3>Explore the ROC-AUC Curve</h3>
@@ -281,7 +285,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Key Takeaways</p>
+      <h2 class="content-section-label">Key Takeaways</h2>
       <ul class="takeaways-list">
 
         <li class="takeaway-item">
@@ -325,7 +329,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">References Cited in the Slides</p>
+      <h2 class="content-section-label">References Cited in the Slides</h2>
       <ol class="citation-list">
 
         <li>
@@ -383,7 +387,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Further Reading &amp; Resources</p>
+      <h2 class="content-section-label">Further Reading &amp; Resources</h2>
       <div class="ref-list">
 
         <a class="ref-item" href="https://hastie.su.domains/ElemStatLearn/" target="_blank" rel="noopener">
@@ -432,7 +436,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Dig Deeper into Supervised Learning</p>
+      <h2 class="content-section-label">Dig Deeper into Supervised Learning</h2>
       <div class="ref-list">
 
         <a class="ref-item" href="https://scikit-learn.org/stable/supervised_learning.html" target="_blank" rel="noopener">

@@ -14,7 +14,11 @@
   <meta property="og:title" content="Research Data Stewardship for Chemistry · Lecture 10 · AI4Chemical Sciences Bootcamp, Caltech">
   <meta property="og:description" content="Good data practices for chemical research: organise, document, version, and share experimental data so that downstream modelling is reliable.">
   <meta property="og:url" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/lectures/data-stewardship.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI4Chemical Sciences Bootcamp — machine learning and AI for chemistry, Caltech, August 2026">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -57,7 +61,7 @@
     .lecture-body { max-width: 820px; margin: 0 auto; padding: 44px 40px 80px; }
     .content-section { margin-bottom: 44px; }
     .content-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-    .content-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .content-section h2:not(.content-section-label) { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
     .content-section p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
     .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .objectives-list li { position: relative; padding-left: 16px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
@@ -191,7 +195,7 @@
 
     <!-- ── Recording ── -->
     <div class="content-section">
-      <p class="content-section-label">Recording</p>
+      <h2 class="content-section-label">Recording</h2>
       <iframe class="video-embed"
               src="https://www.youtube-nocookie.com/embed/OIxvp2xvrvs"
               title="Lecture 10 — Research Data Stewardship for Chemistry (recording)"
@@ -203,7 +207,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Learning Objectives</p>
+      <h2 class="content-section-label">Learning Objectives</h2>
       <ul class="objectives-list">
         <li>Build a reproducible data pipeline for experimental and computational chemistry projects.</li>
         <li>Capture metadata, provenance, and preprocessing steps alongside the raw measurements.</li>
@@ -215,7 +219,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Key Takeaways</p>
+      <h2 class="content-section-label">Key Takeaways</h2>
       <ul class="takeaways-list">
         <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Takeaway 1.</strong> The best model is limited by the quality and traceability of the data you feed it.</p></li>
         <li class="takeaway-item"><span class="takeaway-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><p><strong>Takeaway 2.</strong> Metadata is not optional: it is what turns a spreadsheet into a reusable scientific asset.</p></li>
@@ -226,7 +230,7 @@
     <hr class="divider">
 
     <div class="content-section">
-      <p class="content-section-label">Further Reading &amp; Resources</p>
+      <h2 class="content-section-label">Further Reading &amp; Resources</h2>
       <div class="ref-list">
         <a class="ref-item" href="lecture_10_data_stewardship/data-stewardship.pdf" target="_blank" rel="noopener">
           <div class="ref-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
