@@ -17,7 +17,7 @@
   <meta property="og:image" content="https://julschleinitz.github.io/ai4chemistry-bootcamp/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="AI4Chemical Sciences Bootcamp — machine learning and AI for chemistry, Caltech, August 2026">
+  <meta property="og:image:alt" content="AI4Chemical Sciences Bootcamp — machine learning and AI for chemistry, Caltech">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +32,24 @@
     .page-hero h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
     .page-hero h1 em { font-style: normal; color: var(--accent); }
     .page-hero p { font-size: 15px; color: var(--accent-dim); max-width: 560px; line-height: 1.6; }
+
+    .playlist-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 18px;
+      background: rgba(93,218,180,0.12);
+      border: 1px solid rgba(93,218,180,0.35);
+      color: var(--accent);
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .playlist-cta:hover { background: rgba(93,218,180,0.2); border-color: rgba(93,218,180,0.55); }
+    .playlist-cta svg { flex-shrink: 0; }
 
     .page-body {
       max-width: 980px;
@@ -143,12 +161,16 @@
   <div class="page-hero">
     <h1>Bootcamp <em>Lectures</em></h1>
     <p>14 lectures spanning ML fundamentals, molecular representations, deep learning, and LLMs — click any card to view slides, notes, and further reading.</p>
+    <a class="playlist-cta" href="https://www.youtube.com/playlist?list=PLNtyi-7wjrkY" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+      Watch all 14 recordings on YouTube
+    </a>
   </div>
 
   <div class="page-body">
 
     <!-- Week 1 -->
-    <p class="week-label">Week 1 · Aug 10 – 14 · Foundations of ML &amp; Representations</p>
+    <p class="week-label">Week 1 · Foundations of ML &amp; Representations</p>
     <div class="session-grid">
 
       <a class="session-card" href="ml-intro.html">
@@ -157,7 +179,7 @@
         <div class="session-card-sub">Bootcamp objectives, logistics, and the landscape of ML in chemical sciences</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Mon Aug 10
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -168,7 +190,7 @@
         <div class="session-card-sub">SMILES, InChI, SELFIES, fingerprints, expert-crafted features, molecular graphs</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Mon Aug 10
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -179,7 +201,7 @@
         <div class="session-card-sub">Bias-variance, hyperparameter optimization, feature selection, different models</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- S. Wahler --> Tue Aug 11
+          S. Wahler
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -190,7 +212,7 @@
         <div class="session-card-sub">MLPs, backpropagation, Adam, dropout, PyTorch overview</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Tue Aug 11
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -201,7 +223,7 @@
         <div class="session-card-sub">Message passing, GCN, GAT, MPNN, PyTorch Geometric</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Madeline Murphy --> Wed Aug 12
+          Madeline Murphy
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -212,7 +234,7 @@
         <div class="session-card-sub">Interpretable-by-design vs. post-hoc: MDI, permutation importance, ICE/PDP, LIME, and SHAP</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Michael Yusov --> Mon Aug 17
+          Michael Yusov
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -223,7 +245,7 @@
         <div class="session-card-sub">Data management in experimental projects for efficient use in data-driven projects</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Alix Schmidt --> Mon Aug 17
+          Alix Schmidt
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -234,7 +256,7 @@
         <div class="session-card-sub">Pretraining, fine-tuning, transfer learning for chemical tasks</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Wed Aug 12
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -245,7 +267,7 @@
         <div class="session-card-sub">Generative modelling with diffusion; applications in molecular design</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Chenghao Liu --> Thu Aug 13
+          Chenghao Liu
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -253,7 +275,7 @@
     </div>
 
     <!-- Week 2 -->
-    <p class="week-label">Week 2 · Aug 17 – 21 · Dataset Design &amp; LLMs</p>
+    <p class="week-label">Week 2 · Dataset Design &amp; LLMs</p>
     <div class="session-grid">
 
       <!-- HIDDEN: unfinished session. Notebook missing and schedule slot unconfirmed.
@@ -265,7 +287,7 @@
         <div class="session-card-sub">Self-attention, BERT, ChemBERTa, text-based representations for chemistry</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Wed Aug 19
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -277,7 +299,7 @@
         <div class="session-card-sub">Factorial design, screening, response surfaces, and experimental planning strategies</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Alix Schmidt --> Tue Aug 18
+          Alix Schmidt
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -288,7 +310,7 @@
         <div class="session-card-sub">Query strategies: uncertainty, BALD, core-set, pool-based vs. stream-based</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Wed Aug 19
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -299,7 +321,7 @@
         <div class="session-card-sub">Surrogates, EI/UCB/PI, BO loop, molecular &amp; materials discovery, multi-objective BO</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Jules Schleinitz --> Tue Aug 18
+          Jules Schleinitz
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -325,7 +347,7 @@
         <div class="session-card-sub">RAG, tool use, literature extraction, hallucination limits</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- S. Wahler --> Thu Aug 13
+          S. Wahler
         </div>
         <div class="session-card-arrow">→</div>
       </a>
@@ -336,7 +358,7 @@
         <div class="session-card-sub">ReAct, Coscientist, multi-agent systems, self-driving laboratories</div>
         <div class="session-card-meta">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- B. Reiner | J. Wade --> Thu Aug 20
+          B. Reiner | J. Wade
         </div>
         <div class="session-card-arrow">→</div>
       </a>

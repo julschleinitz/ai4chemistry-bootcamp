@@ -142,6 +142,14 @@ nav {
   border-radius: 8px;
 }
 .pill svg { opacity: 0.8; flex-shrink: 0; }
+.pill-link {
+  text-decoration: none;
+  background: rgba(93,218,180,0.16);
+  border-color: rgba(93,218,180,0.4);
+  color: #CFF6E9;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pill-link:hover { background: rgba(93,218,180,0.26); border-color: rgba(93,218,180,0.6); }
 
 /* ── Main layout ── */
 main {
