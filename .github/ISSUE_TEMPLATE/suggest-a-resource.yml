@@ -1,0 +1,79 @@
+name: Suggest a resource
+description: Recommend a course, tutorial, notebook, dataset or paper for the reading lists.
+title: "[Resource] "
+labels: ["resource suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping grow this. The reading lists were built from
+        community suggestions and are meant to keep growing that way.
+
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: URL of the resource.
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: What is it called, and who made it?
+      placeholder: 'e.g. "Practical Cheminformatics" — Pat Walters'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      description: Which reading list does it belong in?
+      options:
+        - ML fundamentals
+        - Chemical representations
+        - Deep learning
+        - Graph neural networks
+        - Transformers
+        - Generative models
+        - Uncertainty quantification
+        - Bayesian optimization
+        - Active learning
+        - Interpretability
+        - Reaction prediction
+        - Quantum chemistry
+        - Materials science
+        - Drug discovery
+        - Self-driving labs
+        - Datasets
+        - Curated lists
+        - Not sure / something else
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options:
+        - Course
+        - Tutorial or notebook
+        - Paper
+        - Dataset
+        - Software or tool
+        - Book or handbook
+        - Blog or newsletter
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is worth including
+      description: One or two sentences. What does it teach, and who is it for?
+    validations:
+      required: true

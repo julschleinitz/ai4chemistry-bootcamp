@@ -73,6 +73,21 @@ conda activate mlchem-bootcamp
 jupyter lab
 ```
 
+## Contributing
+
+The reading lists were built from suggestions made by the community, and they
+are meant to keep growing that way.
+
+- **Suggest a resource** — a course, notebook, dataset, paper or tool that
+  belongs in the reading lists:
+  [open a suggestion](https://github.com/julschleinitz/ai4chemistry-bootcamp/issues/new?template=suggest-a-resource.yml)
+- **Report a broken link or an error** — [open an issue](https://github.com/julschleinitz/ai4chemistry-bootcamp/issues/new)
+- **Contribute teaching material** — lectures, notebooks or exercises: email
+  Jules first so we can agree on scope, then open a pull request.
+
+All material here is free to reuse. If you teach from it, a link back is
+appreciated but not required.
+
 ## Contact
 
 Jules Schleinitz — jul@caltech.edu

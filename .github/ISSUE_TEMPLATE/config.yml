@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a broken link or error
+    url: https://github.com/julschleinitz/ai4chemistry-bootcamp/issues/new
+    about: Something on the site is wrong, outdated or does not load.
+  - name: Email the organiser
+    url: mailto:jul@caltech.edu
+    about: Questions about the bootcamp, or contributing teaching material.
