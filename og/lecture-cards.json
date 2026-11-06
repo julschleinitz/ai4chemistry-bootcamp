@@ -1,0 +1,17 @@
+[
+ {"slug":"ml-intro","number":"Lecture 1","title":"Bootcamp Introduction","subtitle":"Bootcamp objectives, logistics, and the landscape of ML in chemical sciences","instructor":"Jules Schleinitz"},
+ {"slug":"molecular-representations","number":"Lecture 2","title":"Evolution of Molecular Representations","subtitle":"SMILES, InChI, SELFIES, fingerprints, expert-crafted features, molecular graphs","instructor":"Jules Schleinitz"},
+ {"slug":"supervised-learning","number":"Lecture 3","title":"Supervised Learning: Regression & Classification","subtitle":"Bias-variance, hyperparameter optimization, feature selection, model families","instructor":"Sabrina Wahler"},
+ {"slug":"neural-networks","number":"Lecture 4","title":"Neural Networks & Deep Learning","subtitle":"MLPs, backpropagation, Adam, dropout, PyTorch overview","instructor":"Jules Schleinitz"},
+ {"slug":"mlips","number":"Lecture 5","title":"Machine-Learned Interatomic Potentials","subtitle":"Message passing, GCN, GAT, MPNN, PyTorch Geometric","instructor":"Madeline Murphy"},
+ {"slug":"learned-representations","number":"Lecture 6","title":"Learned Representations","subtitle":"Pretraining, fine-tuning, transfer learning for chemical tasks","instructor":"Jules Schleinitz"},
+ {"slug":"rags","number":"Lecture 7","title":"Retrieval-Augmented Generation","subtitle":"RAG, tool use, literature extraction, hallucination limits","instructor":"Sabrina Wahler"},
+ {"slug":"generative-models","number":"Lecture 8","title":"Generative Models","subtitle":"Diffusion and flow matching; applications in molecular design","instructor":"Chenghao Liu"},
+ {"slug":"interpretability","number":"Lecture 9","title":"Model Interpretability","subtitle":"Interpretable-by-design vs. post-hoc: MDI, permutation importance, ICE/PDP, LIME, SHAP","instructor":"Michael Yusov"},
+ {"slug":"data-stewardship","number":"Lecture 10","title":"Data Stewardship","subtitle":"Data management in experimental projects for efficient use in data-driven work","instructor":"Alix Schmidt"},
+ {"slug":"design-of-experiments","number":"Lecture 11","title":"Design of Experiments","subtitle":"Factorial design, screening, response surfaces, experimental planning strategies","instructor":"Alix Schmidt"},
+ {"slug":"bayesian-optimization","number":"Lecture 12","title":"Bayesian Optimization","subtitle":"Surrogates, EI/UCB/PI, the BO loop, molecular and materials discovery, multi-objective BO","instructor":"Jules Schleinitz"},
+ {"slug":"active-learning","number":"Lecture 13","title":"Active Learning Theory","subtitle":"Query strategies: uncertainty, BALD, core-set, pool-based vs. stream-based","instructor":"Jules Schleinitz"},
+ {"slug":"agentic-ai","number":"Lecture 15","title":"Agentic AI for Chemistry","subtitle":"ReAct, Coscientist, multi-agent systems, self-driving laboratories","instructor":"Benjamin Reiner & James Wade"},
+ {"slug":"roc-auc","number":"Interactive Figure","title":"Understanding the ROC-AUC Curve","subtitle":"Drag a threshold across two score distributions and watch the ROC curve trace out in real time","instructor":"Companion to Lecture 3"}
+]
